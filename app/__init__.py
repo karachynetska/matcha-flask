@@ -1,17 +1,13 @@
-from flask import Flask
+from flask import Flask, render_template, request, redirect, url_for
 from app.config import setup, database
 
 app = Flask(__name__)
 
 setup.initial_setup()
 
-print(database.db_connect("select * from users"))
+from app.views import auth
 
 @app.route('/')
-def hello_world():
-    return 'Hello World!'
+def index():
+    return render_template('index-register.html')
 
-
-# @app.route('/setup')
-# def setup():
-#     return 'Hello World! qwe'
