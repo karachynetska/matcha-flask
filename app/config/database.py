@@ -11,7 +11,7 @@ def dict_factory(cursor, row):
     return d
 
 
-def db_connect(sql, arguments=None):
+def db_query(sql, arguments=None):
     # create a database connection to a SQLite database
     try:
         conn = sqlite3.connect(db_name)

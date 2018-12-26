@@ -3,6 +3,8 @@ from flask import render_template, url_for, redirect, request
 import html
 import hashlib
 from datetime import datetime
+import json
+
 
 @app.route('/register', methods=['POST'])
 def register():
@@ -17,3 +19,4 @@ def register():
     gender = request.form['gender']
 
     birth_date = datetime.strptime(birth_date, '%d/%m/%Y')
+    return "error"

@@ -15,10 +15,11 @@ $("#register-button").on("click", function(e) {
     country: $("#country").val()
   };
 
+  console.log(data);
+
   $.ajax({
     type: "POST",
-    data: JSON.stringify(data),
-    contentType: "application/json",
+    data: data,
     url: "/register"
   }).done(function(data) {
     if (!data.ok) {
