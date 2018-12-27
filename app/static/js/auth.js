@@ -1,6 +1,12 @@
 $("#register-button").on("click", function(e) {
   e.preventDefault();
 
+  var gender;
+  if ($('input[id=female]:checked').val() == 'on') {
+    gender = "female"}
+  else {
+    gender = "male"}
+
   var data = {
     firstname: $("#firstname").val(),
     lastname: $("#lastname").val(),
@@ -10,12 +16,10 @@ $("#register-button").on("click", function(e) {
     day: $("#day").val(),
     month: $("#month").val(),
     year: $("#year").val(),
-    gender: $("#gender"),
+    gender,
     city: $("#city").val(),
-    country: $("#country").val()
+    country: $("#country").val(),
   };
-
-  console.log(data);
 
   $.ajax({
     type: "POST",
