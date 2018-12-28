@@ -2,6 +2,7 @@ $("#register-button").on("click", function(e) {
   e.preventDefault();
 
   var gender;
+  var error = 0;
   if ($('input[id=female]:checked').val() == 'on') {
     gender = "female"}
   else {
