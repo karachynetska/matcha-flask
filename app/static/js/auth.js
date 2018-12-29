@@ -22,16 +22,19 @@ $("#register-button").on("click", function(e) {
     country: $("#country").val(),
   };
 
+  console.log(data['login']);
+
   $.ajax({
     type: "POST",
     data: data,
     url: "/register"
   }).done(function(data) {
-    if (!data.ok) {
+    var res = JSON.parse(data);
+    if (res.ok == false) {
       $("#message-register").text("");
-      $("#message-register").text(data.error);
-      if (data.fields) {
-        data.fields.forEach(function(item) {
+      $("#message-register").text(res.error);
+      if (res.fields) {
+        res.fields.forEach(function(item) {
           $("input[name=" + item + "]").addClass("error");
         });
       }
