@@ -123,6 +123,24 @@ def register():
             'fields': ["country"]
         })
 
+# Сheck for user availability
+    login_exists = user_model.login_exists(login)
+    print(login_exists)
+    if login_exists:
+        return json.dumps({
+            'ok': False,
+            'error': "User with this login already exists",
+            'fields': ["login"]
+        })
+
+    email_exists = user_model.email_exists(email)
+    if email_exists:
+        return json.dumps({
+            'ok': False,
+            'error': "User with this email already exists",
+            'fields': ["email"]
+        })
+
 # birth_date
     try:
         birth_date = datetime.strptime(birth_date, '%d/%b/%Y')
@@ -146,23 +164,30 @@ def register():
     token = hashlib.md5((login + date).encode('utf-8')).hexdigest()
 
 
-    print(password_hash)
-
+# saving user to db and sending email
     user = user_model.save_user_to_db(login, password_hash, firstname, lastname, email, avatar, birth_date, city, country, token, gender)
-    # user = user_model.save_user_to_db(login, 'password_hash', firstname, lastname, 'ema2il', 'dqd', 'qwedda', 'qq111',
-    #                                   'qeff', 'dqdqd', 'dqwww')
-    print(user)
-    # if user:
-    #     message = Message('Matcha registration', sender='matcha@project.unit.ua', recipients=[email])
-    #     message.body = "Thank tou for registration in Matcha. To activate your accont please follow the link " + request.url_root + "activate?email=" + email + '&token=' + token
-    #     message.html = "<p>Thank tou for registration in Matcha. To activate your accont please follow the <a href= " + request.url_root + "activate?email=" + email + '&token=' + token + ">link</a></p> "
-    #     mail.send(message)
-    return 'registered'
+    if user:
+        message = Message('Matcha registration', sender='matcha@project.unit.ua', recipients=[email])
+        message.body = "Thank tou for registration in Matcha. To activate your accont please follow the link " + request.url_root + "activate?email=" + email + '&token=' + token
+        message.html = "<p>Thank tou for registration in Matcha. To activate your accont please follow the <a href= " + request.url_root + "activate?email=" + email + '&token=' + token + ">link</a></p> "
+        mail.send(message)
+    return json.dumps({
+            'ok': True,
+        })
 
 
-# @app.route('/activate')
-# def activate_account():
-#     email = request.args.get('email')
-#     token = request.args.get('token')
-#     if email is None or token is None:
-#         return render_template('activate.html')
+@app.route('/activate')
+def activate_account():
+    email = request.args.get('email')
+    token = request.args.get('token')
+    if email is None or token is None:
+        status = {'activation': False, 'message': 'It does not work, sly. Invalid activation link.'}
+        return render_template('activation.html', status=status)
+    res = user_model.check_token(email, token)
+    if res:
+        user_model.activate_user(res[0]['id'])
+    else:
+        status = {'activation': False, 'message': 'Unfortunately your account is not activated.'}
+        return render_template('activation.html', status=status)
+    status = {'activation': True, 'message': 'Congratulations! Your account has been successfully activated.'}
+    return render_template('activation.html', status=status)

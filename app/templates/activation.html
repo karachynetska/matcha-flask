@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Matcha activation</title>
+
+    <!-- Stylesheets
+    ================================================= -->
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+		<link rel="stylesheet" href="{{ url_for('static', filename='css/ionicons.min.css') }}"/>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}"/>
+
+    <!--Google Font-->
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
+
+    <!--Favicon-->
+        <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/fav.png') }}"/>
+	</head>
+	<body>
+        {% if status.activation == True %}
+        <h1>{% status.message %}</h1>
+        {% else %}
+        <h1>{% status.message %}</h1>
+        {% endif %}
+        <a href="{{ url_for('index') }}">Main page</a>
+    </body>
+</html>
