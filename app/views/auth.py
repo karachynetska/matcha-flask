@@ -1,5 +1,5 @@
 from app import app, mail
-from flask import render_template, url_for, redirect, request
+from flask import render_template, url_for, redirect, request, session
 import html
 import hashlib
 import random
@@ -180,8 +180,8 @@ def register():
 def activate_account():
     email = request.args.get('email')
     token = request.args.get('token')
+    status = {'activation': False, 'message': 'It does not work, sly. Invalid activation link.'}
     if email is None or token is None:
-        status = {'activation': False, 'message': 'It does not work, sly. Invalid activation link.'}
         return render_template('activation.html', status=status)
     res = user_model.check_token(email, token)
     if res:
@@ -191,3 +191,59 @@ def activate_account():
         return render_template('activation.html', status=status)
     status = {'activation': True, 'message': 'Congratulations! Your account has been successfully activated.'}
     return render_template('activation.html', status=status)
+
+
+@app.route('/login', methods=['POST'])
+def login():
+    if 'login' in session:
+        return json.dumps({
+            'ok': False,
+            'error': "Already logged"
+        })
+
+    email = html.escape(request.form['email'])
+    password = html.escape(request.form['password'])
+
+    if not email:
+        return json.dumps({
+            'ok': False,
+            'error': "Please enter your email",
+            'fields': ["my-email"]
+        })
+
+    if not password:
+        return json.dumps({
+            'ok': False,
+            'error': "Please enter your password",
+            'fields': ["my-password"]
+        })
+
+    user = user_model.email_exists(email)
+    if user:
+        if user[0]['activation'] != '1':
+            return json.dumps({
+                'ok': False,
+                'error': "Unfortunately your account is not activated.",
+            })
+        password_hash = hashlib.sha3_512(password.encode('utf-8')).hexdigest()
+        if user['password'] == password_hash:
+            session['id'] = user['id']
+            session['login'] = user['login']
+            return render_template('newsfeed.html')
+        else:
+            return json.dumps({
+                'ok': False,
+                'error': "Wrong password.",
+                'fields': ['my-password']
+            })
+    else:
+        return json.dumps({
+            'ok': False,
+            'error': "There is no user with such email.",
+            'fields': ['my-email']
+        })
+    # return render_template('index-register.html')
+
+@app.route('/newsfeed')
+def newsfeed():
+    return render_template('newsfeed.html')

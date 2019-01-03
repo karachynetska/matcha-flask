@@ -22,8 +22,6 @@ $("#register-button").on("click", function(e) {
     country: $("#country").val(),
   };
 
-  console.log(data['login']);
-
   $.ajax({
     type: "POST",
     data: data,
@@ -42,6 +40,32 @@ $("#register-button").on("click", function(e) {
       $("#message-register").text(
         "Registration completed successfully. Please check your email."
       );
+    }
+  });
+});
+
+$("#login-button").on('click', function (e) {
+  e.preventDefault();
+
+  var data = {
+    email: $('#my-email').val(),
+    password: $('#my-password').val()
+  };
+
+  console.log(data['email']);
+  console.log(data['password']);
+
+  $.ajax({
+      type: "POST",
+      data: data,
+      url: "/login"
+  }).done(function(data) {
+    var res = JSON.parse(data);
+    if (res.ok = false) {
+      $("#message-login").text("");
+      $("#message-login").text(res.error);
+    } else {
+      location.replace('/newsfeed');
     }
   });
 });
