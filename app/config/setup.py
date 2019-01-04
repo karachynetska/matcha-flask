@@ -10,6 +10,7 @@ def create_users():
         lastname TEXT NOT NULL,
         email TEXT NOT NULL UNIQUE,
         avatar TEXT,
+        background TEXT,
         birth_date TEXT NOT NULL,
         city TEXT NOT NULL,
         country TEXT NOT NULL,
@@ -27,6 +28,38 @@ def create_about():
     city TEXT NOT NULL,
     country TEXT NOT NULL,
     # sex_pref TEXT) ''')
+
+def create_friends():
+    database.db_query('''CREATE TABLE IF NOT EXISTS name (
+    )
+    ''')
+
+def create_posts():
+    database.db_query('''CREATE TABLE IF NOT EXISTS name (
+    )
+    ''')
+
+def create_likes():
+    database.db_query('''CREATE TABLE IF NOT EXISTS name (
+    )
+    ''')
+
+def create_comments():
+    database.db_query('''CREATE TABLE IF NOT EXISTS comments(
+    id_comment INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_user INTEGER NOT NULL,
+    id_post INTEGER NOT NULL,
+    text TEXT,
+    date_of_creation DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_post) REFERENCES posts(id_post) ON 
+    )''')
+
+def create_messages():
+    database.db_query('''CREATE TABLE IF NOT EXISTS name (
+    )
+    ''')
+
+
 
 def initial_setup():
     create_users()

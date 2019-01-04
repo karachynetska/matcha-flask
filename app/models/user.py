@@ -48,3 +48,11 @@ def activate_user(id):
     res = database.db_query(sql, array)
     return res
 
+def get_avatar(id):
+    array = [id]
+    sql = 'SELECT avatar FROM users WHERE id=?'
+    res = database.db_query(sql, array)
+    return res
+
+
+

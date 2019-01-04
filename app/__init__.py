@@ -3,6 +3,7 @@ from flask_mail import Mail
 from app.config import setup, database
 
 app = Flask(__name__)
+app.secret_key = "qnfhyamkdntiam16"
 
 setup.initial_setup()
 

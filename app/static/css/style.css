@@ -135,7 +135,7 @@ section .wrapper{
 }
 
 #page-contents{
-  padding: 30px 0 50px;
+  padding: 50px 0 50px;
 }
 
 .btn-primary{
@@ -299,7 +299,7 @@ textarea{
 }
 
 .menu form{
-  margin: 12px 0;
+  margin: 25px 0;
 }
 
 .menu form .form-group{
@@ -319,7 +319,7 @@ textarea{
   box-shadow: none;
   min-width: 235px;
   color: #fff;
-  height: 26px;
+  height: 25px;
   border-radius: 13px;
   font-size: 13px;
   padding-left: 30px;
@@ -372,6 +372,20 @@ textarea{
   border: 0;
 }
 
+.navbar-brand {
+    padding-top: 5px;
+    padding-left: 15px;
+    padding-bottom: 20px;
+    padding-right: 15px;
+}
+
+.navbar-nav>li>a {
+    padding-top: 27px;
+}
+
+.navbar-toggle {
+    margin-top: 22px;
+}
 /*For Homepage Header | Display on Scroll*/
 
 #header.lazy-load{
@@ -2350,7 +2364,7 @@ ul.contact li i{
   }
 }
 
-#spinner-wrapper{
+#spinner-wrapper {
   position: fixed;
   top: 0;
   left: 0;
@@ -2360,4 +2374,9 @@ ul.contact li i{
   z-index: 9999999;
 }
 
+#logout {
+    color: #ff374f;
+    font-size: 13px;
+    font-weight: 600;
+}
 

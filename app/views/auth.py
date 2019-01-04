@@ -153,10 +153,13 @@ def register():
 
     password_hash = hashlib.sha3_512(password.encode('utf-8')).hexdigest()
 
-# standard avatar selection
+# standard avatar and background selection
     numb = random.randint(1, 13)
     avatar = str(numb) + '.png'
     avatar = '/static/avatars/' + avatar
+    background = str(numb) + '.jpg'
+    background = '/static/backgrounds/' + background
+
 
 
 # token
@@ -219,17 +222,21 @@ def login():
         })
 
     user = user_model.email_exists(email)
+
     if user:
-        if user[0]['activation'] != '1':
+        if user[0]['activation'] != 1:
             return json.dumps({
                 'ok': False,
                 'error': "Unfortunately your account is not activated.",
             })
         password_hash = hashlib.sha3_512(password.encode('utf-8')).hexdigest()
-        if user['password'] == password_hash:
-            session['id'] = user['id']
-            session['login'] = user['login']
-            return render_template('newsfeed.html')
+        if user[0]['password'] == password_hash:
+            session['id'] = user[0]['id']
+            session['login'] = user[0]['login']
+            print(session)
+            return json.dumps({
+                'ok': True
+            })
         else:
             return json.dumps({
                 'ok': False,
@@ -242,8 +249,28 @@ def login():
             'error': "There is no user with such email.",
             'fields': ['my-email']
         })
-    # return render_template('index-register.html')
+
+@app.route('/profile')
+def profile():
+    if 'id' in session:
+        data = {
+            'user': user_model.get_user_by_id(session.get('id'))[0]
+        }
+        return render_template('profile.html', data=data)
+    return redirect('/')
 
 @app.route('/newsfeed')
 def newsfeed():
-    return render_template('newsfeed.html')
+    if 'id' in session:
+        data = {
+            'user': user_model.get_user_by_id(session.get('id'))[0]
+        }
+        return render_template('newsfeed.html', data=data)
+    return redirect('/')
+
+@app.route('/logout')
+def logout():
+    print(session)
+
+    session.clear()
+    return redirect(request.referrer)

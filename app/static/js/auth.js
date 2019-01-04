@@ -52,20 +52,22 @@ $("#login-button").on('click', function (e) {
     password: $('#my-password').val()
   };
 
-  console.log(data['email']);
-  console.log(data['password']);
+  // console.log(data['email']);
+  // console.log(data['password']);
 
   $.ajax({
       type: "POST",
       data: data,
       url: "/login"
   }).done(function(data) {
+    console.log(data);
     var res = JSON.parse(data);
-    if (res.ok = false) {
+    if (res.ok == false) {
+      console.log(res.error);
       $("#message-login").text("");
       $("#message-login").text(res.error);
     } else {
-      location.replace('/newsfeed');
+      location.replace('/profile');
     }
   });
 });
