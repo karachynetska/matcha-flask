@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, redirect, url_for
+from flask import Flask, render_template, request, redirect, url_for, session
 from flask_mail import Mail
 from app.config import setup, database
 
@@ -17,9 +17,11 @@ app.config.update(dict(
 ))
 mail = Mail(app)
 
-from app.views import auth
+from app.views import auth, profile
 
 @app.route('/')
 def index():
+    if 'id' in session:
+        return redirect('/profile')
     return render_template('index-register.html')
 

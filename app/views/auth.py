@@ -168,7 +168,7 @@ def register():
 
 
 # saving user to db and sending email
-    user = user_model.save_user_to_db(login, password_hash, firstname, lastname, email, avatar, birth_date, city, country, token, gender)
+    user = user_model.save_user_to_db(login, password_hash, firstname, lastname, email, avatar, background, birth_date, city, country, token, gender)
     if user:
         message = Message('Matcha registration', sender='matcha@project.unit.ua', recipients=[email])
         message.body = "Thank tou for registration in Matcha. To activate your accont please follow the link " + request.url_root + "activate?email=" + email + '&token=' + token
@@ -189,11 +189,12 @@ def activate_account():
     res = user_model.check_token(email, token)
     if res:
         user_model.activate_user(res[0]['id'])
+        status = {'activation': True, 'message': 'Congratulations! Your account has been successfully activated.'}
+        return render_template('activation.html', status=status)
     else:
         status = {'activation': False, 'message': 'Unfortunately your account is not activated.'}
         return render_template('activation.html', status=status)
-    status = {'activation': True, 'message': 'Congratulations! Your account has been successfully activated.'}
-    return render_template('activation.html', status=status)
+
 
 
 @app.route('/login', methods=['POST'])
@@ -250,15 +251,6 @@ def login():
             'fields': ['my-email']
         })
 
-@app.route('/profile')
-def profile():
-    if 'id' in session:
-        data = {
-            'user': user_model.get_user_by_id(session.get('id'))[0]
-        }
-        return render_template('profile.html', data=data)
-    return redirect('/')
-
 @app.route('/newsfeed')
 def newsfeed():
     if 'id' in session:
@@ -267,6 +259,14 @@ def newsfeed():
         }
         return render_template('newsfeed.html', data=data)
     return redirect('/')
+
+
+@app.route('/forgot')
+def forgot():
+    if 'id' in session:
+        return redirect('/')
+    else:
+        return render_template('/forgot.html')
 
 @app.route('/logout')
 def logout():

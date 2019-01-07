@@ -1,0 +1,54 @@
+{% extends 'layout.html' %}
+{% block links %}
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/ionicons.min.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}"/>
+
+    <!--Google Font-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
+
+    <!--Favicon-->
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/fav.png') }}"/>
+{% endblock %}
+{% block main %}
+{#    <div class="container">#}
+{#        <div class="edit-profile-container">#}
+{#            <div class="block-title">#}
+{#                <h4 class="grey"><i class="icon ion-ios-locked-outline"></i>Change Password</h4>#}
+{#                <div class="line"></div>#}
+{#                <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate</p>#}
+{#                <div class="line"></div>#}
+{#            </div>#}
+{#            <div class="edit-block">#}
+{#                <form name="update-pass" id="education" class="form-inline">#}
+{#                    <div class="row">#}
+{#                        <div class="form-group col-xs-12">#}
+{#                            <label for="my-password">Old password</label>#}
+{#                            <input id="my-password" class="form-control input-group-lg" type="password" name="password" title="Enter password" placeholder="Old password"/>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <div class="row">#}
+{#                        <div class="form-group col-xs-6">#}
+{#                            <label>New password</label>#}
+{#                            <input class="form-control input-group-lg" type="password" name="password" title="Enter password" placeholder="New password"/>#}
+{#                        </div>#}
+{#                        <div class="form-group col-xs-6">#}
+{#                            <label>Confirm password</label>#}
+{#                            <input class="form-control input-group-lg" type="password" name="password" title="Enter password" placeholder="Confirm password"/>#}
+{#                        </div>#}
+{#                    </div>#}
+{#                    <p><a href="#">Forgot Password?</a></p>#}
+{#                    <button class="btn btn-primary">Update Password</button>#}
+{#                </form>#}
+{#            </div>#}
+{#        </div>#}
+{#    </div>#}
+{% endblock %}
+{% block scripts %}
+    <script src="{{ url_for('static', filename='js/jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.sticky-kit.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.scrollbar.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+{% endblock %}
