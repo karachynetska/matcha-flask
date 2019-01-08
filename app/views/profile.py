@@ -41,26 +41,26 @@ def ajax_edit_password():
             return json.dumps({
                 'ok': False,
                 'error': "Enter your password please",
-                'fields': ["my-password"]
+                'fields': ["my_password"]
             })
 
         if not new_password:
             return json.dumps({
                 'ok': False,
                 'error': "Enter your new password please",
-                'fields': ["my-password"]
+                'fields': ["my_password"]
             })
 
         if not confirm_password:
             return json.dumps({
                 'ok': False,
                 'error': "Enter new password again please",
-                'fields': ["confirm-password"]
+                'fields': ["confirm_password"]
             })
 
         user = user_model.get_user_by_id(session.get('id'))[0]
         my_password_hash = hashlib.sha3_512(my_password.encode('utf-8')).hexdigest()
-        if my_password_hash == user.password:
+        if my_password_hash == user['password']:
             if new_password == confirm_password:
                 new_password_hash = hashlib.sha3_512(new_password.encode('utf-8')).hexdigest()
                 user_model.change_password(session.get('id'), new_password_hash)
@@ -72,13 +72,13 @@ def ajax_edit_password():
                 return json.dumps({
                     'ok': False,
                     'error': "Passwords don't match",
-                    'fields': ["new_password", "confirm-password"]
+                    'fields': ["new_password", "confirm_password"]
                 })
         else:
             return json.dumps({
                 'ok': False,
                 'error': "You entered wrong password",
-                'fields': ["my-password"]
+                'fields': ["my_password"]
             })
     else:
         return redirect('/')

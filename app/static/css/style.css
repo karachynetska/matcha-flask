@@ -335,8 +335,13 @@ textarea{
   font-weight: 600;
 }
 
+/*.menu ul.main-menu li.dropdown a:hover, .menu ul.main-menu li.dropdown a:active, .menu ul.main-menu li.dropdown a:focus{*/
+  /*color: #27aae1;*/
+  /*background: none;*/
+/*}*/
+
 .menu ul.main-menu li.dropdown a:hover, .menu ul.main-menu li.dropdown a:active, .menu ul.main-menu li.dropdown a:focus{
-  color: #27aae1;
+  color: #d9d54a;
   background: none;
 }
 
@@ -2380,3 +2385,15 @@ ul.contact li i{
     font-weight: 600;
 }
 
+.error {
+    border: 1px solid #ff374f;
+    -webkit-box-shadow: offset 0 1px 1px rgba(0,0,0,.075);
+    /*box-shadow: offset 0 1px 1px rgba(0,0,0,.075);*/
+    box-shadow: 0 0 15px rgb(255, 55, 79);
+}
+
+.success {
+    text-shadow: 1px 1px 2px #8dc63f, 0 0 1em #8dc63f;
+    /*color: 3px solid #8dc63f;*/
+
+}

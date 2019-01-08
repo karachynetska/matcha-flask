@@ -260,6 +260,16 @@ def forgot():
     else:
         return render_template('/forgot.html')
 
+@app.route('/ajax_forgot', methods=["POST"])
+def ajax_forgot():
+    if 'id' in session:
+        return redirect('/')
+    else:
+        email = html.escape(request.form['email'])
+
+
+
+
 @app.route('/logout')
 def logout():
     print(session)

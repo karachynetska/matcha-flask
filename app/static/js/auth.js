@@ -70,3 +70,26 @@ $("#login-button").on('click', function (e) {
     }
   });
 });
+
+$("#send-button").on('click', function (e) {
+    e.preventDefault();
+
+    var data = {
+      email: $("#my-email").val()
+    };
+
+    $.ajax({
+        type: "POST",
+        data: data,
+        url: "/ajax_forgot"
+    }).done(function (data) {
+        var res = JSON.parse(data);
+        if (res.ok == false) {
+          $("#message-forgot").text("");
+          $("#message-forgot").text(res.error);
+        } else {
+          $("#message-forgot").text("");
+          $("#message-forgot").text(res.error);
+        }
+    });
+});
