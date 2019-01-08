@@ -9,6 +9,7 @@ import re
 from app.models import user as user_model
 from flask_mail import Message
 
+
 @app.route('/profile')
 def profile():
     if 'id' in session:
@@ -18,15 +19,24 @@ def profile():
         return render_template('profile.html', data=data)
     return redirect('/')
 
-@app.route('/profile/edit/password', methods=['POST', 'GET'])
+
+@app.route('/profile/edit/password')
 def edit_password():
     if 'id' in session:
-        if request.method == 'POST':
-            my_password = html.escape(request.form['my_password'])
-            new_password = html.escape(request.form['new_password'])
-            confirm_password = html.escape(request.form['confirm_password'])
-            print(my_password)
+        data = {
+            'user': user_model.get_user_by_id(session.get('id'))[0]
+        }
+        return render_template('edit-profile-password.html', data=data)
+    else:
+        return redirect('/')
 
+
+@app.route('/ajax_edit_password', methods=["POST"])
+def ajax_edit_password():
+    if 'id' in session:
+        my_password = html.escape(request.form['my_password'])
+        new_password = html.escape(request.form['new_password'])
+        confirm_password = html.escape(request.form['confirm_password'])
         if not my_password:
             return json.dumps({
                 'ok': False,
@@ -49,7 +59,6 @@ def edit_password():
             })
 
         user = user_model.get_user_by_id(session.get('id'))[0]
-
         my_password_hash = hashlib.sha3_512(my_password.encode('utf-8')).hexdigest()
         if my_password_hash == user.password:
             if new_password == confirm_password:
@@ -71,10 +80,5 @@ def edit_password():
                 'error': "You entered wrong password",
                 'fields': ["my-password"]
             })
-
-        data = {
-            'user': user_model.get_user_by_id(session.get('id'))[0]
-        }
-        return render_template('edit-profile-password.html', data=data)
     else:
         return redirect('/')
