@@ -13,7 +13,7 @@ from flask_mail import Message
 @app.route('/register', methods=['POST'])
 def register():
     login = html.escape(request.form['login'])
-    password = request.form['password']
+    password = html.escape(request.form['password'])
     firstname = html.escape(request.form['firstname'])
     lastname = html.escape(request.form['lastname'])
     email = html.escape(request.form['email'])
@@ -26,7 +26,6 @@ def register():
 
 # firstname and lastname
     if not (firstname or lastname):
-        print('1')
         return json.dumps({
             'ok': False,
             'error': "Please fill in all fields",
@@ -34,7 +33,6 @@ def register():
         })
 
     if len(firstname) < 2 or len(firstname) > 25:
-        print('2')
         return json.dumps({
             'ok': False,
             'error': "Firstname length must be from 2 characters to 25",
@@ -43,7 +41,6 @@ def register():
 
 
     if len(lastname) < 2 or len(lastname) > 25:
-        print('3')
         return json.dumps({
             'ok': False,
             'error': "Lastname length must be from 2 characters to 25",
@@ -53,7 +50,6 @@ def register():
 
 # login
     if not login:
-        print('no login1')
         return json.dumps({
             'ok': False,
             'error': "Please fill in all fields",
@@ -61,7 +57,6 @@ def register():
         })
 
     if len(login) < 2 or len(login) > 25:
-        print('no login')
         return json.dumps({
             'ok': False,
             'error': "Login length must be from 3 characters to 20",
@@ -200,10 +195,7 @@ def activate_account():
 @app.route('/login', methods=['POST'])
 def login():
     if 'login' in session:
-        return json.dumps({
-            'ok': False,
-            'error': "Already logged"
-        })
+        return redirect('/profile')
 
     email = html.escape(request.form['email'])
     password = html.escape(request.form['password'])

@@ -20,7 +20,7 @@ def email_exists(email):
     return res
 
 
-def save_user_to_db(login, password, firstname, lastname, email, background, avatar, birth_date, city, country, token, gender):
+def save_user_to_db(login, password, firstname, lastname, email, avatar, background, birth_date, city, country, token, gender):
     array = [login, password, firstname, lastname, email, avatar, background, birth_date, city, country, token, gender]
     sql = 'INSERT INTO users (login, password, firstname, lastname, email, avatar, background, birth_date, city, country, token, gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
     res = database.db_insert(sql, array)
@@ -54,6 +54,12 @@ def activate_user(id):
 def get_avatar(id):
     array = [id]
     sql = 'SELECT avatar FROM users WHERE id=?'
+    res = database.db_query(sql, array)
+    return res
+
+def change_password(id, password):
+    array = [password, id]
+    sql = 'UPDATE users SET password = ? WHERE id=?'
     res = database.db_query(sql, array)
     return res
 
