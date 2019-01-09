@@ -2,14 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="567250cd-dcc5-4389-bbf0-9b452b7959b0" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/models/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/user.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/static/js/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/js/auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/forgot-password.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/recovery_password.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/forgot.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/forgot.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/auth.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/matcha.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/matcha.sqlite3" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -36,14 +30,14 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/views/auth.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1533">
-              <caret line="348" lean-forward="true" selection-start-line="348" selection-end-line="348" />
+            <state relative-caret-position="296">
+              <caret line="302" column="16" selection-start-line="302" selection-start-column="16" selection-end-line="302" selection-end-column="16" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
-                <marker date="1547054819000" expanded="true" signature="7878:11607" ph="..." />
+                <marker date="1547057983000" expanded="true" signature="7878:11500" ph="..." />
               </folding>
             </state>
           </provider>
@@ -64,8 +58,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/static/js/auth.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1091">
-              <caret line="103" column="19" selection-start-line="103" selection-start-column="19" selection-end-line="103" selection-end-column="19" />
+            <state relative-caret-position="631">
+              <caret line="108" column="53" selection-start-line="108" selection-start-column="53" selection-end-line="108" selection-end-column="53" />
             </state>
           </provider>
         </entry>
@@ -92,7 +86,7 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/templates/recovery_password.html">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="616">
@@ -186,8 +180,8 @@
         <option value="$PROJECT_DIR$/app/templates/forgot-password.html" />
         <option value="$PROJECT_DIR$/app/templates/forgot.html" />
         <option value="$PROJECT_DIR$/app/models/user.py" />
-        <option value="$PROJECT_DIR$/app/static/js/auth.js" />
         <option value="$PROJECT_DIR$/app/templates/recovery_password.html" />
+        <option value="$PROJECT_DIR$/app/static/js/auth.js" />
         <option value="$PROJECT_DIR$/app/views/auth.py" />
       </list>
     </option>
@@ -314,12 +308,12 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1545144156980</updated>
-      <workItem from="1547027478405" duration="14653000" />
+      <workItem from="1547027478405" duration="16082000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14653000" />
+    <option name="totallyTimeSpent" value="16082000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
@@ -510,17 +504,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/profile.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="691">
-          <caret line="64" column="94" lean-forward="true" selection-start-line="64" selection-start-column="94" selection-end-line="64" selection-end-column="94" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-            <marker date="1546964243000" expanded="true" signature="874:879" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/static/js/profile.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="450">
@@ -535,6 +518,34 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/recovery_password.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="616">
+          <caret line="125" column="88" selection-start-line="125" selection-start-column="88" selection-end-line="125" selection-end-column="88" />
+          <folding>
+            <element signature="n#style#0;n#h1#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/static/js/auth.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="631">
+          <caret line="108" column="53" selection-start-line="108" selection-start-column="53" selection-end-line="108" selection-end-column="53" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/profile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="691">
+          <caret line="64" column="94" lean-forward="true" selection-start-line="64" selection-start-column="94" selection-end-line="64" selection-end-column="94" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+            <marker date="1546964243000" expanded="true" signature="874:879" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/user.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="563">
@@ -545,30 +556,13 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/static/js/auth.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1091">
-          <caret line="103" column="19" selection-start-line="103" selection-start-column="19" selection-end-line="103" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/auth.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1533">
-          <caret line="348" lean-forward="true" selection-start-line="348" selection-end-line="348" />
+        <state relative-caret-position="296">
+          <caret line="302" column="16" selection-start-line="302" selection-start-column="16" selection-end-line="302" selection-end-column="16" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
-            <marker date="1547054819000" expanded="true" signature="7878:11607" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/recovery_password.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="616">
-          <caret line="125" column="88" selection-start-line="125" selection-start-column="88" selection-end-line="125" selection-end-column="88" />
-          <folding>
-            <element signature="n#style#0;n#h1#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <marker date="1547057983000" expanded="true" signature="7878:11500" ph="..." />
           </folding>
         </state>
       </provider>

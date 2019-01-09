@@ -105,8 +105,8 @@ $("#recovery-button").on('click', function (e) {
     e.preventDefault();
 
     var data = {
-        new_password: $("#new_password"),
-        confirm_password: $("#confirm_password")
+        new_password: $("#new_password").val(),
+        confirm_password: $("#confirm_password").val()
     };
 
     $.ajax({
