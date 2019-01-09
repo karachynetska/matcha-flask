@@ -32,13 +32,14 @@ $("#register-button").on("click", function(e) {
       $("#message-register").text(res.error);
       if (res.fields) {
         res.fields.forEach(function(item) {
-          $("input[name=" + item + "]").addClass("error");
+          $("input[id=" + item + "]").addClass("error");
         });
       }
     } else {
       $("#message-register").text(
         "Registration completed successfully. Please check your email."
       );
+      $("#message-register").addClass("success");
     }
   });
 });
@@ -87,9 +88,45 @@ $("#send-button").on('click', function (e) {
         if (res.ok == false) {
           $("#message-forgot").text("");
           $("#message-forgot").text(res.error);
+          if (res.fields) {
+                res.fields.forEach(function(item) {
+                    $("input[id=" + item + "]").addClass("error");
+                });
+            }
         } else {
           $("#message-forgot").text("");
           $("#message-forgot").text(res.error);
+          $("#message-forgot").addClass("success");
+        }
+    });
+});
+
+$("#recovery-button").on('click', function (e) {
+    e.preventDefault();
+
+    var data = {
+        new_password: $("#new_password"),
+        confirm_password: $("#confirm_password")
+    };
+
+    $.ajax({
+        type: "POST",
+        data: data,
+        url: "/recovery"
+    }).done(function (data) {
+        var res = JSON.parse(data);
+        if (res.ok == false) {
+            $("#message-recovery").text("");
+            $("#message-recovery").text(res.error);
+            if (res.fields) {
+                res.fields.forEach(function(item) {
+                    $("input[id=" + item + "]").addClass("error");
+                });
+            }
+        } else {
+            $("#message-recovery").text("");
+            $("#message-recovery").text(res.error);
+            $("#message-recovery").addClass("success");
         }
     });
 });

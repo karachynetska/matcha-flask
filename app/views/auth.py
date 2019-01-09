@@ -156,18 +156,16 @@ def register():
     background = '/static/backgrounds/' + background
 
 
-
 # token
-    date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    token = hashlib.md5((login + date).encode('utf-8')).hexdigest()
+    token = user_model.create_token(login)
 
 
 # saving user to db and sending email
     user = user_model.save_user_to_db(login, password_hash, firstname, lastname, email, avatar, background, birth_date, city, country, token, gender)
     if user:
         message = Message('Matcha registration', sender='matcha@project.unit.ua', recipients=[email])
-        message.body = "Thank tou for registration in Matcha. To activate your accont please follow the link " + request.url_root + "activate?email=" + email + '&token=' + token
-        message.html = "<p>Thank tou for registration in Matcha. To activate your accont please follow the <a href= " + request.url_root + "activate?email=" + email + '&token=' + token + ">link</a></p> "
+        message.body = "Thank tou for registration in Matcha. To activate your account please follow the link " + request.url_root + "activate?email=" + email + '&token=' + token
+        message.html = "<p>Thank you for registration in Matcha. To activate your account please follow the <a href= " + request.url_root + "activate?email=" + email + '&token=' + token + ">link</a></p> "
         mail.send(message)
     return json.dumps({
             'ok': True,
@@ -243,6 +241,7 @@ def login():
             'fields': ['my-email']
         })
 
+
 @app.route('/newsfeed')
 def newsfeed():
     if 'id' in session:
@@ -260,14 +259,103 @@ def forgot():
     else:
         return render_template('/forgot.html')
 
-@app.route('/ajax_forgot', methods=["POST"])
+
+@app.route('/ajax_forgot', methods=['POST'])
 def ajax_forgot():
     if 'id' in session:
         return redirect('/')
+
+    email = html.escape(request.form['email'])
+    if not email:
+        return json.dumps({
+            'ok': False,
+            'error': "Please enter your email",
+            'fields': ["my-email"]
+        })
+    user = user_model.email_exists(email)[0]
+    if user:
+        token = user_model.create_token(user['id'], user['login'])
+        message = Message('Matcha: recovery password', sender='matcha@project.unit.ua', recipients=[email])
+        message.body = "To change your password, please follow the link " + request.url_root + "recovery?email=" + email + '&token=' + token
+        message.html = "<p>To change your password, please follow the <a href= " + request.url_root + "recovery?email=" + email + '&token=' + token + ">link</a></p> "
+        mail.send(message)
+        return json.dumps({
+            'ok': True,
+            'error': "Link to change the password sent to the specified mail",
+        })
     else:
-        email = html.escape(request.form['email'])
+        return json.dumps({
+            'ok': False,
+            'error': "There is no user with such email.",
+            'fields': ['my-email']
+        })
+
+@app.route('/recovery', methods=['GET', 'POST'])
+def recovery():
+    email = request.args.get('email')
+    token = request.args.get('token')
+
+    if request.method == 'POST':
+        if 'id' in session:
+            return redirect('/')
+        else:
+            new_password = html.escape(request.form['new_password'])
+            confirm_password = html.escape(request.form['confirm_password'])
+            if not new_password:
+                return json.dumps({
+                    'ok': False,
+                    'error': "Please fill in all fields",
+                    'fields': ['new_password']
+                })
+            if not confirm_password:
+                return json.dumps({
+                    'ok': False,
+                    'error': "Please fill in all fields",
+                    'fields': ['confirm_password']
+                })
+            if new_password == confirm_password:
+                user = user_model.email_exists(email)[0]
+                password_hash = hashlib.sha3_512(new_password.encode('utf-8')).hexdigest()
+                res = user_model.recovery_password(user['id'], password_hash)
+                if res:
+                    return json.dumps({
+                        'ok': True,
+                        'error': "New password successfully set",
+                    })
+                else:
+                    return json.dumps({
+                        'ok': False,
+                        'error': "Ooops...something went wrong",
+                    })
+            else:
+                return json.dumps({
+                    'ok': False,
+                    'error': "Passwords don't match",
+                    'fields': ['confirm_password']
+                })
+
+    if 'id' in session:
+        return redirect('/')
+    status = {'recovery': False, 'message': 'It does not work, sly. Invalid activation link.'}
+    if email is None or token is None:
+        return render_template('recovery_password.html', status=status)
+    res = user_model.check_token(email, token)
+    if res:
+        return render_template('recovery_password.html')
+    else:
+        status = {'recovery': False, 'message': 'Something went wrong.'}
+        return render_template('recovery_password.html', status=status)
 
 
+
+# @app.route('/ajax_recovery', methods=['POST'])
+# def ajax_recovery():
+#     if 'id' in session:
+#         return redirect('/')
+#     else:
+#         new_password = html.escape(request.form['new_password'])
+#         confirm_password = html.escape(request.form['confirm_password'])
+#         res = user_model.recovery_password()
 
 
 @app.route('/logout')

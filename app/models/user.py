@@ -1,5 +1,6 @@
 from app.config import database
-
+from datetime import datetime
+import hashlib
 
 def user_exists(login, email):
     array = [login, email]
@@ -33,6 +34,14 @@ def get_user_by_id(id):
     res = database.db_query(sql, array)
     return res
 
+def create_token(id, login):
+    date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    token = hashlib.md5((login + date).encode('utf-8')).hexdigest()
+    array = [token, id, login]
+    sql = 'UPDATE users SET token=? WHERE id=? AND login=?'
+    database.db_query(sql, array)
+    return token
+
 def check_token(email, token):
     array = [email]
     sql = 'SELECT id, token, activation FROM users WHERE email=?'
@@ -60,6 +69,12 @@ def get_avatar(id):
 def change_password(id, password):
     array = [password, id]
     sql = 'UPDATE users SET password = ? WHERE id=?'
+    res = database.db_query(sql, array)
+    return res
+
+def recovery_password(id, password):
+    array = [password, id]
+    sql = 'UPDATE users SET password=?, token = NULL WHERE id=?'
     res = database.db_query(sql, array)
     return res
 
