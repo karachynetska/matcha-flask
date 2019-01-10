@@ -66,6 +66,11 @@ $("#login-button").on('click', function (e) {
       console.log(res.error);
       $("#message-login").text("");
       $("#message-login").text(res.error);
+      if (res.fields) {
+          res.fields.forEach(function(item) {
+          $("input[id=" + item + "]").addClass("error");
+        });
+      }
     } else {
       location.replace('/profile');
     }
@@ -101,10 +106,34 @@ $("#send-button").on('click', function (e) {
     });
 });
 
+function getLocation(href) {
+    var match = href.match(/^(https?\:)\/\/(([^:\/?#]*)(?:\:([0-9]+))?)([\/]{0,1}[^?#]*)(\?[^#]*|)(#.*|)$/);
+    return match && {
+        href: href,
+        protocol: match[1],
+        host: match[2],
+        hostname: match[3],
+        port: match[4],
+        pathname: match[5],
+        search: match[6],
+        hash: match[7]
+    }
+}
+
 $("#recovery-button").on('click', function (e) {
     e.preventDefault();
 
+    var url = getLocation(location.href);
+    var search = url['search'];
+    var email = search.match(/\?email=(\w+\@\w+.\w+)/)[1];
+    var token = search.match(/\&token=(\w+)/)[1];
+
+    // console.log(email);
+    // console.log(token);
+
     var data = {
+        email: email,
+        token: token,
         new_password: $("#new_password").val(),
         confirm_password: $("#confirm_password").val()
     };
@@ -112,7 +141,7 @@ $("#recovery-button").on('click', function (e) {
     $.ajax({
         type: "POST",
         data: data,
-        url: "/recovery"
+        url: "/ajax_recovery"
     }).done(function (data) {
         var res = JSON.parse(data);
         if (res.ok == false) {

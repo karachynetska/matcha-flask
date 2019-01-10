@@ -290,26 +290,30 @@ def ajax_forgot():
             'fields': ['my-email']
         })
 
-@app.route('/recovery', methods=['POST', 'GET'])
+@app.route('/recovery')
 def recovery():
-    email = ''
-    token = ''
-    if request.method == 'GET':
-        email = request.args.get('email')
-        token = request.args.get('token')
-        if 'id' in session:
-            return redirect('/')
-        status = {'recovery': False, 'message': 'It does not work, sly. Invalid activation link.'}
-        if not (email or token):
-            return render_template('recovery_password.html', status=status)
-        res = user_model.check_token(email, token)
-        if res:
-            return render_template('recovery_password.html')
-        else:
-            status = {'recovery': False, 'message': 'Something went wrong.'}
-            return render_template('recovery_password.html', status=status)
+    email = request.args.get('email')
+    token = request.args.get('token')
+    if 'id' in session:
+        return redirect('/')
+    status = {'recovery': False, 'message': 'It does not work, sly. Invalid activation link.'}
+    if not (email or token):
+        return render_template('recovery_password.html', status=status)
+    res = user_model.check_token(email, token)
+    if res:
+        return render_template('recovery_password.html')
+    else:
+        status = {'recovery': False, 'message': 'Something went wrong.'}
+        return render_template('recovery_password.html', status=status)
 
-    if request.method == 'POST':
+
+@app.route('/ajax_recovery', methods=['POST'])
+def ajax_recovery():
+    if 'id' in session:
+        return redirect('/')
+    else:
+        email = html.escape(request.form['email'])
+        token = html.escape(request.form['token'])
         new_password = html.escape(request.form['new_password'])
         confirm_password = html.escape(request.form['confirm_password'])
         if not new_password:
@@ -324,11 +328,12 @@ def recovery():
                 'error': "Please fill in all fields",
                 'fields': ['confirm_password']
             })
-        if new_password == confirm_password:
-            user = user_model.email_exists(email)[0]
-            password_hash = hashlib.sha3_512(new_password.encode('utf-8')).hexdigest()
-            res = user_model.recovery_password(user['id'], password_hash)
-            if res:
+        res = user_model.check_token(email, token)
+        if res:
+            if new_password == confirm_password:
+                user = user_model.email_exists(email)[0]
+                password_hash = hashlib.sha3_512(new_password.encode('utf-8')).hexdigest()
+                user_model.recovery_password(user['id'], password_hash)
                 return json.dumps({
                     'ok': True,
                     'error': "New password successfully set",
@@ -336,26 +341,10 @@ def recovery():
             else:
                 return json.dumps({
                     'ok': False,
-                    'error': "Ooops...something went wrong",
+                    'error': "Passwords don't match",
+                    'fields': ['confirm_password']
                 })
-        else:
-            return json.dumps({
-                'ok': False,
-                'error': "Passwords don't match",
-                'fields': ['confirm_password']
-            })
 
-
-
-
-# @app.route('/ajax_recovery', methods=['POST'])
-# def ajax_recovery():
-#     if 'id' in session:
-#         return redirect('/')
-#     else:
-#         new_password = html.escape(request.form['new_password'])
-#         confirm_password = html.escape(request.form['confirm_password'])
-#         res = user_model.recovery_password()
 
 
 @app.route('/logout')
@@ -363,4 +352,5 @@ def logout():
     print(session)
 
     session.clear()
-    return redirect(request.referrer)
+    return redirect('/')
+    # return redirect(request.referrer)

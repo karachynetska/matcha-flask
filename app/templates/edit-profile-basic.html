@@ -1,176 +1,120 @@
-<!DOCTYPE html>
-<html lang="en">
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="description" content="This is social network html5 template available in themeforest......" />
-		<meta name="keywords" content="Social Network, Social Media, Make Friends, Newsfeed, Profile Page" />
-		<meta name="robots" content="index, follow" />
-		<title>Friend Finder | A Complete Social Network Template</title>
-
+{% extends 'layout.html' %}
+{% block title %}Edit Profile | Edit Profile Page{% endblock %}
+{% block link %}
     <!-- Stylesheets
     ================================================= -->
-		<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
-		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
-		<link rel="stylesheet" href="{{ url_for('static', filename='css/ionicons.min.css') }}"/>
-        <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}"/>
-        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename = "css/bootstrap.min.css") }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename = "css/style.css") }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename = "css/ionicons.min.css") }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename = "css/font-awesome.min.css") }}" />
+
+    <!--Google Font-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
 
     <!--Favicon-->
-    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/fav.png') }}"/>
-	</head>
-	<body>
+    <link rel="shortcut icon" type="image/png" href="images/fav.png"/>
+{% endblock %}
 
-    <!-- Header
-    ================================================= -->
-		<header id="header-inverse">
-      <nav class="navbar navbar-default navbar-fixed-top menu">
-        <div class="container">
+{% block main %}
+    <div class="container">
 
-          <!-- Brand and toggle get grouped for better mobile display -->
-          <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-              <span class="sr-only">Toggle navigation</span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-              <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="/"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo" /></a>
-          </div>
+      <!-- Timeline
+      ================================================= -->
+      <div class="timeline">
+        <div class="timeline-cover" style="background: url({{ data.user.background }})">
 
-          <!-- Collect the nav links, forms, and other content for toggling -->
-{#          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">#}
-{#            <ul class="nav navbar-nav navbar-right main-menu">#}
-{#              <li class="dropdown">#}
-{#                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Home <span><img src="{{ url_for('static', filename='images/down-arrow.png') }}" alt="" /></span></a>#}
-{#                <ul class="dropdown-menu newsfeed-home">#}
-{#                  <li><a href="index.html">Landing Page 1</a></li>#}
-{#                  <li><a href="index-register.html">Landing Page 2</a></li>#}
-{#                </ul>#}
-{#              </li>#}
-{#              <li class="dropdown">#}
-{#                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Newsfeed <span><img src="{{ url_for('static', filename='images/down-arrow.png') }}" alt="" /></span></a>#}
-{#                <ul class="dropdown-menu newsfeed-home">#}
-{#                  <li><a href="newsfeed.html">Newsfeed</a></li>#}
-{#                  <li><a href="newsfeed-people-nearby.html">Poeple Nearly</a></li>#}
-{#                  <li><a href="newsfeed-friends.html">My friends</a></li>#}
-{#                  <li><a href="newsfeed-messages.html">Chatroom</a></li>#}
-{#                  <li><a href="newsfeed-images.html">Images</a></li>#}
-{#                  <li><a href="newsfeed-videos.html">Videos</a></li>#}
-{#                </ul>#}
-{#              </li>#}
-{#              <li class="dropdown">#}
-{#                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Timeline <span><img src="{{ url_for('static', filename='images/down-arrow.png') }}" alt="" /></span></a>#}
-{#                <ul class="dropdown-menu login">#}
-{#                  <li><a href="timeline.html">Timeline</a></li>#}
-{#                  <li><a href="timeline-about.html">Timeline About</a></li>#}
-{#                  <li><a href="timeline-album.html">Timeline Album</a></li>#}
-{#                  <li><a href="timeline-friends.html">Timeline Friends</a></li>#}
-{#                  <li><a href="edit-profile-basic.html">Edit: Basic Info</a></li>#}
-{#                  <li><a href="edit-profile-work-edu.html">Edit: Work</a></li>#}
-{#                  <li><a href="edit-profile-interests.html">Edit: Interests</a></li>#}
-{#                  <li><a href="edit-profile-settings.html">Account Settings</a></li>#}
-{#                  <li><a href="edit-profile-password.html">Change Password</a></li>#}
-{#                </ul>#}
-{#              </li>#}
-{#              <li class="dropdown">#}
-{#                <a href="#" class="dropdown-toggle pages" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">All Pages <span><img src="{{ url_for('static', filename='images/down-arrow.png') }}" alt="" /></span></a>#}
-{#                <ul class="dropdown-menu page-list">#}
-{#                  <li><a href="index.html">Landing Page 1</a></li>#}
-{#                  <li><a href="index-register.html">Landing Page 2</a></li>#}
-{#                  <li><a href="newsfeed.html">Newsfeed</a></li>#}
-{#                  <li><a href="newsfeed-people-nearby.html">Poeple Nearly</a></li>#}
-{#                  <li><a href="newsfeed-friends.html">My friends</a></li>#}
-{#                  <li><a href="newsfeed-messages.html">Chatroom</a></li>#}
-{#                  <li><a href="newsfeed-images.html">Images</a></li>#}
-{#                  <li><a href="newsfeed-videos.html">Videos</a></li>#}
-{#                  <li><a href="timeline.html">Timeline</a></li>#}
-{#                  <li><a href="timeline-about.html">Timeline About</a></li>#}
-{#                  <li><a href="timeline-album.html">Timeline Album</a></li>#}
-{#                  <li><a href="timeline-friends.html">Timeline Friends</a></li>#}
-{#                  <li><a href="edit-profile-basic.html">Edit Profile</a></li>#}
-{#                  <li><a href="contact.html">Contact Us</a></li>#}
-{#                </ul>#}
-{#              </li>#}
-{#              <li class="dropdown"><a href="contact.html">Contact</a></li>#}
-{#            </ul>#}
-{#            <form class="navbar-form navbar-right hidden-sm">#}
-{#              <div class="form-group">#}
-{#                <i class="icon ion-android-search"></i>#}
-{#                <input type="text" class="form-control" placeholder="Search friends, photos, videos">#}
-{#              </div>#}
-{#            </form>#}
-{#          </div><!-- /.navbar-collapse -->#}
-        </div><!-- /.container -->
-      </nav>
-    </header>
-    <!--Header End-->
-
-    <!-- Landing Page Contents
-    ================================================= -->
-    <div id="lp-register">
-    	<div class="container wrapper">
-        <div class="row">
-        	<div class="col-sm-5">
-            <div class="intro-texts">
-            	<h1 class="text-white">Make Cool Friends !!!</h1>
-            	<p>Friend Finder is a social network template that can be used to connect people. The template offers Landing pages, News Feed, Image/Video Feed, Chat Box, Timeline and lot more. <br /> <br />Why are you waiting for? Buy it now.</p>
-              <button class="btn btn-primary">Learn More</button>
-            </div>
-          </div>
-        	<div class="col-sm-6 col-sm-offset-1">
-            <div class="reg-form-container">
-
-              <!-- Register/Login Tabs-->
-              <div class="reg-options">
-                <ul class="nav nav-tabs">
-                  <li><a href="#register" data-toggle="tab">Register</a></li>
-                  <li class="active"><a href="#login" data-toggle="tab">Login</a></li>
-                </ul><!--Tabs End-->
+          <!--Timeline Menu for Large Screens-->
+          <div class="timeline-nav-bar hidden-sm hidden-xs">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="profile-info">
+                  <img src="{{ data.user.avatar }}" alt="" class="img-responsive profile-photo" />
+                  <h3>{{ data.user.firstname + ' ' + data.user.lastname }}</h3>
+                  <p class="text-muted">{{ data.user.login }}</p>
+                </div>
               </div>
+              <div class="col-md-9">
+                <ul class="list-inline profile-menu">
+                  <li><a href="timeline.html">Timeline</a></li>
+                  <li><a href="timeline-about.html" class="active">About</a></li>
+                  <li><a href="timeline-album.html">Album</a></li>
+                  <li><a href="timeline-friends.html">Friends</a></li>
+                </ul>
+                <ul class="follow-me list-inline">
+                  <li>1,299 followers</li>
+                  <li><button class="btn-primary">Add Friend</button></li>
+                </ul>
+              </div>
+            </div>
+          </div><!--Timeline Menu for Large Screens End-->
 
-              <!--Registration Form Contents-->
-              <div class="tab-content">
-                <div class="tab-pane" id="register">
-                  <h3>Register Now !!!</h3>
-                  <p id="message-register"></p>
+          <!--Timeline Menu for Small Screens-->
+          <div class="navbar-mobile hidden-lg hidden-md">
+            <div class="profile-info">
+              <img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" />
+              <h4>{{ data.user.firstname + ' ' + data.user.lastname }}</h4>
+              <p class="text-muted">{{ data.user.login }}</p>
+            </div>
+            <div class="mobile-menu">
+              <ul class="list-inline">
+                <li><a href="timline.html">Timeline</a></li>
+                <li><a href="timeline-about.html" class="active">About</a></li>
+                <li><a href="timeline-album.html">Album</a></li>
+                <li><a href="timeline-friends.html">Friends</a></li>
+              </ul>
+              <button class="btn-primary">Add Friend</button>
+            </div>
+          </div><!--Timeline Menu for Small Screens End-->
 
-                  <!--Register Form-->
-                  <form name="registration_form" id='registration_form' class="form-inline" method="post" >
+        </div>
+        <div id="page-contents">
+          <div class="row">
+            <div class="col-md-3">
+
+              <!--Edit Profile Menu-->
+              <ul class="edit-menu">
+              	<li class="active"><i class="icon ion-ios-information-outline"></i><a href="/profile/edit/basic">Basic Information</a></li>
+              	<li><i class="icon ion-ios-briefcase-outline"></i><a href="/profile/edit/edu-work">Education and Work</a></li>
+              	<li><i class="icon ion-ios-heart-outline"></i><a href="/profile/edit/interests">My Interests</a></li>
+                <li><i class="icon ion-ios-settings"></i><a href="/profile/edit/settings">Account Settings</a></li>
+              	<li><i class="icon ion-ios-locked-outline"></i><a href="/profile/edit/password">Change Password</a></li>
+              </ul>
+            </div>
+            <div class="col-md-7">
+
+              <!-- Basic Information
+              ================================================= -->
+              <div class="edit-profile-container">
+                <div class="block-title">
+                  <h4 class="grey"><i class="icon ion-android-checkmark-circle"></i>Edit basic information</h4>
+                  <div class="line"></div>
+                  <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate</p>
+                  <div class="line"></div>
+                </div>
+                <div class="edit-block">
+                  <form name="basic-info" id="basic-info" class="form-inline">
                     <div class="row">
                       <div class="form-group col-xs-6">
-                        <label for="firstname" class="sr-only">First Name</label>
+                        <label for="firstname">First name</label>
                         <input id="firstname" class="form-control input-group-lg" type="text" name="firstname" title="Enter first name" placeholder="First name"/>
                       </div>
                       <div class="form-group col-xs-6">
-                        <label for="lastname" class="sr-only">Last Name</label>
+                        <label for="lastname" class="">Last name</label>
                         <input id="lastname" class="form-control input-group-lg" type="text" name="lastname" title="Enter last name" placeholder="Last name"/>
                       </div>
                     </div>
-                      <div class="row">
-                          <div class="form-group col-xs-12">
-                              <label for="rlogin" class="sr-only">Login</label>
-                              <input id="rlogin" class="form-control input-group-lg" type="text" name="login" title="Enter Login" placeholder="Your Login"/>
-                          </div>
-                      </div>
                     <div class="row">
                       <div class="form-group col-xs-12">
-                        <label for="email" class="sr-only">Email</label>
-                        <input id="email" class="form-control input-group-lg" type="text" name="email" title="Enter Email" placeholder="Your Email"/>
+                        <label for="email">My email</label>
+                        <input id="email" class="form-control input-group-lg" type="text" name="Email" title="Enter Email" placeholder="My Email"/>
                       </div>
                     </div>
                     <div class="row">
-                      <div class="form-group col-xs-12">
-                        <label for="password" class="sr-only">Password</label>
-                        <input id="password" class="form-control input-group-lg" type="password" name="password" title="Enter password" placeholder="Password"/>
-                      </div>
-                    </div>
-                    <div class="row">
-                      <p class="birth"><strong>Date of Birth</strong></p>
+                      <p class="custom-label"><strong>Date of Birth</strong></p>
                       <div class="form-group col-sm-3 col-xs-6">
                         <label for="month" class="sr-only"></label>
-                        <select class="form-control" id="day" name="day">
-                          <option value="Day" disabled selected>Day</option>
+                        <select class="form-control" id="day">
+                          <option value="Day">Day</option>
                           <option>1</option>
                           <option>2</option>
                           <option>3</option>
@@ -189,7 +133,7 @@
                           <option>16</option>
                           <option>17</option>
                           <option>18</option>
-                          <option>19</option>
+                          <option selected>19</option>
                           <option>20</option>
                           <option>21</option>
                           <option>22</option>
@@ -206,8 +150,8 @@
                       </div>
                       <div class="form-group col-sm-3 col-xs-6">
                         <label for="month" class="sr-only"></label>
-                        <select class="form-control" id="month" name="month">
-                          <option value="month" disabled selected>Month</option>
+                        <select class="form-control" id="month">
+                          <option value="month">Month</option>
                           <option>Jan</option>
                           <option>Feb</option>
                           <option>Mar</option>
@@ -219,13 +163,13 @@
                           <option>Sep</option>
                           <option>Oct</option>
                           <option>Nov</option>
-                          <option>Dec</option>
+                          <option selected>Dec</option>
                         </select>
                       </div>
                       <div class="form-group col-sm-6 col-xs-12">
                         <label for="year" class="sr-only"></label>
-                        <select class="form-control" id="year" name="year">
-                          <option value="year" disabled selected>Year</option>
+                        <select class="form-control" id="year">
+                          <option value="year">Year</option>
                             <option>1950</option>
                             <option>1951</option>
                             <option>1952</option>
@@ -292,24 +236,25 @@
                       </div>
                     </div>
                     <div class="form-group gender">
-                      <label class="radio-inline" >
-                        <input type="radio" name="gender" checked>Male
+                      <span class="custom-label"><strong>I am a: </strong></span>
+                      <label class="radio-inline">
+                        <input type="radio" name="optradio" checked>Male
                       </label>
                       <label class="radio-inline">
-                        <input type="radio" name="gender" id="female">Female
+                        <input type="radio" name="optradio">Female
                       </label>
                     </div>
                     <div class="row">
                       <div class="form-group col-xs-6">
-                        <label for="city" class="sr-only">City</label>
-                        <input id="city" class="form-control input-group-lg reg_name" type="text" name="city" title="Enter city" placeholder="Your city"/>
+                        <label for="city"> My city</label>
+                        <input id="city" class="form-control input-group-lg" type="text" name="city" title="Enter city" placeholder="Your city" value="New York"/>
                       </div>
                       <div class="form-group col-xs-6">
-                        <label for="country" class="sr-only"></label>
-                        <select class="form-control" id="country" name="country">
-                          <option value="country" disabled selected>Country</option>
+                        <label for="country">My country</label>
+                        <select class="form-control" id="country">
+                          <option value="country">Country</option>
                           <option value="AFG">Afghanistan</option>
-                          <option value="ALA">Åland Islands</option>
+                          <option value="ALA">Ƭand Islands</option>
                           <option value="ALB">Albania</option>
                           <option value="DZA">Algeria</option>
                           <option value="ASM">American Samoa</option>
@@ -362,10 +307,10 @@
                           <option value="COD">Congo, the Democratic Republic of the</option>
                           <option value="COK">Cook Islands</option>
                           <option value="CRI">Costa Rica</option>
-                          <option value="CIV">Côte d'Ivoire</option>
+                          <option value="CIV">C𴥠d'Ivoire</option>
                           <option value="HRV">Croatia</option>
                           <option value="CUB">Cuba</option>
-                          <option value="CUW">Curaçao</option>
+                          <option value="CUW">Cura袯</option>
                           <option value="CYP">Cyprus</option>
                           <option value="CZE">Czech Republic</option>
                           <option value="DNK">Denmark</option>
@@ -488,11 +433,11 @@
                           <option value="PRT">Portugal</option>
                           <option value="PRI">Puerto Rico</option>
                           <option value="QAT">Qatar</option>
-                          <option value="REU">Réunion</option>
+                          <option value="REU">R궮ion</option>
                           <option value="ROU">Romania</option>
                           <option value="RUS">Russian Federation</option>
                           <option value="RWA">Rwanda</option>
-                          <option value="BLM">Saint Barthélemy</option>
+                          <option value="BLM">Saint Barthꭥmy</option>
                           <option value="SHN">Saint Helena, Ascension and Tristan da Cunha</option>
                           <option value="KNA">Saint Kitts and Nevis</option>
                           <option value="LCA">Saint Lucia</option>
@@ -543,7 +488,7 @@
                           <option value="UKR">Ukraine</option>
                           <option value="ARE">United Arab Emirates</option>
                           <option value="GBR">United Kingdom</option>
-                          <option value="USA">United States</option>
+                          <option value="USA" selected>United States</option>
                           <option value="UMI">United States Minor Outlying Islands</option>
                           <option value="URY">Uruguay</option>
                           <option value="UZB">Uzbekistan</option>
@@ -560,70 +505,66 @@
                         </select>
                       </div>
                     </div>
-                      <button class="btn btn-primary" type="submit" id="register-button">Register Now</button>
-                  </form><!--Register Now Form Ends-->
-                  <p><a href="/">Already have an account?</a></p>
-
-                </div><!--Registration Form Contents Ends-->
-
-                <!--Login-->
-                <div class="tab-pane active" id="login">
-                  <h3>Login</h3>
-{#                  <p class="text-muted">Log into your account</p>#}
-                    <p id="message-login"></p>
-
-                  <!--Login Form-->
-                  <form name="Login_form" id='Login_form' method="post">
-                     <div class="row">
-                      <div class="form-group col-xs-12">
-                        <label for="my-email" class="sr-only">Email</label>
-                        <input id="my-email" class="form-control input-group-lg" type="text" name="Email" title="Enter Email" placeholder="Your Email"/>
-                      </div>
-                    </div>
                     <div class="row">
                       <div class="form-group col-xs-12">
-                        <label for="my-password" class="sr-only">Password</label>
-                        <input id="my-password" class="form-control input-group-lg" type="password" name="password" title="Enter password" placeholder="Password"/>
+                        <label for="my-info">About me</label>
+                        <textarea id="my-info" name="information" class="form-control" placeholder="Some texts about me" rows="4" cols="400">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur</textarea>
                       </div>
                     </div>
-                      <button class="btn btn-primary" id="login-button">Login Now</button>
-                  </form><!--Login Form Ends-->
-                  <p><a href="/forgot">Forgot Password?</a></p>
+                    <button class="btn btn-primary">Save Changes</button>
+                  </form>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-2 static">
 
+              <!--Sticky Timeline Activity Sidebar-->
+              <div id="sticky-sidebar">
+                <h4 class="grey">{{ data.user.firstname + "'s activity"}}</h4>
+                <div class="feed-item">
+                  <div class="live-activity">
+                    <p><a href="#" class="profile-link">Sarah</a> Commended on a Photo</p>
+                    <p class="text-muted">5 mins ago</p>
+                  </div>
+                </div>
+                <div class="feed-item">
+                  <div class="live-activity">
+                    <p><a href="#" class="profile-link">Sarah</a> Has posted a photo</p>
+                    <p class="text-muted">an hour ago</p>
+                  </div>
+                </div>
+                <div class="feed-item">
+                  <div class="live-activity">
+                    <p><a href="#" class="profile-link">Sarah</a> Liked her friend's post</p>
+                    <p class="text-muted">4 hours ago</p>
+                  </div>
+                </div>
+                <div class="feed-item">
+                  <div class="live-activity">
+                    <p><a href="#" class="profile-link">Sarah</a> has shared an album</p>
+                    <p class="text-muted">a day ago</p>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="row">
-          <div class="col-sm-6 col-sm-offset-6">
-
-            <!--Social Icons-->
-            <ul class="list-inline social-icons">
-              <li><a href="#"><i class="icon ion-social-facebook"></i></a></li>
-              <li><a href="#"><i class="icon ion-social-twitter"></i></a></li>
-              <li><a href="#"><i class="icon ion-social-googleplus"></i></a></li>
-              <li><a href="#"><i class="icon ion-social-pinterest"></i></a></li>
-              <li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
-            </ul>
-          </div>
-        </div>
       </div>
     </div>
+{% endblock %}
 
     <!--preloader-->
     <div id="spinner-wrapper">
       <div class="spinner"></div>
     </div>
 
+{% block scripts %}
     <!-- Scripts
     ================================================= -->
-    <script src="{{ url_for('static', filename='js/jquery-3.1.1.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/jquery.appear.min.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/jquery.incremental-counter.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
-    <script src="{{ url_for('static', filename='js/auth.js') }}"></script>
+    <script src="{{ url_for('static', filename = "js/jquery-3.1.1.min.js") }}"></script>
+    <script src="{{ url_for('static', filename = "js/bootstrap.min.js") }}"></script>
+    <script src="{{ url_for('static', filename = "js/jquery.sticky-kit.min.js") }}"></script>
+    <script src="{{ url_for('static', filename = "js/jquery.scrollbar.min.js") }}"></script>
+    <script src="{{ url_for('static', filename = "js/script.js") }}"></script>
+{% endblock %}
 
-	</body>
-</html>

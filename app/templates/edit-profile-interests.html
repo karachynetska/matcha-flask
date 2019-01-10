@@ -1,15 +1,18 @@
 {% extends 'layout.html' %}
+{% block title %}Edit Profile | My Interests{% endblock %}
 {% block link %}
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/ionicons.min.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}" />
+    <!-- Stylesheets
+    ================================================= -->
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.min.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/style.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/ionicons.min.css') }}"/>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/font-awesome.min.css') }}"/>
 
     <!--Google Font-->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
 
     <!--Favicon-->
-    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/fav.png') }}"/>
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename = '') }}images/fav.png"/>
 {% endblock %}
 {% block main %}
     <div class="container">
@@ -71,43 +74,40 @@
               <ul class="edit-menu">
               	<li><i class="icon ion-ios-information-outline"></i><a href="/profile/edit/basic">Basic Information</a></li>
               	<li><i class="icon ion-ios-briefcase-outline"></i><a href="/profile/edit/edu-work">Education and Work</a></li>
-              	<li><i class="icon ion-ios-heart-outline"></i><a href="/profile/edit/interests">My Interests</a></li>
+              	<li class="active"><i class="icon ion-ios-heart-outline"></i><a href="/profile/edit/interests">My Interests</a></li>
                 <li><i class="icon ion-ios-settings"></i><a href="/profile/edit/settings">Account Settings</a></li>
-              	<li class="active"><i class="icon ion-ios-locked-outline"></i><a href="/profile/edit/password">Change Password</a></li>
+              	<li><i class="icon ion-ios-locked-outline"></i><a href="/profile/edit/password">Change Password</a></li>
               </ul>
             </div>
             <div class="col-md-7">
 
-              <!-- Change Password
+              <!-- Edit Interests
               ================================================= -->
               <div class="edit-profile-container">
                 <div class="block-title">
-                  <h4 class="grey"><i class="icon ion-ios-locked-outline"></i>Change Password</h4>
+                  <h4 class="grey"><i class="icon ion-ios-heart-outline"></i>My Interests</h4>
                   <div class="line"></div>
-                  <p id="message-edit"></p>
+                  <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate</p>
                   <div class="line"></div>
                 </div>
                 <div class="edit-block">
-                  <form name="update-pass" id="education" class="form-inline" method="post">
-                    <div class="row">
-                      <div class="form-group col-xs-12">
-                        <label for="my_password">Old password</label>
-                        <input id="my_password" class="form-control input-group-lg" type="password" name="password" title="Enter password" placeholder="Old password"/>
-                      </div>
+                  <ul class="list-inline interests">
+                  	<li><a href=""><i class="icon ion-android-bicycle"></i> Bycicle</a></li>
+                  	<li><a href=""><i class="icon ion-ios-camera"></i> Photgraphy</a></li>
+                  	<li><a href=""><i class="icon ion-android-cart"></i> Shopping</a></li>
+                  	<li><a href=""><i class="icon ion-android-plane"></i> Traveling</a></li>
+                  	<li><a href=""><i class="icon ion-android-restaurant"></i> Eating</a></li>
+                  </ul>
+                  <div class="line"></div>
+                  <div class="row">
+                    <p class="custom-label"><strong>Add interests</strong></p>
+                    <div class="form-group col-sm-8">
+                      <input id="add-interest" class="form-control input-group-lg" type="text" name="interest" title="Choose Interest" placeholder="Interests. For example, photography"/>
                     </div>
-                    <div class="row">
-                      <div class="form-group col-xs-6">
-                        <label>New password</label>
-                        <input id="new_password" class="form-control input-group-lg" type="password" name="password" title="Enter password" placeholder="New password"/>
-                      </div>
-                      <div class="form-group col-xs-6">
-                        <label>Confirm password</label>
-                        <input id="confirm_password" class="form-control input-group-lg" type="password" name="password" title="Enter password" placeholder="Confirm password"/>
-                      </div>
+                    <div class="form-group col-sm-4">
+                      <button class="btn btn-primary">Add</button>
                     </div>
-                    <p><a href="/forgot">Forgot Password?</a></p>
-                    <button id="edit-button" class="btn btn-primary">Update Password</button>
-                  </form>
+                  </div>
                 </div>
               </div>
             </div>
@@ -115,7 +115,7 @@
 
               <!--Sticky Timeline Activity Sidebar-->
               <div id="sticky-sidebar">
-                <h4 class="grey">{{ data.user.firstname + "'s activity" }}</h4>
+                <h4 class="grey">Sarah's activity</h4>
                 <div class="feed-item">
                   <div class="live-activity">
                     <p><a href="#" class="profile-link">Sarah</a> Commended on a Photo</p>
@@ -153,14 +153,12 @@
       <div class="spinner"></div>
     </div>
 
-
+{% block scripts %}
     <!-- Scripts
     ================================================= -->
-{% block scripts %}
-    <script src="{{ url_for('static', filename="js/jquery-3.1.1.min.js") }}"></script>
-    <script src="{{ url_for('static', filename="js/bootstrap.min.js") }}"></script>
-    <script src="{{ url_for('static', filename="js/jquery.sticky-kit.min.js") }}"></script>
-    <script src="{{ url_for('static', filename="js/jquery.scrollbar.min.js") }}"></script>
-    <script src="{{ url_for('static', filename="js/script.js") }}"></script>
-    <script src="{{ url_for('static', filename='js/profile.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'js/jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'js/jquery.sticky-kit.min.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'js/jquery.scrollbar.min.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'js/script.js') }}"></script>
 {% endblock %}

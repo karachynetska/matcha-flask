@@ -75,7 +75,7 @@ def change_password(id, password):
 def recovery_password(id, password):
     array = [password, id]
     sql = 'UPDATE users SET password=?, token = NULL WHERE id=?'
-    res = database.db_query(sql, array)
+    res = database.db_insert(sql, array)
     return res
 
 

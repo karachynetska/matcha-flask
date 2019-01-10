@@ -10,6 +10,8 @@ from app.models import user as user_model
 from flask_mail import Message
 
 
+
+# PROFILE
 @app.route('/profile')
 def profile():
     if 'id' in session:
@@ -20,6 +22,59 @@ def profile():
     return redirect('/')
 
 
+
+# ABOUT
+@app.route('/profile/about')
+def about():
+    if 'id' in session:
+        data = {
+            'user': user_model.get_user_by_id(session.get('id'))[0]
+        }
+        return render_template('about.html', data=data)
+    return redirect('/')
+
+
+
+# FRIENDS
+@app.route('/profile/friends')
+def friends():
+    data = {
+        'user': user_model.get_user_by_id(session.get('id'))[0]
+    }
+    return render_template('friends.html', data=data)
+
+
+
+# ALBUM
+@app.route('/profile/album')
+def album():
+    if 'id' in session:
+        data = {
+            'user': user_model.get_user_by_id(session.get('id'))[0]
+        }
+        return render_template('album.html', data=data)
+    return redirect('/')
+
+
+
+# EDIT BASIC INFORMATION
+@app.route('/profile/edit/basic')
+def edit_basic():
+    if 'id' in session:
+        data = {
+            'user': user_model.get_user_by_id(session.get('id'))[0]
+        }
+        return render_template('edit-profile-basic.html', data=data)
+    else:
+        return redirect('/')
+
+
+# @app.route('/ajax_edit_basic')
+# def ajax_edit_basic():
+#
+
+
+# EDIT PASSWORD
 @app.route('/profile/edit/password')
 def edit_password():
     if 'id' in session:
@@ -82,3 +137,51 @@ def ajax_edit_password():
             })
     else:
         return redirect('/')
+
+
+
+# EDIT INTERESTS
+@app.route('/profile/edit/interests')
+def edit_interests():
+    if 'id' in session:
+        data = {
+            'user': user_model.get_user_by_id(session.get('id'))[0]
+        }
+        return render_template('edit-profile-interests.html', data=data)
+    else:
+        return redirect('/')
+
+
+# @app.route('/ajax_edit_interests')
+# def ajax_edit_interests():
+
+
+
+# EDIT EDUCATION AND WORK
+@app.route('/profile/edit/edu-work')
+def edit_edu_work():
+    if 'id' in session:
+        data = {
+            'user': user_model.get_user_by_id(session.get('id'))[0]
+        }
+        return render_template('edit-profile-edu-work.html', data=data)
+    else:
+        return redirect('/')
+
+
+# @app.route('/ajax_edit_edu_work')
+# def ajax_edit_edu_work():
+
+
+
+# EDIT ACCOUNT SETTINGS
+@app.route('/profile/edit/settings')
+def edit_settings():
+    if 'id' in session:
+        data = {
+            'user': user_model.get_user_by_id(session.get('id'))[0]
+        }
+        return render_template('edit-profile-settings.html', data=data)
+    else:
+        return redirect('/')
+

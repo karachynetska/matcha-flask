@@ -341,9 +341,10 @@ textarea{
 /*}*/
 
 .menu ul.main-menu li.dropdown a:hover, .menu ul.main-menu li.dropdown a:active, .menu ul.main-menu li.dropdown a:focus{
-  color: #d9d54a;
+  color: #27aae1;
   background: none;
 }
+/*#d9d54a*/
 
 .menu ul.main-menu li.open a, .menu ul.main-menu li.open a:active, .menu ul.main-menu li.open a:focus{
   background: transparent;
@@ -2386,10 +2387,10 @@ ul.contact li i{
 }
 
 .error {
-    border: 1px solid #ff374f;
-    -webkit-box-shadow: offset 0 1px 1px rgba(0,0,0,.075);
+    border: 1px solid #ff374f !important;
+    -webkit-box-shadow: 0 0 15px rgb(255, 55, 79);
     /*box-shadow: offset 0 1px 1px rgba(0,0,0,.075);*/
-    box-shadow: 0 0 15px rgb(255, 55, 79);
+    box-shadow: 0 0 15px rgb(255, 55, 79) !important;
 }
 
 .success {
