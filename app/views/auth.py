@@ -21,6 +21,7 @@ def register():
     city = request.form['city']
     country = request.form['country']
     gender = request.form['gender']
+    sex_pref = request.form['sex_pref']
     date_of_creation = datetime.now()
 
 
@@ -53,14 +54,14 @@ def register():
         return json.dumps({
             'ok': False,
             'error': "Please fill in all fields",
-            'fields': ["login"]
+            'fields': ["rlogin"]
         })
 
     if len(login) < 2 or len(login) > 25:
         return json.dumps({
             'ok': False,
             'error': "Login length must be from 3 characters to 20",
-            'fields': ["login"]
+            'fields': ["rlogin"]
         })
 
 
@@ -116,6 +117,22 @@ def register():
             'ok': False,
             'error': "Please fill in all fields",
             'fields': ["country"]
+        })
+
+# gender
+    if not gender:
+        return json.dumps({
+            'ok': False,
+            'error': "Please fill in all fields",
+            'fields': ["gender"]
+        })
+
+# sexual preferences
+    if not gender:
+        return json.dumps({
+            'ok': False,
+            'error': "Please fill in all fields",
+            'fields': ["sex_pref"]
         })
 
 # Сheck for user availability
@@ -332,6 +349,19 @@ def ajax_recovery():
         if res:
             if new_password == confirm_password:
                 user = user_model.email_exists(email)[0]
+                if len(new_password) < 2 or len(new_password) > 25:
+                    return json.dumps({
+                        'ok': False,
+                        'error': "Password length must be from 8 characters to 16",
+                        'fields': ["new_password"]
+                    })
+
+                if re.search("[a-zA-Z]+", new_password) is None or re.search("[0-9]+", new_password) is None:
+                    return json.dumps({
+                        'ok': False,
+                        'error': "Password is too weak",
+                        'fields': ["new_password"]
+                    })
                 password_hash = hashlib.sha3_512(new_password.encode('utf-8')).hexdigest()
                 user_model.recovery_password(user['id'], password_hash)
                 return json.dumps({

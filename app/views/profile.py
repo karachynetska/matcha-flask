@@ -117,6 +117,19 @@ def ajax_edit_password():
         my_password_hash = hashlib.sha3_512(my_password.encode('utf-8')).hexdigest()
         if my_password_hash == user['password']:
             if new_password == confirm_password:
+                if len(new_password) < 2 or len(new_password) > 25:
+                    return json.dumps({
+                        'ok': False,
+                        'error': "Password length must be from 8 characters to 16",
+                        'fields': ["new_password"]
+                    })
+
+                if re.search("[a-zA-Z]+", new_password) is None or re.search("[0-9]+", new_password) is None:
+                    return json.dumps({
+                        'ok': False,
+                        'error': "Password is too weak",
+                        'fields': ["new_password"]
+                    })
                 new_password_hash = hashlib.sha3_512(new_password.encode('utf-8')).hexdigest()
                 user_model.change_password(session.get('id'), new_password_hash)
                 return json.dumps({

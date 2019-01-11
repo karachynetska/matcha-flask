@@ -17,6 +17,7 @@ $("#register-button").on("click", function(e) {
     month: $("#month").val(),
     year: $("#year").val(),
     gender,
+    sex_pref: $("#sex_pref").val(),
     city: $("#city").val(),
     country: $("#country").val(),
   };
