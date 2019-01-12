@@ -198,3 +198,16 @@ def edit_settings():
     else:
         return redirect('/')
 
+
+
+#CHANGE AVATAR
+@app.route('/profile/edit/avatar')
+def edit_avatar():
+    if 'id' in session:
+        data = {
+            'user': user_model.get_user_by_id(session.get('id'))[0]
+        }
+        return render_template('edit-profile-avatar.html', data=data)
+    else:
+        return redirect('/')
+

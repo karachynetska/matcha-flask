@@ -23,7 +23,7 @@ def create_users():
     if res:
         print(res)
     else:
-        print("users created")
+        print("users")
 
 def create_about():
     res = database.db_query('''CREATE TABLE IF NOT EXISTS about(
@@ -36,7 +36,7 @@ def create_about():
     if res:
         print(res)
     else:
-        print("about created")
+        print("about")
 
 def create_interests():
     res = database.db_query('''CREATE TABLE IF NOT EXISTS interests(
@@ -47,7 +47,7 @@ def create_interests():
     if res:
         print(res)
     else:
-        print("interests created")
+        print("interests")
 
 def create_interests_users():
     res = database.db_query('''CREATE TABLE IF NOT EXISTS interests_users(
@@ -58,12 +58,24 @@ def create_interests_users():
     if res:
         print(res)
     else:
-        print("interests created")
+        print("interests_users")
 
-# def create_friends():
+# def create_friendship():
 #     database.db_query('''CREATE TABLE IF NOT EXISTS name (
+#     id_frienship
 #     )
 #     ''')
+#
+# def create_friends_request():
+#     res = database.db_query('''CREATE TABLE IF NOT EXISTS friends_request(
+#     id_requested INTEGER NOT NULL,
+#     id_requester INTEGER NOT NULL,
+#     FOREIGN KEY (id_requested) REFERENCES users(id) ON DELETE CASCADE,
+#     FOREIGN KEY (id_requester) REFERENCES users(id) ON DELETE CASCADE)''')
+#     if res:
+#         print(res)
+#     else:
+#         print('friends_request created')
 
 # def create_posts():
 #     database.db_query('''CREATE TABLE IF NOT EXISTS name (
@@ -71,7 +83,7 @@ def create_interests_users():
 #     ''')
 
 def create_likes():
-    database.db_query('''CREATE TABLE IF NOT EXISTS name (
+    res = database.db_query('''CREATE TABLE IF NOT EXISTS likes (
     id_user INTEGER NOT NULL,
     id_post INTEGER NOT NULL,
     id_photo INTEGER NOT NULL,
@@ -93,7 +105,7 @@ def create_comments():
     if res:
         print(res)
     else:
-        print("comments created")
+        print("comments")
 
 # def create_messages():
 #     database.db_query('''CREATE TABLE IF NOT EXISTS name (
@@ -101,6 +113,16 @@ def create_comments():
 #     ''')
 
 
+def create_geolocation():
+    res = database.db_query('''CREATE TABLE IF NOT EXISTS geolocation(
+    id_user INTEGER NOT NULL UNIQUE,
+    longitude TEXT,
+    latitude TEXT,
+    FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE CASCADE)''')
+    if (res):
+        print(res)
+    else:
+        print("geolocation")
 
 def initial_setup():
     create_users()

@@ -33,3 +33,27 @@ $("#edit-button").on('click', function (e) {
     });
 });
 
+$("#change-avatar").on('click', function (e) {
+    e.preventDefault();
+
+    var data = {
+        avatar: $("#avatar").val();
+    };
+
+    $.ajax({
+        type: "POST",
+        data: data,
+        url: "/profile/edit/avatar"
+    }).done(function (data) {
+        var res = JSON.parse(data);
+        if (res.ok == false) {
+
+            if (res.fields) {
+
+            }
+        } else {
+
+        }
+    });
+});
+
