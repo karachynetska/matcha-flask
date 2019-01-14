@@ -21,7 +21,6 @@ $("#edit-button").on('click', function (e) {
           $("#message-edit").text(res.error)
           if (res.fields) {
             res.fields.forEach(function (item) {
-                console.log(item);
                 $("input[id=" + item + "]").addClass("error");
             });
           }
@@ -33,27 +32,74 @@ $("#edit-button").on('click', function (e) {
     });
 });
 
-$("#change-avatar").on('click', function (e) {
-    e.preventDefault();
 
-    var data = {
-        avatar: $("#avatar").val();
-    };
+$("#avatar").on('change', function (e) {
+    var data = new FormData();
+    var file = $("#avatar").prop('files')[0];
+    console.log(file.src);
 
-    $.ajax({
-        type: "POST",
-        data: data,
-        url: "/profile/edit/avatar"
-    }).done(function (data) {
-        var res = JSON.parse(data);
-        if (res.ok == false) {
 
-            if (res.fields) {
 
+    if (data) {
+        data.append('avatar', file);
+        // data.append('avatar', file);
+        console.log(data.getAll('avatar'));
+
+
+        $.ajax({
+            type: "POST",
+            data: data,
+            url: "/ajax_edit_avatar",
+            processData: false,
+            contentType: false
+        }).done(function (data) {
+            var res = JSON.parse(data);
+            if (res.ok == false) {
+                $("#message-avatar").text("");
+                $("#message-avatar").text(res.error)
+                if (res.fields) {
+                    res.fields.forEach(function (item) {
+                        $("input[id=" + item + "]").addClass("error");
+                    });
+                }
+            } else {
+                $("#avatar_preview").attr('src', file);
+                console.log($("#avatar_preview").attr('src'));
+                $("#message-avatar").text("");
+                $("#message-avatar").text(res.error);
+                $("#message-avatar").addClass("success");
             }
-        } else {
-
-        }
-    });
+        });
+    }
 });
+
+
+// $("#change-avatar").on('click', function (e) {
+//     e.preventDefault();
+//     var data = new FormData();
+//
+//     //     console.log("blah");
+//
+//     var data = {
+//         avatar: $("#avatar").val()
+//     };
+//     console.log(data.avatar);
+
+
+    // $.ajax({
+    //     type: "POST",
+    //     data: data,
+    //     url: "ajax_edit_avatar"
+    // }).done(function (data) {
+    //     var res = JSON.parse(data);
+    //     if (res.ok == false) {
+    //
+    //         if (res.fields) {
+    //
+    //         }
+    //     } else {
+    //
+    //     }
+    // });
+// });
 

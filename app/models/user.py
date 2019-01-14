@@ -66,6 +66,12 @@ def get_avatar(id):
     res = database.db_query(sql, array)
     return res
 
+def change_avatar(avatar, id):
+    array = [avatar, id]
+    sql = 'UPDATE USERS SET avatar=? WHERE id=?'
+    res = database.db_query(sql, array)
+    return res
+
 def change_password(id, password):
     array = [password, id]
     sql = 'UPDATE users SET password = ? WHERE id=?'
