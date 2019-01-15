@@ -89,7 +89,7 @@
                 <div class="block-title">
                   <h4 class="grey"><i class="icon ion-android-checkmark-circle"></i>Edit basic information</h4>
                   <div class="line"></div>
-                  <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate</p>
+                  <p id="message-basic"></p>
                   <div class="line"></div>
                 </div>
                 <div class="edit-block">
@@ -242,8 +242,19 @@
                         <input type="radio" name="optradio" checked>Male
                       </label>
                       <label class="radio-inline">
-                        <input type="radio" name="optradio">Female
+                        <input type="radio" name="optradio" id="female">Female
                       </label>
+                    </div>
+                      <div class="row">
+                        <div class="form-group col-xs-12">
+                        <label for="sex_pref">Sexual preferences</label>
+                        <select class="form-control" id="sex_pref" name="sex_pref">
+                            <option value="Sexual preferences" disabled selected>Sexual preferences</option>
+                            <option>Heterosexual</option>
+                            <option>Homosexual</option>
+                            <option>Bisexual</option>
+                        </select>
+                      </div>
                     </div>
                     <div class="row">
                       <div class="form-group col-xs-6">
@@ -512,7 +523,7 @@
                         <textarea id="my-info" name="information" class="form-control" placeholder="Some texts about me" rows="4" cols="400">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur</textarea>
                       </div>
                     </div>
-                    <button class="btn btn-primary">Save Changes</button>
+                    <button class="btn btn-primary" id="edit-basic">Save Changes</button>
                   </form>
                 </div>
               </div>

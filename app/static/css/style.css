@@ -2393,6 +2393,12 @@ ul.contact li i{
     box-shadow: 0 0 15px rgb(255, 55, 79) !important;
 }
 
+.error_text {
+    text-shadow: 1px 1px 2px #ff374f, 0 0 1em #ff374f;
+    /*color: 3px solid #8dc63f;*/
+
+}
+
 .success {
     text-shadow: 1px 1px 2px #8dc63f, 0 0 1em #8dc63f;
     /*color: 3px solid #8dc63f;*/

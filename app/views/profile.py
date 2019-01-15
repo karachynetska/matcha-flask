@@ -5,6 +5,7 @@ import html
 import hashlib
 import random
 from datetime import datetime
+from werkzeug.utils import secure_filename
 import json
 import re
 import os
@@ -16,10 +17,13 @@ photos = UploadSet('photos', IMAGES)
 app.config['UPLOADED_PHOTOS_DEST'] = "app/static/media"
 configure_uploads(app, photos)
 
+UPLOAD_FOLDER = '/'
 ALLOWED_EXTENSIONS = set(['image/jpg', 'image/jpeg', 'image/JPG', 'image/JPEG', 'image/png', 'image/PNG', 'image/gif', 'image/GIF'])
 
 def allowed_extensions(mime_type):
 	return mime_type in ALLOWED_EXTENSIONS
+
+
 
 # PROFILE
 @app.route('/profile')
@@ -81,7 +85,7 @@ def edit_basic():
 
 # @app.route('/ajax_edit_basic')
 # def ajax_edit_basic():
-#
+
 
 
 # EDIT PASSWORD
@@ -225,47 +229,35 @@ def edit_avatar():
 @app.route('/ajax_edit_avatar', methods=['POST'])
 def ajax_edit_avatar():
     avatar = request.files.get('avatar')
-    print(avatar)
+
     if not avatar:
         return json.dumps({
             'ok': False,
             'error': "Something wrong",
             'fields': ["avatar"]
         })
+    id = session.get('id')
+    login = session.get('login')
+    user = user_model.get_user_by_id(id)[0]
 
-    MAX_FILE_SIZE = 1024 * 1024 + 1
-    if bool(avatar.filename):
-        avatar_bytes = avatar.read(MAX_FILE_SIZE)
-        if avatar_bytes == MAX_FILE_SIZE:
-            return json.dumps({
-                'ok': False,
-                'error': "Image size too large",
-                'fields': ["avatar"]
-            })
-        res = allowed_extensions(avatar.content_type)
-        if res:
-            id = session.get('id')
-            login = session.get('login')
-            user = user_model.get_user_by_id(id)[0]
-            extension = avatar.filename.rsplit('.', 1)[1]
-            avatar_name = str('avatar' + '_' + login + '.' + extension)
-            path = '/static/media/' + login + '/' + avatar_name
-            avatar_extension = user['avatar'].rsplit('.', 1)[1]
-            name = (APP_ROOT + '/static/media/' + login + '/avatar_' + login + '.' + avatar_extension).strip()
+    extension = avatar.filename.rsplit('.', 1)[1]
+    avatar_name = str('avatar' + '_' + login + '.' + extension)
+    path = '/static/media/' + login + '/' + avatar_name
 
-            if os.path.isfile(name):
-                os.remove(name)
-            photos.save(avatar, login, avatar_name)
+    # CHECK IF AVATAR LOADED EARLIER EXISTS
+    avatar_extension = user['avatar'].rsplit('.', 1)[1]
+    name = (APP_ROOT + '/static/media/' + login + '/avatar_' + login + '.' + avatar_extension).strip()
 
-            user_model.change_avatar(path, id)
-            return json.dumps({
-                'ok': True,
-                'error': "Image successfully uploaded",
-                'path': ""
-            })
-        else:
-            return json.dumps({
-                'ok': False,
-                'error': "Allowed to download files of the following formats: jpg, jpeg, png, gif",
-                'fields': ["avatar"]
-            })
+    # DELETE IF EXISTS
+    if os.path.isfile(name):
+        os.remove(name)
+
+    # SAVE AVATAR TO FOLDER
+    photos.save(avatar, login, avatar_name)
+
+    # CHANGE AVATAR IN DB
+    user_model.change_avatar(path, id)
+    return json.dumps({
+        'ok': True,
+        'error': "Avatar successfully uploaded",
+    })
