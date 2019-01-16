@@ -128,7 +128,7 @@ def register():
         })
 
 # sexual preferences
-    if not gender:
+    if not sex_pref:
         return json.dumps({
             'ok': False,
             'error': "Please fill in all fields",
@@ -178,7 +178,7 @@ def register():
 
 
 # saving user to db and sending email
-    user = user_model.save_user_to_db(login, password_hash, firstname, lastname, email, avatar, background, birth_date, city, country, token, gender)
+    user = user_model.save_user_to_db(login, password_hash, firstname, lastname, email, avatar, background, birth_date, city, country, token, gender, sex_pref)
     if user:
         message = Message('Matcha registration', sender='matcha@project.unit.ua', recipients=[email])
         message.body = "Thank tou for registration in Matcha. To activate your account please follow the link " + request.url_root + "activate?email=" + email + '&token=' + token

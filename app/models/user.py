@@ -21,9 +21,9 @@ def email_exists(email):
     return res
 
 
-def save_user_to_db(login, password, firstname, lastname, email, avatar, background, birth_date, city, country, token, gender):
-    array = [login, password, firstname, lastname, email, avatar, background, birth_date, city, country, token, gender]
-    sql = 'INSERT INTO users (login, password, firstname, lastname, email, avatar, background, birth_date, city, country, token, gender) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
+def save_user_to_db(login, password, firstname, lastname, email, avatar, background, birth_date, city, country, token, gender, sex_pref):
+    array = [login, password, firstname, lastname, email, avatar, background, birth_date, city, country, token, gender, sex_pref]
+    sql = 'INSERT INTO users (login, password, firstname, lastname, email, avatar, background, birth_date, city, country, token, gender, sex_pref) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)'
     res = database.db_insert(sql, array)
     return res
 
@@ -66,6 +66,13 @@ def get_avatar(id):
     res = database.db_query(sql, array)
     return res
 
+def recovery_password(id, password):
+    array = [password, id]
+    sql = 'UPDATE users SET password=?, token = NULL WHERE id=?'
+    res = database.db_insert(sql, array)
+    return res
+
+#EDIT PROFILE
 def change_avatar(avatar, id):
     array = [avatar, id]
     sql = 'UPDATE USERS SET avatar=? WHERE id=?'
@@ -74,15 +81,60 @@ def change_avatar(avatar, id):
 
 def change_password(id, password):
     array = [password, id]
-    sql = 'UPDATE users SET password = ? WHERE id=?'
+    sql = 'UPDATE users SET password=? WHERE id=?'
     res = database.db_query(sql, array)
     return res
 
-def recovery_password(id, password):
-    array = [password, id]
-    sql = 'UPDATE users SET password=?, token = NULL WHERE id=?'
-    res = database.db_insert(sql, array)
+def change_firstname(firstname, id):
+    array = [firstname, id]
+    sql = 'UPDATE users SET firstname=? WHERE id=?'
+    res = database.db_query(sql, array)
     return res
 
+def change_lastname(lastname, id):
+    array = [lastname, id]
+    sql = 'UPDATE users SET lastname=? WHERE id=?'
+    res = database.db_query(sql, array)
+    return res
 
+def change_email(email, id):
+    array = [email, id]
+    sql = 'UPDATE users SET email=? WHERE id=?'
+    res = database.db_query(sql, array)
+    return res
 
+def change_birth_date(birth_date, id):
+    array = [birth_date, id]
+    sql = 'UPDATE users SET birth_date=? WHERE id=?'
+    res = database.db_query(sql, array)
+    return res
+
+def change_gender(gender, id):
+    array = [gender, id]
+    sql = 'UPDATE users SET gender=? WHERE id=?'
+    res = database.db_query(sql, array)
+    return res
+
+def change_sex_pref(sex_pref, id):
+    array = [sex_pref, id]
+    sql = 'UPDATE users SET sex_pref=? WHERE id=?'
+    res = database.db_query(sql, array)
+    return res
+
+def change_city(city, id):
+    array = [city, id]
+    sql = 'UPDATE users SET city=? WHERE id=?'
+    res = database.db_query(sql, array)
+    return res
+
+def change_country(country, id):
+    array = [country, id]
+    sql = 'UPDATE users SET country=? WHERE id=?'
+    res = database.db_query(sql, array)
+    return res
+
+def change_my_info(my_info, id):
+    array = [my_info, id]
+    sql = 'UPDATE users SET my_info=? WHERE id=?'
+    res = database.db_query(sql, array)
+    return res

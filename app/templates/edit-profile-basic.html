@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
 
     <!--Favicon-->
-    <link rel="shortcut icon" type="image/png" href="images/fav.png"/>
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename = "images/fav.png") }}"/>
 {% endblock %}
 
 {% block main %}
@@ -93,7 +93,7 @@
                   <div class="line"></div>
                 </div>
                 <div class="edit-block">
-                  <form name="basic-info" id="basic-info" class="form-inline">
+                  <form name="basic-info" id="basic-info" class="form-inline" method="post">
                     <div class="row">
                       <div class="form-group col-xs-6">
                         <label for="firstname">First name</label>
@@ -115,7 +115,7 @@
                       <div class="form-group col-sm-3 col-xs-6">
                         <label for="month" class="sr-only"></label>
                         <select class="form-control" id="day">
-                          <option value="Day">Day</option>
+                          <option value="day" disabled selected>Day</option>
                           <option>1</option>
                           <option>2</option>
                           <option>3</option>
@@ -134,7 +134,7 @@
                           <option>16</option>
                           <option>17</option>
                           <option>18</option>
-                          <option selected>19</option>
+                          <option>19</option>
                           <option>20</option>
                           <option>21</option>
                           <option>22</option>
@@ -152,7 +152,7 @@
                       <div class="form-group col-sm-3 col-xs-6">
                         <label for="month" class="sr-only"></label>
                         <select class="form-control" id="month">
-                          <option value="month">Month</option>
+                          <option value="month" disabled selected>Month</option>
                           <option>Jan</option>
                           <option>Feb</option>
                           <option>Mar</option>
@@ -164,13 +164,13 @@
                           <option>Sep</option>
                           <option>Oct</option>
                           <option>Nov</option>
-                          <option selected>Dec</option>
+                          <option>Dec</option>
                         </select>
                       </div>
                       <div class="form-group col-sm-6 col-xs-12">
                         <label for="year" class="sr-only"></label>
                         <select class="form-control" id="year">
-                          <option value="year">Year</option>
+                          <option value="year" disabled selected>Year</option>
                             <option>1950</option>
                             <option>1951</option>
                             <option>1952</option>
@@ -239,7 +239,7 @@
                     <div class="form-group gender">
                       <span class="custom-label"><strong>I am a: </strong></span>
                       <label class="radio-inline">
-                        <input type="radio" name="optradio" checked>Male
+                        <input type="radio" name="optradio" id="male">Male
                       </label>
                       <label class="radio-inline">
                         <input type="radio" name="optradio" id="female">Female
@@ -259,12 +259,12 @@
                     <div class="row">
                       <div class="form-group col-xs-6">
                         <label for="city"> My city</label>
-                        <input id="city" class="form-control input-group-lg" type="text" name="city" title="Enter city" placeholder="Your city" value="New York"/>
+                        <input id="city" class="form-control input-group-lg" type="text" name="city" title="Enter city" placeholder="Your city"/>
                       </div>
                       <div class="form-group col-xs-6">
                         <label for="country">My country</label>
                         <select class="form-control" id="country">
-                          <option value="country">Country</option>
+                          <option value="country" disabled selected>Country</option>
                           <option value="AFG">Afghanistan</option>
                           <option value="ALA">Ƭand Islands</option>
                           <option value="ALB">Albania</option>
@@ -578,5 +578,6 @@
     <script src="{{ url_for('static', filename = "js/jquery.sticky-kit.min.js") }}"></script>
     <script src="{{ url_for('static', filename = "js/jquery.scrollbar.min.js") }}"></script>
     <script src="{{ url_for('static', filename = "js/script.js") }}"></script>
+    <script src="{{ url_for('static', filename = "js/profile.js") }}"></script>
 {% endblock %}
 

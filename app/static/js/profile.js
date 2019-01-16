@@ -34,6 +34,12 @@ $("#edit-password").on('click', function (e) {
 $("#edit-basic").on('click', function (e) {
     e.preventDefault();
 
+      var gender;
+      if ($('input[id=female]:checked').val() == 'on') {
+          gender = "female"}
+      if ($('input[id=male]:checked').val() == 'on') {
+          gender = "male"}
+
     var data = {
         firstname: $('#firstname').val(),
         lastname: $('#lastname').val(),
@@ -48,6 +54,11 @@ $("#edit-basic").on('click', function (e) {
         my_info: $('#my-info').val()
     };
 
+      console.log(data.day);
+      console.log(data.month);
+      console.log(data.year);
+      console.log(data.gender);
+
     $.ajax({
         type: "POST",
         data: data,
@@ -61,14 +72,18 @@ $("#edit-basic").on('click', function (e) {
                 res.fields.forEach(function (item) {
                     $("input[id=" + item + "]").addClass("error");
                 });
-            } else {
-                $("#message-basic").text("");
-                $("#message-basic").text(res.error);
-                $("#message-basic").addClass("success");
             }
+        } else {
+            $("#message-basic").text("");
+            $("#message-basic").text(res.error);
+            $("#message-basic").addClass("success");
         }
-    })
-})
+    });
+    $("input").each( function() {
+        console.log($(this).val());
+        console.log($(this).name);
+    });
+});
 
 
 $("#avatar").on('change', function () {

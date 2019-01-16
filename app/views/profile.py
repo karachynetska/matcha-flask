@@ -83,8 +83,103 @@ def edit_basic():
         return redirect('/')
 
 
-# @app.route('/ajax_edit_basic')
-# def ajax_edit_basic():
+@app.route('/ajax_edit_basic', methods=['POST'])
+def ajax_edit_basic():
+    firstname = html.escape(request.form['firstname'])
+    lastname = html.escape(request.form['lastname'])
+    email = html.escape(request.form['email'])
+    day = request.form['day']
+    month = request.form['month']
+    year = request.form['year']
+    gender = request.form['gender']
+    sex_pref = request.form['sex_pref']
+    city = request.form['city']
+    country = request.form['country']
+    my_info = html.escape(request.form['my_info'])
+
+    id = session.get('id')
+    if firstname:
+        if (len(firstname) < 2) or (len(firstname) > 25):
+            return json.dumps({
+                'ok': False,
+                'error': "Firstname length must be from 2 characters to 25",
+                'fields': ["firstname"]
+            })
+        user_model.change_firstname(firstname, id)
+        return json.dumps({
+            'ok': True,
+            'error': "Changes successfully changed"
+        })
+
+    if lastname:
+        if (len(lastname) < 2) or (len(lastname) > 25):
+            return json.dumps({
+                'ok': False,
+                'error': "Lastname length must be from 2 characters to 25",
+                'fields': ["lastname"]
+            })
+        user_model.change_lastname(lastname, id)
+        return json.dumps({
+            'ok': True,
+            'error': "Changes successfully changed"
+        })
+
+    if email:
+        if not re.match("^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$", email.lower()):
+            return json.dumps({
+                'ok': False,
+                'error': "Wrong email",
+                'fields': ["email"]
+            })
+        user_model.change_email(email, id)
+        return json.dumps({
+            'ok': True,
+            'error': "Changes successfully changed"
+        })
+
+    if day and month and year:
+        birth_date = request.form['day'] + '/' + request.form['month'] + '/' + request.form['year']
+        try:
+            birth_date = datetime.strptime(birth_date, '%d/%b/%Y')
+        except:
+            return json.dumps({
+                'ok': False,
+                'error': "Wrong date",
+                'fields': ["day", "month", "year"]
+            })
+        user_model.change_birth_date(birth_date, id)
+        return json.dumps({
+            'ok': True,
+            'error': "Changes successfully changed"
+        })
+
+    if gender:
+        user_model.change_gender(gender, id)
+        return json.dumps({
+            'ok': True,
+            'error': "Changes successfully changed"
+        })
+
+    if sex_pref:
+        user_model.change_sex_pref(sex_pref, id)
+        return json.dumps({
+            'ok': True,
+            'error': "Changes successfully changed"
+        })
+
+    if city:
+        user_model.change_city(city, id)
+        return json.dumps({
+            'ok': True,
+            'error': "Changes successfully changed"
+        })
+
+    if country:
+        user_model.change_country(country, id)
+        return json.dumps({
+            'ok': True,
+            'error': "Changes successfully changed"
+        })
 
 
 
