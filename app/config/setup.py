@@ -41,7 +41,6 @@ def create_about():
 def create_interests():
     res = database.db_query('''CREATE TABLE IF NOT EXISTS interests(
     id_interest INTEGER PRIMARY KEY AUTOINCREMENT,
-    id_user INTEGER NOT NULL,
     title TEXT,
     icon TEXT)''')
     if res:

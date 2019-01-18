@@ -37,9 +37,11 @@ $("#edit-basic").on('click', function (e) {
       var gender;
       if ($('input[id=female]:checked').val() == 'on') {
           gender = "female"}
-      if ($('input[id=male]:checked').val() == 'on') {
+      else if ($('input[id=male]:checked').val() == 'on') {
           gender = "male"}
-
+      else {
+          gender = null;
+      }
     var data = {
         firstname: $('#firstname').val(),
         lastname: $('#lastname').val(),
@@ -54,10 +56,10 @@ $("#edit-basic").on('click', function (e) {
         my_info: $('#my-info').val()
     };
 
-      console.log(data.day);
-      console.log(data.month);
-      console.log(data.year);
-      console.log(data.gender);
+      console.log("day" + data.day);
+      console.log("month" + data.month);
+      console.log("year" + data.year);
+      console.log("gender" + data.gender);
 
     $.ajax({
         type: "POST",
@@ -79,10 +81,10 @@ $("#edit-basic").on('click', function (e) {
             $("#message-basic").addClass("success");
         }
     });
-    $("input").each( function() {
-        console.log($(this).val());
-        console.log($(this).name);
-    });
+    // $("input").each( function() {
+    //     console.log($(this).val());
+    //     console.log($(this).name);
+    // });
 });
 
 

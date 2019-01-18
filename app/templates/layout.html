@@ -78,6 +78,65 @@
         </nav>
     </header>
     <!--Header End-->
+    <div class="container">
+
+      <!-- Timeline
+      ================================================= -->
+      <div class="timeline">
+        <div class="timeline-cover" style="background: url({{ data.user.background }})">
+
+          <!--Timeline Menu for Large Screens-->
+          <div class="timeline-nav-bar hidden-sm hidden-xs">
+            <div class="row">
+              <div class="col-md-3">
+                <div class="profile-info">
+                  <a href="/profile"><img src="{{ data.user.avatar }}" alt="" class="img-responsive profile-photo" /></a>
+                  <h3>{{ data.user.firstname + ' ' + data.user.lastname }}</h3>
+                  <p class="text-muted">{{ data.user.login }}</p>
+                </div>
+              </div>
+              <div class="col-md-9">
+                <ul class="list-inline profile-menu">
+                  <li><a href="timeline.html" class="active">Timeline</a></li>
+                  <li><a href="timeline-about.html">About</a></li>
+                  <li><a href="timeline-album.html">Album</a></li>
+                  <li><a href="timeline-friends.html">Friends</a></li>
+                </ul>
+                <ul class="follow-me list-inline">
+                  <li>1,299 followers</li>
+                  {% if session.get('id') != data.user.id %}
+                  <li><button class="btn-primary">Add Friend</button></li>
+                      {% else %}
+                      <li><button class="btn-primary" style="background: #ff374f">Remove from friends</button></li>
+                  {% endif %}
+                </ul>
+              </div>
+            </div>
+          </div><!--Timeline Menu for Large Screens End-->
+
+          <!--Timeline Menu for Small Screens-->
+          <div class="navbar-mobile hidden-lg hidden-md">
+            <div class="profile-info">
+              <a href="/profile"><img src="{{ data.user.avatar }}" alt="" class="img-responsive profile-photo" /></a>
+              <h4>{{ data.user.firstname + ' ' + data.user.lastname }}</h4>
+              <p class="text-muted">{{ data.user.login }}</p>
+            </div>
+            <div class="mobile-menu">
+              <ul class="list-inline">
+                <li><a href="timeline.html" class="active">Timeline</a></li>
+                <li><a href="timeline-about.html">About</a></li>
+                <li><a href="timeline-album.html">Album</a></li>
+                <li><a href="timeline-friends.html">Friends</a></li>
+              </ul>
+                {% if session.get('id') != data.user.id %}
+                <button class="btn-primary">Add Friend</button>
+                    {% else %}
+                    <li><button class="btn-primary" style="background: #ff374f">Remove from friends</button></li>
+                {% endif %}
+            </div>
+          </div><!--Timeline Menu for Small Screens End-->
+
+        </div>
     {% block main %}{% endblock %}
     <!-- Footer
     ================================================= -->

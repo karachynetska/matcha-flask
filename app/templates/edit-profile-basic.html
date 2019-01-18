@@ -16,57 +16,7 @@
 {% endblock %}
 
 {% block main %}
-    <div class="container">
 
-      <!-- Timeline
-      ================================================= -->
-      <div class="timeline">
-        <div class="timeline-cover" style="background: url({{ data.user.background }})">
-
-          <!--Timeline Menu for Large Screens-->
-          <div class="timeline-nav-bar hidden-sm hidden-xs">
-            <div class="row">
-              <div class="col-md-3">
-                <div class="profile-info">
-                  <img src="{{ data.user.avatar }}" alt="" class="img-responsive profile-photo" />
-                  <h3>{{ data.user.firstname + ' ' + data.user.lastname }}</h3>
-                  <p class="text-muted">{{ data.user.login }}</p>
-                </div>
-              </div>
-              <div class="col-md-9">
-                <ul class="list-inline profile-menu">
-                  <li><a href="timeline.html">Timeline</a></li>
-                  <li><a href="timeline-about.html" class="active">About</a></li>
-                  <li><a href="timeline-album.html">Album</a></li>
-                  <li><a href="timeline-friends.html">Friends</a></li>
-                </ul>
-                <ul class="follow-me list-inline">
-                  <li>1,299 followers</li>
-                  <li><button class="btn-primary">Add Friend</button></li>
-                </ul>
-              </div>
-            </div>
-          </div><!--Timeline Menu for Large Screens End-->
-
-          <!--Timeline Menu for Small Screens-->
-          <div class="navbar-mobile hidden-lg hidden-md">
-            <div class="profile-info">
-              <img src="http://placehold.it/300x300" alt="" class="img-responsive profile-photo" />
-              <h4>{{ data.user.firstname + ' ' + data.user.lastname }}</h4>
-              <p class="text-muted">{{ data.user.login }}</p>
-            </div>
-            <div class="mobile-menu">
-              <ul class="list-inline">
-                <li><a href="timline.html">Timeline</a></li>
-                <li><a href="timeline-about.html" class="active">About</a></li>
-                <li><a href="timeline-album.html">Album</a></li>
-                <li><a href="timeline-friends.html">Friends</a></li>
-              </ul>
-              <button class="btn-primary">Add Friend</button>
-            </div>
-          </div><!--Timeline Menu for Small Screens End-->
-
-        </div>
         <div id="page-contents">
           <div class="row">
             <div class="col-md-3">
@@ -500,7 +450,7 @@
                           <option value="UKR">Ukraine</option>
                           <option value="ARE">United Arab Emirates</option>
                           <option value="GBR">United Kingdom</option>
-                          <option value="USA" selected>United States</option>
+                          <option value="USA">United States</option>
                           <option value="UMI">United States Minor Outlying Islands</option>
                           <option value="URY">Uruguay</option>
                           <option value="UZB">Uzbekistan</option>
