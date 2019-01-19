@@ -7,13 +7,11 @@ $("#edit-password").on('click', function (e) {
       confirm_password: $("#confirm_password").val()
     };
 
-    console.log(data);
     $.ajax({
         type: "POST",
         data: data,
         url: "/ajax_edit_password"
     }).done(function (data) {
-      console.log("blah")
         var res = JSON.parse(data);
         if (res.ok == false) {
           $("#message-edit").text("");
@@ -145,6 +143,38 @@ $("#avatar").on('change', function () {
             });
         }
     }
+});
+
+
+$("#add_interest").on('click', function (e) {
+    e.preventDefault();
+
+    var data = {
+        interest: $("#interest").val()
+    };
+
+    console.log(data);
+
+    $.ajax({
+        type: "POST",
+        data: data,
+        url: "/ajax_edit_interests"
+    }).done(function (data) {
+        var res = JSON.parse(data);
+        if (res.ok == false) {
+            $("#message-interests").text("");
+            $('#message-interests').text(res.error);
+            if (res.fields) {
+                res.fields.forEach(function (item) {
+                    $("input[id=" + item + "]").addClass("error");
+                });
+            }
+        } else {
+            $("#message-interests").text("");
+            $("#message-interestst").text(res.error);
+            $("#message-interests").addClass("success");
+        }
+    });
 });
 
 

@@ -5,7 +5,6 @@ import html
 import hashlib
 import random
 from datetime import datetime
-from werkzeug.utils import secure_filename
 import json
 import re
 import os
@@ -21,7 +20,7 @@ UPLOAD_FOLDER = '/'
 ALLOWED_EXTENSIONS = set(['image/jpg', 'image/jpeg', 'image/JPG', 'image/JPEG', 'image/png', 'image/PNG', 'image/gif', 'image/GIF'])
 
 def allowed_extensions(mime_type):
-	return mime_type in ALLOWED_EXTENSIONS
+    return mime_type in ALLOWED_EXTENSIONS
 
 
 
@@ -274,8 +273,22 @@ def edit_interests():
         return redirect('/')
 
 
-# @app.route('/ajax_edit_interests')
-# def ajax_edit_interests():
+@app.route('/ajax_edit_interests', methods=['POST'])
+def ajax_edit_interests():
+    interest = html.escape(request.form['interest'])
+
+    if not interest:
+        return json.dumps({
+            'ok': False,
+            'error': "Enter your interest please",
+            'fields': ["interest"]
+        })
+    res = user_model.add_interest(interest, session.get('id'))
+    if res:
+        return json.dumps({
+            'ok': True,
+            'error': "Interest successfully added"
+        })
 
 
 

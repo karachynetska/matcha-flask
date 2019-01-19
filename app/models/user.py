@@ -138,3 +138,20 @@ def change_my_info(my_info, id):
     sql = 'UPDATE users SET my_info=? WHERE id=?'
     res = database.db_query(sql, array)
     return res
+
+def get_interest_by_title(title):
+    array = [title]
+    sql = 'SELECT id_interest FROM interests WHERE title=?'
+    res = database.db_query(sql, array)
+    return res
+
+def add_interest(interest, id_user):
+    array1 = [interest]
+    sql = 'INSERT INTO interests (title) VALUES (?)'
+    database.db_insert(sql, array1)
+
+    id_interest = get_interest_by_title(interest)[0]['id_interest']
+    array2 = [id_interest, id_user]
+    sql = 'INSERT INTO interests_users (id_interest, id_user) VALUES (?, ?)'
+    res = database.db_insert(sql, array2)
+    return res

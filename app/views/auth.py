@@ -137,7 +137,6 @@ def register():
 
 # Сheck for user availability
     login_exists = user_model.login_exists(login)
-    print(login_exists)
     if login_exists:
         return json.dumps({
             'ok': False,
@@ -174,7 +173,9 @@ def register():
 
 
 # token
-    token = user_model.create_token(login)
+    date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+    token = hashlib.md5((login + date).encode('utf-8')).hexdigest()
+    # token = user_model.create_token(id, login)
 
 
 # saving user to db and sending email
@@ -241,7 +242,6 @@ def login():
         if user[0]['password'] == password_hash:
             session['id'] = user[0]['id']
             session['login'] = user[0]['login']
-            print(session)
             return json.dumps({
                 'ok': True
             })
