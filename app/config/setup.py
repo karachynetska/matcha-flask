@@ -59,22 +59,31 @@ def create_interests_users():
     else:
         print("interests_users")
 
-# def create_friendship():
-#     database.db_query('''CREATE TABLE IF NOT EXISTS name (
-#     id_frienship
-#     )
-#     ''')
-#
-# def create_friends_request():
-#     res = database.db_query('''CREATE TABLE IF NOT EXISTS friends_request(
-#     id_requested INTEGER NOT NULL,
-#     id_requester INTEGER NOT NULL,
-#     FOREIGN KEY (id_requested) REFERENCES users(id) ON DELETE CASCADE,
-#     FOREIGN KEY (id_requester) REFERENCES users(id) ON DELETE CASCADE)''')
-#     if res:
-#         print(res)
-#     else:
-#         print('friends_request created')
+
+def create_friend_requests():
+    res = database.db_query('''CREATE TABLE IF NOT EXISTS friend_requests(
+    id_request INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_sender INTEGER NOT NULL,
+    id_taker INTEGER NOT NULL,
+    FOREIGN KEY (id_sender) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_taker) REFERENCES users(id) ON DELETE CASCADE)''')
+    if res:
+        print(res)
+    else:
+        print('friend_requests created')
+
+def create_friendships():
+    res = database.db_query('''CREATE TABLE IF NOT EXISTS name frienships(
+    id_user1 INTEGER NOT NULL,
+    id_user2 INTEGER NOT NULL,
+    FOREIGN KEY (id_user1) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_user2) REFERENCES users(id) ON DELETE CASCADE)''')
+    if res:
+        print(res)
+    else:
+        print('friendships created')
+
+
 
 # def create_posts():
 #     database.db_query('''CREATE TABLE IF NOT EXISTS name (

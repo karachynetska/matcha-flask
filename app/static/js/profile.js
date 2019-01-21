@@ -179,3 +179,11 @@ $("#add_interest").on('click', function (e) {
 
 
 
+$("#delete_interest").on('click', function (e) {
+    e.preventDefault();
+
+    console.log('Blah');
+
+    var tag = $("#tag").innerText;
+    console.log(tag);
+})

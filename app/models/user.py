@@ -145,13 +145,35 @@ def get_interest_by_title(title):
     res = database.db_query(sql, array)
     return res
 
-def add_interest(interest, id_user):
-    array1 = [interest]
-    sql = 'INSERT INTO interests (title) VALUES (?)'
+def add_interest(interest, icon, id_user):
+    array1 = [interest, icon]
+    sql = 'INSERT INTO interests (title, icon) VALUES (?, ?)'
     database.db_insert(sql, array1)
 
     id_interest = get_interest_by_title(interest)[0]['id_interest']
     array2 = [id_interest, id_user]
     sql = 'INSERT INTO interests_users (id_interest, id_user) VALUES (?, ?)'
     res = database.db_insert(sql, array2)
+    return res
+
+def get_interests_by_user_id(id):
+    array = [id]
+    sql = 'SELECT * FROM interests INNER JOIN interests_users iu on interests.id_interest=iu.id_interest WHERE iu.id_user=?'
+    res = database.db_query(sql, array)
+    return res
+
+
+# FRIENDS
+
+def add_friend(id_sender, id_taker):
+    status = 0
+    array = [id_sender, id_taker, status]
+    sql = "INSERT INTO friend_requests (id_sender, id_taker, status) VALUES (?, ?, ?)"
+    res = database.db_insert(sql, array)
+    return res
+
+def check_friendship(id1, id2):
+    array = [id1, id2]
+    sql = 'SELECT * FROM friendships WHERE id1=? AND id2=?'
+    res = database.db_query(sql, array)
     return res

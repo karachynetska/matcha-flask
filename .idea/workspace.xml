@@ -6,11 +6,9 @@
       <change beforePath="$PROJECT_DIR$/app/config/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/setup.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/user.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/static/js/profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/js/profile.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/media/ikarachy/avatar_ikarachy.jpg" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/media/ikarachy/avatar_ikarachy.jpg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/edit-profile-interests.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/edit-profile-interests.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/auth.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/profile.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/profile.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/matcha.sqlite3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/matcha.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/matcha.sqlite3" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -19,7 +17,8 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/matcha$matcha.coverage" NAME="matcha Coverage Results" MODIFIED="1547914875439" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/matcha$matcha.coverage" NAME="matcha Coverage Results" MODIFIED="1548095152418" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/matcha$test.coverage" NAME="test Coverage Results" MODIFIED="1548081334466" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
     <option name="SHOW_INTERMEDIATE" value="true" />
@@ -40,17 +39,17 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/config/setup.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="645">
-              <caret line="43" column="31" selection-start-line="43" selection-start-column="31" selection-end-line="43" selection-end-column="31" />
+            <state relative-caret-position="660">
+              <caret line="83" column="34" selection-start-line="83" selection-start-column="34" selection-end-line="83" selection-end-column="34" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app/models/user.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2055">
-              <caret line="139" column="14" selection-start-line="139" selection-start-column="14" selection-end-line="139" selection-end-column="14" />
+            <state relative-caret-position="1006">
+              <caret line="178" column="14" selection-start-line="178" selection-start-column="14" selection-end-line="178" selection-end-column="14" />
               <folding>
                 <element signature="e#0#31#0" expanded="true" />
               </folding>
@@ -61,8 +60,15 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/templates/edit-profile-interests.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1770">
-              <caret line="118" selection-start-line="118" selection-end-line="118" />
+            <state relative-caret-position="340">
+              <caret line="48" column="146" selection-start-line="48" selection-start-column="146" selection-end-line="48" selection-end-column="146" />
+              <folding>
+                <element signature="n#style#0;n#a#0;n#li#0;n#ul#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+                <element signature="e#2804#2810#0#HTML" expanded="true" />
+                <element signature="e#2810#2816#0#HTML" expanded="true" />
+                <element signature="e#2816#2822#0#HTML" expanded="true" />
+                <element signature="n#style#0;n#a#1;n#li#0;n#ul#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -70,17 +76,26 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/static/js/profile.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2715">
-              <caret line="181" selection-start-line="181" selection-end-line="181" />
+            <state relative-caret-position="976">
+              <caret line="188" column="2" lean-forward="true" selection-start-line="188" selection-start-column="2" selection-end-line="188" selection-end-column="2" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/profile.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="656">
-              <caret line="298" column="16" selection-start-line="298" selection-start-column="16" selection-end-line="298" selection-end-column="16" />
+            <state relative-caret-position="877">
+              <caret line="328" lean-forward="true" selection-start-line="328" selection-start-column="1" selection-end-line="330" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/test.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="20" column="16" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="16" />
             </state>
           </provider>
         </entry>
@@ -97,8 +112,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>navbar-bra</find>
-      <find>.menu form</find>
       <find>.navbar-nav&gt;li&gt;a</find>
       <find>.navbar-toggle</find>
       <find>page-con</find>
@@ -127,6 +140,8 @@
       <find>instagram</find>
       <find>avatar</find>
       <find>&lt;li</find>
+      <find>clear</find>
+      <find>close</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -169,13 +184,14 @@
         <option value="$PROJECT_DIR$/app/templates/edit-profile-edu-work.html" />
         <option value="$PROJECT_DIR$/app/templates/edit-profile-password.html" />
         <option value="$PROJECT_DIR$/app/templates/edit-profile-settings.html" />
+        <option value="$PROJECT_DIR$/app/views/auth.py" />
+        <option value="$PROJECT_DIR$/app/__init__.py" />
+        <option value="$PROJECT_DIR$/test.py" />
+        <option value="$PROJECT_DIR$/app/views/profile.py" />
         <option value="$PROJECT_DIR$/app/templates/edit-profile-interests.html" />
         <option value="$PROJECT_DIR$/app/static/js/profile.js" />
-        <option value="$PROJECT_DIR$/app/views/auth.py" />
         <option value="$PROJECT_DIR$/app/config/setup.py" />
         <option value="$PROJECT_DIR$/app/models/user.py" />
-        <option value="$PROJECT_DIR$/app/views/profile.py" />
-        <option value="$PROJECT_DIR$/app/__init__.py" />
       </list>
     </option>
   </component>
@@ -206,18 +222,6 @@
               <item name="matcha" type="b2602c69:ProjectViewProjectNode" />
               <item name="matcha" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="matcha" type="b2602c69:ProjectViewProjectNode" />
-              <item name="matcha" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="models" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="matcha" type="b2602c69:ProjectViewProjectNode" />
-              <item name="matcha" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -226,40 +230,6 @@
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
               <item name="css" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="matcha" type="b2602c69:ProjectViewProjectNode" />
-              <item name="matcha" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="matcha" type="b2602c69:ProjectViewProjectNode" />
-              <item name="matcha" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="media" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="matcha" type="b2602c69:ProjectViewProjectNode" />
-              <item name="matcha" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="media" type="462c0819:PsiDirectoryNode" />
-              <item name="ikarachy" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="matcha" type="b2602c69:ProjectViewProjectNode" />
-              <item name="matcha" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="templates" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="matcha" type="b2602c69:ProjectViewProjectNode" />
-              <item name="matcha" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="views" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -287,7 +257,29 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.test">
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="matcha" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/test.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="matcha" type="Python.FlaskServer" factoryName="Flask server">
       <option name="additionalOptions" value="--host=0.0.0.0" />
       <option name="flaskDebug" value="true" />
@@ -305,6 +297,11 @@
       <option name="launchJavascriptDebuger" value="false" />
       <method v="2" />
     </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.test" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -334,18 +331,20 @@
       <workItem from="1547898741317" duration="3950000" />
       <workItem from="1547906896008" duration="1980000" />
       <workItem from="1547910433123" duration="178000" />
-      <workItem from="1547914646513" duration="983000" />
+      <workItem from="1547914646513" duration="1226000" />
+      <workItem from="1548066240802" duration="1675000" />
+      <workItem from="1548073501368" duration="11785000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="93268000" />
+    <option name="totallyTimeSpent" value="106971000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16481334" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.16719618" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -395,16 +394,6 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/app/views/activation.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/mail_config.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="60">
-          <caret line="4" column="19" lean-forward="true" selection-start-line="4" selection-start-column="19" selection-end-line="4" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/requirements.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -515,13 +504,6 @@
     <entry file="file://$PROJECT_DIR$/app/static/fonts/ionicons.ttf">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/static/css/ionicons.min.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="47475" selection-start-line="10" selection-start-column="47466" selection-end-line="10" selection-end-column="47475" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/about.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2370">
@@ -611,13 +593,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/layout.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1015">
-          <caret line="138" column="13" selection-start-line="138" selection-start-column="13" selection-end-line="138" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/edit-profile-password.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -627,37 +602,6 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/matcha.sqlite3">
       <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="43" column="31" selection-start-line="43" selection-start-column="31" selection-end-line="43" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/user.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2055">
-          <caret line="139" column="14" selection-start-line="139" selection-start-column="14" selection-end-line="139" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/edit-profile-interests.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1770">
-          <caret line="118" selection-start-line="118" selection-end-line="118" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/static/js/profile.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2715">
-          <caret line="181" selection-start-line="181" selection-end-line="181" />
-        </state>
-      </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
@@ -686,10 +630,76 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/layout.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1015">
+          <caret line="138" column="13" selection-start-line="138" selection-start-column="13" selection-end-line="138" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="300">
+          <caret line="20" column="16" selection-start-line="20" selection-start-column="16" selection-end-line="20" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/static/css/font-awesome.min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="45">
+          <caret line="3" column="3607" selection-start-line="3" selection-start-column="3602" selection-end-line="3" selection-end-column="3607" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/static/css/ionicons.min.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="150">
+          <caret line="10" column="1607" selection-start-line="10" selection-start-column="1602" selection-end-line="10" selection-end-column="1607" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/profile.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="656">
-          <caret line="298" column="16" selection-start-line="298" selection-start-column="16" selection-end-line="298" selection-end-column="16" />
+        <state relative-caret-position="877">
+          <caret line="328" lean-forward="true" selection-start-line="328" selection-start-column="1" selection-end-line="330" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/edit-profile-interests.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="48" column="146" selection-start-line="48" selection-start-column="146" selection-end-line="48" selection-end-column="146" />
+          <folding>
+            <element signature="n#style#0;n#a#0;n#li#0;n#ul#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+            <element signature="e#2804#2810#0#HTML" expanded="true" />
+            <element signature="e#2810#2816#0#HTML" expanded="true" />
+            <element signature="e#2816#2822#0#HTML" expanded="true" />
+            <element signature="n#style#0;n#a#1;n#li#0;n#ul#0;n#div#1;n#div#0;n#div#1;n#div#0;n#div#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/static/js/profile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="976">
+          <caret line="188" column="2" lean-forward="true" selection-start-line="188" selection-start-column="2" selection-end-line="188" selection-end-column="2" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/setup.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="660">
+          <caret line="83" column="34" selection-start-line="83" selection-start-column="34" selection-end-line="83" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/user.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1006">
+          <caret line="178" column="14" selection-start-line="178" selection-start-column="14" selection-end-line="178" selection-end-column="14" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

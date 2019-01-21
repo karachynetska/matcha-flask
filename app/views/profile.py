@@ -266,7 +266,8 @@ def ajax_edit_password():
 def edit_interests():
     if 'id' in session:
         data = {
-            'user': user_model.get_user_by_id(session.get('id'))[0]
+            'user': user_model.get_user_by_id(session.get('id'))[0],
+            'interests': user_model.get_interests_by_user_id(session.get('id'))
         }
         return render_template('edit-profile-interests.html', data=data)
     else:
@@ -276,6 +277,7 @@ def edit_interests():
 @app.route('/ajax_edit_interests', methods=['POST'])
 def ajax_edit_interests():
     interest = html.escape(request.form['interest'])
+    icon = None
 
     if not interest:
         return json.dumps({
@@ -283,12 +285,50 @@ def ajax_edit_interests():
             'error': "Enter your interest please",
             'fields': ["interest"]
         })
-    res = user_model.add_interest(interest, session.get('id'))
+
+    icon_array = {
+        'fas fa-gamepad': ['game', 'games', 'playstation', 'xbox', 'игры', 'плойка'],
+        'fas fa tree': ['nature', 'природа'],
+        'fas fa-car': ['car', 'cars', 'race', 'racing', 'машины', 'тачки', 'гонки'],
+        'fas fa-motorcycle': ['motorcycle', 'motorcycles', 'мотоцикл', 'мотоциклы'],
+        'fas fa-bicycle': ['bicycle', 'bicycles', 'cycling', 'велосипед', 'велосипеды', 'велопрогулки', 'велопрогулка'],
+        'fas fa-tv': ['tv', 'television', 'телевизор', 'телевидение'],
+        'fas fa-paw': ['pets', 'animals', 'pet', 'animal', 'животное', 'животные', 'звери'],
+        'fas fa-cat': ['cat', 'cats', 'pussycat', 'pussycats', 'кошка', 'кошки', 'кот', 'коты', 'котики', 'котяры'],
+        'fas fa-dog': ['dog', 'dogs', 'doggy', 'doggies', 'собака', 'собаки', 'пес', 'псы', 'собачки', 'песики', 'собачка'],
+        'fas fa-music': ['music', 'pop', 'rock', 'rap', 'jazz', 'hip-hop', 'classical music', 'singing', 'sing', 'музыка', 'рэп', 'джаз', 'поп', 'рок', 'классическая музыка', 'хип-хоп', 'пение'],
+        'fas fa-guitar': ['guitar', 'guitars', 'гитара', 'гитары'],
+        'fas fa-camera-retro': ['camera', 'photo', 'photos', 'taking photo', 'taking photos', 'photography', 'фото', 'фотки', 'фотосъемка'],
+        'fab fa-apple': ['apple', 'ios', 'iphone', 'айфон', 'айфоны', 'эпл'],
+        'fas fa-bed': ['bed', 'sleep', 'sleeping', 'спать', 'сон'],
+        'fas fa-bowling-ball': ['bowling', 'боулинг'],
+        'fas fa-wine-glass': ['wine', 'vodka', 'whiskey', 'bourbon', 'beer', 'alcohol', 'cocktailes', 'cocktaile', 'вино', 'винишко', 'водка', 'пиво', 'виски', 'бурбон', 'коньяк', 'алкоголь', 'выпивка'],
+        'fas fa-terminal': ['code', 'coding', 'programming', 'программирование', 'код', 'кодинг', 'c', 'c++', 'c#'],
+        'fab fa-python': ['python', 'питон', 'пайтон'],
+        'fas fa-swimmer': ['swimming', 'pool', 'swimming pool', 'swim', 'плавание', 'бассейн'],
+        'fab fa-js': ['js', 'javascript'],
+        'fab fa-node-js': ['node js', 'node', 'node.js'],
+        'fas fa-book-reader': ['book', 'books', 'reading', 'read', 'чтение', 'книга', 'книги', 'книжки'],
+        'fas fa-plane': ['travel', 'traveling', 'airplane', 'airplanes', 'aircraft', 'путешествие', 'путешествия', 'самолеты', 'самолет', 'полет'],
+        'fas fa-utensils': ['eating', 'food', 'meal', 'restaurants', 'restaurant', 'cafe', 'еда', 'есть', 'кафе', 'ресторан', 'рестораны'],
+        'fas fa-smoking': ['smoke', 'smoking', 'cigarettes', 'cigarette', 'курение', 'сигарета', 'сигара', 'сигары', 'сигареты', 'папиросы', 'папироса'],
+        'fas fa-skiing': ['ski', 'skiing', 'лыжи', 'лыжный спорт', 'кататься на лыжах'],
+        'fas fa-snowboarding': ['snowboard', 'snowboarding', 'сноуборд', 'кататься на сноуборде', 'катание на сноуборде'],
+        'fas fa-film': ['film', 'films', 'cinema', 'movie', 'movies', 'cartoon', 'cartoons', 'кино', 'кинотеатр', 'фильм', 'фильмы', 'мультики', 'мультик']
+    }
+    for key, value in icon_array.items():
+        if interest.lower() in value:
+            icon = key
+    res = user_model.add_interest(interest, icon, session.get('id'))
     if res:
         return json.dumps({
             'ok': True,
             'error': "Interest successfully added"
         })
+
+#
+# @app.route('/ajax_delete_interest', methods=['POST'])
+# def ajax_delete_interest():
 
 
 
