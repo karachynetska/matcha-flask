@@ -104,11 +104,13 @@
                 </ul>
                 <ul class="follow-me list-inline">
                   <li>1,299 followers</li>
-                  {% if session.get('id') != data.user.id %}
-                  <li><button class="btn-primary">Add Friend</button></li>
-                      {% else %}
-                      <li><button class="btn-primary" style="background: #ff374f">Remove from friends</button></li>
-                  {% endif %}
+                {% if session.get('id') != data.user.id %}
+                    {% if data.check_friendship(session.get('id'), data.user.id) %}
+                        <button id="remove_friend" class="btn-primary" style="background: #ff374f">Remove from friends</button>
+                    {% else %}
+                        <button id="add_friend" class="btn-primary">Add Friend</button>
+                    {% endif %}
+            {% endif %}
                 </ul>
               </div>
             </div>
@@ -129,10 +131,12 @@
                 <li><a href="timeline-friends.html">Friends</a></li>
               </ul>
                 {% if session.get('id') != data.user.id %}
-                <button class="btn-primary">Add Friend</button>
+                    {% if data.check_friendship(session.get('id'), data.user.id) %}
+                        <button class="btn-primary" style="background: #ff374f">Remove from friends</button>
                     {% else %}
-                    <li><button class="btn-primary" style="background: #ff374f">Remove from friends</button></li>
-                {% endif %}
+                        <button class="btn-primary">Add Friend</button>
+                    {% endif %}
+            {% endif %}
             </div>
           </div><!--Timeline Menu for Small Screens End-->
 

@@ -163,17 +163,3 @@ def get_interests_by_user_id(id):
     return res
 
 
-# FRIENDS
-
-def add_friend(id_sender, id_taker):
-    status = 0
-    array = [id_sender, id_taker, status]
-    sql = "INSERT INTO friend_requests (id_sender, id_taker, status) VALUES (?, ?, ?)"
-    res = database.db_insert(sql, array)
-    return res
-
-def check_friendship(id1, id2):
-    array = [id1, id2]
-    sql = 'SELECT * FROM friendships WHERE id1=? AND id2=?'
-    res = database.db_query(sql, array)
-    return res

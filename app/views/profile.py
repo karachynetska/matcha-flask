@@ -9,6 +9,7 @@ import json
 import re
 import os
 from app.models import user as user_model
+from app.models.friendships import check_friendship, add_friend
 from flask_mail import Message
 from app.settings import APP_ROOT
 
@@ -26,13 +27,22 @@ def allowed_extensions(mime_type):
 
 # PROFILE
 @app.route('/profile')
-def profile():
+@app.route('/profile/id<int:id_user>/')
+def profile(id_user=None):
+    if not 'id' in session and not id_user:
+        return redirect('/')
     if 'id' in session:
-        data = {
-            'user': user_model.get_user_by_id(session.get('id'))[0]
-        }
-        return render_template('profile.html', data=data)
-    return redirect('/')
+        user = user_model.get_user_by_id(session.get('id'))[0]
+
+    if id_user:
+        user = user_model.get_user_by_id(id_user)[0]
+    data = {
+        'user': user,
+        'check_friendship': check_friendship
+
+    }
+    return render_template('profile.html', data=data)
+
 
 
 
