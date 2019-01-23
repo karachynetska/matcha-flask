@@ -9,7 +9,8 @@ import json
 import re
 import os
 from app.models import user as user_model
-from app.models.friendships import check_friendship, add_friend
+from app.models import friendships
+# from app.models.friendships import check_friendship, add_friend
 from flask_mail import Message
 from app.settings import APP_ROOT
 
@@ -38,7 +39,7 @@ def profile(id_user=None):
         user = user_model.get_user_by_id(id_user)[0]
     data = {
         'user': user,
-        'check_friendship': check_friendship
+        'friendships': friendships
 
     }
     return render_template('profile.html', data=data)
@@ -61,11 +62,14 @@ def about():
 # FRIENDS
 @app.route('/profile/friends')
 def friends():
-    data = {
-        'user': user_model.get_user_by_id(session.get('id'))[0]
-    }
-    return render_template('friends.html', data=data)
-
+    if 'id' in session:
+        data = {
+            'user': user_model.get_user_by_id(session.get('id'))[0],
+            'friends': friendships.get_friends_list(session.get('id')),
+            'get_user_by_id': user_model.get_user_by_id
+        }
+        return render_template('friends.html', data=data)
+    return redirect('/')
 
 
 # ALBUM

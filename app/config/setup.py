@@ -65,6 +65,7 @@ def create_friend_requests():
     id_request INTEGER PRIMARY KEY AUTOINCREMENT,
     id_sender INTEGER NOT NULL,
     id_taker INTEGER NOT NULL,
+    status INTEGER NOT NULL,
     FOREIGN KEY (id_sender) REFERENCES users(id) ON DELETE CASCADE,
     FOREIGN KEY (id_taker) REFERENCES users(id) ON DELETE CASCADE)''')
     if res:

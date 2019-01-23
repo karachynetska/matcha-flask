@@ -43,17 +43,17 @@
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right main-menu">
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My friends</a>
+                            <a href="/profile/friends">My friends</a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My messages</a>
+                            <a href="#">My messages</a>
                         </li>
                         <li class="dropdown"><a href="/newsfeed">Newsfeed</a>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle pages" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My photos</a>
+                            <a href="#">My photos</a>
                         </li>
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle pages" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Edit <span><img src="{{ url_for('static', filename='images/down-arrow.png') }}" alt="" /></span></a>
+                            <a href="#">Edit <span><img src="{{ url_for('static', filename='images/down-arrow.png') }}" alt="" /></span></a>
                             <ul class="dropdown-menu page-list">
                                 <li><a href="/profile/edit/basic">Basic information</a></li>
                                 <li><a href="/profile/edit/edu-work">Education and work</a></li>
@@ -100,15 +100,21 @@
                   <li><a href="timeline.html" class="active">Timeline</a></li>
                   <li><a href="timeline-about.html">About</a></li>
                   <li><a href="timeline-album.html">Album</a></li>
-                  <li><a href="timeline-friends.html">Friends</a></li>
+                  <li><a href="/profile/friends">Friends</a></li>
                 </ul>
                 <ul class="follow-me list-inline">
-                  <li>1,299 followers</li>
+                  <li style="margin-top: 7px;">1,299 followers</li>
                 {% if session.get('id') != data.user.id %}
-                    {% if data.check_friendship(session.get('id'), data.user.id) %}
-                        <button id="remove_friend" class="btn-primary" style="background: #ff374f">Remove from friends</button>
+                    {% if data.friendships.check_friendship(session.get('id'), data.user.id) %}
+                        <li><button id="remove_friend" class="btn-primary" style="background: #ff374f">Remove from friends</button></li>
                     {% else %}
-                        <button id="add_friend" class="btn-primary">Add Friend</button>
+                        {% if data.friendships.check_request(session.get('id'), data.user.id) == 'sender' %}
+                            <li><button id="pending" class="btn-primary">Pending</button></li>
+                            {% elif data.friendships.check_request(session.get('id'), data.user.id) == 'taker' %}
+                            <li><button id="pending" class="btn-primary">Confirm</button></li>
+                            {% else %}
+                            <li><button id="add_friend" class="btn-primary">Add Friend</button></li>
+                            {% endif %}
                     {% endif %}
             {% endif %}
                 </ul>
@@ -131,10 +137,16 @@
                 <li><a href="timeline-friends.html">Friends</a></li>
               </ul>
                 {% if session.get('id') != data.user.id %}
-                    {% if data.check_friendship(session.get('id'), data.user.id) %}
-                        <button class="btn-primary" style="background: #ff374f">Remove from friends</button>
+                    {% if data.friendships.check_friendship(session.get('id'), data.user.id) %}
+                        <li><button id="remove_friend" class="btn-primary" style="background: #ff374f">Remove from friends</button></li>
                     {% else %}
-                        <button class="btn-primary">Add Friend</button>
+                        {% if data.friendships.check_request(session.get('id'), data.user.id) == 'sender' %}
+                            <li><button id="pending" class="btn-primary">Pending</button></li>
+                            {% elif data.friendships.check_request(session.get('id'), data.user.id) == 'taker' %}
+                            <li><button id="pending" class="btn-primary">Confirm</button></li>
+                            {% else %}
+                            <li><button id="add_friend" class="btn-primary">Add Friend</button></li>
+                            {% endif %}
                     {% endif %}
             {% endif %}
             </div>
@@ -206,5 +218,6 @@
       </div>
 		</footer>
         {% block scripts %}{% endblock %}
+          <script src="{{ url_for('static', filename = 'js/friendships.js') }}"></script>
   </body>
 </html>
