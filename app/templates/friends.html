@@ -29,7 +29,7 @@
                 <div class="row">
                  {% for friend in data.friends %}
                     {% if friend.id_user1 == data.user.id %}
-                    {% set guy = data.get_user_by_id(friend.id_user2) %}
+                    {% set guy = data.get_user_by_id(friend.id_user2)[0] %}
                   <div class="col-md-6 col-sm-6">
                     <div class="friend-card">
                       <img src="{{ guy.background }}" alt="profile-cover" class="img-responsive cover" />
@@ -44,7 +44,7 @@
                     </div>
                   </div>
                     {% elif friend.id_user2 == data.user.id %}
-                    {% set guy = data.get_user_by_id(friend.id_user1) %}
+                    {% set guy = data.get_user_by_id(friend.id_user1)[0] %}
                   <div class="col-md-6 col-sm-6">
                     <div class="friend-card">
                       <img src="{{ guy.background }}" alt="profile-cover" class="img-responsive cover" />

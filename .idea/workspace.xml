@@ -2,16 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="567250cd-dcc5-4389-bbf0-9b452b7959b0" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/app/views/friendships.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/config/setup.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/setup.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/friendships.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/friendships.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/static/js/friendships.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/js/friendships.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/friends.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/friends.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/layout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/views/profile.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/profile.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/matcha.sqlite3" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/friendships.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/friendships.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/matcha.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/matcha.sqlite3" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -20,7 +17,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/matcha$matcha.coverage" NAME="matcha Coverage Results" MODIFIED="1548260818303" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/matcha$matcha.coverage" NAME="matcha Coverage Results" MODIFIED="1548346566696" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/matcha$test.coverage" NAME="test Coverage Results" MODIFIED="1548155346995" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
@@ -40,40 +37,34 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/templates/profile.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="50">
-              <caret line="14" column="16" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/templates/edit-profile-interests.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1755">
-              <caret line="117" column="69" selection-start-line="117" selection-start-column="12" selection-end-line="117" selection-end-column="69" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/app/templates/friends.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="834">
-              <caret line="64" column="23" selection-start-line="64" selection-start-column="23" selection-end-line="64" selection-end-column="23" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/profile.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="869">
-              <caret line="68" column="55" lean-forward="true" selection-start-line="68" selection-start-column="55" selection-end-line="68" selection-end-column="55" />
+            <state relative-caret-position="-4379">
+              <caret line="68" column="55" selection-start-line="68" selection-start-column="55" selection-end-line="68" selection-end-column="55" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/auth.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="775">
+              <caret line="178" selection-start-line="178" selection-end-line="178" />
+              <folding>
+                <element signature="e#0#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/templates/friends.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="690">
+              <caret line="46" column="72" selection-start-line="46" selection-start-column="72" selection-end-line="46" selection-end-column="72" />
             </state>
           </provider>
         </entry>
@@ -81,8 +72,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/static/js/friendships.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="375">
-              <caret line="25" column="29" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
+            <state relative-caret-position="510">
+              <caret line="34" column="24" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="24" />
             </state>
           </provider>
         </entry>
@@ -90,8 +81,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/views/friendships.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="285">
-              <caret line="19" column="65" selection-start-line="19" selection-start-column="65" selection-end-line="19" selection-end-column="65" />
+            <state relative-caret-position="480">
+              <caret line="32" column="17" selection-start-line="32" selection-start-column="17" selection-end-line="32" selection-end-column="17" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
               </folding>
@@ -100,19 +91,34 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/models/friendships.py">
+        <entry file="file://$PROJECT_DIR$/app/templates/layout.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="585">
-              <caret line="39" column="19" selection-start-line="39" selection-start-column="19" selection-end-line="39" selection-end-column="19" />
+            <state relative-caret-position="897">
+              <caret line="147" column="104" selection-start-line="147" selection-start-column="104" selection-end-line="147" selection-end-column="104" />
+              <folding>
+                <element signature="n#style#0;n#button#0;n#li#1;n#ul#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#button#0;n#li#4;n#ul#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#button#0;n#li#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#button#0;n#li#3;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/app/config/setup.py">
+        <entry file="file://$PROJECT_DIR$/app/static/css/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="78">
-              <caret line="67" column="27" selection-start-line="67" selection-start-column="27" selection-end-line="67" selection-end-column="27" />
+            <state relative-caret-position="327">
+              <caret line="1691" column="9" lean-forward="true" selection-start-line="1691" selection-start-column="9" selection-end-line="1691" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/models/friendships.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="300">
+              <caret line="20" column="94" selection-start-line="20" selection-start-column="94" selection-end-line="20" selection-end-column="94" />
             </state>
           </provider>
         </entry>
@@ -120,8 +126,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/app/static/js/profile.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="91">
-              <caret line="129" column="47" lean-forward="true" selection-start-line="129" selection-start-column="19" selection-end-line="129" selection-end-column="47" />
+            <state relative-caret-position="1935">
+              <caret line="129" column="47" selection-start-line="129" selection-start-column="19" selection-end-line="129" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -215,12 +221,12 @@
         <option value="$PROJECT_DIR$/app/models/user.py" />
         <option value="$PROJECT_DIR$/app/__init__.py" />
         <option value="$PROJECT_DIR$/app/config/setup.py" />
+        <option value="$PROJECT_DIR$/app/views/profile.py" />
+        <option value="$PROJECT_DIR$/app/templates/friends.html" />
+        <option value="$PROJECT_DIR$/app/templates/layout.html" />
         <option value="$PROJECT_DIR$/app/views/friendships.py" />
         <option value="$PROJECT_DIR$/app/static/js/friendships.js" />
-        <option value="$PROJECT_DIR$/app/templates/layout.html" />
-        <option value="$PROJECT_DIR$/app/views/profile.py" />
         <option value="$PROJECT_DIR$/app/models/friendships.py" />
-        <option value="$PROJECT_DIR$/app/templates/friends.html" />
       </list>
     </option>
   </component>
@@ -234,6 +240,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -294,7 +301,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -396,23 +402,24 @@
       <workItem from="1548073501368" duration="11874000" />
       <workItem from="1548154957946" duration="3045000" />
       <workItem from="1548177402369" duration="2990000" />
-      <workItem from="1548235770365" duration="10096000" />
+      <workItem from="1548235770365" duration="10193000" />
+      <workItem from="1548339761312" duration="2873000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="123191000" />
+    <option name="totallyTimeSpent" value="126161000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.17077045" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17196187" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32919708" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.18759124" />
+      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.18759124" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -581,13 +588,6 @@
     <entry file="file://$PROJECT_DIR$/app/static/media/ikarachy/avatar_ikarachy_3.png">
       <provider selected="true" editor-type-id="images" />
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/static/css/style.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="916">
-          <caret line="2396" column="53" selection-start-line="2396" selection-start-column="53" selection-end-line="2396" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/index-register.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="4800">
@@ -627,19 +627,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
           <caret line="14" lean-forward="true" selection-start-line="14" selection-end-line="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/matcha.sqlite3">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/auth.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1036">
-          <caret line="178" selection-start-line="178" selection-end-line="178" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -698,17 +685,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/static/js/profile.js">
+    <entry file="file://$PROJECT_DIR$/app/templates/profile.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="91">
-          <caret line="129" column="47" lean-forward="true" selection-start-line="129" selection-start-column="19" selection-end-line="129" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/static/js/friendships.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="375">
-          <caret line="25" column="29" selection-start-line="25" selection-start-column="29" selection-end-line="25" selection-end-column="29" />
+        <state relative-caret-position="210">
+          <caret line="14" column="16" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
         </state>
       </provider>
     </entry>
@@ -719,27 +699,81 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/setup.py">
+    <entry file="file://$PROJECT_DIR$/app/static/js/profile.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="78">
-          <caret line="67" column="27" selection-start-line="67" selection-start-column="27" selection-end-line="67" selection-end-column="27" />
+        <state relative-caret-position="1935">
+          <caret line="129" column="47" selection-start-line="129" selection-start-column="19" selection-end-line="129" selection-end-column="47" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/friendships.py">
+    <entry file="file://$PROJECT_DIR$/app/config/setup.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="285">
-          <caret line="19" column="65" selection-start-line="19" selection-start-column="65" selection-end-line="19" selection-end-column="65" />
+        <state relative-caret-position="-14">
+          <caret line="78" column="9" lean-forward="true" selection-start-line="78" selection-start-column="9" selection-end-line="78" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/profile.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-4379">
+          <caret line="68" column="55" selection-start-line="68" selection-start-column="55" selection-end-line="68" selection-end-column="55" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/profile.py">
+    <entry file="file://$PROJECT_DIR$/matcha.sqlite3">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/auth.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="869">
-          <caret line="68" column="55" lean-forward="true" selection-start-line="68" selection-start-column="55" selection-end-line="68" selection-end-column="55" />
+        <state relative-caret-position="775">
+          <caret line="178" selection-start-line="178" selection-end-line="178" />
+          <folding>
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/friends.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="690">
+          <caret line="46" column="72" selection-start-line="46" selection-start-column="72" selection-end-line="46" selection-end-column="72" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/static/css/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="1691" column="9" lean-forward="true" selection-start-line="1691" selection-start-column="9" selection-end-line="1691" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/layout.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="897">
+          <caret line="147" column="104" selection-start-line="147" selection-start-column="104" selection-end-line="147" selection-end-column="104" />
+          <folding>
+            <element signature="n#style#0;n#button#0;n#li#1;n#ul#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#li#4;n#ul#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#li#0;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#button#0;n#li#3;n#div#1;n#div#1;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/static/js/friendships.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="510">
+          <caret line="34" column="24" selection-start-line="34" selection-start-column="24" selection-end-line="34" selection-end-column="24" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/friendships.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="32" column="17" selection-start-line="32" selection-start-column="17" selection-end-line="32" selection-end-column="17" />
           <folding>
             <element signature="e#0#25#0" expanded="true" />
           </folding>
@@ -748,32 +782,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/app/models/friendships.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="585">
-          <caret line="39" column="19" selection-start-line="39" selection-start-column="19" selection-end-line="39" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/layout.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="346">
-          <caret line="181" column="19" lean-forward="true" selection-start-line="181" selection-start-column="19" selection-end-line="181" selection-end-column="19" />
-          <folding>
-            <element signature="n#style#0;n#li#0;n#ul#1;n#div#1;n#div#0;n#div#0;n#div#0;n#div#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/profile.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="50">
-          <caret line="14" column="16" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/friends.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="834">
-          <caret line="64" column="23" selection-start-line="64" selection-start-column="23" selection-end-line="64" selection-end-column="23" />
+        <state relative-caret-position="300">
+          <caret line="20" column="94" selection-start-line="20" selection-start-column="94" selection-end-line="20" selection-end-column="94" />
         </state>
       </provider>
     </entry>

@@ -25,6 +25,17 @@ def ajax_add_friend():
                 'error': "Friend request sent"
             })
 
+@app.route('/ajax_delete_friend')
+def ajax_delete_friend():
+    user_id = request.args.get('user_id')
+    if friendships.check_friendship(session.get('id'), user_id):
+        res = friendships.delete_friend(session.get('id'), user_id)
+        print(res)
+        if res:
+            return json.dumps({
+                'ok': True,
+                'error': "Friend deleted"
+            })
 # @app.route('/ajax_remove_request')
 # def ajax_remove_request():
 #     user_id = request.form('user_id')

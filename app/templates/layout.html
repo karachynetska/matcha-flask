@@ -106,14 +106,14 @@
                   <li style="margin-top: 7px;">1,299 followers</li>
                 {% if session.get('id') != data.user.id %}
                     {% if data.friendships.check_friendship(session.get('id'), data.user.id) %}
-                        <li><button id="remove_friend" class="btn-primary" style="background: #ff374f">Remove from friends</button></li>
+                        <li><button id="delete_friend" class="btn-primary" style="background: #ff374f;">Remove from friends</button></li>
                     {% else %}
                         {% if data.friendships.check_request(session.get('id'), data.user.id) == 'sender' %}
                             <li><button id="pending" class="btn-primary">Pending</button></li>
                             {% elif data.friendships.check_request(session.get('id'), data.user.id) == 'taker' %}
                             <li><button id="pending" class="btn-primary">Confirm</button></li>
                             {% else %}
-                            <li><button id="add_friend" class="btn-primary">Add Friend</button></li>
+                            <li><button id="add_friend" class="btn-primary" style="background: #27aae1;">Add Friend</button></li>
                             {% endif %}
                     {% endif %}
             {% endif %}
@@ -138,14 +138,14 @@
               </ul>
                 {% if session.get('id') != data.user.id %}
                     {% if data.friendships.check_friendship(session.get('id'), data.user.id) %}
-                        <li><button id="remove_friend" class="btn-primary" style="background: #ff374f">Remove from friends</button></li>
+                        <li><button id="delete_friend" class="btn-primary" style="background: #ff374f">Remove from friends</button></li>
                     {% else %}
                         {% if data.friendships.check_request(session.get('id'), data.user.id) == 'sender' %}
                             <li><button id="pending" class="btn-primary">Pending</button></li>
                             {% elif data.friendships.check_request(session.get('id'), data.user.id) == 'taker' %}
                             <li><button id="pending" class="btn-primary">Confirm</button></li>
                             {% else %}
-                            <li><button id="add_friend" class="btn-primary">Add Friend</button></li>
+                            <li><button id="add_friend" class="btn-primary" style="background: #27aae1;">Add Friend</button></li>
                             {% endif %}
                     {% endif %}
             {% endif %}

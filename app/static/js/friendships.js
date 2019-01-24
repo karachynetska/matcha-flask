@@ -29,3 +29,22 @@ $('#add_friend').on('click', function (e) {
         }
     });
 });
+
+$('#delete_friend').on('click', function (e) {
+    e.preventDefault();
+    console.log('pressed')
+
+    var url = getLocation(location.href);
+    var user_id = url.pathname.match(/(\d+)/)[1];
+    var data = {
+        user_id: user_id
+    };
+
+    $.get('/ajax_delete_friend', data).done(function (data) {
+        var res = JSON.parse(data);
+        if (res.ok == true) {
+            $('#delete_friend').html('Add Friend');
+            $('#delete_friend').attr('id', 'add_friend');
+        }
+    });
+});
