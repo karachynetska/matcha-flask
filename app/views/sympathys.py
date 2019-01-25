@@ -9,32 +9,31 @@ import json
 import re
 import os
 from app.models import user as user_model
-from app.models import friendships
+from app.models import sympathys
 # from app.models.friendships import check_friendship, add_friend
 from flask_mail import Message
 from app.settings import APP_ROOT
 
-@app.route('/ajax_add_friend')
+@app.route('/ajax_like_user')
 def ajax_add_friend():
     user_id = request.args.get('user_id')
-    if not friendships.check_request(session.get('id'), user_id):
-        res = friendships.add_friend(session.get('id'), user_id)
+    if not sympathys.check_request(session.get('id'), user_id):
+        res = sympathys.like_user(session.get('id'), user_id)
         if res:
             return json.dumps({
                 'ok': True,
-                'error': "Friend request sent"
+                'error': "Liked"
             })
 
-@app.route('/ajax_delete_friend')
+@app.route('/ajax_unlike_user')
 def ajax_delete_friend():
     user_id = request.args.get('user_id')
-    if friendships.check_friendship(session.get('id'), user_id):
-        res = friendships.delete_friend(session.get('id'), user_id)
-        print(res)
+    if sympathys.check_sympathy(session.get('id'), user_id):
+        res = sympathys.unlike_user(session.get('id'), user_id)
         if res:
             return json.dumps({
                 'ok': True,
-                'error': "Friend deleted"
+                'error': "Unlike"
             })
 # @app.route('/ajax_remove_request')
 # def ajax_remove_request():

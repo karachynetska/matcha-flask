@@ -72,6 +72,18 @@ def recovery_password(id, password):
     res = database.db_insert(sql, array)
     return res
 
+def get_gender(id):
+    array = [id]
+    sql = 'SELECT gender FROM users WHERE id=?'
+    res = database.db_query(sql, array)
+    return res[0]['gender']
+
+def get_sex_pref(id):
+    array = [id]
+    sql = 'SELECT sex_pref FROM users WHERE id=?'
+    res = database.db_query(sql, array)
+    return res[0]['sex_pref']
+
 #EDIT PROFILE
 def change_avatar(avatar, id):
     array = [avatar, id]
@@ -136,6 +148,12 @@ def change_country(country, id):
 def change_my_info(my_info, id):
     array = [my_info, id]
     sql = 'UPDATE users SET my_info=? WHERE id=?'
+    res = database.db_query(sql, array)
+    return res
+
+def change_basic(id, firstname, lastname, email, city, country, gender, sex_pref):
+    array = [firstname, lastname, email, city, country, gender, sex_pref, id]
+    sql = 'UPDATE users SET firstname=?, lastname=?, email=?, city=?, country=?, gender=?, sex_pref=? WHERE id=?'
     res = database.db_query(sql, array)
     return res
 

@@ -60,8 +60,8 @@ def create_interests_users():
         print("interests_users")
 
 
-def create_friend_requests():
-    res = database.db_query('''CREATE TABLE IF NOT EXISTS friend_requests(
+def create_requests():
+    res = database.db_query('''CREATE TABLE IF NOT EXISTS requests(
     id_request INTEGER PRIMARY KEY AUTOINCREMENT,
     id_sender INTEGER NOT NULL,
     id_taker INTEGER NOT NULL,
@@ -71,10 +71,10 @@ def create_friend_requests():
     if res:
         print(res)
     else:
-        print('friend_requests created')
+        print('requests created')
 
-def create_friendships():
-    res = database.db_query('''CREATE TABLE IF NOT EXISTS friendships(
+def create_sympathys():
+    res = database.db_query('''CREATE TABLE IF NOT EXISTS sympathys(
     id_user1 INTEGER NOT NULL,
     id_user2 INTEGER NOT NULL,
     FOREIGN KEY (id_user1) REFERENCES users(id) ON DELETE CASCADE,
@@ -82,7 +82,7 @@ def create_friendships():
     if res:
         print(res)
     else:
-        print('friendships created')
+        print('sympathys created')
 
 
 
@@ -138,7 +138,7 @@ def initial_setup():
     create_about()
     create_interests()
     create_interests_users()
-    create_friend_requests()
-    create_friendships()
+    create_requests()
+    create_sympathys()
     create_likes()
     create_comments()

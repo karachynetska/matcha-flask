@@ -46,14 +46,14 @@
                             <a href="/profile/friends">My friends</a>
                         </li>
                         <li class="dropdown">
-                            <a href="#">My messages</a>
+                            <a href="/profile/messages">My messages</a>
                         </li>
                         <li class="dropdown"><a href="/newsfeed">Newsfeed</a>
                         <li class="dropdown">
                             <a href="#">My photos</a>
                         </li>
-                        <li class="dropdown">
-                            <a href="#">Edit <span><img src="{{ url_for('static', filename='images/down-arrow.png') }}" alt="" /></span></a>
+                        <li class="dropdown" >
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Edit <span><img src="{{ url_for('static', filename='images/down-arrow.png') }}" alt="" /></span></a>
                             <ul class="dropdown-menu page-list">
                                 <li><a href="/profile/edit/basic">Basic information</a></li>
                                 <li><a href="/profile/edit/edu-work">Education and work</a></li>
@@ -105,15 +105,15 @@
                 <ul class="follow-me list-inline">
                   <li style="margin-top: 7px;">1,299 followers</li>
                 {% if session.get('id') != data.user.id %}
-                    {% if data.friendships.check_friendship(session.get('id'), data.user.id) %}
-                        <li><button id="delete_friend" class="btn-primary" style="background: #ff374f;">Remove from friends</button></li>
+                    {% if data.sympathys.check_sympathy(session.get('id'), data.user.id) %}
+                        <li><button id="unlike_user" class="btn-primary" style="background: #ff374f;">Unlike</button></li>
                     {% else %}
-                        {% if data.friendships.check_request(session.get('id'), data.user.id) == 'sender' %}
-                            <li><button id="pending" class="btn-primary">Pending</button></li>
-                            {% elif data.friendships.check_request(session.get('id'), data.user.id) == 'taker' %}
+                        {% if data.sympathys.check_request(session.get('id'), data.user.id) == 'sender' %}
+                            <li><button id="liked_user" class="btn-primary" style="background: #fcf809; color: #ff374f;">Liked</button></li>
+                            {% elif data.sympathys.check_request(session.get('id'), data.user.id) == 'taker' %}
                             <li><button id="pending" class="btn-primary">Confirm</button></li>
                             {% else %}
-                            <li><button id="add_friend" class="btn-primary" style="background: #27aae1;">Add Friend</button></li>
+                            <li><button id="like_user" class="btn-primary" style="background: #27aae1;">Like</button></li>
                             {% endif %}
                     {% endif %}
             {% endif %}
@@ -137,15 +137,15 @@
                 <li><a href="timeline-friends.html">Friends</a></li>
               </ul>
                 {% if session.get('id') != data.user.id %}
-                    {% if data.friendships.check_friendship(session.get('id'), data.user.id) %}
-                        <li><button id="delete_friend" class="btn-primary" style="background: #ff374f">Remove from friends</button></li>
+                    {% if data.sympathys.check_sympathy(session.get('id'), data.user.id) %}
+                        <li><button id="unlike_user" class="btn-primary" style="background: #ff374f">Unlike</button></li>
                     {% else %}
-                        {% if data.friendships.check_request(session.get('id'), data.user.id) == 'sender' %}
-                            <li><button id="pending" class="btn-primary">Pending</button></li>
-                            {% elif data.friendships.check_request(session.get('id'), data.user.id) == 'taker' %}
+                        {% if data.sympathys.check_request(session.get('id'), data.user.id) == 'sender' %}
+                            <li><button id="liked_user" class="btn-primary" style="background: #fcf809; color: #ff374f;">Liked</button></li>
+                            {% elif data.sympathys.check_request(session.get('id'), data.user.id) == 'taker' %}
                             <li><button id="pending" class="btn-primary">Confirm</button></li>
                             {% else %}
-                            <li><button id="add_friend" class="btn-primary" style="background: #27aae1;">Add Friend</button></li>
+                            <li><button id="like_user" class="btn-primary" style="background: #27aae1;">Like</button></li>
                             {% endif %}
                     {% endif %}
             {% endif %}

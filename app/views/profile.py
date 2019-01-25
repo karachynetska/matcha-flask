@@ -9,7 +9,7 @@ import json
 import re
 import os
 from app.models import user as user_model
-from app.models import friendships
+from app.models import sympathys
 # from app.models.friendships import check_friendship, add_friend
 from flask_mail import Message
 from app.settings import APP_ROOT
@@ -39,7 +39,7 @@ def profile(id_user=None):
         user = user_model.get_user_by_id(id_user)[0]
     data = {
         'user': user,
-        'friendships': friendships
+        'sympathys': sympathys
 
     }
     return render_template('profile.html', data=data)
@@ -65,7 +65,7 @@ def friends():
     if 'id' in session:
         data = {
             'user': user_model.get_user_by_id(session.get('id'))[0],
-            'friends': friendships.get_friends_list(session.get('id')),
+            'sympathys': sympathys.get_sympathys_list(session.get('id')),
             'get_user_by_id': user_model.get_user_by_id
         }
         return render_template('friends.html', data=data)
@@ -101,97 +101,57 @@ def ajax_edit_basic():
     firstname = html.escape(request.form['firstname'])
     lastname = html.escape(request.form['lastname'])
     email = html.escape(request.form['email'])
-    day = request.form['day']
-    month = request.form['month']
-    year = request.form['year']
-    gender = request.form['gender']
-    sex_pref = request.form['sex_pref']
     city = request.form['city']
     country = request.form['country']
+    gender = request.form['gender']
+    sex_pref = request.form['sex_pref']
+
     my_info = html.escape(request.form['my_info'])
 
     id = session.get('id')
-    if firstname:
-        if (len(firstname) < 2) or (len(firstname) > 25):
-            return json.dumps({
-                'ok': False,
-                'error': "Firstname length must be from 2 characters to 25",
-                'fields': ["firstname"]
-            })
-        user_model.change_firstname(firstname, id)
+    user = user_model.get_user_by_id(id)[0]
+    if not gender:
+        gender = user['gender']
+    if not sex_pref:
+        sex_pref = user['sex_pref']
+    if not email:
+        email = user['email']
+    if not city:
+        city = user['city']
+    if not country:
+        country = user['country']
+
+    if (len(firstname) < 2) or (len(firstname) > 25):
         return json.dumps({
-            'ok': True,
-            'error': "Changes successfully changed"
+            'ok': False,
+            'error': "Firstname length must be from 2 characters to 25",
+            'fields': ["firstname"]
         })
 
-    if lastname:
-        if (len(lastname) < 2) or (len(lastname) > 25):
-            return json.dumps({
-                'ok': False,
-                'error': "Lastname length must be from 2 characters to 25",
-                'fields': ["lastname"]
-            })
-        user_model.change_lastname(lastname, id)
+    if (len(lastname) < 2) or (len(lastname) > 25):
         return json.dumps({
-            'ok': True,
-            'error': "Changes successfully changed"
+            'ok': False,
+            'error': "Lastname length must be from 2 characters to 25",
+            'fields': ["lastname"]
         })
 
-    if email:
-        if not re.match("^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$", email.lower()):
-            return json.dumps({
-                'ok': False,
-                'error': "Wrong email",
-                'fields': ["email"]
-            })
-        user_model.change_email(email, id)
+    if not re.match("^[_a-z0-9-]+(.[_a-z0-9-]+)*@[a-z0-9-]+(.[a-z0-9-]+)*(.[a-z]{2,4})$", email.lower()):
         return json.dumps({
-            'ok': True,
-            'error': "Changes successfully changed"
+            'ok': False,
+            'error': "Wrong email",
+            'fields': ["email"]
         })
+    res = user_model.change_basic(id, firstname, lastname, email, city, country, gender, sex_pref)
 
-    if day and month and year:
-        birth_date = request.form['day'] + '/' + request.form['month'] + '/' + request.form['year']
-        try:
-            birth_date = datetime.strptime(birth_date, '%d/%b/%Y')
-        except:
-            return json.dumps({
-                'ok': False,
-                'error': "Wrong date",
-                'fields': ["day", "month", "year"]
-            })
-        user_model.change_birth_date(birth_date, id)
+    if not res:
         return json.dumps({
             'ok': True,
-            'error': "Changes successfully changed"
+            'error': "Changes successfully saved"
         })
-
-    if gender:
-        user_model.change_gender(gender, id)
+    else:
         return json.dumps({
-            'ok': True,
-            'error': "Changes successfully changed"
-        })
-
-    if sex_pref:
-        user_model.change_sex_pref(sex_pref, id)
-        return json.dumps({
-            'ok': True,
-            'error': "Changes successfully changed"
-        })
-
-    if city:
-        user_model.change_city(city, id)
-        return json.dumps({
-            'ok': True,
-            'error': "Changes successfully changed"
-        })
-
-    if country:
-        user_model.change_country(country, id)
-        return json.dumps({
-            'ok': True,
-            'error': "Changes successfully changed"
+            'ok': False,
+            'error': "Something went wrong"
         })
 
 

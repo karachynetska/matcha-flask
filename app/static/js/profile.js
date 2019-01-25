@@ -44,20 +44,12 @@ $("#edit-basic").on('click', function (e) {
         firstname: $('#firstname').val(),
         lastname: $('#lastname').val(),
         email: $('#email').val(),
-        day: $('#day').val(),
-        month: $('#month').val(),
-        year: $('#year').val(),
         gender,
         sex_pref: $('#sex_pref').val(),
         city: $('#city').val(),
         country: $('#country').val(),
         my_info: $('#my-info').val()
     };
-
-      console.log("day" + data.day);
-      console.log("month" + data.month);
-      console.log("year" + data.year);
-      console.log("gender" + data.gender);
 
     $.ajax({
         type: "POST",
@@ -79,10 +71,6 @@ $("#edit-basic").on('click', function (e) {
             $("#message-basic").addClass("success");
         }
     });
-    // $("input").each( function() {
-    //     console.log($(this).val());
-    //     console.log($(this).name);
-    // });
 });
 
 

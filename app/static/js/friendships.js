@@ -12,7 +12,7 @@ function getLocation(href) {
     }
 }
 
-$('#add_friend').on('click', function (e) {
+$('#like_user').on('click', function (e) {
     e.preventDefault();
 
     var url = getLocation(location.href);
@@ -21,16 +21,16 @@ $('#add_friend').on('click', function (e) {
         user_id: user_id
     };
 
-    $.get('/ajax_add_friend', data).done(function (data) {
+    $.get('/ajax_like_user', data).done(function (data) {
         var res = JSON.parse(data);
         if (res.ok == true) {
-            $('#add_friend').html('Pending');
-            $('#add_friend').attr('id', 'pending');
+            $('#like_user').html('Liked');
+            $('#like_user').attr('id', 'liked_user');
         }
     });
 });
 
-$('#delete_friend').on('click', function (e) {
+$('#unlike_user').on('click', function (e) {
     e.preventDefault();
     console.log('pressed')
 
@@ -40,11 +40,11 @@ $('#delete_friend').on('click', function (e) {
         user_id: user_id
     };
 
-    $.get('/ajax_delete_friend', data).done(function (data) {
+    $.get('/ajax_unlike_user', data).done(function (data) {
         var res = JSON.parse(data);
         if (res.ok == true) {
-            $('#delete_friend').html('Add Friend');
-            $('#delete_friend').attr('id', 'add_friend');
+            $('#unlike_user').html('Like');
+            $('#unlike_user').attr('id', 'like_user');
         }
     });
 });
