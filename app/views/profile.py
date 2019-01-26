@@ -18,12 +18,6 @@ photos = UploadSet('photos', IMAGES)
 app.config['UPLOADED_PHOTOS_DEST'] = "app/static/media"
 configure_uploads(app, photos)
 
-UPLOAD_FOLDER = '/'
-ALLOWED_EXTENSIONS = set(['image/jpg', 'image/jpeg', 'image/JPG', 'image/JPEG', 'image/png', 'image/PNG', 'image/gif', 'image/GIF'])
-
-def allowed_extensions(mime_type):
-    return mime_type in ALLOWED_EXTENSIONS
-
 
 
 # PROFILE

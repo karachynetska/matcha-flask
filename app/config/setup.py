@@ -86,10 +86,17 @@ def create_sympathys():
 
 
 
-# def create_posts():
-#     database.db_query('''CREATE TABLE IF NOT EXISTS name (
-#     )
-#     ''')
+def create_photos():
+    res = database.db_query('''CREATE TABLE IF NOT EXISTS photos (
+    id_photo INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_user INTEGER NOT NULL,
+    photo TEXT NOT NULL,
+    date_added DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_user) REFERENCES user(id) ON DELETE CASCADE)''')
+    if res:
+        print(res)
+    else:
+        print('photos')
 
 def create_likes():
     res = database.db_query('''CREATE TABLE IF NOT EXISTS likes (
@@ -140,5 +147,6 @@ def initial_setup():
     create_interests_users()
     create_requests()
     create_sympathys()
+    create_photos()
     create_likes()
     create_comments()
