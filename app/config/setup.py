@@ -71,7 +71,7 @@ def create_requests():
     if res:
         print(res)
     else:
-        print('requests created')
+        print('requests')
 
 def create_sympathys():
     res = database.db_query('''CREATE TABLE IF NOT EXISTS sympathys(
@@ -82,7 +82,7 @@ def create_sympathys():
     if res:
         print(res)
     else:
-        print('sympathys created')
+        print('sympathys')
 
 
 
@@ -100,23 +100,36 @@ def create_photos():
 
 def create_likes():
     res = database.db_query('''CREATE TABLE IF NOT EXISTS likes (
-    id_user INTEGER NOT NULL,
-    id_post INTEGER NOT NULL,
     id_photo INTEGER NOT NULL,
+    id_user INTEGER NOT NULL,
     data_of_creation DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_post) REFERENCES posts(id_post) ON DELETE CASCADE,
-    FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE CASCADE
-    )
-    ''')
+    FOREIGN KEY (id_photo) REFERENCES photos(id_photo) ON DELETE CASCADE,
+    FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE CASCADE)''')
+    if res:
+        print(res)
+    else:
+        print('likes')
+
+def create_dislikes():
+    res = database.db_query('''CREATE TABLE IF NOT EXISTS dislikes (
+    id_photo INTEGER NOT NULL,
+    id_user INTEGER NOT NULL,
+    data_of_creation DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_photo) REFERENCES photos(id_photo) ON DELETE CASCADE,
+    FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE CASCADE)''')
+    if res:
+        print(res)
+    else:
+        print('dislikes')
 
 def create_comments():
     res = database.db_query('''CREATE TABLE IF NOT EXISTS comments(
     id_comment INTEGER PRIMARY KEY AUTOINCREMENT,
     id_user INTEGER NOT NULL,
-    id_post INTEGER NOT NULL,
+    id_photo INTEGER NOT NULL,
     text TEXT,
     date_of_creation DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_post) REFERENCES posts(id_post) ON DELETE CASCADE,
+    FOREIGN KEY (id_photo) REFERENCES photos(id_photo) ON DELETE CASCADE,
     FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE CASCADE)''')
     if res:
         print(res)
@@ -149,4 +162,5 @@ def initial_setup():
     create_sympathys()
     create_photos()
     create_likes()
+    create_dislikes()
     create_comments()

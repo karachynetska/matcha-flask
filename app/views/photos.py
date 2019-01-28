@@ -22,14 +22,27 @@ configure_uploads(app, images)
 
 
 @app.route('/profile/photos')
-def photos():
+@app.route('/profile/photos/id<int:id_user>/')
+def photos(id_user=None):
+    if not 'id' in session and not id_user:
+        return redirect('/')
     if 'id' in session:
-        data = {
-            'user': user_model.get_user_by_id(session.get('id'))[0],
-            'photos': photos_model.get_photos_by_id(session.get('id'))
-        }
-        return render_template('photos.html', data=data)
-    return redirect('/')
+        id = session.get('id')
+        user = user_model.get_user_by_id(id)[0]
+        photos = photos_model.get_photos_by_id(id)
+
+    if id_user:
+        user = user_model.get_user_by_id(id_user)[0]
+        photos = photos_model.get_photos_by_id(id_user)
+
+    data = {
+        'user': user,
+        'photos': photos,
+        'get_user_by_id': user_model.get_user_by_id
+    }
+    print(data)
+    return render_template('photos.html', data=data)
+
 
 @app.route('/ajax_add_photo', methods=["POST"])
 def ajax_add_photo():
