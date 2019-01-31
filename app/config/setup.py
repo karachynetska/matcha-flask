@@ -125,8 +125,8 @@ def create_dislikes():
 def create_comments():
     res = database.db_query('''CREATE TABLE IF NOT EXISTS comments(
     id_comment INTEGER PRIMARY KEY AUTOINCREMENT,
-    id_user INTEGER NOT NULL,
     id_photo INTEGER NOT NULL,
+    id_user INTEGER NOT NULL,
     text TEXT,
     date_of_creation DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (id_photo) REFERENCES photos(id_photo) ON DELETE CASCADE,

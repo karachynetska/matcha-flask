@@ -104,16 +104,26 @@
                     </div>
                     <div class="media-info">
                       <div class="reaction">
-                        <a class="btn text-green" id="like" onclick="like({{ photo.id_photo }}, {{ session.get('id') }})"><i class="fa fa-thumbs-up"></i> 63</a>
-                        <a class="btn text-red" id="dislike" onclick="dislike({{ photo.id_photo }}, {{ session.get('id') }})"><i class="fa fa-thumbs-down"></i> 12</a>
+                          {% set likes =  data.likes(photo.id_photo) %}
+                          {% set dislikes =  data.dislikes(photo.id_photo) %}
+                          {% if data.check_like(photo.id_photo, session.get('id')) %}
+                          <a class="btn text-green like photo-{{ photo.id_photo }}" onclick="like({{ photo.id_photo }}, {{ session.get('id') }})"><i class="fa fa-thumbs-up"></i> <span>{{ likes }}</span></a>
+                          {% else %}
+                          <a class="btn text-muted like photo-{{ photo.id_photo }}" onclick="like({{ photo.id_photo }}, {{ session.get('id') }})"><i class="fa fa-thumbs-up"></i> <span>{{ likes }}</span></a>
+                      {% endif %}
+                          {% if data.check_dislike(photo.id_photo, session.get('id')) %}
+                          <a class="btn text-red dislike photo-{{ photo.id_photo }}" onclick="dislike({{ photo.id_photo }}, {{ session.get('id') }})"><i class="fa fa-thumbs-down"></i> <span>{{ dislikes }}</span></a>
+                          {% else %}
+                          <a class="btn text-muted dislike photo-{{ photo.id_photo }}" onclick="dislike({{ photo.id_photo }}, {{ session.get('id')}})"><i class="fa fa-thumbs-down"></i> <span>{{ dislikes }}</span></a>
+                          {% endif %}
                       </div>
-                      <div class="user-info">
-                        <img src="{{ data.user.avatar }}" alt="" class="profile-photo-sm pull-left" />
-                        <div class="user">
-                          <h6><a href="#" class="profile-link">{{ data.user.firstname + ' ' + data.user.lastname }}</a></h6>
-                          <a class="text-green" href="#">{{ data.user.login }}</a>
-                        </div>
-                      </div>
+{#                      <div class="user-info">#}
+{#                        <img src="{{ data.user.avatar }}" alt="" class="profile-photo-sm pull-left" />#}
+{#                        <div class="user">#}
+{#                          <h6><a href="#" class="profile-link">{{ data.user.firstname + ' ' + data.user.lastname }}</a></h6>#}
+{#                          <a class="text-green" href="#">{{ data.user.login }}</a>#}
+{#                        </div>#}
+{#                      </div>#}
                     </div>
 
                     <!--Popup-->
@@ -130,13 +140,21 @@
                                   <p class="text-muted">Published a photo about 3 mins ago</p>
                                 </div>
                                 <div class="reaction">
-                                  <a class="btn text-green" id="like" onclick="like({{ photo.id_photo }}, {{ session.get('id') }})"><i class="icon ion-thumbsup"></i> 13</a>
-                                  <a class="btn text-red" id="dislike" onclick="dislike({{ photo.id_photo }}, {{ session.get('id') }})"><i class="fa fa-thumbs-down"></i> 0</a>
+                                  {% if data.check_like(photo.id_photo, session.get('id')) %}
+                                      <a class="btn text-green pop-like photo-{{ photo.id_photo }}" onclick="like({{ photo.id_photo }}, {{ session.get('id') }})"><i class="fa fa-thumbs-up"></i> <span>{{ likes }}</span></a>
+                                  {% else %}
+                                      <a class="btn text-muted pop-like photo-{{ photo.id_photo }}" onclick="like({{ photo.id_photo }}, {{ session.get('id') }})"><i class="fa fa-thumbs-up"></i> <span>{{ likes }}</span></a>
+                                  {% endif %}
+                                  {% if data.check_dislike(photo.id_photo, session.get('id')) %}
+                                      <a class="btn text-red pop-dislike photo-{{ photo.id_photo }}" onclick="dislike({{ photo.id_photo }}, {{ session.get('id') }})"><i class="fa fa-thumbs-down"></i> <span>{{ dislikes }}</span></a>
+                                  {% else %}
+                                      <a class="btn text-muted pop-dislike photo-{{ photo.id_photo }}" onclick="dislike({{ photo.id_photo }}, {{ session.get('id')}})"><i class="fa fa-thumbs-down"></i> <span>{{ dislikes }}</span></a>
+                                  {% endif %}
                                 </div>
                                 <div class="line-divider"></div>
-                                <div class="post-text">
-                                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>
-                                </div>
+{#                                <div class="post-text">#}
+{#                                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>#}
+{#                                </div>#}
                                 <div class="line-divider"></div>
                                 <div class="post-comment">
                                   <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
@@ -147,8 +165,18 @@
                                   <p><a href="timeline.html" class="profile-link">John</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
                                 </div>
                                 <div class="post-comment">
-                                  <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
-                                  <input type="text" class="form-control" placeholder="Post a comment">
+                                  <img src="{{ data.user.avatar }}" alt="" class="profile-photo-sm" />
+                                  <div class="col-md-12 col-sm-12">
+                                      <form onsubmit="add_comment({{ photo.id_photo }})" method="post">
+                                          <div class="col-md-9 col-sm-9">
+{#                                              <input type="hidden" name="id_photo" value="{{ photo.id_photo }}">#}
+                                              <input id="comment" type="text" class="form-control" placeholder="Post a comment" style="margin-top: 2px">
+                                          </div>
+                                          <div class="col-md-3 col-sm-3">
+                                              <button class="btn btn-primary pull-right" id="add_comment" type="submit">Comment</button>
+                                          </div>
+                                      </form>
+                                  </div>
                                 </div>
                               </div>
                             </div>
@@ -249,5 +277,6 @@
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <script src="{{ url_for('static', filename='js/photos.js') }}"></script>
     <script src="{{ url_for('static', filename='js/likes.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/comments.js') }}"></script>
   </body>
 </html>

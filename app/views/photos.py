@@ -10,6 +10,7 @@ import re
 import os
 from app.models import user as user_model
 from app.models import photos as photos_model
+from app.models import likes
 from app.models import sympathys
 # from app.models.friendships import check_friendship, add_friend
 from flask_mail import Message
@@ -38,9 +39,12 @@ def photos(id_user=None):
     data = {
         'user': user,
         'photos': photos,
-        'get_user_by_id': user_model.get_user_by_id
+        'get_user_by_id': user_model.get_user_by_id,
+        'likes': likes.photo_likes,
+        'dislikes': likes.photo_dislikes,
+        'check_like': likes.check_like,
+        'check_dislike': likes.check_dislike
     }
-    print(data)
     return render_template('photos.html', data=data)
 
 
