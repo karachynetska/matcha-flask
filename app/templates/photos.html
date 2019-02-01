@@ -91,7 +91,6 @@
                 <div class="grid-sizer col-md-6 col-sm-6"></div>
                     {% if data.photos %}
                     {% for photo in data.photos %}
-                        {% set i = 0 %}
 
             <!-- Media
             ================================================= -->
@@ -156,25 +155,31 @@
 {#                                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. <i class="em em-anguished"></i> <i class="em em-anguished"></i> <i class="em em-anguished"></i></p>#}
 {#                                </div>#}
                                 <div class="line-divider"></div>
-                                <div class="post-comment">
-                                  <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
-                                  <p><a href="timeline.html" class="profile-link">Diana </a><i class="em em-laughing"></i> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
+                              <div id="photo_comments">
+                              {% set comments = data.get_comments_by_photo_id(photo.id_photo) %}
+                              {% if comments %}
+                              {% for comment in comments %}
+                                  {% set user = data.get_user_by_id(comment.id_user)[0] %}
+                                <div class="post-comment" id="comment-{{ comment.id_comment }}">
+                                  <img src="{{ user.avatar }}" alt="" class="profile-photo-sm" />
+                                  <p><a href="timeline.html" class="profile-link">{{ user.firstname }} </a> {{ comment.text }} </p>
                                 </div>
-                                <div class="post-comment">
-                                  <img src="http://placehold.it/300x300" alt="" class="profile-photo-sm" />
-                                  <p><a href="timeline.html" class="profile-link">John</a> Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud </p>
-                                </div>
+                                  {% endfor %}
+                              {% endif %}
+                              </div>
                                 <div class="post-comment">
                                   <img src="{{ data.user.avatar }}" alt="" class="profile-photo-sm" />
                                   <div class="col-md-12 col-sm-12">
-                                      <form onsubmit="add_comment({{ photo.id_photo }})" method="post">
+                                      <form method="post" onsubmit="add_comment(this)">
                                           <div class="col-md-9 col-sm-9">
-{#                                              <input type="hidden" name="id_photo" value="{{ photo.id_photo }}">#}
+                                              <input type="hidden" name="id_photo" id="id_photo" value="{{ photo.id_photo }}">
+                                              <input type="hidden" name="profile_photo" id="profile_photo" value="{{ data.user.avatar }}">
+                                              <input type="hidden" name="user_firstname" id="user_firstname" value="{{ data.user.firstname }}">
                                               <input id="comment" type="text" class="form-control" placeholder="Post a comment" style="margin-top: 2px">
                                           </div>
-                                          <div class="col-md-3 col-sm-3">
-                                              <button class="btn btn-primary pull-right" id="add_comment" type="submit">Comment</button>
-                                          </div>
+{#                                          <div class="col-md-3 col-sm-3">#}
+{#                                              <button class="btn btn-primary pull-right" id="add_comment" type="submit">Comment</button>#}
+{#                                          </div>#}
                                       </form>
                                   </div>
                                 </div>

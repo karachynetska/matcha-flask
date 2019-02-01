@@ -21,23 +21,23 @@ def ajax_add_comment():
     id_photo = request.form['id_photo']
     id_user = session.get('id')
     text = html.escape(request.form['text'])
-    print(id_photo)
-    print(text)
 
     if not id_photo or not id_user or not text:
+        print('not')
         return json.dumps({
             'ok': False,
             'error': "Something went wrong"
         })
     res = comments.add_comment(id_photo, id_user, text)
     print(res)
-    if res:
-        return json.dumps({
-            'ok': True,
-            'error': "Commented"
-        })
-    else:
+    if not res:
+        print('faaalse')
         return json.dumps({
             'ok': False,
             'error': "The comment has not been added"
         })
+    return json.dumps({
+        'ok': True,
+        'error': "Commented"
+    })
+

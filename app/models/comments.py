@@ -11,3 +11,9 @@ def delete_comment(id_photo, id_user, text):
     sql = 'DELETE FROM comments WHERE id_photo=?, id_user=?, text=?'
     res = database.db_insert(sql, array)
     return res
+
+def get_comments_by_photo_id(id_photo):
+    array = [id_photo]
+    sql = 'SELECT * FROM comments WHERE id_photo=?'
+    res = database.db_query(sql, array)
+    return res
