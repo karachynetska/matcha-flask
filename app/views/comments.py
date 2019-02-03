@@ -29,7 +29,6 @@ def ajax_add_comment():
             'error': "Something went wrong"
         })
     res = comments.add_comment(id_photo, id_user, text)
-    print(res)
     if not res:
         print('faaalse')
         return json.dumps({
