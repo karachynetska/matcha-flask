@@ -1,10 +1,13 @@
 from flask import Flask, render_template, request, redirect, url_for, session
+from flask_socketio import SocketIO
 from flask_mail import Mail
 from app.config import setup, database
 import os
 
 app = Flask(__name__)
-app.secret_key = "qnfhyamkdntiam16"
+app.config['SECRET_KEY'] = "qnfhyamkdntiam16"
+# app.config['DEBUG'] = True
+socketio = SocketIO(app)
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))  # refers to application_top
 APP_STATIC = os.path.join(APP_ROOT, 'static')

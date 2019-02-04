@@ -136,10 +136,27 @@ def create_comments():
     else:
         print("comments")
 
-# def create_messages():
-#     database.db_query('''CREATE TABLE IF NOT EXISTS name (
-#     )
-#     ''')
+
+def create_dialogues():
+    res = database.db_query('''CREATE TABLE IF NOT EXISTS dialogues(
+    id_dialogue INTEGER PRIMARY KEY AUTOINCREMENT,
+    dialogue_name TEXT NOT NULL,
+    id_user1 INTEGER NOT NULL,
+    id_user2 INTEGER NOT NULL)''')
+    if res:
+        print(res)
+    else:
+        print("dialogues")
+
+def create_messages():
+    database.db_query('''CREATE TABLE IF NOT EXISTS messages (
+    id_message INTEGER PRIMARY KEY AUTOINCREMENT,
+    from_whom_id INTEGER NOT NULL,
+    to_whom_id INTEGER NOT NULL,
+    message TEXT NOT NULL,
+    date DATETIME DEFAULT CURRENT_TIMESTAMP,
+    )
+    ''')
 
 
 def create_geolocation():

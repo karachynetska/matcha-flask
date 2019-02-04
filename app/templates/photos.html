@@ -136,7 +136,7 @@
                               <div class="post-detail">
                                 <div class="user-info">
                                   <h5><a href="timeline.html" class="profile-link">{{ data.user.firstname + ' ' + data.user.lastname }}</a> <span class="following">following</span></h5>
-                                  <p class="text-muted">Published a photo about 3 mins ago</p>
+                                  <p class="text-muted">Published a photo {{ photo.date_added.split(' ')[0] }}</p>
                                 </div>
                                 <div class="reaction">
                                   {% if data.check_like(photo.id_photo, session.get('id')) %}
