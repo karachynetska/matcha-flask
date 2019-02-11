@@ -7,7 +7,7 @@ import os
 app = Flask(__name__)
 app.config['SECRET_KEY'] = "qnfhyamkdntiam16"
 # app.config['DEBUG'] = True
-socketio = SocketIO(app)
+sio = SocketIO(app)
 
 APP_ROOT = os.path.dirname(os.path.abspath(__file__))  # refers to application_top
 APP_STATIC = os.path.join(APP_ROOT, 'static')

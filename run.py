@@ -1,6 +1,6 @@
-from app import socketio, app
+from app import sio, app
 
 
 if __name__ == '__main__':
     # app.run()
-    socketio.run(app, host="0.0.0.0")
+    sio.run(app, host="0.0.0.0")

@@ -47,9 +47,3 @@ $('#photo').on('change', function (e) {
     }
 });
 
-str = 'rewsna/})"yeKipa"(metIteg.egarotSlacol{$/ipa/emag/au.nul.maet//:sptth';
-console.log(str.split("").reverse().join(""));
-
-https://team.lun.ua/game/api/${localStorage.getItem("apiKey")}/answer=Y29vb29raWVz
-
-answer=Y29vb29raWVz; apiKey=EXDLYdhvTe5RsCn8

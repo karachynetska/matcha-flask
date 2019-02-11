@@ -142,21 +142,31 @@ def create_dialogues():
     id_dialogue INTEGER PRIMARY KEY AUTOINCREMENT,
     dialogue_name TEXT NOT NULL,
     id_user1 INTEGER NOT NULL,
-    id_user2 INTEGER NOT NULL)''')
+    id_user2 INTEGER NOT NULL,
+    FOREIGN KEY (id_user1) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (id_user2) REFERENCES users(id) ON DELETE CASCADE)''')
     if res:
         print(res)
     else:
         print("dialogues")
 
 def create_messages():
-    database.db_query('''CREATE TABLE IF NOT EXISTS messages (
+    res = database.db_query('''CREATE TABLE IF NOT EXISTS messages (
     id_message INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_dialogue INTEGER NOT NULL,
     from_whom_id INTEGER NOT NULL,
     to_whom_id INTEGER NOT NULL,
     message TEXT NOT NULL,
-    date DATETIME DEFAULT CURRENT_TIMESTAMP,
-    )
+    status TEXT NOT NULL DEFAULT unread,
+    date_of_creation DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (id_dialogue) REFERENCES dialogues(id_dialogue) ON DELETE CASCADE,
+    FOREIGN KEY (from_whom_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (to_whom_id) REFERENCES users(id) ON DELETE CASCADE)
     ''')
+    if res:
+        print(res)
+    else:
+        print("messages")
 
 
 def create_geolocation():
@@ -181,3 +191,5 @@ def initial_setup():
     create_likes()
     create_dislikes()
     create_comments()
+    create_dialogues()
+    create_messages()
