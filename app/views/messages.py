@@ -31,15 +31,26 @@ def messages():
 
 @sio.on('connect', namespace='/messages')
 def connect():
-    id_user_to_sid[request.sid] = session.get('id')
+    match = 0
+    for key, value in id_user_to_sid.items():
+        print(type(value))
+        print(type(session.get('id')))
+        if value == session.get('id'):
+            match = 1
+    if match == 0:
+        id_user_to_sid[request.sid] = session.get('id')
     print(id_user_to_sid)
 
 @sio.on('join_dialogue', namespace='/messages')
 def join_dialogue(data):
-    print(data)
-    join_room(data['id_dialogue'])
-    id_dialogue_to_sid[request.sid] = data['id_dialogue']
-    messages_model.read_all_messages(data['from_whom_id'], data['to_whom_id'])
+    match = 0
+    for key, value in id_dialogue_to_sid.items():
+        if value == data['id_dialogue']:
+            match = 1
+    if match == 0:
+        join_room(data['id_dialogue'])
+        id_dialogue_to_sid[request.sid] = data['id_dialogue']
+        messages_model.read_all_messages(data['from_whom_id'], data['to_whom_id'])
 
 @sio.on('send_message', namespace='/messages')
 def send_message(data):
@@ -64,8 +75,10 @@ def send_message(data):
 
 @sio.on('disconnect', namespace='/messages')
 def disconnect():
-    dialogue = id_dialogue_to_sid[request.sid]
     id_user_to_sid.pop(request.sid)
+    print('deleted')
+    print(id_user_to_sid)
+    dialogue = id_dialogue_to_sid[request.sid]
     leave_room(dialogue)
     id_dialogue_to_sid.pop(request.sid)
 
