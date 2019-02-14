@@ -9,9 +9,7 @@ function init(dialogue, id_user1, id_user2) {
     id_dialogue = dialogue;
     from_whom_id = id_user1;
     to_whom_id = id_user2;
-    //     console.log(id_dialogue);
-    // console.log(from_whom_id);
-    // console.log(to_whom_id);
+    $('#'+id_dialogue).find('.chat-alert').addClass('invisible');
     socket_messages.emit('join_dialogue', {'id_dialogue': id_dialogue, 'from_whom_id': from_whom_id, 'to_whom_id': to_whom_id});
 };
 
@@ -24,23 +22,21 @@ $('#send_message').on('click', function (e) {
     }
     var data = {'message': message, 'from_whom_id': from_whom_id, 'to_whom_id': to_whom_id};
     socket_messages.emit('send_message', data);
-    $('message').val('');
+    $('#message').val('');
 
 });
 
 socket_messages.on('add_message_to_template', function (data) {
-   var from_whom_id = data['from-whom_id'],
-       user = data['user'],
+   var user = data['user'],
        last_message = data['last_message'];
 
-   // var dialogue = $('#contact-'+data['dialogue']);
-    console.log(data['dialogue']);
-    console.log(data['from_whom_id']);
-    console.log($('li.active').find('.from_whom_id').text());
+   console.log(data['dialogue']);
+   console.log(data['from_whom_id']);
+   console.log($('li.active').find('.from_whom_id').text());
 
    if(data['from_whom_id'] == $('li.active').find('.from_whom_id').text()) {
        $('#contact-'+data['dialogue']).find('.chat-message').append('<li class="right">\n' +
-       '                      \t\t\t<img src="'+ user['avatar'] +'" alt="" class="profile-photo-sm pull-right" />\n' +
+       '                      \t\t\t<a href="/profile/id'+user['id']+'"><img src="'+ user['avatar'] +'" alt="" class="profile-photo-sm pull-right" /></a>\n' +
        '                      \t\t\t<div class="chat-item">\n' +
        '                              <div class="chat-item-header">\n' +
        '                              \t<h5>'+ user['firstname'] +' '+ user['lastname'] +'</h5>\n' +
@@ -50,9 +46,8 @@ socket_messages.on('add_message_to_template', function (data) {
        '                            </div>\n' +
        '                      \t\t</li>');
    } else {
-       console.log('else0');
        $('#contact-'+data['dialogue']).find('.chat-message').append('<li class="left">\n' +
-       '                      \t\t\t<img src="'+ user['avatar'] +'" alt="" class="profile-photo-sm pull-right" />\n' +
+       '                      \t\t\t<a href="/profile/id'+user['id']+'"><img src="'+ user['avatar'] +'" alt="" class="profile-photo-sm pull-left" /></a>\n' +
        '                      \t\t\t<div class="chat-item">\n' +
        '                              <div class="chat-item-header">\n' +
        '                              \t<h5>'+ user['firstname'] +' '+ user['lastname'] +'</h5>\n' +

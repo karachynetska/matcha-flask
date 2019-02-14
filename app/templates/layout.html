@@ -143,7 +143,7 @@
                         {% if data.sympathys.check_request(session.get('id'), data.user.id) == 'sender' %}
                             <li><button id="liked_user" class="btn-primary" style="background: #fcf809; color: #ff374f;">Liked</button></li>
                             {% elif data.sympathys.check_request(session.get('id'), data.user.id) == 'taker' %}
-                            <li><button id="pending" class="btn-primary">Confirm</button></li>
+                            <li><button id="pending" class="btn-primary">Like back</button></li>
                             {% else %}
                             <li><button id="like_user" class="btn-primary" style="background: #27aae1;">Like</button></li>
                             {% endif %}

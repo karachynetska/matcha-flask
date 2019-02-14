@@ -53,6 +53,7 @@ $("#login-button").on('click', function (e) {
     password: $('#my-password').val()
   };
 
+
   // console.log(data['email']);
   // console.log(data['password']);
 

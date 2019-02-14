@@ -51,3 +51,10 @@ def get_last_message_by_dialogue_id(id_dialogue):
     res = database.db_query(sql, array)
     print('last message'+str(res[0]))
     return res[0]
+
+def get_unread_messages_nbr(from_whom_id, to_whom_id):
+    array = [from_whom_id, to_whom_id]
+    sql = 'SELECT * FROM messages WHERE status="unread" AND from_whom_id=? AND to_whom_id=?'
+    res = database.db_query(sql, array)
+    n = len(res)
+    return n

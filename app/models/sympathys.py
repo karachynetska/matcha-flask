@@ -9,6 +9,14 @@ def like_user(id_sender, id_taker):
     res = database.db_insert(sql, array)
     return res
 
+def like_back_user(id_sender, id_taker):
+    array = [id_sender, id_taker]
+    sql = 'UPDATE requests SET status=1 WHERE id_sender=? AND id_taker=?'
+    res = database.db_insert(sql, array)
+    sql = 'INSERT INTO sympathys (id_user1, id_user2) VALUES (?,?)'
+    res = database.db_insert(sql, array)
+    return res
+
 def unlike_user(id1, id2):
     array = [id1, id2, id2, id1]
     sql = 'DELETE FROM sympathys WHERE id_user1=? AND id_user2=? OR id_user1=? AND id_user2=?'

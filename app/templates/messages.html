@@ -98,7 +98,10 @@
                                 <p>There are no messages here yet</p>
                                 {% endif %}
                             <small class="text-muted">a min ago</small>
-                            <div class="chat-alert">1</div>
+                            {% set unread_messages =  data.get_unread_messages_nbr(companion.id, session.get('id')) %}
+                            {% if unread_messages != 0 %}
+                                <div class="chat-alert">{{ unread_messages }}</div>
+                            {% endif %}
                         	</div>
                         </div>
                       </a>
@@ -130,7 +133,7 @@
                                 {% for message in messages %}
                                     {% if message.from_whom_id == session.get('id') %}
                                         <li class="right">
-                      			<img src="{{ data.user.avatar }}" alt="" class="profile-photo-sm pull-right" />
+                                            <a href="/profile/id{{ data.user.id }}"><img src="{{ data.user.avatar }}" alt="" class="profile-photo-sm pull-right" /></a>
                       			<div class="chat-item">
                               <div class="chat-item-header">
                               	<h5>{{ data.user.firstname + ' ' + data.user.lastname }}</h5>
@@ -151,7 +154,7 @@
 {#                      		</li>#}
                                     {% else %}
                                         <li class="left">
-                      			<img src="{{ companion.avatar }}" alt="" class="profile-photo-sm pull-left" />
+                                            <a href="/profile/id{{ companion.id }}"><img src="{{ companion.avatar }}" alt="" class="profile-photo-sm pull-left" /></a>
                       			<div class="chat-item">
                               <div class="chat-item-header">
                               	<h5>{{ companion.firstname + ' ' + companion.lastname }}</h5>

@@ -2404,3 +2404,7 @@ ul.contact li i{
     /*color: 3px solid #8dc63f;*/
 
 }
+
+.invisible {
+    display: none;
+}
