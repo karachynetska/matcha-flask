@@ -28,13 +28,15 @@ def profile(id_user=None):
         return redirect('/')
     if 'id' in session:
         user = user_model.get_user_by_id(session.get('id'))[0]
+        friends = sympathys.get_sympathys_list(session.get('id'))
 
     if id_user:
         user = user_model.get_user_by_id(id_user)[0]
+        friends = sympathys.get_sympathys_list(id_user)
     data = {
         'user': user,
-        'sympathys': sympathys
-
+        'sympathys': sympathys,
+        'friends': friends
     }
     return render_template('profile.html', data=data)
 
@@ -55,15 +57,36 @@ def about():
 
 # FRIENDS
 @app.route('/profile/friends')
-def friends():
+@app.route('/profile/friends/id<int:id_user>/')
+def friends(id_user=None):
+    if not 'id' in session and not id_user:
+        return redirect('/')
     if 'id' in session:
-        data = {
-            'user': user_model.get_user_by_id(session.get('id'))[0],
-            'sympathys': sympathys.get_sympathys_list(session.get('id')),
-            'get_user_by_id': user_model.get_user_by_id
-        }
-        return render_template('friends.html', data=data)
-    return redirect('/')
+        user = user_model.get_user_by_id(session.get('id'))[0]
+        friends = sympathys.get_sympathys_list(session.get('id'))
+
+    if id_user:
+        user = user_model.get_user_by_id(id_user)[0]
+        friends = sympathys.get_sympathys_list(id_user)
+    data = {
+        'user': user,
+        'sympathys': sympathys.get_sympathys_list(session.get('id')),
+        'friends': friends,
+        'get_user_by_id': user_model.get_user_by_id
+    }
+    return render_template('friends.html', data=data)
+
+    # if 'id' in session:
+    #     data = {
+    #         'user': user_model.get_user_by_id(session.get('id'))[0],
+    #         'sympathys': sympathys.get_sympathys_list(session.get('id')),
+    #         'get_user_by_id': user_model.get_user_by_id
+    #     }
+    #     return render_template('friends.html', data=data)
+    # return redirect('/')
+
+
+
 
 
 # ALBUM

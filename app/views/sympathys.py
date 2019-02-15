@@ -25,6 +25,17 @@ def ajax_add_friend():
                 'error': "Liked"
             })
 
+@app.route('/ajax_like_back_user')
+def ajax_like_back_user():
+    user_id = request.args.get('user_id')
+    if not sympathys.check_sympathy(session.get('id'), user_id):
+        sympathys.like_back_user(session.get('id'), user_id)
+        sympathys.add_users_to_sympathys(session.get('id'), user_id)
+        return json.dumps({
+            'ok': True,
+            'error': "Liked_back"
+        })
+
 @app.route('/ajax_unlike_user')
 def ajax_delete_friend():
     user_id = request.args.get('user_id')

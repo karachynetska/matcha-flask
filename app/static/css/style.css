@@ -93,7 +93,7 @@ h1.grey, h2.grey, h3.grey, h4.grey, h5.grey, h6.grey{
 
 .text-muted{color: #939598;}
 
-a{color: #27aae1;}
+a {color: #27aae1;}
 
 a:hover{color: #149AC9;}
 
@@ -2407,4 +2407,17 @@ ul.contact li i{
 
 .invisible {
     display: none;
+}
+
+.liked_user {
+    background: #fcf809;
+    color: #ff374f;
+}
+
+.unlike_user {
+    background: #ff374f
+}
+
+.like_user {
+    background: #27aae1;
 }
