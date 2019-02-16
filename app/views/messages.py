@@ -4,9 +4,17 @@ import html
 from flask_socketio import SocketIO, join_room, leave_room, emit, send
 from app.models import user as user_model
 from app.models import messages as messages_model
+from app.models import notifications as notifications_model
 
 id_user_to_sid = {}
 id_dialogue_to_sid = {}
+
+def check_online_status(user_id):
+    for key, value in id_user_to_sid.items():
+        if value == user_id:
+            return True
+        else:
+            return False
 
 @app.route('/profile/messages')
 def messages():
@@ -46,6 +54,8 @@ def send_message(data):
     data['last_message'] = messages_model.get_last_message_by_dialogue_id(dialogue)
     messages_model.send_message(dialogue, from_whom_id, to_whom_id, message)
     emit('add_message_to_template', data, room=dialogue)
+    if not check_online_status(to_whom_id):
+        notifications_model.add_notification(from_whom_id, to_whom_id, 'You have a new message from '+ user['firstname'] + ' ' + user['lastname'])
 
 @sio.on('disconnect', namespace='/messages')
 def disconnect():

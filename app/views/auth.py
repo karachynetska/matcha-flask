@@ -242,6 +242,8 @@ def login():
         if user[0]['password'] == password_hash:
             session['id'] = user[0]['id']
             session['login'] = user[0]['login']
+            session['firstname'] = user[0]['firstname']
+            session['lastname'] = user[0]['lastname']
             return json.dumps({
                 'ok': True
             })

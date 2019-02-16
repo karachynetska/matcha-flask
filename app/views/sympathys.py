@@ -9,6 +9,7 @@ import json
 import re
 import os
 from app.models import user as user_model
+from app.models import notifications as notification_model
 from app.models import sympathys
 # from app.models.friendships import check_friendship, add_friend
 from flask_mail import Message
@@ -17,9 +18,11 @@ from app.settings import APP_ROOT
 @app.route('/ajax_like_user')
 def ajax_add_friend():
     user_id = request.args.get('user_id')
+    user = user_model.get_user_by_id(session.get('id'))[0]
     if not sympathys.check_request(session.get('id'), user_id):
         res = sympathys.like_user(session.get('id'), user_id)
         if res:
+            notification_model.add_notification(session.get('id'), user_id, user['firstname'] + ' ' + user['lastname'] + ' likes you!')
             return json.dumps({
                 'ok': True,
                 'error': "Liked"
@@ -28,9 +31,11 @@ def ajax_add_friend():
 @app.route('/ajax_like_back_user')
 def ajax_like_back_user():
     user_id = request.args.get('user_id')
+    user = user_model.get_user_by_id(session.get['id'])[0]
     if not sympathys.check_sympathy(session.get('id'), user_id):
         sympathys.like_back_user(session.get('id'), user_id)
         sympathys.add_users_to_sympathys(session.get('id'), user_id)
+        notification_model.add_notification(session.get('id'), user_id, 'You like each other! Now you can chat with ' + user['firstname'] + ' ' + user['lastname'] + '.')
         return json.dumps({
             'ok': True,
             'error': "Liked_back"
@@ -39,9 +44,11 @@ def ajax_like_back_user():
 @app.route('/ajax_unlike_user')
 def ajax_delete_friend():
     user_id = request.args.get('user_id')
+    user = user_model.get_user_by_id(session.get('id'))
     if sympathys.check_sympathy(session.get('id'), user_id):
         res = sympathys.unlike_user(session.get('id'), user_id)
         if res:
+            notification_model.add_notification(session.get('id'), user_id, user['firstname'] + ' ' + user['lastname'] + ' does not like you anymore.')
             return json.dumps({
                 'ok': True,
                 'error': "Unlike"

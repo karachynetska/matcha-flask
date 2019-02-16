@@ -1,6 +1,5 @@
 from app import app, sio
 from flask import render_template, url_for, redirect, request, session
-from flask_socketio import SocketIO, send
 import html
 import hashlib
 import random
@@ -18,3 +17,6 @@ id_user_to_notification_sid = {}
 def connect():
     id_user_to_notification_sid[request.sid] = session.get('id')
 
+@sio.on('disconnect', namespace='/notifications')
+def disconnect():
+    id_user_to_notification_sid.pop(request.sid)

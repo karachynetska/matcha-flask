@@ -9,6 +9,7 @@ import json
 import re
 import os
 from app.models import user as user_model
+from app.models import notifications as notification_model
 from app.models import sympathys
 from app.models import likes
 # from app.models.friendships import check_friendship, add_friend
@@ -19,7 +20,7 @@ from app.settings import APP_ROOT
 def ajax_like():
     id_photo = request.form['id_photo']
     id_user = request.form['id_user']
-
+    user = user_model.get_user_by_id(id_user)[0]
     if not id_photo or not id_user:
         return json.dumps({
             'ok': False,
@@ -27,6 +28,7 @@ def ajax_like():
         })
     res = likes.like(id_photo, id_user)
     if res:
+        notification_model.add_notification(session.get('id'), id_user, user['firstname'] + ' ' + user['lastname'] + ' liked your photo')
         if res == 'was':
             return json.dumps({
                 'ok': True,

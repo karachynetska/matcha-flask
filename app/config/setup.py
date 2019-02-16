@@ -168,6 +168,20 @@ def create_messages():
     else:
         print("messages")
 
+def create_notifications():
+    res = database.db_query('''CREATE TABLE IF NOT EXISTS notifications (
+    id_notification INTEGER PRIMARY KEY AUTOINCREMENT,
+    from_whom_id INTEGER NOT NULL,
+    to_whom_id INTEGER NOT NULL,
+    notification TEXT,
+    date_of_creation DATETIME DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (from_whom_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (to_whom_id) REFERENCES users(id) ON DELETE CASCADE''')
+    if res:
+        print(res)
+    else:
+        print("notification")
+
 
 def create_geolocation():
     res = database.db_query('''CREATE TABLE IF NOT EXISTS geolocation(
