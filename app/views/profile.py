@@ -9,7 +9,7 @@ import json
 import re
 import os
 from app.models import user as user_model
-from app.models import notifications as notification_model
+from app.views import notifications as notification_view
 from app.models import sympathys
 # from app.models.friendships import check_friendship, add_friend
 from flask_mail import Message
@@ -34,7 +34,9 @@ def profile(id_user=None):
     if id_user:
         user = user_model.get_user_by_id(id_user)[0]
         friends = sympathys.get_sympathys_list(id_user)
-        notification_model.add_notification(session.get('id'), id_user, session.get['firstname'] + ' ' + session.get('lastname') + ' viewed your profile.')
+        print(session)
+        msg = str(session.get('firstname')) + ' ' + str(session.get('lastname')) + ' viewed your profile.'
+        notification_view.add_notification(id_user, msg,'view')
     data = {
         'user': user,
         'sympathys': sympathys,
@@ -70,8 +72,10 @@ def friends(id_user=None):
     if id_user:
         user = user_model.get_user_by_id(id_user)[0]
         friends = sympathys.get_sympathys_list(id_user)
-        notification_model.add_notification(session.get('id'), id_user, session.get['firstname'] + ' ' + session.get(
-            'lastname') + ' viewed your profile.')
+        print(session)
+        msg = str(session.get('firstname')) + ' ' + str(session.get(
+            'lastname')) + ' viewed your profile.'
+        notification_view.add_notification(id_user, msg, 'view')
     data = {
         'user': user,
         'sympathys': sympathys.get_sympathys_list(session.get('id')),

@@ -9,7 +9,7 @@ import json
 import re
 import os
 from app.models import user as user_model
-from app.models import notifications as notification_model
+from app.views import notifications as notification_view
 from app.models import sympathys
 from app.models import likes
 # from app.models.friendships import check_friendship, add_friend
@@ -28,7 +28,7 @@ def ajax_like():
         })
     res = likes.like(id_photo, id_user)
     if res:
-        notification_model.add_notification(session.get('id'), id_user, user['firstname'] + ' ' + user['lastname'] + ' liked your photo')
+        notification_view.add_notification(id_user, user['firstname'] + ' ' + user['lastname'] + ' liked your photo', 'like')
         if res == 'was':
             return json.dumps({
                 'ok': True,
@@ -49,7 +49,7 @@ def ajax_like():
 def ajax_dislike():
     id_photo = request.form['id_photo']
     id_user = request.form['id_user']
-
+    user = user_model.get_user_by_id(id_user)[0]
     if not id_photo or not id_user:
         return json.dumps({
             'ok': False,
@@ -57,6 +57,7 @@ def ajax_dislike():
         })
     res = likes.dislike(id_photo, id_user)
     if res:
+        notification_view.add_notification(id_user, user['firstname'] + ' ' + user['lastname'] + ' liked your photo', 'dislike')
         if res == 'was':
             return json.dumps({
                 'ok': True,

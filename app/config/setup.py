@@ -171,12 +171,11 @@ def create_messages():
 def create_notifications():
     res = database.db_query('''CREATE TABLE IF NOT EXISTS notifications (
     id_notification INTEGER PRIMARY KEY AUTOINCREMENT,
-    from_whom_id INTEGER NOT NULL,
     to_whom_id INTEGER NOT NULL,
     notification TEXT,
+    notif_type TEXT,
     date_of_creation DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (from_whom_id) REFERENCES users(id) ON DELETE CASCADE,
-    FOREIGN KEY (to_whom_id) REFERENCES users(id) ON DELETE CASCADE''')
+    FOREIGN KEY (to_whom_id) REFERENCES users(id) ON DELETE CASCADE)''')
     if res:
         print(res)
     else:
@@ -207,3 +206,4 @@ def initial_setup():
     create_comments()
     create_dialogues()
     create_messages()
+    create_notifications()

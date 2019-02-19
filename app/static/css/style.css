@@ -2159,6 +2159,8 @@ ul.contact li i{
 
   .post-contents .post-container .post-detail .reaction{position: relative;}
 
+  .notifications {display: none;}
+
 }
 
 
@@ -2420,4 +2422,59 @@ ul.contact li i{
 
 .like_user {
     background: #27aae1;
+}
+
+
+/*NOTIFICATIONS*/
+@keyframes notify {
+  from{left: -800px; opacity: 0;}
+  to{left: 0; opacity: 1}
+}
+
+.notification {
+    animation: notify 1s ease;
+    border-radius: 2px;
+    /*background-color: #6d6e71;*/
+    background: rgba(0,0,0, .7);
+    padding: 15px;
+    width: 270px;
+    box-shadow: 0px 2px 10px -3px #000;
+    position: absolute;
+    /*bottom: 0;*/
+    transition: box-shadow .5s ease, transform .5s ease;
+    margin: 33px 0px 0px 5px;
+    /*height: 34px;*/
+    z-index: 10000;
+}
+
+.notifications {
+    position: absolute;
+}
+
+.notifications li{
+    list-style-image: unset;
+    list-style-type: none;
+    padding-bottom: 85px;
+}
+
+.notification:active{
+    box-shadow: 0px 4px 10px 0px rgba(0,0,0,0.6);
+}
+
+.notification-img {
+    margin-right: 10px;
+}
+
+.notification h1 {
+    margin: 0;
+    font-size: 12pt;
+}
+.notification p {
+    margin: 0;
+    font-size: 9pt;
+}
+.notification h2{
+    color: #fff;
+    text-align: center;
+    margin: 50px;
 }

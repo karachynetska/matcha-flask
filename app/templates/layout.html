@@ -77,6 +77,22 @@
             </div><!-- /.container -->
         </nav>
     </header>
+    <ul class="notifications">
+        <li>
+    <div class="notification">
+        <img src="{{ data.user.avatar }}" alt="user" class="profile-photo-md pull-left notification-img" />
+        <h1>Notification with icon</h1>
+        <p>lorem ipsum dolor sit amet</p>
+    </div>
+            </li>
+{#        <li>#}
+{#    <div class="notification">#}
+{#        <img src="{{ data.user.avatar }}" alt="user" class="profile-photo-md pull-left notification-img" />#}
+{#        <h1>Notification with icon</h1>#}
+{#        <p>Blah</p>#}
+{#    </div>#}
+{#        </li>#}
+    </ul>
     <!--Header End-->
     <div class="container">
 
@@ -168,7 +184,27 @@
           </div><!--Timeline Menu for Small Screens End-->
 
         </div>
+{#      <div class="col-md-5">#}
+{#        <ul id="notifications">#}
+{#            <li>#}
+{#                <div class="notification">#}
+{#                    <div class="content">#}
+{#                        <div class="identifier">#}
+{#                            <img src="" class="profile-photo-md">#}
+{#                        </div>#}
+{#                        <div class="text"></div>#}
+{#                    </div>#}
+{#                </div>#}
+{#                <div class="number"><p>1</p></div>#}
+{#            </li>#}
+{#        </ul>#}
+{#    </div>#}
+
     {% block main %}{% endblock %}
+
+
+
+
     <!-- Footer
     ================================================= -->
     <footer id="footer">
@@ -235,6 +271,7 @@
         {% block scripts %}
             <script src="{{ url_for('static', filename = 'js/friendships.js') }}"></script>
             <script src="{{ url_for('static', filename = 'js/messages.js') }}"></script>
+            <script src="{{ url_for('static', filename = 'js/notifications.js') }}"></script>
         {% endblock %}
   </body>
 </html>

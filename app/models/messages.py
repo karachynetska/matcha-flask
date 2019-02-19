@@ -34,7 +34,6 @@ def get_dialogues_by_user_id(id_user):
     array = [id_user, id_user]
     sql = 'SELECT * FROM dialogues WHERE id_user1=? OR id_user2=?'
     res = database.db_query(sql, array)
-    print('dialogues'+str(res))
     return res
 
 
@@ -49,7 +48,6 @@ def get_last_message_by_dialogue_id(id_dialogue):
     array = [id_dialogue]
     sql = 'SELECT * FROM messages WHERE id_dialogue=? GROUP BY id_message ORDER BY id_message DESC LIMIT 1;'
     res = database.db_query(sql, array)
-    print('last message'+str(res[0]))
     return res[0]
 
 def get_unread_messages_nbr(from_whom_id, to_whom_id):
