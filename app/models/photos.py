@@ -12,3 +12,4 @@ def add_photo(id_user, photo):
     sql = 'INSERT INTO photos (id_user, photo) VALUES (?, ?)'
     res = database.db_insert(sql, array)
     return res
+

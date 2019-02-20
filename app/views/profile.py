@@ -34,9 +34,9 @@ def profile(id_user=None):
     if id_user:
         user = user_model.get_user_by_id(id_user)[0]
         friends = sympathys.get_sympathys_list(id_user)
-        print(session)
         msg = str(session.get('firstname')) + ' ' + str(session.get('lastname')) + ' viewed your profile.'
-        notification_view.add_notification(id_user, msg,'view')
+        image = user_model.get_avatar(session.get('id'))
+        notification_view.add_notification(id_user, msg,'view', image)
     data = {
         'user': user,
         'sympathys': sympathys,
@@ -72,10 +72,10 @@ def friends(id_user=None):
     if id_user:
         user = user_model.get_user_by_id(id_user)[0]
         friends = sympathys.get_sympathys_list(id_user)
-        print(session)
+        image = user_model.get_avatar(session.get('id'))
         msg = str(session.get('firstname')) + ' ' + str(session.get(
             'lastname')) + ' viewed your profile.'
-        notification_view.add_notification(id_user, msg, 'view')
+        notification_view.add_notification(id_user, msg, 'view', image)
     data = {
         'user': user,
         'sympathys': sympathys.get_sympathys_list(session.get('id')),

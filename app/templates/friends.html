@@ -4,6 +4,7 @@
     <!-- Stylesheets
     ================================================= -->
     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/jquery-ui.min.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/style.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/ionicons.min.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/font-awesome.min.css') }}" />
@@ -104,9 +105,12 @@
 {% block scripts %}
     <!-- Scripts
     ================================================= -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
     <script src="{{ url_for('static', filename = 'js/jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'js/jquery-ui.min.js') }}"></script>
     <script src="{{ url_for('static', filename = 'js/bootstrap.min.js') }}"></script>
     <script src="{{ url_for('static', filename = 'js/jquery.sticky-kit.min.js') }}"></script>
     <script src="{{ url_for('static', filename = 'js/jquery.scrollbar.min.js') }}"></script>
     <script src="{{ url_for('static', filename = 'js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'js/notifications.js') }}"></script>
 {% endblock %}

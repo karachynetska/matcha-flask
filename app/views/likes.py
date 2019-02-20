@@ -20,7 +20,6 @@ from app.settings import APP_ROOT
 def ajax_like():
     id_photo = request.form['id_photo']
     id_user = request.form['id_user']
-    user = user_model.get_user_by_id(id_user)[0]
     if not id_photo or not id_user:
         return json.dumps({
             'ok': False,
@@ -28,7 +27,10 @@ def ajax_like():
         })
     res = likes.like(id_photo, id_user)
     if res:
-        notification_view.add_notification(id_user, user['firstname'] + ' ' + user['lastname'] + ' liked your photo', 'like')
+        to_whom_id = user_model.get_user_id_by_photo_id(id_photo)
+        msg = str(session.get('firstname')) + ' ' + str(session.get('lastname')) + ' liked your photo.'
+        image = user_model.get_avatar(session.get('id'))
+        notification_view.add_notification(to_whom_id, msg, 'like', image)
         if res == 'was':
             return json.dumps({
                 'ok': True,
@@ -49,7 +51,7 @@ def ajax_like():
 def ajax_dislike():
     id_photo = request.form['id_photo']
     id_user = request.form['id_user']
-    user = user_model.get_user_by_id(id_user)[0]
+    print(id_user)
     if not id_photo or not id_user:
         return json.dumps({
             'ok': False,
@@ -57,7 +59,10 @@ def ajax_dislike():
         })
     res = likes.dislike(id_photo, id_user)
     if res:
-        notification_view.add_notification(id_user, user['firstname'] + ' ' + user['lastname'] + ' liked your photo', 'dislike')
+        to_whom_id = user_model.get_user_id_by_photo_id(id_photo)
+        msg = str(session.get('firstname')) + ' ' + str(session.get('lastname')) + ' disliked your photo.'
+        image = user_model.get_avatar(session.get('id'))
+        notification_view.add_notification(to_whom_id, msg, 'dislike', image)
         if res == 'was':
             return json.dumps({
                 'ok': True,

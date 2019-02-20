@@ -78,13 +78,14 @@
         </nav>
     </header>
     <ul class="notifications">
-        <li>
-    <div class="notification">
-        <img src="{{ data.user.avatar }}" alt="user" class="profile-photo-md pull-left notification-img" />
-        <h1>Notification with icon</h1>
-        <p>lorem ipsum dolor sit amet</p>
-    </div>
-            </li>
+{#        <li>#}
+{#    <div class="notification">#}
+{#        <img src="{{ data.user.avatar }}" alt="user" class="profile-photo-md pull-left notification-img" />#}
+{#        <h1>Notification with icon</h1>#}
+{#        <p>lorem ipsum dolor sit amet</p>#}
+{#    </div>#}
+{##}
+{#            </li>#}
 {#        <li>#}
 {#    <div class="notification">#}
 {#        <img src="{{ data.user.avatar }}" alt="user" class="profile-photo-md pull-left notification-img" />#}
@@ -271,7 +272,6 @@
         {% block scripts %}
             <script src="{{ url_for('static', filename = 'js/friendships.js') }}"></script>
             <script src="{{ url_for('static', filename = 'js/messages.js') }}"></script>
-            <script src="{{ url_for('static', filename = 'js/notifications.js') }}"></script>
         {% endblock %}
   </body>
 </html>

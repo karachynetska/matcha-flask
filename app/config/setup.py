@@ -174,6 +174,7 @@ def create_notifications():
     to_whom_id INTEGER NOT NULL,
     notification TEXT,
     notif_type TEXT,
+    image TEXT,
     date_of_creation DATETIME DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (to_whom_id) REFERENCES users(id) ON DELETE CASCADE)''')
     if res:

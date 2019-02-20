@@ -10,6 +10,7 @@ id_user_to_sid = {}
 id_dialogue_to_sid = {}
 
 def check_online_status(user_id):
+    print(id_user_to_sid)
     for key, value in id_user_to_sid.items():
         if value == user_id:
             return True
@@ -55,7 +56,7 @@ def send_message(data):
     messages_model.send_message(dialogue, from_whom_id, to_whom_id, message)
     emit('add_message_to_template', data, room=dialogue)
     if not check_online_status(to_whom_id):
-        notifications_view.add_notification(to_whom_id, 'You have a new message from '+ user['firstname'] + ' ' + user['lastname'], 'message')
+        notifications_view.add_notification(to_whom_id, 'You have a new message from '+ user['firstname'] + ' ' + user['lastname'], 'message', user['avatar'])
 
 @sio.on('disconnect', namespace='/messages')
 def disconnect():

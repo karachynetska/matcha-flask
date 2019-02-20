@@ -34,6 +34,12 @@ def get_user_by_id(id):
     res = database.db_query(sql, array)
     return res
 
+def get_user_id_by_photo_id(id_photo):
+    array = [id_photo]
+    sql = 'SELECT id_user FROM photos WHERE id_photo=?'
+    res = database.db_query(sql, array)
+    return res[0]['id_user']
+
 def create_token(id, login):
     date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     token = hashlib.md5((login + date).encode('utf-8')).hexdigest()
@@ -64,7 +70,7 @@ def get_avatar(id):
     array = [id]
     sql = 'SELECT avatar FROM users WHERE id=?'
     res = database.db_query(sql, array)
-    return res
+    return res[0]['avatar']
 
 def recovery_password(id, password):
     array = [password, id]

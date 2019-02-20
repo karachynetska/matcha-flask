@@ -18,11 +18,12 @@ from app.settings import APP_ROOT
 @app.route('/ajax_like_user')
 def ajax_add_friend():
     user_id = request.args.get('user_id')
-    user = user_model.get_user_by_id(session.get('id'))[0]
     if not sympathys.check_request(session.get('id'), user_id):
         res = sympathys.like_user(session.get('id'), user_id)
         if res:
-            notification_view.add_notification(user_id, user['firstname'] + ' ' + user['lastname'] + ' likes you!', 'like_user')
+            msg = str(session.get('firstname')) + ' ' + str(session.get('lastname')) + ' likes you!'
+            image = user_model.get_avatar(session.get('id'))
+            notification_view.add_notification(user_id, msg, image)
             return json.dumps({
                 'ok': True,
                 'error': "Liked"
@@ -31,11 +32,13 @@ def ajax_add_friend():
 @app.route('/ajax_like_back_user')
 def ajax_like_back_user():
     user_id = request.args.get('user_id')
-    user = user_model.get_user_by_id(session.get['id'])[0]
     if not sympathys.check_sympathy(session.get('id'), user_id):
         sympathys.like_back_user(session.get('id'), user_id)
         sympathys.add_users_to_sympathys(session.get('id'), user_id)
-        notification_view.add_notification(user_id, 'You like each other! Now you can chat with ' + user['firstname'] + ' ' + user['lastname'] + '.', 'like_back_user')
+
+        msg = 'You like each other! Now you can chat with ' + str(session.get('firstname')) + ' ' + str(session.get('lastname')) + '.'
+        image = user_model.get_avatar(session.get('id'))
+        notification_view.add_notification(user_id, msg, image)
         return json.dumps({
             'ok': True,
             'error': "Liked_back"
@@ -44,11 +47,12 @@ def ajax_like_back_user():
 @app.route('/ajax_unlike_user')
 def ajax_delete_friend():
     user_id = request.args.get('user_id')
-    user = user_model.get_user_by_id(session.get('id'))
     if sympathys.check_sympathy(session.get('id'), user_id):
         res = sympathys.unlike_user(session.get('id'), user_id)
         if res:
-            notification_view.add_notification(user_id, user['firstname'] + ' ' + user['lastname'] + ' does not like you anymore.', 'unlike_user')
+            msg = str(session.get('firstname')) + ' ' + str(session.get('lastname')) + ' does not like you anymore.'
+            image = user_model.get_avatar(session.get('id'))
+            notification_view.add_notification(user_id, msg, 'unlike_user', image)
             return json.dumps({
                 'ok': True,
                 'error': "Unlike"

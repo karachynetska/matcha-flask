@@ -11,6 +11,7 @@ import os
 from app.models import user as user_model
 from app.models import sympathys
 from app.models import likes, comments
+from app.views import notifications as notifications_view
 # from app.models.friendships import check_friendship, add_friend
 from flask_mail import Message
 from app.settings import APP_ROOT
@@ -23,14 +24,16 @@ def ajax_add_comment():
     text = html.escape(request.form['text'])
 
     if not id_photo or not id_user or not text:
-        print('not')
         return json.dumps({
             'ok': False,
             'error': "Something went wrong"
         })
     res = comments.add_comment(id_photo, id_user, text)
+    to_whom_id = user_model.get_user_id_by_photo_id(id_photo)
+    msg = 'You have a new comment from ' + str(session.get('firstname')) + ' ' + str(session.get('lastname')) + '.'
+    image = user_model.get_avatar(session.get('id'))
+    notifications_view.add_notification(to_whom_id, msg, 'comment', image)
     if not res:
-        print('faaalse')
         return json.dumps({
             'ok': False,
             'error': "The comment has not been added"

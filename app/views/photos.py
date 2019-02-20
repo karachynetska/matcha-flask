@@ -11,6 +11,7 @@ import os
 from app.models import user as user_model
 from app.models import photos as photos_model
 from app.models import likes, comments
+from app.views import notifications as notification_view
 from app.models import sympathys
 # from app.models.friendships import check_friendship, add_friend
 from flask_mail import Message
@@ -35,17 +36,23 @@ def photos(id_user=None):
     if id_user:
         user = user_model.get_user_by_id(id_user)[0]
         photos = photos_model.get_photos_by_id(id_user)
+        image = user_model.get_avatar(session.get('id'))
+        msg = str(session.get('firstname')) + ' ' + str(session.get(
+            'lastname')) + ' viewed your profile.'
+        notification_view.add_notification(id_user, msg, 'view', image)
 
     data = {
         'user': user,
         'photos': photos,
         'get_user_by_id': user_model.get_user_by_id,
+        'get_avatar': user_model.get_avatar,
         'likes': likes.photo_likes,
         'dislikes': likes.photo_dislikes,
         'check_like': likes.check_like,
         'check_dislike': likes.check_dislike,
         'get_comments_by_photo_id': comments.get_comments_by_photo_id
     }
+
     return render_template('photos.html', data=data)
 
 

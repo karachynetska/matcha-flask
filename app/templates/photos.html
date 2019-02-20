@@ -13,13 +13,14 @@
     <!-- Stylesheets
     ================================================= -->
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename = 'css/jquery-ui.min.css') }}" />
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/ionicons.min.css') }}" />
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}" />
-    <link href="{{ url_for('static', filename='css/emoji.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}" />
+        <link href="{{ url_for('static', filename='css/emoji.css') }}" rel="stylesheet">
 
     <!--Google Font-->
-    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
 	</head>
   <body>
 
@@ -168,13 +169,13 @@
                               {% endif %}
                               </div>
                                 <div class="post-comment">
-                                  <img src="{{ data.user.avatar }}" alt="" class="profile-photo-sm" />
+                                  <img src="{{ data.get_avatar(session.get('id')) }}" alt="" class="profile-photo-sm" />
                                   <div class="col-md-12 col-sm-12">
                                       <form method="post" onsubmit="add_comment(this)">
                                           <div class="col-md-9 col-sm-9">
                                               <input type="hidden" name="id_photo" id="id_photo" value="{{ photo.id_photo }}">
-                                              <input type="hidden" name="profile_photo" id="profile_photo" value="{{ data.user.avatar }}">
-                                              <input type="hidden" name="user_firstname" id="user_firstname" value="{{ data.user.firstname }}">
+                                              <input type="hidden" name="profile_photo" id="profile_photo" value="{{ data.get_avatar(session.get('id')) }}">
+                                              <input type="hidden" name="user_firstname" id="user_firstname" value="{{ session.get('firstname') }}">
                                               <input id="comment" type="text" class="form-control" placeholder="Post a comment" style="margin-top: 2px">
                                           </div>
 {#                                          <div class="col-md-3 col-sm-3">#}
@@ -274,7 +275,9 @@
 
     <!-- Scripts
     ================================================= -->
+   <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
     <script src="{{ url_for('static', filename='js/jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'js/jquery-ui.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/masonry.pkgd.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/jquery.sticky-kit.min.js') }}"></script>
@@ -283,5 +286,6 @@
     <script src="{{ url_for('static', filename='js/photos.js') }}"></script>
     <script src="{{ url_for('static', filename='js/likes.js') }}"></script>
     <script src="{{ url_for('static', filename='js/comments.js') }}"></script>
+  <script src="{{ url_for('static', filename = 'js/notifications.js') }}"></script>
   </body>
 </html>

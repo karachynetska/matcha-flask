@@ -1,5 +1,5 @@
 var socket = io.connect('http://' + document.domain + ':' + location.port);
-var socket_messages = io.connect('http://' + document.domain + ':' + location.port + '/messages');
+var socket_messages = io('http://' + document.domain + ':' + location.port + '/messages');
 
 var id_dialogue,
     from_whom_id,

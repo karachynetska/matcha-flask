@@ -1,9 +1,9 @@
 from app.config import database
 
-def add_notification(to_whom_id, notification, type):
+def add_notification(to_whom_id, notification, type, image):
     if not check_for_notification(to_whom_id, notification):
-        array = [to_whom_id, notification, type]
-        sql = 'INSERT INTO notifications (to_whom_id, notification, notif_type) VALUES (?,?,?)'
+        array = [to_whom_id, notification, type, image]
+        sql = 'INSERT INTO notifications (to_whom_id, notification, notif_type, image) VALUES (?,?,?,?)'
         res = database.db_insert(sql, array)
         return res
 
