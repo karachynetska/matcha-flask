@@ -116,7 +116,7 @@
 
 
                   <!--Chat Messages in Right-->
-                  <div class="tab-content scrollbar-wrapper wrapper scrollbar-outer">
+                <div class="tab-content scrollbar-wrapper wrapper scrollbar-outer">
                   {% if data.dialogues %}
                     {% for dialogue in data.dialogues %}
                         {% if session.get('id') == dialogue.id_user1 %}
@@ -124,9 +124,9 @@
                         {% elif session.get('id') == dialogue.id_user2 %}
                             {% set companion = data.get_user_by_id(dialogue.id_user1)[0] %}
                         {% endif %}
-                    <div class="tab-pane" id="contact-{{ dialogue.id_dialogue }}">
-                      <div class="chat-body">
-                      	<ul class="chat-message">
+                        <div class="tab-pane" id="contact-{{ dialogue.id_dialogue }}">
+                            <div class="chat-body">
+                                <ul class="chat-message">
                                 {% set messages = data.messages(dialogue.id_dialogue) %}
                                                 {% if not messages %}
                                 <p>There are no messages here yet</p>

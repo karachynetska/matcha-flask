@@ -6,19 +6,19 @@ $(document).ready(function () {
         if (data) {
             jQuery.each(data, function (i, val) {
                 $('.notifications').append('<li class="notification-li"><div class="notification"><img src="'+val['image']+'" alt="user" class="profile-photo-md pull-left notification-img"/><p>'+val['notification']+'</p></div></li>');
-                swipe();
+                // swipe();
             });
         }
+        swipe();
     });
-
 
     function swipe() {
     $('.notification-li').draggable({
     axis: "x"
-});
-$('.notification-li').bind("mouseup mouseleave", function() {
-    if ($(this).position().left >= 80) {
-        $(this).animate({
+    });
+    $('.notification-li').bind("mouseup mouseleave", function() {
+        if ($(this).position().left >= 80) {
+            $(this).animate({
                 left: 400,
                 opacity: 0
             }, 200,

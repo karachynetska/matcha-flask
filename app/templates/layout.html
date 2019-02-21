@@ -170,7 +170,7 @@
                 {% if session.get('id') != data.user.id %}
                     {% if data.sympathys.check_sympathy(session.get('id'), data.user.id) %}
                         <li><button id="unlike_user" class="btn-primary unlike_user">Unlike</button></li>
-                        <li><button id="start_dialog" class="btn-primary">Send message</button></li>
+                        <li><button id="start_dialogue" class="btn-primary" onclick="start_dialogue(session.get('id'), data.user.id)">Send message</button></li>
                     {% else %}
                         {% if data.sympathys.check_request(session.get('id'), data.user.id) == 'sender' %}
                             <li><button id="liked_user" class="btn-primary liked_user">Liked</button></li>
@@ -272,6 +272,7 @@
         {% block scripts %}
             <script src="{{ url_for('static', filename = 'js/friendships.js') }}"></script>
             <script src="{{ url_for('static', filename = 'js/messages.js') }}"></script>
+            <script src="{{ url_for('static', filename = 'js/create_dialogue.js') }}"></script>
         {% endblock %}
   </body>
 </html>

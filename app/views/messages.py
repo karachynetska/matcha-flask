@@ -17,6 +17,11 @@ def check_online_status(user_id):
         else:
             return False
 
+# @app.route('/ajax_start_dialogue', methods=['POST'])
+# def ajax_start_dialogue():
+#     id_user1 = request.form['id_user1']
+#     id_user2 = request.form['id_user2']
+
 @app.route('/profile/messages')
 def messages():
     if 'id' in session:
