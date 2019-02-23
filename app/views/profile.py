@@ -49,13 +49,30 @@ def profile(id_user=None):
 
 # ABOUT
 @app.route('/profile/about')
-def about():
+@app.route('/profile/about/id<int:id_user>')
+def about(id_user=None):
+    if not 'id' in session and not id_user:
+        return redirect('/')
     if 'id' in session:
-        data = {
-            'user': user_model.get_user_by_id(session.get('id'))[0]
-        }
-        return render_template('about.html', data=data)
-    return redirect('/')
+        user = user_model.get_user_by_id(session.get('id'))[0]
+        information = user_model.get_information(session.get('id'))
+        sex_pref = user_model.get_sex_pref(session.get('id'))
+        interests = user_model.get_interests_by_user_id(session.get('id'))
+
+    if id_user:
+        user = user_model.get_user_by_id(id_user)[0]
+        information = user_model.get_information(id_user)
+        sex_pref = user_model.get_sex_pref(id_user)
+        interests = user_model.get_interests_by_user_id(id_user)
+
+    data = {
+        'user': user,
+        'sympathys': sympathys,
+        'information': information,
+        'sex_pref': sex_pref,
+        'interests': interests
+    }
+    return render_template('about.html', data=data)
 
 
 
@@ -130,8 +147,7 @@ def ajax_edit_basic():
     country = request.form['country']
     gender = request.form['gender']
     sex_pref = request.form['sex_pref']
-
-    my_info = html.escape(request.form['my_info'])
+    information = html.escape(request.form['information'])
 
     id = session.get('id')
     user = user_model.get_user_by_id(id)[0]
@@ -167,8 +183,10 @@ def ajax_edit_basic():
             'fields': ["email"]
         })
     res = user_model.change_basic(id, firstname, lastname, email, city, country, gender, sex_pref)
+    if information:
+        res1 = user_model.change_information(information, id)
 
-    if not res:
+    if not res and not res1:
         return json.dumps({
             'ok': True,
             'error': "Changes successfully saved"

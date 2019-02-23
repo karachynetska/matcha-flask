@@ -115,9 +115,15 @@
               <div class="col-md-9">
                 <ul class="list-inline profile-menu">
                   <li><a href="timeline.html" class="active">Timeline</a></li>
-                  <li><a href="timeline-about.html">About</a></li>
-                  <li><a href="timeline-album.html">Album</a></li>
+                  {% if data.user.id != session.get('id') %}
+                  <li><a href="/profile/about/id{{ data.user.id }}">About</a></li>
+                  <li><a href="/profile/photos/id{{ data.user.id }}">Album</a></li>
+                  <li><a href="/profile/friends/id{{ data.user.id }}">Friends</a></li>
+                    {% else %}
+                    <li><a href="/profile/about">About</a></li>
+                  <li><a href="/profile/photos">Album</a></li>
                   <li><a href="/profile/friends">Friends</a></li>
+                    {% endif %}
                 </ul>
                 <ul class="follow-me list-inline actions">
                 {% set nbr_of_friends = data.friends|count %}
@@ -137,7 +143,7 @@
                 {% if session.get('id') != data.user.id %}
                     {% if data.sympathys.check_sympathy(session.get('id'), data.user.id) %}
                         <li><button id="unlike_user" class="btn-primary unlike_user" >Unlike</button></li>
-                        <li><button id="start_dialog" class="btn-primary">Send message</button></li>
+                        <li><button id="start_dialog" class="btn-primary" onclick="start_chat({{ session.get('id') }}, {{ data.user.id }})">Send message</button></li>
                     {% else %}
                         {% if data.sympathys.check_request(session.get('id'), data.user.id) == 'sender' %}
                             <li><button id="liked_user" class="btn-primary liked_user">Liked</button></li>
@@ -170,7 +176,7 @@
                 {% if session.get('id') != data.user.id %}
                     {% if data.sympathys.check_sympathy(session.get('id'), data.user.id) %}
                         <li><button id="unlike_user" class="btn-primary unlike_user">Unlike</button></li>
-                        <li><button id="start_dialogue" class="btn-primary" onclick="start_dialogue(session.get('id'), data.user.id)">Send message</button></li>
+                        <li><button id="start_dialogue" class="btn-primary" onclick="start_chat(session.get('id'), data.user.id)">Send message</button></li>
                     {% else %}
                         {% if data.sympathys.check_request(session.get('id'), data.user.id) == 'sender' %}
                             <li><button id="liked_user" class="btn-primary liked_user">Liked</button></li>
@@ -272,7 +278,6 @@
         {% block scripts %}
             <script src="{{ url_for('static', filename = 'js/friendships.js') }}"></script>
             <script src="{{ url_for('static', filename = 'js/messages.js') }}"></script>
-            <script src="{{ url_for('static', filename = 'js/create_dialogue.js') }}"></script>
         {% endblock %}
   </body>
 </html>

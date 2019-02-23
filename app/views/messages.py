@@ -1,6 +1,7 @@
 from app import app, sio
 from flask import render_template, url_for, redirect, request, session
 import html
+import json
 from flask_socketio import SocketIO, join_room, leave_room, emit, send
 from app.models import user as user_model
 from app.models import messages as messages_model
@@ -17,10 +18,28 @@ def check_online_status(user_id):
         else:
             return False
 
-# @app.route('/ajax_start_dialogue', methods=['POST'])
-# def ajax_start_dialogue():
-#     id_user1 = request.form['id_user1']
-#     id_user2 = request.form['id_user2']
+@app.route('/ajax_start_dialogue', methods=['POST'])
+def ajax_start_dialogue():
+    id_user1 = request.form['id_user1']
+    id_user2 = request.form['id_user2']
+
+    if not messages_model.check_dialogue(id_user1, id_user2):
+        dialogue_name = id_user1 + id_user2
+        if messages_model.create_dialogue(dialogue_name, id_user1, id_user2):
+            dialogue_id = messages_model.get_dialogue_id(id_user1, id_user2)
+            return json.dumps({
+                'ok': True,
+                'error': "The dialogue was created",
+                'id_dialogue': dialogue_id
+            })
+    else:
+        dialogue_id = messages_model.get_dialogue_id(id_user1, id_user2)
+        return json.dumps({
+            'ok': True,
+            'error': "The exists",
+            'id_dialogue': dialogue_id
+        })
+
 
 @app.route('/profile/messages')
 def messages():

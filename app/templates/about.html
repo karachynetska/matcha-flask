@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/style.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/ionicons.min.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/font-awesome.min.css') }}" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
 
     <!--Google Font-->
     <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
@@ -18,53 +19,53 @@
 {% block main %}
     <div class="container">
 
-      <!-- Timeline
-      ================================================= -->
-      <div class="timeline">
-        <div class="timeline-cover" style="background: url({{ data.user.background }})">
-
-          <!--Timeline Menu for Large Screens-->
-          <div class="timeline-nav-bar hidden-sm hidden-xs">
-            <div class="row">
-              <div class="col-md-3">
-                <div class="profile-info">
-                  <img src="{{ data.user.avatar }}" alt="" class="img-responsive profile-photo" />
-                  <h3>{{ data.user.firstname + ' ' + data.user.lastname }}</h3>
-                  <p class="text-muted">{{ data.user.login }}</p>
-                </div>
-              </div>
-              <div class="col-md-9">
-                <ul class="list-inline profile-menu">
-                  <li><a href="timeline.html">Timeline</a></li>
-                  <li><a href="timeline-about.html" class="active">About</a></li>
-                  <li><a href="timeline-album.html">Album</a></li>
-                  <li><a href="timeline-friends.html">Friends</a></li>
-                </ul>
-                <ul class="follow-me list-inline">
-                  <li>1,299 followers</li>
-                  <li><button class="btn-primary">Add Friend</button></li>
-                </ul>
-              </div>
-            </div>
-          </div><!--Timeline Menu for Large Screens End-->
-
-          <!--Timeline Menu for Small Screens-->
-          <div class="navbar-mobile hidden-lg hidden-md">
-            <div class="profile-info">
-              <img src="{{ data.user.avatar }}" alt="" class="img-responsive profile-photo" />
-              <h4>{{ data.user.firstname + ' ' + data.user.lastname }}</h4>
-              <p class="text-muted">{{ data.user.login }}</p>
-            </div>
-            <div class="mobile-menu">
-              <ul class="list-inline">
-                <li><a href="timline.html">Timeline</a></li>
-                <li><a href="timeline-about.html" class="active">About</a></li>
-                <li><a href="timeline-album.html">Album</a></li>
-                <li><a href="timeline-friends.html">Friends</a></li>
-              </ul>
-              <button class="btn-primary">Add Friend</button>
-            </div>
-          </div><!--Timeline Menu for Small Screens End-->
+{#      <!-- Timeline#}
+{#      ================================================= -->#}
+{#      <div class="timeline">#}
+{#        <div class="timeline-cover" style="background: url({{ data.user.background }})">#}
+{##}
+{#          <!--Timeline Menu for Large Screens-->#}
+{#          <div class="timeline-nav-bar hidden-sm hidden-xs">#}
+{#            <div class="row">#}
+{#              <div class="col-md-3">#}
+{#                <div class="profile-info">#}
+{#                  <img src="{{ data.user.avatar }}" alt="" class="img-responsive profile-photo" />#}
+{#                  <h3>{{ data.user.firstname + ' ' + data.user.lastname }}</h3>#}
+{#                  <p class="text-muted">{{ data.user.login }}</p>#}
+{#                </div>#}
+{#              </div>#}
+{#              <div class="col-md-9">#}
+{#                <ul class="list-inline profile-menu">#}
+{#                  <li><a href="timeline.html">Timeline</a></li>#}
+{#                  <li><a href="timeline-about.html" class="active">About</a></li>#}
+{#                  <li><a href="timeline-album.html">Album</a></li>#}
+{#                  <li><a href="timeline-friends.html">Friends</a></li>#}
+{#                </ul>#}
+{#                <ul class="follow-me list-inline">#}
+{#                  <li>1,299 followers</li>#}
+{#                  <li><button class="btn-primary">Add Friend</button></li>#}
+{#                </ul>#}
+{#              </div>#}
+{#            </div>#}
+{#          </div><!--Timeline Menu for Large Screens End-->#}
+{##}
+{#          <!--Timeline Menu for Small Screens-->#}
+{#          <div class="navbar-mobile hidden-lg hidden-md">#}
+{#            <div class="profile-info">#}
+{#              <img src="{{ data.user.avatar }}" alt="" class="img-responsive profile-photo" />#}
+{#              <h4>{{ data.user.firstname + ' ' + data.user.lastname }}</h4>#}
+{#              <p class="text-muted">{{ data.user.login }}</p>#}
+{#            </div>#}
+{#            <div class="mobile-menu">#}
+{#              <ul class="list-inline">#}
+{#                <li><a href="timline.html">Timeline</a></li>#}
+{#                <li><a href="timeline-about.html" class="active">About</a></li>#}
+{#                <li><a href="timeline-album.html">Album</a></li>#}
+{#                <li><a href="timeline-friends.html">Friends</a></li>#}
+{#              </ul>#}
+{#              <button class="btn-primary">Add Friend</button>#}
+{#            </div>#}
+{#          </div><!--Timeline Menu for Small Screens End-->#}
 
         </div>
         <div id="page-contents">
@@ -77,19 +78,25 @@
               <div class="about-profile">
                 <div class="about-content-block">
                   <h4 class="grey"><i class="ion-information-circled icon-in-title"></i>About me</h4>
-                  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur</p>
+                  <p>{{ data.information }}</p>
                 </div>
                  <div class="about-content-block">
                      <h4 class="grey"><i class="ion-information-circled icon-in-title"></i>Sexual preferences</h4>
+                     <p>{{ data.sex_pref }}</p>
                  </div>
                 <div class="about-content-block">
                   <h4 class="grey"><i class="ion-ios-heart icon-in-title"></i>Interests</h4>
                   <ul class="interests list-inline">
-                    <li><span class="int-icons" title="Bycycle riding"><i class="icon ion-android-bicycle"></i></span></li>
-                    <li><span class="int-icons" title="Photography"><i class="icon ion-ios-camera"></i></span></li>
-                    <li><span class="int-icons" title="Shopping"><i class="icon ion-android-cart"></i></span></li>
-                    <li><span class="int-icons" title="Traveling"><i class="icon ion-android-plane"></i></span></li>
-                    <li><span class="int-icons" title="Eating"><i class="icon ion-android-restaurant"></i></span></li>
+                      {% if data.interests %}
+                       {% for interest in data.interests %}
+                           <li><a id="tag" style="text-decoration: none"><i class="{{ interest.icon }}"></i> {{ interest.title }}</a>&nbsp;&nbsp;&nbsp;</li>
+{#                    <li><span class="int-icons" title="Bycycle riding"><i class="icon ion-android-bicycle"></i></span></li>#}
+{#                    <li><span class="int-icons" title="Photography"><i class="icon ion-ios-camera"></i></span></li>#}
+{#                    <li><span class="int-icons" title="Shopping"><i class="icon ion-android-cart"></i></span></li>#}
+{#                    <li><span class="int-icons" title="Traveling"><i class="icon ion-android-plane"></i></span></li>#}
+{#                    <li><span class="int-icons" title="Eating"><i class="icon ion-android-restaurant"></i></span></li>#}
+                      {% endfor %}
+                  {% endif %}
                   </ul>
                 </div>
                 <div class="about-content-block">

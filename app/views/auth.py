@@ -180,14 +180,17 @@ def register():
 
 # saving user to db and sending email
     user = user_model.save_user_to_db(login, password_hash, firstname, lastname, email, avatar, background, birth_date, city, country, token, gender, sex_pref)
+
     if user:
         message = Message('Matcha registration', sender='matcha@project.unit.ua', recipients=[email])
         message.body = "Thank tou for registration in Matcha. To activate your account please follow the link " + request.url_root + "activate?email=" + email + '&token=' + token
         message.html = "<p>Thank you for registration in Matcha. To activate your account please follow the <a href= " + request.url_root + "activate?email=" + email + '&token=' + token + ">link</a></p> "
         mail.send(message)
-    return json.dumps({
-            'ok': True,
-        })
+        id_user = user_model.email_exists(email)[0]['id']
+        if user_model.create_about_for_user(id_user):
+            return json.dumps({
+                'ok': True,
+            })
 
 
 @app.route('/activate')

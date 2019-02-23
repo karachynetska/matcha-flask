@@ -27,6 +27,12 @@ def save_user_to_db(login, password, firstname, lastname, email, avatar, backgro
     res = database.db_insert(sql, array)
     return res
 
+def create_about_for_user(id):
+    array = [id]
+    sql = 'INSERT INTO about(id_user) VALUES(?)'
+    res = database.db_insert(sql, array)
+    print(res)
+    return res
 
 def get_user_by_id(id):
     array = [id]
@@ -89,6 +95,12 @@ def get_sex_pref(id):
     sql = 'SELECT sex_pref FROM users WHERE id=?'
     res = database.db_query(sql, array)
     return res[0]['sex_pref']
+
+def get_information(id):
+    array = [id]
+    sql = 'SELECT information FROM about WHERE id_user=?'
+    res = database.db_query(sql, array)
+    return res[0]['information']
 
 #EDIT PROFILE
 def change_avatar(avatar, id):
@@ -153,7 +165,7 @@ def change_country(country, id):
 
 def change_my_info(my_info, id):
     array = [my_info, id]
-    sql = 'UPDATE users SET my_info=? WHERE id=?'
+    sql = 'UPDATE about SET information=? WHERE id=?'
     res = database.db_query(sql, array)
     return res
 
@@ -161,6 +173,14 @@ def change_basic(id, firstname, lastname, email, city, country, gender, sex_pref
     array = [firstname, lastname, email, city, country, gender, sex_pref, id]
     sql = 'UPDATE users SET firstname=?, lastname=?, email=?, city=?, country=?, gender=?, sex_pref=? WHERE id=?'
     res = database.db_query(sql, array)
+    print(res)
+    return res
+
+def change_information(information, user_id):
+    array = [information, user_id]
+    sql = 'UPDATE about SET information=? WHERE id_user=?'
+    res = database.db_query(sql, array)
+    print(res)
     return res
 
 def get_interest_by_title(title):
@@ -184,6 +204,7 @@ def get_interests_by_user_id(id):
     array = [id]
     sql = 'SELECT * FROM interests INNER JOIN interests_users iu on interests.id_interest=iu.id_interest WHERE iu.id_user=?'
     res = database.db_query(sql, array)
+    print(res)
     return res
 
 

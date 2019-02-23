@@ -48,8 +48,9 @@ $("#edit-basic").on('click', function (e) {
         sex_pref: $('#sex_pref').val(),
         city: $('#city').val(),
         country: $('#country').val(),
-        my_info: $('#my-info').val()
+        information: $('#my-info').val()
     };
+      console.log(data);
 
     $.ajax({
         type: "POST",
@@ -173,38 +174,4 @@ $("#delete_interest").on('click', function (e) {
 
     var tag = $("#tag").innerText;
     console.log(tag);
-});
-
-
-$('#start_dialog').on('click', function (e) {
-    e.preventDefault();
-    location.replace('/profile/messages');
-
-    $('.contact-list')
-
-
-    // <li onclick="init({{ dialogue.id_dialogue }}, {{ session.get('id') }}, {{ companion.id }})">
-    //                 <div class="id_dialogue" style="display: none">{{ dialogue.id_dialogue }}</div>
-    //                 <div class="from_whom_id" style="display: none">{{ session.get('id') }}</div>
-    //                 <div class="to_whom_id" style="display: none">{{ companion.id }}</div>
-    //                   <a href="#contact-{{ dialogue.id_dialogue }}" data-toggle="tab">
-    //                     <div class="contact" id="{{ dialogue.id_dialogue }}">
-    //                     	<img src="{{ companion.avatar }}" alt="" class="profile-photo-sm pull-left"/>
-    //                     	<div class="msg-preview">
-    //                     		<h6>{{ companion.firstname + ' ' + companion.lastname }}</h6>
-    //                             {% set last_message =  data.get_last_message_by_dialogue_id(dialogue.id_dialogue) %}
-    //                             {% if last_message %}
-    //                     		<p class="text-muted" id="last_message">{{ last_message['message'] }}</p>
-    //                             {% else %}
-    //                             <p>There are no messages here yet</p>
-    //                             {% endif %}
-    //                         <small class="text-muted">a min ago</small>
-    //                         {% set unread_messages =  data.get_unread_messages_nbr(companion.id, session.get('id')) %}
-    //                         {% if unread_messages != 0 %}
-    //                             <div class="chat-alert">{{ unread_messages }}</div>
-    //                         {% endif %}
-    //                     	</div>
-    //                     </div>
-    //                   </a>
-    //                 </li>
 });

@@ -83,7 +83,7 @@
                             {% endif %}
                   <!-- Contact List in Left-->
 
-                    <li onclick="init({{ dialogue.id_dialogue }}, {{ session.get('id') }}, {{ companion.id }})">
+                    <li id="{{ dialogue.id_dialogue }}" onclick="init({{ dialogue.id_dialogue }}, {{ session.get('id') }}, {{ companion.id }})">
                     <div class="id_dialogue" style="display: none">{{ dialogue.id_dialogue }}</div>
                     <div class="from_whom_id" style="display: none">{{ session.get('id') }}</div>
                     <div class="to_whom_id" style="display: none">{{ companion.id }}</div>
@@ -94,7 +94,7 @@
                         		<h6>{{ companion.firstname + ' ' + companion.lastname }}</h6>
                                 {% set last_message =  data.get_last_message_by_dialogue_id(dialogue.id_dialogue) %}
                                 {% if last_message %}
-                        		<p class="text-muted" id="last_message">{{ last_message['message'] }}</p>
+                        		<p class="text-muted" id="last_message">{{ last_message }}</p>
                                 {% else %}
                                 <p>There are no messages here yet</p>
                                 {% endif %}
@@ -315,6 +315,7 @@
     <script src="{{ url_for('static', filename = 'js/script.js') }}"></script>
     <script src="{{ url_for('static', filename = 'js/messages.js') }}"></script>
     <script src="{{ url_for('static', filename = 'js/notifications.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'js/create_dialogue.js') }}"></script>
 
 
   </body>
