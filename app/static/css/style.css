@@ -1834,12 +1834,28 @@ ul.edit-menu li.active a{
   border-radius: 40px;
 }
 
+ul.interests li {
+    background: #8dc63f;
+    color: #fff;
+    padding: 5px 15px;
+    margin-right: 10px;
+    border-radius: 40px;
+}
+
 .edit-block ul.interests li a{
   color: #fff;
 }
 
+ul.interests li a {
+    color: #fff;
+}
+
 .edit-block ul.interests li a i.icon{
   font-size: 18px;
+}
+
+.ul.interests li a i.icon {
+    font-size: 18px;
 }
 
 .edit-block .btn-primary{

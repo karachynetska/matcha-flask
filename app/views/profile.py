@@ -338,14 +338,37 @@ def ajax_edit_interests():
             icon = key
     res = user_model.add_interest(interest, icon, session.get('id'))
     if res:
+        if res == 'exists':
+            return json.dumps({
+                'ok': False,
+                'error': "Interest exists",
+            })
+        else:
+            id_interest = user_model.get_interest_by_title(interest)[0]['id_interest']
+            return json.dumps({
+                'ok': True,
+                'error': "Interest successfully added",
+                'interest': interest,
+                'icon': icon,
+                'id_interest': id_interest
+            })
+
+
+@app.route('/ajax_delete_interest', methods=['POST'])
+def ajax_delete_interest():
+    id_interest = request.form['id_interest']
+    id_user = session.get('id')
+
+    if user_model.delete_interest(id_interest, id_user):
         return json.dumps({
             'ok': True,
-            'error': "Interest successfully added"
+            'error': "Interest deleted"
         })
-
-#
-# @app.route('/ajax_delete_interest', methods=['POST'])
-# def ajax_delete_interest():
+    else:
+        return json.dumps({
+            'ok': False,
+            'error': " Something went wrong. Interest not deleted."
+        })
 
 
 

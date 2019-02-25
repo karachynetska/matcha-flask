@@ -189,22 +189,37 @@ def get_interest_by_title(title):
     res = database.db_query(sql, array)
     return res
 
+def check_interest(id_interest, id_user):
+    array = [id_interest, id_user]
+    sql = 'SELECT * FROM interests_users WHERE id_interest=? AND id_user=?'
+    res = database.db_query(sql, array)
+    return res
+
 def add_interest(interest, icon, id_user):
     array1 = [interest, icon]
     sql = 'INSERT INTO interests (title, icon) VALUES (?, ?)'
     database.db_insert(sql, array1)
 
     id_interest = get_interest_by_title(interest)[0]['id_interest']
-    array2 = [id_interest, id_user]
-    sql = 'INSERT INTO interests_users (id_interest, id_user) VALUES (?, ?)'
-    res = database.db_insert(sql, array2)
-    return res
+    if not check_interest(id_interest, id_user):
+        array2 = [id_interest, id_user]
+        sql = 'INSERT INTO interests_users (id_interest, id_user) VALUES (?, ?)'
+        res = database.db_insert(sql, array2)
+        return res
+    else:
+        return 'exists'
 
 def get_interests_by_user_id(id):
     array = [id]
     sql = 'SELECT * FROM interests INNER JOIN interests_users iu on interests.id_interest=iu.id_interest WHERE iu.id_user=?'
     res = database.db_query(sql, array)
-    print(res)
     return res
 
 
+def delete_interest(id_interest, id_user):
+    array = [id_interest, id_user]
+    sql = 'DELETE FROM interests_users WHERE id_interest=? AND id_user=?'
+    res = database.db_query(sql, array)
+    if not res:
+        return True
+    return res

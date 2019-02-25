@@ -151,27 +151,40 @@ $("#add_interest").on('click', function (e) {
     }).done(function (data) {
         var res = JSON.parse(data);
         if (res.ok == false) {
-            $("#message-interests").text("");
+            $('#message-interests').text("");
+            $('#message-interests').addClass('error_text');
             $('#message-interests').text(res.error);
-            if (res.fields) {
-                res.fields.forEach(function (item) {
-                    $("input[id=" + item + "]").addClass("error");
-                });
-            }
+            setTimeout(function () {
+                $('#message-interests').text('');
+            }, 2000);
         } else {
-            $("#message-interests").text("");
-            $("#message-interestst").text(res.error);
-            $("#message-interests").addClass("success");
+            $('.interests').append('<li id="'+ res.id_interest +'"><a class="tag" style="text-decoration:none"><i class="'+ res.icon +'"></i> '+res.interest+'</a>&nbsp;&nbsp;&nbsp;<a style="cursor: pointer"><i class="ion-android-close"></i></a></li>');
         }
     });
 });
 
 
-$("#delete_interest").on('click', function (e) {
-    e.preventDefault();
+function delete_interest(id_interest) {
+    var data = {
+        'id_interest': id_interest
+    };
 
-    console.log('Blah');
+    $.ajax({
+        type: "POST",
+        data: data,
+        url: '/ajax_delete_interest'
+    }).done(function (data) {
+        var res = JSON.parse(data);
+        if (res.ok == true) {
+            $('#'+id_interest).remove();
+        } else {
+            $('#message-interests').text('');
+            $('#message-interests').addClass('error_text');
+            $('#message-interests').text(res.error);
+            setTimeout(function () {
+                $('#message-interests').text('');
+            }, 2000);
+        }
+    });
+}
 
-    var tag = $("#tag").innerText;
-    console.log(tag);
-});
