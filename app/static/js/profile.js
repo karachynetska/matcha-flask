@@ -159,6 +159,7 @@ $("#add_interest").on('click', function (e) {
             }, 2000);
         } else {
             $('.interests').append('<li id="'+ res.id_interest +'"><a class="tag" style="text-decoration:none"><i class="'+ res.icon +'"></i> '+res.interest+'</a>&nbsp;&nbsp;&nbsp;<a style="cursor: pointer"><i class="ion-android-close"></i></a></li>');
+            $('#interest').val("");
         }
     });
 });

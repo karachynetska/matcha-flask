@@ -47,3 +47,25 @@ $('#photo').on('change', function (e) {
     }
 });
 
+
+function delete_photo(id_photo) {
+    var data = {
+        'id_photo': id_photo
+    };
+
+    $.ajax({
+        type: 'POST',
+        data: data,
+        url: '/ajax_delete_photo'
+    }).done(function (data) {
+        console.log(data);
+        var res = JSON.parse(data);
+        if (res.ok == true) {
+            $('#'+id_photo).remove();
+            $('.modal-backdrop.in').css({'display': 'none'});
+            $('.modal-'+id_photo).css({'display': 'none'});
+        } else {
+            console.log('Photo not deleted');
+        }
+    });
+}

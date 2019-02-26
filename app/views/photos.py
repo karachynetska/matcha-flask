@@ -78,3 +78,19 @@ def ajax_add_photo():
         'ok': True,
         'error': "Photo successfully uploaded"
     })
+
+@app.route('/ajax_delete_photo', methods=['POST'])
+def ajax_delete_photo():
+    id_photo = request.form['id_photo']
+    print(id_photo)
+
+    if not id_photo:
+        return json.dumps({
+            'ok': False,
+            'error': 'Something wrong'
+        })
+    photos_model.delete_photo_by_id(id_photo)
+    return json.dumps({
+        'ok': True,
+        'error': 'Photo deleted'
+    })

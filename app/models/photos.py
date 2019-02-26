@@ -13,3 +13,8 @@ def add_photo(id_user, photo):
     res = database.db_insert(sql, array)
     return res
 
+def delete_photo_by_id(id_photo):
+    array = [id_photo]
+    sql = 'DELETE FROM photos WHERE id_photo=?'
+    res = database.db_query(sql, array)
+    return res
