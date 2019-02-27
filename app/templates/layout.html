@@ -143,7 +143,7 @@
                 {% if session.get('id') != data.user.id %}
                     {% if data.sympathys.check_sympathy(session.get('id'), data.user.id) %}
                         <li><button id="unlike_user" class="btn-primary unlike_user" >Unlike</button></li>
-                        <li><button id="start_dialog" class="btn-primary" onclick="start_chat({{ session.get('id') }}, {{ data.user.id }})">Send message</button></li>
+                        <a href="/profile/messages/dialogue_with_{{ data.user.id }}"><li><button id="start_dialog" class="btn-primary">Send message</button></li></a>
                     {% else %}
                         {% if data.sympathys.check_request(session.get('id'), data.user.id) == 'sender' %}
                             <li><button id="liked_user" class="btn-primary liked_user">Liked</button></li>
@@ -176,7 +176,7 @@
                 {% if session.get('id') != data.user.id %}
                     {% if data.sympathys.check_sympathy(session.get('id'), data.user.id) %}
                         <li><button id="unlike_user" class="btn-primary unlike_user">Unlike</button></li>
-                        <li><button id="start_dialogue" class="btn-primary" onclick="start_chat(session.get('id'), data.user.id)">Send message</button></li>
+                        <a href="/profile/messages/dialogue_with_{{ data.user.id }}"><li><button id="start_dialogue" class="btn-primary">Send message</button></li></a>
                     {% else %}
                         {% if data.sympathys.check_request(session.get('id'), data.user.id) == 'sender' %}
                             <li><button id="liked_user" class="btn-primary liked_user">Liked</button></li>

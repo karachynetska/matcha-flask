@@ -61,6 +61,15 @@ socket_messages.on('add_message_to_template', function (data) {
    $("#"+data['dialogue']).find('#last_message').text(last_message['message']);
 });
 
+var dialogue_id = $('#dialogue_id').text();
+if (dialogue_id) {
+    console.log('if');
+    $('#'+dialogue_id).addClass('active');
+    $('#'+dialogue_id).find('a').attr('area-expanded', 'true');
+    $('#contact-'+dialogue_id).addClass('active');
+}
+
+
 
 
 

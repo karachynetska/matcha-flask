@@ -9,8 +9,8 @@ def create_dialogue(dialogue_name, id_user1, id_user2):
     return res
 
 def check_dialogue(id_user1, id_user2):
-    array = [id_user1, id_user2]
-    sql = 'SELECT * FROM dialogues WHERE id_user1=? AND id_user2=?'
+    array = [id_user1, id_user2, id_user2, id_user1]
+    sql = 'SELECT * FROM dialogues WHERE id_user1=? AND id_user2=? OR id_user1=? AND id_user2=?'
     res = database.db_query(sql, array)
     return res
 
@@ -60,6 +60,7 @@ def get_last_message_by_dialogue_id(id_dialogue):
     array = [id_dialogue]
     sql = 'SELECT * FROM messages WHERE id_dialogue=? GROUP BY id_message ORDER BY id_message DESC LIMIT 1;'
     res = database.db_query(sql, array)
+    print(res)
     if res:
         return res[0]['message']
     else:
