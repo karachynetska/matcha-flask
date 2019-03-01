@@ -1,110 +1,78 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="description" content="This is social network html5 template available in themeforest......" />
-		<meta name="keywords" content="Social Network, Social Media, Make Friends, Newsfeed, Profile Page" />
-		<meta name="robots" content="index, follow" />
-        <title>{% block title %}{% endblock %}</title>
-        {% block link %}{% endblock %}
-
-    <!-- Stylesheets
-    ================================================= -->
-{#        href="{{ url_for('static', filename='css/bootstrap.min.css') }}"#}
-
-
-    <!--Google Font-->
-{#    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">#}
-
-    <!--Favicon-->
-{#    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/fav.png') }}"/>#}
-    </head>
-    <body>
-
-    <!-- Header
-    ================================================= -->
-    <header id="header">
-        <nav class="navbar navbar-default navbar-fixed-top menu">
-            <div class="container">
-
-          <!-- Brand and toggle get grouped for better mobile display -->
-                <div class="navbar-header">
-                    <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                        <span class="sr-only">Toggle navigation</span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                        <span class="icon-bar"></span>
-                    </button>
-                    <a class="navbar-brand" href="/profile"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo" /></a>
-                </div>
-
-          <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                    <ul class="nav navbar-nav navbar-right main-menu">
-                        <li class="dropdown">
-                            <a href="/profile/friends">My friends</a>
-                        </li>
-                        <li class="dropdown">
-                            <a href="/profile/messages">My messages</a>
-                        </li>
-                        <li class="dropdown"><a href="/newsfeed">Newsfeed</a>
-                        <li class="dropdown">
-                            <a href="/profile/photos">My photos</a>
-                        </li>
-                        <li class="dropdown" >
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Edit <span><img src="{{ url_for('static', filename='images/down-arrow.png') }}" alt="" /></span></a>
-                            <ul class="dropdown-menu page-list">
-                                <li><a href="/profile/edit/basic">Basic information</a></li>
-                                <li><a href="/profile/edit/edu-work">Education and work</a></li>
-                                <li><a href="/profile/edit/interests">My interests</a></li>
-                                <li><a href="/profile/edit/settings">Account settings</a></li>
-                                <li><a href="/profile/edit/avatar">Avatar</a></li>
-                                <li><a href="/profile/edit/password">Password</a></li>
-                            </ul>
-                        </li>
-                        {% if 'id' in session %}
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="This is social network html5 template available in themeforest......" />
+    <meta name="keywords" content="Social Network, Social Media, Make Friends, Newsfeed, Profile Page" />
+    <meta name="robots" content="index, follow" />
+    <title>{% block title %}{% endblock %}</title>
+    {% block link %}{% endblock %}
+</head>
+<body>
+<!-- Header
+================================================= -->
+<header id="header">
+    <nav class="navbar navbar-default navbar-fixed-top menu">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/profile"><img src="{{ url_for('static', filename='images/logo.png') }}" alt="logo" /></a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right main-menu">
+                    <li class="dropdown">
+                        <a href="/profile/friends">My friends</a>
+                    </li>
+                    <li class="dropdown">
+                        <a href="/profile/messages">My messages</a>
+                    </li>
+                    <li class="dropdown"><a href="/newsfeed">Newsfeed</a></li>
+                    <li class="dropdown">
+                        <a href="/profile/photos">My photos</a>
+                    </li>
+                    <li class="dropdown" >
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Edit <span><img src="{{ url_for('static', filename='images/down-arrow.png') }}" alt="" /></span></a>
+                        <ul class="dropdown-menu page-list">
+                            <li><a href="/profile/edit/basic">Basic information</a></li>
+                            <li><a href="/profile/edit/edu-work">Education and work</a></li>
+                            <li><a href="/profile/edit/interests">My interests</a></li>
+                            <li><a href="/profile/edit/settings">Account settings</a></li>
+                            <li><a href="/profile/edit/avatar">Avatar</a></li>
+                            <li><a href="/profile/edit/password">Password</a></li>
+                        </ul>
+                    </li>
+                    {% if 'id' in session %}
                         <li><a id="logout" href="/logout">Logout</a></li>
-                        {% endif %}
-                    </ul>
-                    <form class="navbar-form navbar-right hidden-sm">
-                        <div class="form-group">
-                            <i class="icon ion-android-search"></i>
-                            <input type="text" class="form-control" placeholder="Search friends, photos, videos">
-                        </div>
-                    </form>
-                </div>  <!-- /.navbar-collapse -->
-            </div><!-- /.container -->
-        </nav>
-    </header>
-    <ul class="notifications">
-{#        <li>#}
-{#    <div class="notification">#}
-{#        <img src="{{ data.user.avatar }}" alt="user" class="profile-photo-md pull-left notification-img" />#}
-{#        <h1>Notification with icon</h1>#}
-{#        <p>lorem ipsum dolor sit amet</p>#}
-{#    </div>#}
-{##}
-{#            </li>#}
-{#        <li>#}
-{#    <div class="notification">#}
-{#        <img src="{{ data.user.avatar }}" alt="user" class="profile-photo-md pull-left notification-img" />#}
-{#        <h1>Notification with icon</h1>#}
-{#        <p>Blah</p>#}
-{#    </div>#}
-{#        </li>#}
-    </ul>
-    <!--Header End-->
-    <div class="container">
-
-      <!-- Timeline
-      ================================================= -->
-      <div class="timeline">
+                    {% endif %}
+                </ul>
+                <form class="navbar-form navbar-right hidden-sm">
+                    <div class="form-group">
+                        <i class="icon ion-android-search"></i>
+                        <input type="text" class="form-control" placeholder="Search friends, photos, videos">
+                    </div>
+                </form>
+            </div>  <!-- /.navbar-collapse -->
+        </div><!-- /.container -->
+    </nav>
+</header>
+<ul class="notifications"></ul>
+<!--Header End-->
+<div class="container">
+    <!-- Timeline
+    ================================================= -->
+    <div class="timeline">
         <div class="timeline-cover" style="background: url({{ data.user.background }})">
-
-          <!--Timeline Menu for Large Screens-->
-          <div class="timeline-nav-bar hidden-sm hidden-xs">
-            <div class="row">
+            <!--Timeline Menu for Large Screens-->
+            <div class="timeline-nav-bar hidden-sm hidden-xs">
+                <div class="row">
               <div class="col-md-3">
                 <div class="profile-info">
                   <a href="/profile"><img src="{{ data.user.avatar }}" alt="" class="img-responsive profile-photo" /></a>
@@ -117,12 +85,12 @@
                   <li><a href="timeline.html" class="active">Timeline</a></li>
                   {% if data.user.id != session.get('id') %}
                   <li><a href="/profile/about/id{{ data.user.id }}">About</a></li>
-                  <li><a href="/profile/photos/id{{ data.user.id }}">Album</a></li>
                   <li><a href="/profile/friends/id{{ data.user.id }}">Friends</a></li>
+                  <li><a href="/profile/photos/id{{ data.user.id }}">Album</a></li>
                     {% else %}
                     <li><a href="/profile/about">About</a></li>
-                  <li><a href="/profile/photos">Album</a></li>
                   <li><a href="/profile/friends">Friends</a></li>
+                      <li><a href="/profile/photos">Album</a></li>
                     {% endif %}
                 </ul>
                 <ul class="follow-me list-inline actions">
@@ -157,127 +125,105 @@
                 </ul>
               </div>
             </div>
-          </div><!--Timeline Menu for Large Screens End-->
+            </div><!--Timeline Menu for Large Screens End-->
 
-          <!--Timeline Menu for Small Screens-->
-          <div class="navbar-mobile hidden-lg hidden-md">
-            <div class="profile-info">
-              <a href="/profile"><img src="{{ data.user.avatar }}" alt="" class="img-responsive profile-photo" /></a>
-              <h4>{{ data.user.firstname + ' ' + data.user.lastname }}</h4>
-              <p class="text-muted">{{ data.user.login }}</p>
-            </div>
-            <div class="mobile-menu">
-              <ul class="list-inline actions">
-                <li><a href="timeline.html" class="active">Timeline</a></li>
-                <li><a href="timeline-about.html">About</a></li>
-                <li><a href="timeline-album.html">Album</a></li>
-                <li><a href="timeline-friends.html">Friends</a></li>
-              </ul>
-                {% if session.get('id') != data.user.id %}
-                    {% if data.sympathys.check_sympathy(session.get('id'), data.user.id) %}
-                        <li><button id="unlike_user" class="btn-primary unlike_user">Unlike</button></li>
-                        <a href="/profile/messages/dialogue_with_{{ data.user.id }}"><li><button id="start_dialogue" class="btn-primary">Send message</button></li></a>
-                    {% else %}
-                        {% if data.sympathys.check_request(session.get('id'), data.user.id) == 'sender' %}
-                            <li><button id="liked_user" class="btn-primary liked_user">Liked</button></li>
+            <!--Timeline Menu for Small Screens-->
+            <div class="navbar-mobile hidden-lg hidden-md">
+                <div class="profile-info">
+                    <a href="/profile"><img src="{{ data.user.avatar }}" alt="" class="img-responsive profile-photo" /></a>
+                    <h4>{{ data.user.firstname + ' ' + data.user.lastname }}</h4>
+                    <p class="text-muted">{{ data.user.login }}</p>
+                </div>
+                <div class="mobile-menu">
+                    <ul class="list-inline actions">
+                        <li><a href="timeline.html" class="active">Timeline</a></li>
+                        <li><a href="timeline-about.html">About</a></li>
+                        <li><a href="timeline-album.html">Album</a></li>
+                        <li><a href="timeline-friends.html">Friends</a></li>
+                    </ul>
+                    {% if session.get('id') != data.user.id %}
+                        {% if data.sympathys.check_sympathy(session.get('id'), data.user.id) %}
+                            <li><button id="unlike_user" class="btn-primary unlike_user">Unlike</button></li>
+                            <a href="/profile/messages/dialogue_with_{{ data.user.id }}"><li><button id="start_dialogue" class="btn-primary">Send message</button></li></a>
+                        {% else %}
+                            {% if data.sympathys.check_request(session.get('id'), data.user.id) == 'sender' %}
+                                <li><button id="liked_user" class="btn-primary liked_user">Liked</button></li>
                             {% elif data.sympathys.check_request(session.get('id'), data.user.id) == 'taker' %}
-                            <li><button id="like_back" class="btn-primary">Like back</button></li>
+                                <li><button id="like_back" class="btn-primary">Like back</button></li>
                             {% else %}
-                            <li><button id="like_user" class="btn-primary like_user">Like</button></li>
+                                <li><button id="like_user" class="btn-primary like_user">Like</button></li>
                             {% endif %}
+                        {% endif %}
                     {% endif %}
-                {% endif %}
-            </div>
-          </div><!--Timeline Menu for Small Screens End-->
-
+                </div>
+            </div><!--Timeline Menu for Small Screens End-->
         </div>
-{#      <div class="col-md-5">#}
-{#        <ul id="notifications">#}
-{#            <li>#}
-{#                <div class="notification">#}
-{#                    <div class="content">#}
-{#                        <div class="identifier">#}
-{#                            <img src="" class="profile-photo-md">#}
-{#                        </div>#}
-{#                        <div class="text"></div>#}
-{#                    </div>#}
-{#                </div>#}
-{#                <div class="number"><p>1</p></div>#}
-{#            </li>#}
-{#        </ul>#}
-{#    </div>#}
-
-    {% block main %}{% endblock %}
-
-
-
-
-    <!-- Footer
-    ================================================= -->
-    <footer id="footer">
-      <div class="container">
-      	<div class="row">
-          <div class="footer-wrapper">
-            <div class="col-md-3 col-sm-3">
-              <a href=""><img src="{{ url_for('static', filename='images/logo-black.png') }}" alt="" class="footer-logo" /></a>
-              <ul class="list-inline social-icons">
-              	<li><a href="#"><i class="icon ion-social-facebook"></i></a></li>
-              	<li><a href="#"><i class="icon ion-social-twitter"></i></a></li>
-              	<li><a href="#"><i class="icon ion-social-googleplus"></i></a></li>
-              	<li><a href="#"><i class="icon ion-social-pinterest"></i></a></li>
-              	<li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
-              </ul>
+        {% block main %}{% endblock %}
+        <!-- Footer
+        ================================================= -->
+        <footer id="footer">
+            <div class="container">
+                <div class="row">
+                    <div class="footer-wrapper">
+                        <div class="col-md-3 col-sm-3">
+                            <a href=""><img src="{{ url_for('static', filename='images/logo-black.png') }}" alt="" class="footer-logo" /></a>
+                            <ul class="list-inline social-icons">
+                                <li><a href="#"><i class="icon ion-social-facebook"></i></a></li>
+                                <li><a href="#"><i class="icon ion-social-twitter"></i></a></li>
+                                <li><a href="#"><i class="icon ion-social-googleplus"></i></a></li>
+                                <li><a href="#"><i class="icon ion-social-pinterest"></i></a></li>
+                                <li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-2 col-sm-2">
+                            <h5>For individuals</h5>
+                            <ul class="footer-links">
+                                <li><a href="">Signup</a></li>
+                                <li><a href="">login</a></li>
+                                <li><a href="">Explore</a></li>
+                                <li><a href="">Finder app</a></li>
+                                <li><a href="">Features</a></li>
+                                <li><a href="">Language settings</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-2 col-sm-2">
+                            <h5>For businesses</h5>
+                            <ul class="footer-links">
+                                <li><a href="">Business signup</a></li>
+                                <li><a href="">Business login</a></li>
+                                <li><a href="">Benefits</a></li>
+                                <li><a href="">Resources</a></li>
+                                <li><a href="">Advertise</a></li>
+                                <li><a href="">Setup</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-2 col-sm-2">
+                            <h5>About</h5>
+                            <ul class="footer-links">
+                                <li><a href="">About us</a></li>
+                                <li><a href="">Contact us</a></li>
+                                <li><a href="">Privacy Policy</a></li>
+                                <li><a href="">Terms</a></li>
+                                <li><a href="">Help</a></li>
+                            </ul>
+                        </div>
+                        <div class="col-md-3 col-sm-3">
+                            <h5>Contact Us</h5>
+                            <ul class="contact">
+                                <li><i class="icon ion-ios-email-outline"></i>info@thunder-team.com</li>
+                                <li><i class="icon ion-ios-location-outline"></i>228 Park Ave S NY, USA</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="col-md-2 col-sm-2">
-              <h5>For individuals</h5>
-              <ul class="footer-links">
-                <li><a href="">Signup</a></li>
-                <li><a href="">login</a></li>
-                <li><a href="">Explore</a></li>
-                <li><a href="">Finder app</a></li>
-                <li><a href="">Features</a></li>
-                <li><a href="">Language settings</a></li>
-              </ul>
+            <div class="copyright">
+                <p>ikarachy © 2019. All rights reserved</p>
             </div>
-            <div class="col-md-2 col-sm-2">
-              <h5>For businesses</h5>
-              <ul class="footer-links">
-                <li><a href="">Business signup</a></li>
-                <li><a href="">Business login</a></li>
-                <li><a href="">Benefits</a></li>
-                <li><a href="">Resources</a></li>
-                <li><a href="">Advertise</a></li>
-                <li><a href="">Setup</a></li>
-              </ul>
-            </div>
-            <div class="col-md-2 col-sm-2">
-              <h5>About</h5>
-              <ul class="footer-links">
-                <li><a href="">About us</a></li>
-                <li><a href="">Contact us</a></li>
-                <li><a href="">Privacy Policy</a></li>
-                <li><a href="">Terms</a></li>
-                <li><a href="">Help</a></li>
-              </ul>
-            </div>
-            <div class="col-md-3 col-sm-3">
-              <h5>Contact Us</h5>
-              <ul class="contact">
-                <li><i class="icon ion-ios-telephone-outline"></i>+1 (234) 222 0754</li>
-                <li><i class="icon ion-ios-email-outline"></i>info@thunder-team.com</li>
-                <li><i class="icon ion-ios-location-outline"></i>228 Park Ave S NY, USA</li>
-              </ul>
-            </div>
-          </div>
-      	</div>
-      </div>
-      <div class="copyright">
-        <p>ikarachy © 2019. All rights reserved</p>
-      </div>
-		</footer>
+        </footer>
         {% block scripts %}
             <script src="{{ url_for('static', filename = 'js/friendships.js') }}"></script>
             <script src="{{ url_for('static', filename = 'js/messages.js') }}"></script>
         {% endblock %}
-  </body>
+</body>
 </html>

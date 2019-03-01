@@ -58,19 +58,24 @@ def about(id_user=None):
         information = user_model.get_information(session.get('id'))
         sex_pref = user_model.get_sex_pref(session.get('id'))
         interests = user_model.get_interests_by_user_id(session.get('id'))
+        education = user_model.get_education_by_user_id(session.get('id'))
 
     if id_user:
         user = user_model.get_user_by_id(id_user)[0]
         information = user_model.get_information(id_user)
         sex_pref = user_model.get_sex_pref(id_user)
         interests = user_model.get_interests_by_user_id(id_user)
+        education = user_model.get_education_by_user_id(id_user)
+
+    print(education[0])
 
     data = {
         'user': user,
         'sympathys': sympathys,
         'information': information,
         'sex_pref': sex_pref,
-        'interests': interests
+        'interests': interests,
+        'education': education
     }
     return render_template('about.html', data=data)
 
@@ -449,3 +454,65 @@ def ajax_edit_avatar():
         'ok': True,
         'error': "Avatar successfully uploaded",
     })
+
+
+@app.route('/ajax_add_education', methods=['POST'])
+def ajax_edit_education():
+    university = request.form['university']
+    date_from = request.form['date_from']
+    date_to = request.form['date_to']
+    description = request.form['description']
+
+    if not university:
+        return json.dumps({
+            'ok': False,
+            'error': "Please fill in selected field",
+            'fields': ['school']
+        })
+
+    if not date_from:
+        return json.dumps({
+            'ok': False,
+            'error': "Please fill in selected field",
+            'fields': ['date_from']
+        })
+
+    if not date_to:
+        return json.dumps({
+            'ok': False,
+            'error': "Please fill in selected field",
+            'fields': ['date_to']
+        })
+
+    if user_model.add_education(session.get('id'), university, date_from, date_to, description):
+        return json.dumps({
+            'ok': True,
+            'error': "Education successfully added"
+        })
+    else:
+        return json.dumps({
+            'ok': False,
+            'error': "Something went wrong"
+        })
+
+
+@app.route('/ajax_add_work', methods=['POST'])
+def ajax_edit_work():
+    company = request.form['company']
+    designation = request.form['designation']
+    from_date = request.form['from_date']
+    to_date = request.form['to_date']
+    city = request.form['city']
+    description = request.form['description']
+
+    print(company)
+    print(designation)
+    print(from_date)
+    print(to_date)
+    print(city)
+    print(description)
+    return json.dumps({
+        'ok': True,
+        'error': "Education successfully added"
+    })
+

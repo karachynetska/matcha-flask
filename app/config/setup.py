@@ -38,6 +38,36 @@ def create_about():
     else:
         print("about")
 
+def create_education():
+    res = database.db_query('''CREATE TABLE IF NOT EXISTS education(
+    id_education INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_user INTEGER NOT NULL,
+    university TEXT NOT NULL,
+    from_year TEXT NOT NULL,
+    to_year TEXT NOT NULL,
+    description TEXT,
+    FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE CASCADE)''')
+    if res:
+        print(res)
+    else:
+        print('education')
+
+def create_work():
+    res = database.db_query('''CREATE TABLE IF NOT EXISTS job(
+    id_job INTEGER PRIMARY KEY AUTOINCREMENT,
+    id_user INTEGER NOT NULL,
+    company TEXT NOT NULL,
+    designation TEXT NOT NULL,
+    from_year TEXT NOT NULL,
+    to_year TEXT NOT NULL,
+    city TEXT NOT NULL,
+    description TEXT,
+    FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE CASCADE)''')
+    if res:
+        print(res)
+    else:
+        print('job')
+
 def create_interests():
     res = database.db_query('''CREATE TABLE IF NOT EXISTS interests(
     id_interest INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -208,3 +238,5 @@ def initial_setup():
     create_dialogues()
     create_messages()
     create_notifications()
+    create_education()
+    create_work()

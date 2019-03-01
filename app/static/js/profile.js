@@ -189,3 +189,58 @@ function delete_interest(id_interest) {
     });
 }
 
+function add_education(form) {
+    event.preventDefault();
+    var data = {
+        'university': form.school.value,
+        'date_from': form.date_from.value,
+        'date_to': form.date_to.value,
+        'description': form.edu_description.value
+    };
+
+    console.log(data);
+    $.ajax({
+        type: 'POST',
+        data: data,
+        url: '/ajax_add_education'
+    }).done(function (data) {
+        var res = JSON.parse(data);
+        if (res.ok == false) {
+            $('#message_education').text('');
+            $('#message_education').text(res.error);
+            if (res.fields) {
+                res.fields.forEach(function (item) {
+                    $("input[id=" + item + "]").addClass("error");
+                });
+            }
+        } else {
+            $('#message_education').text('');
+            $('#message_education').text(res.error);
+            $("#message_education").addClass("success");
+        }
+    });
+}
+
+function add_work(form) {
+    event.preventDefault();
+    var data = {
+        'company': form.company.value,
+        'designation': form.designation.value,
+        'from_date': form.from_date.value,
+        'to_date': form.to_date.value,
+        'city': form.work_city.value,
+        'description': form.work_description.value
+    };
+    console.log(data);
+
+    $.ajax({
+        type: 'POST',
+        data: data,
+        url: '/ajax_add_work'
+    }).done(function (data) {
+        var res = JSON.parse(data);
+        if (res.ok = true) {
+            console.log('true');
+        }
+    });
+}

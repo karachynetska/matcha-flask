@@ -223,3 +223,43 @@ def delete_interest(id_interest, id_user):
     if not res:
         return True
     return res
+
+
+# EDUCATION
+def add_education(id_user, university, date_from, date_to, description):
+    array = [id_user, university, date_from, date_to, description]
+    sql = 'INSERT INTO education(id_user, university, from_year, to_year, description) VALUES (?, ?, ?, ?, ?)'
+    res = database.db_insert(sql, array)
+    print(res)
+    return res
+
+def get_education_by_user_id(id_user):
+    array = [id_user]
+    sql = 'SELECT * FROM education WHERE id_user=?'
+    res = database.db_query(sql, array)
+    return res
+
+def delete_education(id_education):
+    array = [id_education]
+    sql = 'DELETE FROM education WHERE id_education=?'
+    res = database.db_query(sql, array)
+    return res
+
+# WORK
+def add_work(id_user, company, designation, from_year, to_year, city, description):
+    array = [id_user, company, designation, from_year, to_year, city, description]
+    sql = 'INSERT INTO job(id_user, company, designation, from_year, to_year, city, description) VALUES (?, ?, ?, ?, ?, ?, ?)'
+    res = database.db_insert(sql, array)
+    return res
+
+def get_work_by_user_id(id_user):
+    array = [id_user]
+    sql = 'SELECT * FROM job WHERE id_user=?'
+    res = database.db_query(sql, array)
+    return res
+
+def delete_work(id_work):
+    array =[id_work]
+    sql = 'DELETE FROM job WHERE id_job=?'
+    res = database.db_query(sql, array)
+    return res
