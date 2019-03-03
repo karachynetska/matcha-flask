@@ -230,7 +230,6 @@ def add_education(id_user, university, date_from, date_to, description):
     array = [id_user, university, date_from, date_to, description]
     sql = 'INSERT INTO education(id_user, university, from_year, to_year, description) VALUES (?, ?, ?, ?, ?)'
     res = database.db_insert(sql, array)
-    print(res)
     return res
 
 def get_education_by_user_id(id_user):

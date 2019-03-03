@@ -27,6 +27,7 @@
                     <li><i class="icon ion-ios-settings"></i><a href="/profile/edit/settings">Account Settings</a></li>
                     <li><i class="icon ion-ios-camera-outline"></i><a href="/profile/edit/avatar">Change Avatar</a></li>
                     <li><i class="icon ion-ios-locked-outline"></i><a href="/profile/edit/password">Change Password</a></li>
+                    <li><i class="icon ion-ios-locked-outline"></i><a href="/profile/edit/geolocation">Change Geolocation</a></li>
                 </ul>
             </div>
             <div class="col-md-7">
@@ -44,23 +45,23 @@
                             <div class="row">
                                 <div class="form-group col-xs-12">
                                     <label for="school">My university</label>
-                                    <input id="school" class="form-control input-group-lg" type="text" name="school" title="Enter School" placeholder="My School" value="Harvard Unversity" />
+                                    <input id="school" class="form-control input-group-lg" type="text" name="school" title="Enter School" placeholder="My School"/>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-xs-6">
                                     <label for="date_from">From</label>
-                                    <input id="date_from" class="form-control input-group-lg" type="text" name="date" title="Enter a Date" placeholder="from" value="2012" />
+                                    <input id="date_from" class="form-control input-group-lg" type="text" name="date" title="Enter a Date" placeholder="from"/>
                                 </div>
                                 <div class="form-group col-xs-6">
                                     <label for="date_to" class="">To</label>
-                                    <input id="date_to" class="form-control input-group-lg" type="text" name="date" title="Enter a Date" placeholder="to" value="2016" />
+                                    <input id="date_to" class="form-control input-group-lg" type="text" name="date" title="Enter a Date" placeholder="to"/>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-xs-12">
                                     <label for="edu_description">Description</label>
-                                    <textarea id="edu_description" name="description" class="form-control" placeholder="Some texts about my education" rows="4" cols="400">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate</textarea>
+                                    <textarea id="edu_description" name="description" class="form-control" placeholder="Some texts about my education" rows="4" cols="400"></textarea>
                                 </div>
                             </div>
                             <button class="btn btn-primary">Save Changes</button>
@@ -69,7 +70,7 @@
                     <div class="block-title">
                         <h4 class="grey"><i class="icon ion-ios-briefcase-outline"></i>Work Experiences</h4>
                         <div class="line"></div>
-                        <p></p>
+                        <p id="message_work"></p>
                         <div class="line"></div>
                     </div>
                     <div class="edit-block">
@@ -77,35 +78,35 @@
                             <div class="row">
                                 <div class="form-group col-xs-12">
                                     <label for="company">Company</label>
-                                    <input id="company" class="form-control input-group-lg" type="text" name="company" title="Enter Company" placeholder="Company name" value="Envato Inc" />
+                                    <input id="company" class="form-control input-group-lg" type="text" name="company" title="Enter Company" placeholder="Company name"/>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-xs-12">
                                     <label for="designation">Designation</label>
-                                    <input id="designation" class="form-control input-group-lg" type="text" name="designation" title="Enter designation" placeholder="designation name" value="Exclusive Author" />
+                                    <input id="designation" class="form-control input-group-lg" type="text" name="designation" title="Enter designation" placeholder="designation name"/>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-xs-6">
                                     <label for="from_date">From</label>
-                                    <input id="from_date" class="form-control input-group-lg" type="text" name="date" title="Enter a Date" placeholder="from" value="2016" />
+                                    <input id="from_date" class="form-control input-group-lg" type="text" name="date" title="Enter a Date" placeholder="from"/>
                                 </div>
                                 <div class="form-group col-xs-6">
                                     <label for="to_date" class="">To</label>
-                                    <input id="to_date" class="form-control input-group-lg" type="text" name="date" title="Enter a Date" placeholder="to" value="Present" />
+                                    <input id="to_date" class="form-control input-group-lg" type="text" name="date" title="Enter a Date" placeholder="to"/>
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-xs-12">
                                     <label for="work_city">City/Town</label>
-                                    <input id="work_city" class="form-control input-group-lg" type="text" name="city" title="Enter city" placeholder="Your city" value="Melbourne"/>
+                                    <input id="work_city" class="form-control input-group-lg" type="text" name="city" title="Enter city" placeholder="Your city">
                                 </div>
                             </div>
                             <div class="row">
                                 <div class="form-group col-xs-12">
                                     <label for="work_description">Description</label>
-                                    <textarea id="work_description" name="description" class="form-control" placeholder="Some texts about my work" rows="4" cols="400">At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate</textarea>
+                                    <textarea id="work_description" name="description" class="form-control" placeholder="Some texts about my work" rows="4" cols="400"></textarea>
                                 </div>
                             </div>
                             <button class="btn btn-primary">Save Changes</button>

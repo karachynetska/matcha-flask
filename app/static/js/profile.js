@@ -239,8 +239,18 @@ function add_work(form) {
         url: '/ajax_add_work'
     }).done(function (data) {
         var res = JSON.parse(data);
-        if (res.ok = true) {
-            console.log('true');
+        if (res.ok = false) {
+            $('#message_work').text('');
+            $('#message_work').text(res.error);
+            if (res.fields) {
+                res.fields.forEach(function (item) {
+                    $("input[id=" + item + "]").addClass("error");
+                });
+            }
+        } else {
+            $('#message_work').text('');
+            $('#message_work').text(res.error);
+            $("#message_work").addClass("success");
         }
     });
 }

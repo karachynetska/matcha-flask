@@ -58,24 +58,28 @@ def about(id_user=None):
         information = user_model.get_information(session.get('id'))
         sex_pref = user_model.get_sex_pref(session.get('id'))
         interests = user_model.get_interests_by_user_id(session.get('id'))
-        education = user_model.get_education_by_user_id(session.get('id'))
+        education = user_model.get_education_by_user_id(session.get('id'))[0],
+        work = user_model.get_work_by_user_id(session.get('id'))
 
     if id_user:
         user = user_model.get_user_by_id(id_user)[0]
         information = user_model.get_information(id_user)
         sex_pref = user_model.get_sex_pref(id_user)
         interests = user_model.get_interests_by_user_id(id_user)
-        education = user_model.get_education_by_user_id(id_user)
+        education = user_model.get_education_by_user_id(id_user)[0]
+        work = user_model.get_work_by_user_id(id_user)
 
-    print(education[0])
 
+    print(education)
+    print(work)
     data = {
         'user': user,
         'sympathys': sympathys,
         'information': information,
         'sex_pref': sex_pref,
         'interests': interests,
-        'education': education
+        'education': education,
+        'work': work
     }
     return render_template('about.html', data=data)
 
@@ -139,6 +143,16 @@ def edit_basic():
             'user': user_model.get_user_by_id(session.get('id'))[0]
         }
         return render_template('edit-profile-basic.html', data=data)
+    else:
+        return redirect('/')
+
+@app.route('/profile/edit/geolocation')
+def edit_geolocation():
+    if 'id' in session:
+        data = {
+            'user': user_model.get_user_by_id(session.get('id'))[0]
+        }
+        return render_template('edit-profile-geolocation.html', data=data)
     else:
         return redirect('/')
 
@@ -505,14 +519,49 @@ def ajax_edit_work():
     city = request.form['city']
     description = request.form['description']
 
-    print(company)
-    print(designation)
-    print(from_date)
-    print(to_date)
-    print(city)
-    print(description)
-    return json.dumps({
-        'ok': True,
-        'error': "Education successfully added"
-    })
+    if not company:
+        return json.dumps({
+            'ok': False,
+            'error': "Please fill in selected field",
+            'fields': ['company']
+        })
+
+    if not designation:
+        return json.dumps({
+            'ok': False,
+            'error': "Please fill in selected field",
+            'fields': ['designation']
+        })
+
+    if not from_date:
+        return json.dumps({
+            'ok': False,
+            'error': "Please fill in selected field",
+            'fields': ['from_date']
+        })
+
+    if not to_date:
+        return json.dumps({
+            'ok': False,
+            'error': "Please fill in selected field",
+            'fields': ['to_date']
+        })
+
+    if not city:
+        return json.dumps({
+            'ok': False,
+            'error': "Please fill in selected field",
+            'fields': ['work_city']
+        })
+
+    if user_model.add_work(session.get('id'), company, designation, from_date, to_date, city, description):
+        return json.dumps({
+            'ok': False,
+            'error': "Work successfully added"
+        })
+    else:
+        return json.dumps({
+            'ok': False,
+            'error': "Something went wrong"
+        })
 

@@ -1,0 +1,67 @@
+{% extends 'layout.html' %}
+{% block title %} Edit Profile | Edit Geolocation {% endblock %}
+{% block link %}
+    <!-- Stylesheets
+    ================================================= -->
+    <link rel="stylesheet" href="{{ url_for('static', filename = "css/bootstrap.min.css") }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/jquery-ui.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename = "css/style.css") }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename = "css/ionicons.min.css") }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename = "css/font-awesome.min.css") }}" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+
+    <!--Google Font-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
+
+    <!--Favicon-->
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename = "images/fav.png") }}"/>
+{% endblock %}
+
+{% block main %}
+<div id="page-contents">
+    <div class="row">
+        <div class="col-md-3">
+            <!--Edit Profile Menu-->
+            <ul class="edit-menu">
+                <li class="active"><i class="icon ion-ios-information-outline"></i><a href="/profile/edit/basic">Basic Information</a></li>
+              	<li><i class="icon ion-ios-briefcase-outline"></i><a href="/profile/edit/edu-work">Education and Work</a></li>
+              	<li><i class="icon ion-ios-heart-outline"></i><a href="/profile/edit/interests">My Interests</a></li>
+                <li><i class="icon ion-ios-settings"></i><a href="/profile/edit/settings">Account Settings</a></li>
+                <li><i class="icon ion-ios-camera-outline"></i><a href="/profile/edit/avatar">Change Avatar</a></li>
+              	<li><i class="icon ion-ios-locked-outline"></i><a href="/profile/edit/password">Change Password</a></li>
+                <li><i class="icon ion-ios-locked-outline"></i><a href="/profile/edit/geolocation">Change Geolocation</a></li>
+            </ul>
+        </div>
+        <div class="col-md-7">
+            <!-- Change location
+            ================================================= -->
+            <div class="about-content-block">
+                <h4 class="grey"><i class="ion-location icon-in-title"></i>Location</h4>
+                <p>228 Park Eve, New York</p>
+                <div class="google-maps">
+                    <div id="map_edit" class="map edit-map"></div>
+{#                    <div id="map" class="map"></div>#}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+<!--preloader-->
+<div id="spinner-wrapper">
+    <div class="spinner"></div>
+</div>
+{% block scripts %}
+    <!-- Scripts
+    ================================================= -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTMXfmDn0VlqWIyoOxK8997L-amWbUPiQ&callback=initMap"></script>
+    <script src="{{ url_for('static', filename = "js/jquery-3.1.1.min.js") }}"></script>
+    <script src="{{ url_for('static', filename = 'js/jquery-ui.min.js') }}"></script>
+    <script src="{{ url_for('static', filename = "js/bootstrap.min.js") }}"></script>
+    <script src="{{ url_for('static', filename = "js/jquery.sticky-kit.min.js") }}"></script>
+    <script src="{{ url_for('static', filename = "js/jquery.scrollbar.min.js") }}"></script>
+    <script src="{{ url_for('static', filename = "js/script.js") }}"></script>
+    <script src="{{ url_for('static', filename = "js/profile.js") }}"></script>
+    <script src="{{ url_for('static', filename = 'js/notifications.js') }}"></script>
+{% endblock %}

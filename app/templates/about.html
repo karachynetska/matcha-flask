@@ -67,27 +67,18 @@
                         </div>
                         <div class="about-content-block">
                             <h4 class="grey"><i class="ion-ios-briefcase icon-in-title"></i>Work Experiences</h4>
+                            {% if data.work %}
+                            {% for work in data.work %}
                             <div class="organization">
                                 <img src="{{ url_for('static', filename = 'images/envato.png') }}" alt="" class="pull-left img-org" />
                                 <div class="work-info">
-                                    <h5>Envato</h5>
-                                    <p>Seller - <span class="text-grey">1 February 2013 to present</span></p>
+                                    <h5>{{ work.company }}</h5>
+                                    <p>{{ work.designation }} - <span class="text-grey">from  {{ work.from_year }}  to  {{ work.to_year }}</span></p>
+                                    <p>{{ work.description }}</p>
                                 </div>
                             </div>
-                            <div class="organization">
-                                <img src="{{ url_for('static', filename = 'images/envato.png') }}" alt="" class="pull-left img-org" />
-                                <div class="work-info">
-                                    <h5>Envato</h5>
-                                    <p>Seller - <span class="text-grey">1 February 2013 to present</span></p>
-                                </div>
-                            </div>
-                            <div class="organization">
-                                <img src="{{ url_for('static', filename = 'images/envato.png') }}" alt="" class="pull-left img-org" />
-                                <div class="work-info">
-                                    <h5>Envato</h5>
-                                    <p>Seller - <span class="text-grey">1 February 2013 to present</span></p>
-                                </div>
-                            </div>
+                            {% endfor %}
+                        {% endif %}
                         </div>
                         <div class="about-content-block">
                             <h4 class="grey"><i class="ion-ios-chatbubble icon-in-title"></i>Language</h4>
@@ -157,4 +148,5 @@
     <script src="{{ url_for('static', filename = 'js/jquery.scrollbar.min.js') }}"></script>
     <script src="{{ url_for('static', filename = 'js/script.js') }}"></script>
     <script src="{{ url_for('static', filename = 'js/notifications.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'js/geolocation.js') }}"></script>
 {% endblock %}
