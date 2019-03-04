@@ -37,10 +37,8 @@
             ================================================= -->
             <div class="about-content-block">
                 <h4 class="grey"><i class="ion-location icon-in-title"></i>Location</h4>
-                <p>228 Park Eve, New York</p>
                 <div class="google-maps">
                     <div id="map_edit" class="map edit-map"></div>
-{#                    <div id="map" class="map"></div>#}
                 </div>
             </div>
         </div>
@@ -55,7 +53,8 @@
     <!-- Scripts
     ================================================= -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTMXfmDn0VlqWIyoOxK8997L-amWbUPiQ&callback=initMap"></script>
+    <script src="{{ url_for('static', filename = 'js/geomarker.js') }}"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCTMXfmDn0VlqWIyoOxK8997L-amWbUPiQ&callback=initEditMap"></script>
     <script src="{{ url_for('static', filename = "js/jquery-3.1.1.min.js") }}"></script>
     <script src="{{ url_for('static', filename = 'js/jquery-ui.min.js') }}"></script>
     <script src="{{ url_for('static', filename = "js/bootstrap.min.js") }}"></script>
