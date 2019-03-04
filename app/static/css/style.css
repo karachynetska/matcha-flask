@@ -2497,3 +2497,11 @@ ul.contact li i{
     text-align: center;
     margin: 50px;
 }
+
+/*MAP*/
+
+#map_edit {
+    width: 100%;
+    height: 400px;
+    background-color: grey;
+}

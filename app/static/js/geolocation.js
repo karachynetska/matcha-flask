@@ -9,6 +9,24 @@ window.onload = function () {
 
 
 function geolocationSuccess(position) {
+	var data = {
+		'latitude': position.coords.latitude,
+		'longitude': position.coords.longitude
+	};
+
+	$.ajax({
+		type: 'POST',
+		data: data,
+		url: '/ajax_set_geolocation'
+	}).done(function (data) {
+		var res = JSON.parse(data);
+		if (res.ok == false) {
+			console.log('false');
+		} else {
+			console.log('true');
+		}
+	});
+
 	alert("Последний раз вас засекали здесь: " +
 	         position.coords.latitude + ", " + position.coords.longitude);
 }
