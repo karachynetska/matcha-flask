@@ -40,13 +40,14 @@
                                     {% for interest in data.interests %}
                                         <li><a class="tag" style="text-decoration: none;"><i class="{{ interest.icon }}"></i> {{ interest.title }}</a></li>
                                     {% endfor %}
-                                {% endif %}e
+                                {% endif %}
                             </ul>
                         </div>
                         <div class="about-content-block">
                             <h4 class="grey"><i class="ion-location icon-in-title"></i>Location</h4>
-                            <p>228 Park Eve, New York</p>
                             <div class="google-maps">
+                                <div style="display: none;" id="geo_latitude">{{ data.geolocation['latitude'] }}</div>
+                                <div style="display: none;" id="geo_longitude">{{ data.geolocation['longitude'] }}</div>
                                 <div id="map" class="map"></div>
                             </div>
                         </div>
@@ -147,6 +148,6 @@
     <script src="{{ url_for('static', filename = 'js/jquery.scrollbar.min.js') }}"></script>
     <script src="{{ url_for('static', filename = 'js/script.js') }}"></script>
     <script src="{{ url_for('static', filename = 'js/notifications.js') }}"></script>
-    <script src="{{ url_for('static', filename = 'js/geolocation.js') }}"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUP4_3NmkZ27AEBxCg8aZypK-mRMa9EHE&callback=initMap"></script>
+    <script src="{{ url_for('static', filename = 'js/geomarker.js') }}"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqLNucodvPuxX_30MWoh6g1YT6hWnvzS4&callback=initMap"></script>
 {% endblock %}

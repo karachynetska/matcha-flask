@@ -216,8 +216,8 @@ def create_notifications():
 def create_geolocation():
     res = database.db_query('''CREATE TABLE IF NOT EXISTS geolocation(
     id_user INTEGER NOT NULL UNIQUE,
-    longitude TEXT,
     latitude TEXT,
+    longitude TEXT,
     FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE CASCADE)''')
     if (res):
         print(res)
@@ -240,3 +240,4 @@ def initial_setup():
     create_notifications()
     create_education()
     create_work()
+    create_geolocation()

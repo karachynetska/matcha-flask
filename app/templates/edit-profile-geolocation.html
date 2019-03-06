@@ -37,10 +37,14 @@
             ================================================= -->
             <div class="about-content-block">
                 <h4 class="grey"><i class="ion-location icon-in-title"></i>Location</h4>
+                <p id="change_geo_message"></p>
                 <div class="google-maps">
+                    <div style="display: none;" id="geo_edit_latitude">{{ data.geolocation.latitude }}</div>
+                    <div style="display: none;" id="geo_edit_longitude">{{ data.geolocation.longitude }}</div>
                     <div id="map_edit" class="map edit-map"></div>
                 </div>
             </div>
+            <button style="width: 100%; margin-top: 25px;" class="btn btn-primary" id="change_geolocation">Save Changes</button>
         </div>
     </div>
 </div>
@@ -54,7 +58,6 @@
     ================================================= -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
     <script src="{{ url_for('static', filename = 'js/geomarker.js') }}"></script>
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDUP4_3NmkZ27AEBxCg8aZypK-mRMa9EHE&callback=initEditMap"></script>
     <script src="{{ url_for('static', filename = "js/jquery-3.1.1.min.js") }}"></script>
     <script src="{{ url_for('static', filename = 'js/jquery-ui.min.js') }}"></script>
     <script src="{{ url_for('static', filename = "js/bootstrap.min.js") }}"></script>
@@ -63,4 +66,5 @@
     <script src="{{ url_for('static', filename = "js/script.js") }}"></script>
     <script src="{{ url_for('static', filename = "js/profile.js") }}"></script>
     <script src="{{ url_for('static', filename = 'js/notifications.js') }}"></script>
+     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqLNucodvPuxX_30MWoh6g1YT6hWnvzS4&callback=initEditMap"></script>
 {% endblock %}

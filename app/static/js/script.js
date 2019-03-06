@@ -149,22 +149,30 @@ $(window).on("resize", function() {
 });
 
 // Fuction for map initialization
-function initMap() {
-  var uluru = {lat: 12.927923, lng: 77.627108};
-  var map = new google.maps.Map(document.getElementById('map'), {
-    zoom: 15,
-    center: uluru,
-    zoomControl: true,
-    scaleControl: false,
-    scrollwheel: false,
-    disableDoubleClickZoom: true
-  });
-  
-  var marker = new google.maps.Marker({
-    position: uluru,
-    map: map
-  });
-}
+// function initMap() {
+//     var latitude = parseFloat($('#geo_latitude').text()),
+//         longitude = parseFloat($('#geo_longitude').text());
+//     console.log(latitude);
+// 		console.log(longitude);
+// 	// if (!latitude && !longitude) {
+// 	// 	latitude = 50.4688257;
+// 	// 	longitude = 30.4621588;
+// 	// }
+// 	var uluru = {lat: latitude, lng: longitude};
+// 	var map = new google.maps.Map(document.getElementById('map'), {
+// 	    zoom: 17,
+//         center: uluru,
+//         zoomControl: true,
+//         scaleControl: false,
+//         scrollwheel: false,
+//         disableDoubleClickZoom: true
+// 	});
+// 	var marker = new google.maps.Marker({
+//         position: uluru,
+//         map: map,
+//         title: 'UNIT Factory'
+// 	});
+// }
 
 
 

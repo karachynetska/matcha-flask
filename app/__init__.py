@@ -24,7 +24,7 @@ app.config.update(dict(
 ))
 mail = Mail(app)
 
-from app.views import auth, profile, messages, sympathys, photos, likes, comments
+from app.views import auth, profile, messages, sympathys, photos, likes, comments, geolocation
 
 @app.route('/')
 def index():

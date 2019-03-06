@@ -9,6 +9,7 @@ import json
 import re
 import os
 from app.models import user as user_model
+from app.models import geolocation as geolocation_model
 from app.views import notifications as notification_view
 from app.models import sympathys
 # from app.models.friendships import check_friendship, add_friend
@@ -58,20 +59,19 @@ def about(id_user=None):
         information = user_model.get_information(session.get('id'))
         sex_pref = user_model.get_sex_pref(session.get('id'))
         interests = user_model.get_interests_by_user_id(session.get('id'))
-        education = user_model.get_education_by_user_id(session.get('id'))[0],
+        education = user_model.get_education_by_user_id(session.get('id'))
         work = user_model.get_work_by_user_id(session.get('id'))
+        geolocation = geolocation_model.get_geolocation_by_user_id(session.get('id'))
 
     if id_user:
         user = user_model.get_user_by_id(id_user)[0]
         information = user_model.get_information(id_user)
         sex_pref = user_model.get_sex_pref(id_user)
         interests = user_model.get_interests_by_user_id(id_user)
-        education = user_model.get_education_by_user_id(id_user)[0]
+        education = user_model.get_education_by_user_id(id_user)
         work = user_model.get_work_by_user_id(id_user)
+        geolocation = geolocation_model.get_geolocation_by_user_id(id_user)
 
-
-    print(education)
-    print(work)
     data = {
         'user': user,
         'sympathys': sympathys,
@@ -79,7 +79,8 @@ def about(id_user=None):
         'sex_pref': sex_pref,
         'interests': interests,
         'education': education,
-        'work': work
+        'work': work,
+        'geolocation': geolocation
     }
     return render_template('about.html', data=data)
 
@@ -150,7 +151,8 @@ def edit_basic():
 def edit_geolocation():
     if 'id' in session:
         data = {
-            'user': user_model.get_user_by_id(session.get('id'))[0]
+            'user': user_model.get_user_by_id(session.get('id'))[0],
+            'geolocation': geolocation_model.get_geolocation_by_user_id(session.get('id'))
         }
         return render_template('edit-profile-geolocation.html', data=data)
     else:
