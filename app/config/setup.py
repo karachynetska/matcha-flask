@@ -18,7 +18,8 @@ def create_users():
         token TEXT,
         gender TEXT,
         sex_pref TEXT,
-        date_of_creation DATETIME DEFAULT CURRENT_TIMESTAMP)
+        date_of_creation DATETIME DEFAULT CURRENT_TIMESTAMP,
+        fame_rating INTEGER DEFAULT 0)
         ''')
     if res:
         print(res)
