@@ -19,7 +19,7 @@ $("#register-button").on("click", function(e) {
     gender,
     sex_pref: $("#sex_pref").val(),
     city: $("#city").val(),
-    country: $("#country").val(),
+    country: $("#country").text(),
   };
 
   $.ajax({

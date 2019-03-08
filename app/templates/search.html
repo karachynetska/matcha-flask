@@ -57,16 +57,26 @@
                     </div><!--chat block ends-->
                 </div>
                 <div class="col-md-9">
+                    <div class="block-title">
+                        <h4 class="grey"><i class="icon ion-ios-locked-outline"></i>Search</h4>
+                        <div class="line"></div>
+                        <p id="message_search"></p>
+                        <div class="line"></div>
+                    </div>
+                </div>
+                <div class="col-md-3">
                     <div class="search-container">
-                        <div class="block-title">
-                            <h4 class="grey"><i class="icon ion-ios-locked-outline"></i>Search</h4>
-                            <div class="line"></div>
-                            <p id="message_search"></p>
-                            <div class="line"></div>
-                        </div>
                         <div class="search-block">
                             <form method="post">
                                 <div class="row">
+                                    <div class="form-group col-xs-6">
+                                        <label for="first_name">First name</label>
+                                        <input id="first_name" class="form-control input-group-lg" type="text" name="first_name" placeholder="First name"/>
+                                    </div>
+                                    <div class="form-group col-xs-6">
+                                        <label for="last_name">Last name</label>
+                                        <input id="last_name" class="form-control input-group-lg" type="text" name="last_name" placeholder="Last name"/>
+                                    </div>
                                     <div class="form-group col-xs-6">
                                         <label for="from_age">From age</label>
                                         <input id="from_age" class="form-control input-group-lg" type="number" name="from_age" placeholder="From age"/>

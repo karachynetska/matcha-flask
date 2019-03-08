@@ -1,7 +1,9 @@
 $('#search').on('click', function (e) {
     e.preventDefault();
 
-    var from_age = $('#from_age').val(),
+    var first_name = $('#first_name').val(),
+        last_name = $('#last_name').val(),
+        from_age = $('#from_age').val(),
         to_age = $('#to_age').val(),
         from_rate = $('#from_rate').val(),
         to_rate = $('#to_rate').val(),
@@ -14,6 +16,8 @@ $('#search').on('click', function (e) {
         interest4 = $('#interest4').val();
 
     var data = {
+        'first_name': first_name,
+        'last_name': last_name,
         'from_age': from_age,
         'to_age': to_age,
         'from_rate': from_rate,
