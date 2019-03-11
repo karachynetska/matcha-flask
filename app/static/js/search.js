@@ -1,5 +1,6 @@
 $('#search').on('click', function (e) {
     e.preventDefault();
+    $('#found_users').empty();
 
     var first_name = $('#first_name').val(),
         last_name = $('#last_name').val(),
@@ -35,7 +36,25 @@ $('#search').on('click', function (e) {
         type: 'POST',
         data: data,
         url: '/ajax_search'
-    });
+    }).done(function (data) {
+        var res = JSON.parse(data);
+        if (res.ok == true) {
+            if (res.found_users) {
+                jQuery.each(res.found_users, function (i, val) {
+                    $('#found_users').append('<div class="friend-card">\n' +
+                       '                      <img src="'+val['background']+'" alt="profile-cover" class="img-responsive cover" />\n' +
+                       '                      <div class="card-info">\n' +
+                       '                        <img src="'+val['avatar']+'" alt="user" class="profile-photo-lg" />\n' +
+                       '                        <div class="friend-info">\n' +
+                       '                          <h5><a href="/profile/id'+val['id']+'" class="profile-link">'+val['firstname']+ ' ' + val['lastname']+'</a></h5>\n' +
+                       '                          <p>'+val['login']+'</p>\n' +
+                       '                        </div>\n' +
+                       '                      </div>\n' +
+                       '                    </div>')
+                });
+            }
+        }
+    })
     //     .done(function (data) {
     //     var res = JSON.parse(data);
     //     if (res.ok == false) {

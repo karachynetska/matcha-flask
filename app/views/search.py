@@ -51,6 +51,7 @@ def ajax_search():
         users = search_model.search_by_full_name(my_id, first_name, last_name)
 
     if first_name and not last_name:
+        print('firstname')
         users = search_model.search_by_first_name(my_id, first_name)
 
     if last_name and not first_name:
@@ -61,17 +62,17 @@ def ajax_search():
 
     found_users = []
 
-    # print(users)
+    print(users)
 
     for user in users:
         correct = True
         if from_age or to_age:
             user['age'] = date.today().year - datetime.strptime(user['birth_date'], '%Y-%m-%d %H:%M:%S').year
             if from_age:
-                if user['age'] < from_age:
+                if user['age'] < int(from_age):
                     correct = False
             if to_age:
-                if user['age'] > to_age:
+                if user['age'] > int(to_age):
                     correct = False
         if from_rate:
             if user['fame_rating'] < from_rate:
@@ -88,4 +89,10 @@ def ajax_search():
         if city:
             if user['city'].find(city) == -1:
                 correct = False
-    return "response"
+
+        if correct:
+            found_users.append(user)
+    return json.dumps({
+            'ok': True,
+            'found_users': found_users
+        })

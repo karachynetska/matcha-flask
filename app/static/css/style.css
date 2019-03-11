@@ -2505,3 +2505,7 @@ ul.contact li i{
     height: 400px;
     background-color: grey;
 }
+
+.none {
+    display: none !important;
+}

@@ -100,7 +100,7 @@ def get_information(id):
     array = [id]
     sql = 'SELECT information FROM about WHERE id_user=?'
     res = database.db_query(sql, array)
-    return res[0]['information']
+    return res
 
 #EDIT PROFILE
 def change_avatar(avatar, id):

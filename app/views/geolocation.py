@@ -14,7 +14,11 @@ def ajax_set_geolocation():
         latitude = 50.4688257
         longitude = 30.4621588
 
-    geolocation_model.add_geolocation(id_user, latitude, longitude)
+    if geolocation_model.add_geolocation(id_user, latitude, longitude):
+        return json.dumps({
+            'ok': True,
+            'error': "Geolocation saved.",
+        })
 
 @app.route('/ajax_change_geolocation', methods=['POST'])
 def ajax_change_geolocation():

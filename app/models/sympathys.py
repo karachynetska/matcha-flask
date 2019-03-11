@@ -32,6 +32,7 @@ def check_sympathy(id1, id2):
     array = [id1, id2, id2, id1]
     sql = 'SELECT * FROM sympathys WHERE id_user1=? AND id_user2=? OR id_user1=? AND id_user2=?'
     res = database.db_query(sql, array)
+    print(res)
     return res
 
 def check_request(id1, id2):
@@ -49,11 +50,24 @@ def check_request(id1, id2):
     else:
         return 'sender'
 
+def check_request_status(id1, id2):
+    array = [id1, id2, id2, id1]
+    sql = 'SELECT status FROM requests WHERE id_sender=? AND id_taker=? OR id_sender=? AND id_taker=?'
+    res = database.db_query(sql, array)
+    return res
+
 def remove_request(id1, id2):
     array = [id1, id2]
     sql = 'DELETE FROM requests WHERE id_sender=? AND id_taker=?'
     res = database.db_query(sql, array)
     return res
+
+def set_request_status_to_zero(id1, id2):
+    array = [id1, id2, id2, id1]
+    sql = 'UPDATE requests SET status=0 WHERE id_sender=? AND id_taker=? OR id_sender=? AND id_taker=?'
+    res = database.db_query(sql, array)
+    return res
+
 
 def get_sympathys_list(id):
     array = [id, id]

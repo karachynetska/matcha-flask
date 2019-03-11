@@ -29,5 +29,8 @@ def connect():
 
 @sio.on('disconnect', namespace='/notifications')
 def disconnect():
+    print(request.sid)
+    print(id_user_to_notification_sid)
     id_user_to_notification_sid.pop(request.sid)
+    print(id_user_to_notification_sid)
 

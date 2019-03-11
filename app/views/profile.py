@@ -23,6 +23,32 @@ configure_uploads(app, photos)
 
 
 # PROFILE
+# @app.route('/profile')
+# @app.route('/profile/id<int:id_user>/')
+# def profile(id_user=None):
+#     if not 'id' in session and not id_user:
+#         return redirect('/')
+#     if 'id' in session:
+#         user = user_model.get_user_by_id(session.get('id'))[0]
+#         friends = sympathys.get_sympathys_list(session.get('id'))
+#
+#     if id_user:
+#         user = user_model.get_user_by_id(id_user)[0]
+#         friends = sympathys.get_sympathys_list(id_user)
+#         msg = str(session.get('firstname')) + ' ' + str(session.get('lastname')) + ' viewed your profile.'
+#         image = user_model.get_avatar(session.get('id'))
+#         notification_view.add_notification(id_user, msg,'view', image)
+#     data = {
+#         'user': user,
+#         'sympathys': sympathys,
+#         'friends': friends
+#     }
+#     return render_template('profile.html', data=data)
+
+
+
+
+# ABOUT
 @app.route('/profile')
 @app.route('/profile/id<int:id_user>/')
 def profile(id_user=None):
@@ -31,31 +57,6 @@ def profile(id_user=None):
     if 'id' in session:
         user = user_model.get_user_by_id(session.get('id'))[0]
         friends = sympathys.get_sympathys_list(session.get('id'))
-
-    if id_user:
-        user = user_model.get_user_by_id(id_user)[0]
-        friends = sympathys.get_sympathys_list(id_user)
-        msg = str(session.get('firstname')) + ' ' + str(session.get('lastname')) + ' viewed your profile.'
-        image = user_model.get_avatar(session.get('id'))
-        notification_view.add_notification(id_user, msg,'view', image)
-    data = {
-        'user': user,
-        'sympathys': sympathys,
-        'friends': friends
-    }
-    return render_template('profile.html', data=data)
-
-
-
-
-# ABOUT
-@app.route('/profile/about')
-@app.route('/profile/about/id<int:id_user>')
-def about(id_user=None):
-    if not 'id' in session and not id_user:
-        return redirect('/')
-    if 'id' in session:
-        user = user_model.get_user_by_id(session.get('id'))[0]
         information = user_model.get_information(session.get('id'))
         sex_pref = user_model.get_sex_pref(session.get('id'))
         interests = user_model.get_interests_by_user_id(session.get('id'))
@@ -65,6 +66,7 @@ def about(id_user=None):
 
     if id_user:
         user = user_model.get_user_by_id(id_user)[0]
+        friends = sympathys.get_sympathys_list(id_user)
         information = user_model.get_information(id_user)
         sex_pref = user_model.get_sex_pref(id_user)
         interests = user_model.get_interests_by_user_id(id_user)
@@ -72,8 +74,13 @@ def about(id_user=None):
         work = user_model.get_work_by_user_id(id_user)
         geolocation = geolocation_model.get_geolocation_by_user_id(id_user)
 
+        msg = str(session.get('firstname')) + ' ' + str(session.get('lastname')) + ' viewed your profile.'
+        image = user_model.get_avatar(session.get('id'))
+        notification_view.add_notification(id_user, msg, 'view', image)
+
     data = {
         'user': user,
+        'friends': friends,
         'sympathys': sympathys,
         'information': information,
         'sex_pref': sex_pref,
@@ -82,7 +89,7 @@ def about(id_user=None):
         'work': work,
         'geolocation': geolocation
     }
-    return render_template('about.html', data=data)
+    return render_template('profile.html', data=data)
 
 
 
