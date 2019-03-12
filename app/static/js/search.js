@@ -1,5 +1,4 @@
-$('#search').on('click', function (e) {
-    e.preventDefault();
+function search() {
     $('#found_users').empty();
 
     var first_name = $('#first_name').val(),
@@ -14,7 +13,9 @@ $('#search').on('click', function (e) {
         interest1 = $('#interest1').val(),
         interest2 = $('#interest2').val(),
         interest3 = $('#interest3').val(),
-        interest4 = $('#interest4').val();
+        interest4 = $('#interest4').val(),
+        filter = $('#filter').val(),
+        sort = $('#sort').val();
 
     var data = {
         'first_name': first_name,
@@ -29,8 +30,11 @@ $('#search').on('click', function (e) {
         'interest1': interest1,
         'interest2': interest2,
         'interest3': interest3,
-        'interest4': interest4
+        'interest4': interest4,
+        'filter': filter,
+        'sort': sort
     };
+    console.log(data);
 
     $.ajax({
         type: 'POST',
@@ -52,18 +56,24 @@ $('#search').on('click', function (e) {
                        '                      </div>\n' +
                        '                    </div>')
                 });
+                $('#filter_sort').removeClass('none');
             }
+        } else {
+            $('#found_users').append('<h3>'+res.error+'</h3>');
         }
-    })
-    //     .done(function (data) {
-    //     var res = JSON.parse(data);
-    //     if (res.ok == false) {
-    //         // $('#message_search')
-    //         console.log('false');
-    //     } else {
-    //         console.log('true');
-    //     }
-    // });
-    console.log(data);
+    });
+}
+$('#search').on('click', function (e) {
+    e.preventDefault();
+    search();
+});
 
+$('#filter').on('change', function (e) {
+    e.preventDefault();
+    search();
+});
+
+$('#sort').on('change', function (e) {
+    e.preventDefault();
+    search();
 });

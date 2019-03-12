@@ -17,5 +17,8 @@ def get_geolocation_by_user_id(id_user):
     array = [id_user]
     sql = 'SELECT * FROM geolocation WHERE id_user=?'
     res = database.db_query(sql, array)
-    return res[0]
+    if res:
+        return res[0]
+    else:
+        return False
 

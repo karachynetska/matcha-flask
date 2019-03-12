@@ -50,8 +50,8 @@ html, body {
 }
 
 body{
-	font-family: 'Lato', sans-serif;
-  line-height: 26px;
+    font-family: 'Lato', sans-serif;
+    line-height: 26px;
 	color: #6d6e71;
 	font-size: 13px;
 }
@@ -1400,13 +1400,13 @@ ul.online-users li span.online-dot{
   right: 20px;
 }
 
-.chat-room .send-message{
+.chat-room .send_message{
   background: #f8f8f8;
   padding: 20px;
   border-radius: 4px;
 }
 
-.chat-room .send-message button{
+.chat-room .send_message button{
   background: #000;
   color: #fff;
 }
@@ -1418,12 +1418,12 @@ ul.online-users li span.online-dot{
 }
 .scrollbar-wrapper.tab-content{
     overflow-y: auto;
-    height: 790px;
+    height: 720px;
 }
 
 .scrollbar-wrapper.contact-list{
     overflow-y: auto;
-    height: 790px;
+    height: 720px;
     border: none;
     margin-bottom: 20px;
 }
@@ -2006,8 +2006,11 @@ input:checked + .slider:before{
   ==================================================*/
 
 #footer{
-  background: #fff;
-  position: relative;
+    background: #fff;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
 }
 
 #footer::before{
@@ -2508,4 +2511,9 @@ ul.contact li i{
 
 .none {
     display: none !important;
+}
+
+#filter_sort {
+    display: flex;
+    justify-content: flex-end;
 }

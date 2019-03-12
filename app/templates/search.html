@@ -61,20 +61,49 @@
                         <h4 class="grey"><i class="icon ion-ios-locked-outline"></i>Search</h4>
                         <div class="line"></div>
                         <p id="message_search"></p>
-                        <div class="form-group" style="text-align: center">
-                            <label class="radio-inline">
-                                <input type="radio" name="filter">Age
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="filter">Geolocation
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="filter">Rating
-                            </label>
-                            <label class="radio-inline">
-                                <input type="radio" name="filter">Interests
-                            </label>
+                        <div class="row none" style="text-align: center" id="filter_sort">
+                        <div class="form-group col-xs-3">
+                            <label for="filter">Filter by:</label>
+                            <select class="form-control" id="filter" name="filter">
+                                <option value="filter" disabled selected>Filter</option>
+                                <option value="age">Age</option>
+                                <option value="distance">Distance</option>
+                                <option value="rating">Rating</option>
+                                <option value="interests">Interests</option>
+                            </select>
                         </div>
+                        <div class="form-group col-xs-3">
+                            <label for="sort">Sort by:</label>
+                            <select class="form-control" id="sort" name="sort">
+                                <option value="asc">Asc</option>
+                                <option value="desc">Desc</option>
+                            </select>
+                        </div>
+                            </div>
+{#                        <div class="form-group" style="text-align: center">#}
+{#                            <p class="radio-inline" style="font-weight: bold">Filter by: </p>#}
+{#                            <label class="radio-inline">#}
+{#                                <input type="radio" name="filter">Age#}
+{#                            </label>#}
+{#                            <label class="radio-inline">#}
+{#                                <input type="radio" name="filter">Geolocation#}
+{#                            </label>#}
+{#                            <label class="radio-inline">#}
+{#                                <input type="radio" name="filter">Rating#}
+{#                            </label>#}
+{#                            <label class="radio-inline">#}
+{#                                <input type="radio" name="filter">Interests#}
+{#                            </label>#}
+{#                        </div>#}
+{#                        <div class="form-group" style="text-align: center">#}
+{#                            <p class="radio-inline" style="font-weight: bold">Sort by: </p>#}
+{#                            <label class="radio-inline">#}
+{#                                <input type="radio" name="sort" checked>Asc#}
+{#                            </label>#}
+{#                            <label class="radio-inline">#}
+{#                                <input type="radio" name="sort">Desc#}
+{#                            </label>#}
+{#                        </div>#}
                         <div class="line"></div>
                     </div>
                 </div>
@@ -153,10 +182,10 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6" style="height: 790px; overflow: auto">
                     <div class="friend-list">
                         <div class="row">
-                            <div class="col-md-6 col-sm-6" id="found_users">
+                            <div class="col-md-12 col-sm-12" id="found_users">
 
                             </div>
                         </div>
@@ -168,15 +197,8 @@
     <!-- Footer
     ================================================= -->
     <footer id="footer">
-        <div class="container">
-            <div class="row">
-                <div class="footer-wrapper">
-
-                </div>
-            </div>
-        </div>
         <div class="copyright">
-            <p>Thunder Team © 2016. All rights reserved</p>
+            <p>ikarachy © 2019. All rights reserved</p>
         </div>
     </footer>
     <!--preloader-->

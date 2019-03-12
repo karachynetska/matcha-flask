@@ -12,6 +12,8 @@ from app.models import user as user_model
 from app.models import geolocation as geolocation_model
 from app.views import notifications as notification_view
 from app.models import sympathys
+from app.models import search as search_model
+from app.views.search import calculate_distance
 # from app.models.friendships import check_friendship, add_friend
 from flask_mail import Message
 from app.settings import APP_ROOT
@@ -78,6 +80,15 @@ def profile(id_user=None):
         image = user_model.get_avatar(session.get('id'))
         notification_view.add_notification(id_user, msg, 'view', image)
 
+    suggestions = search_model.suggestion(session.get('id'))
+    print(suggestions)
+    for suggestion in suggestions:
+        print(suggestion['latitude'])
+        print(suggestion['longitude'])
+        suggestion['distance'] = calculate_distance(float(suggestion['latitude']), float(suggestion['longitude']))
+    suggestions = sorted(suggestions, key=lambda k: k['distance'])
+
+
     data = {
         'user': user,
         'friends': friends,
@@ -87,7 +98,8 @@ def profile(id_user=None):
         'interests': interests,
         'education': education,
         'work': work,
-        'geolocation': geolocation
+        'geolocation': geolocation,
+        'suugestions': suggestions[:5]
     }
     return render_template('profile.html', data=data)
 
@@ -126,20 +138,6 @@ def friends(id_user=None):
     #     }
     #     return render_template('friends.html', data=data)
     # return redirect('/')
-
-
-
-
-
-# ALBUM
-@app.route('/profile/album')
-def album():
-    if 'id' in session:
-        data = {
-            'user': user_model.get_user_by_id(session.get('id'))[0]
-        }
-        return render_template('album.html', data=data)
-    return redirect('/')
 
 
 

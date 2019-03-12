@@ -11,6 +11,7 @@ function init(dialogue, id_user1, id_user2) {
     to_whom_id = id_user2;
     $('#'+id_dialogue).find('.chat-alert').addClass('invisible');
     socket_messages.emit('join_dialogue', {'id_dialogue': id_dialogue, 'from_whom_id': from_whom_id, 'to_whom_id': to_whom_id});
+    $('.send_message').removeClass('none');
 };
 
 $('#send_message').on('click', function (e) {

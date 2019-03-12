@@ -29,3 +29,9 @@ def search_by_last_name(id_user, last_name):
     sql = 'SELECT * FROM users WHERE lastname=? AND id != ? AND activation = 1'
     res = database.db_query(sql, array)
     return res
+
+def suggestion(id_user):
+    array = [id_user, id_user, id_user]
+    sql = 'SELECT * FROM users INNER JOIN geolocation g ON users.id = g.id_user INNER JOIN requests r ON users.id = r.id_sender AND r.id_sender != ?  AND r.id_taker != ?  WHERE users.activation = 1 AND users.id != ?'
+    res = database.db_query(sql, array)
+    return res
