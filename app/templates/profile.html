@@ -26,14 +26,22 @@
                         <div class="about-content-block">
                             <h4 class="grey"><i class="ion-information-circled icon-in-title"></i>About me</h4>
                             {% if data.information %}
-                            <p>{{ data.information[0]['information'] }}</p>
-{#                            {% else %}#}
-{#                            <p>The user has not yet filled out any personal information.</p>#}
+                                <p>{{ data.information }}</p>
+                            {% else %}
+                                {% if data.user.id == session.get('id') %}
+                                    <a href="/profile/edit/basic"><p>Add information about yourself</p></a>
+                                {% else %}
+                                    <p>The user has not yet filled out any personal information.</p>
+                                {% endif %}
                             {% endif %}
                         </div>
                         <div class="about-content-block">
+                            <h4 class="grey"><i class="ion-information-circled icon-in-title"></i>Gender</h4>
+                            <p>{{ data.user.gender }}</p>
+                        </div>
+                        <div class="about-content-block">
                             <h4 class="grey"><i class="ion-information-circled icon-in-title"></i>Sexual preferences</h4>
-                            <p>{{ data.sex_pref }}</p>
+                            <p>{{ data.user.sex_pref }}</p>
                         </div>
                         <div class="about-content-block">
                             <h4 class="grey"><i class="ion-ios-heart icon-in-title"></i>Interests</h4>
@@ -42,6 +50,8 @@
                                     {% for interest in data.interests %}
                                         <li><a class="tag" style="text-decoration: none;"><i class="{{ interest.icon }}"></i> {{ interest.title }}</a></li>
                                     {% endfor %}
+                                {% else %}
+                                    <a href="/profile/edit/interests"><p>Add your interests</p></a>
                                 {% endif %}
                             </ul>
                         </div>
@@ -103,8 +113,8 @@
                         <div class="follow-user">
                             <img src="{{ suggestion.avatar }}" alt="" class="profile-photo-sm pull-left" />
                             <div>
-                                <h5><a href="/profile/id{{ suggestion.id }}">Diana Amber</a></h5>
-{#                                <a href="#" class="text-green">Add friend</a>#}
+                                <h5><a href="/profile/id{{ suggestion.id }}">{{ suggestion.firstname + ' ' + suggestion.lastname }}</a></h5>
+{#                                <a href="#" class="text-green">{{  }}</a>#}
                             </div>
                         </div>
                         {% endfor %}
@@ -124,8 +134,9 @@
     <script src="{{ url_for('static', filename='js/jquery.scrollbar.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <script src="{{ url_for('static', filename = 'js/notifications.js') }}"></script>
-{#    <script src="{{ url_for('static', filename = 'js/create_dialogue.js') }}"></script>#}
+    <script src="{{ url_for('static', filename = 'js/create_dialogue.js') }}"></script>
     <script src="{{ url_for('static', filename = 'js/geolocation.js') }}"></script>
     <script src="{{ url_for('static', filename = 'js/geomarker.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'js/sympathys.js') }}"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqLNucodvPuxX_30MWoh6g1YT6hWnvzS4&callback=initMap"></script>
 {% endblock %}

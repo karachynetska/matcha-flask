@@ -3,9 +3,9 @@ $("#register-button").on("click", function(e) {
 
   var gender;
   if ($('input[id=female]:checked').val() == 'on') {
-    gender = "female"}
+    gender = "Female"}
   else {
-    gender = "male"}
+    gender = "Male"}
 
   var data = {
     firstname: $("#firstname").val(),
@@ -19,7 +19,7 @@ $("#register-button").on("click", function(e) {
     gender,
     sex_pref: $("#sex_pref").val(),
     city: $("#city").val(),
-    country: $("#country").text(),
+    country: $("#country").val(),
   };
 
   $.ajax({
@@ -49,7 +49,7 @@ $("#login-button").on('click', function (e) {
   e.preventDefault();
 
   var data = {
-    email: $('#my-email').val(),
+    login: $('#my-login').val(),
     password: $('#my-password').val()
   };
 

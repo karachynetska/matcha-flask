@@ -12,13 +12,9 @@ function getLocation(href) {
     }
 }
 
-
-
-$('button').on('click', function (e) {
-    console.log(e.target.like_user);
-});
 // LIKE USER
 function like_user() {
+    console.log('pressed');
     var url = getLocation(location.href);
     var user_id = url.pathname.match(/(\d+)/)[1];
     var data = {
@@ -37,14 +33,19 @@ function like_user() {
     });
 }
 
+// window.onload = function() {
+//     like_user();
+// };
+
 $('#like_user').on('click', function (e) {
     e.preventDefault();
 
     like_user();
 });
 
+
 $('#like_user-M').on('click', function (e) {
-    e.preventDefault();
+    // e.preventDefault();
 
     like_user();
 });

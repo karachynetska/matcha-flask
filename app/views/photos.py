@@ -41,6 +41,7 @@ def photos(id_user=None):
             'lastname')) + ' viewed your profile.'
         notification_view.add_notification(id_user, msg, 'view', image)
 
+
     data = {
         'user': user,
         'photos': photos,

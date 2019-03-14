@@ -79,7 +79,10 @@ $("#avatar").on('change', function () {
     var file = this.files[0];
 
     if (file) {
-        var data = new FormData();
+        var data = new FormData(),
+            src = null,
+            avatar_preview = $('#avatar_preview').attr('src');
+
         if (data) {
             data.append('avatar', file);
             data.append('size', data.get('avatar').size);
@@ -101,12 +104,10 @@ $("#avatar").on('change', function () {
             }
             var reader = new FileReader();
             reader.onload = function (e) {
-                $('#avatar_preview').attr('src', e.target.result);
-            }
+                src = e.target.result;
+                $('#avatar_preview').attr('src', src);
+            };
             reader.readAsDataURL(file);
-            $("#message-avatar").text("");
-            $("#message-avatar").text("Avatar succesfully uploaded");
-            $("#message-avatar").addClass("success");
             $('#change-avatar').on('click', function (e) {
                 e.preventDefault();
                 $.ajax({
@@ -117,6 +118,7 @@ $("#avatar").on('change', function () {
                     contentType: false
                 }).done(function (data) {
                     var res = JSON.parse(data);
+                    console.log(res);
                     if (res.ok == false) {
                         $("#message-avatar").text("");
                         $("#message-avatar").text(res.error);
@@ -126,7 +128,9 @@ $("#avatar").on('change', function () {
                             });
                         }
                     } else {
-                        location.reload();
+                        $('#profile_photo').attr('src', src);
+                        $('#m-profile_photo').attr('src', src);
+                        $('#avatar_preview').attr('src', avatar_preview);
                     }
                 });
             });

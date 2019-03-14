@@ -31,6 +31,12 @@ def create_about_for_user(id):
     array = [id]
     sql = 'INSERT INTO about(id_user) VALUES(?)'
     res = database.db_insert(sql, array)
+    return res
+
+def create_profile_settings(id_user, user_gender, user_sex_pref, user_filter):
+    array = [id_user, user_gender, user_sex_pref, user_filter]
+    sql = 'INSERT INTO profile_settings (id_user, user_gender, user_sex_pref, user_filter) VALUES (?, ?, ?, ?)'
+    res = database.db_insert(sql, array)
     print(res)
     return res
 
@@ -100,7 +106,10 @@ def get_information(id):
     array = [id]
     sql = 'SELECT information FROM about WHERE id_user=?'
     res = database.db_query(sql, array)
-    return res
+    if res:
+        return res[0]['information']
+    else:
+        return False
 
 #EDIT PROFILE
 def change_avatar(avatar, id):

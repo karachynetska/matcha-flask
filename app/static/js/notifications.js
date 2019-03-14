@@ -4,6 +4,7 @@ $(document).ready(function () {
 
     socket_notifications.on('notification', function (data) {
         if (data) {
+            console.log(data);
             jQuery.each(data, function (i, val) {
                 $('.notifications').append('<li class="notification-li"><div class="notification"><img src="'+val['image']+'" alt="user" class="profile-photo-md pull-left notification-img"/><p>'+val['notification']+'</p></div></li>');
             });

@@ -12,7 +12,8 @@ from app.models import user as user_model
 from app.models import geolocation as geolocation_model
 from app.views import notifications as notification_view
 from app.models import sympathys
-from app.models import search as search_model
+from app.models import suggestions as suggestions_model
+from app.models import photos as photos_model
 from app.views.search import calculate_distance
 # from app.models.friendships import check_friendship, add_friend
 from flask_mail import Message
@@ -23,54 +24,56 @@ app.config['UPLOADED_PHOTOS_DEST'] = "app/static/media"
 configure_uploads(app, photos)
 
 
+def get_suggestions_for_user(user):
+    suggestions = []
+
+    # print(user['sex_pref'])
+    # print(user['gender'])
+    if user['gender'] == 'Female' and user['sex_pref'] == 'Heterosexual':
+        print('blah')
+        suggestions = suggestions_model.get_getero_or_bi_user(user['id'], 'Male')
+
+    if user['gender'] == 'Female' and user['sex_pref'] == 'Homosexual':
+        suggestions = suggestions_model.get_getero_or_bi_user(user['id'], 'Female')
+
+    if user['gender'] == 'Female' and user['sex_pref'] == 'Bisexual':
+        suggestions = suggestions_model.get_getero_or_bi_user(user['id'], 'Male')
+
+    if user['gender'] == 'Male' and user['sex_pref'] == 'Heterosexual':
+        suggestions = suggestions_model.get_getero_or_bi_user(user['id'], 'Male')
+
+    if user['gender'] == 'Male' and user['sex_pref'] == 'Homosexual':
+        suggestions = suggestions_model.get_getero_or_bi_user(user['id'], 'Male')
+
+    if user['gender'] == 'Male' and user['sex_pref'] == 'Bisexual':
+        suggestions = suggestions_model.get_getero_or_bi_user(user['id'], 'Male')
+
+    return suggestions
 
 # PROFILE
-# @app.route('/profile')
-# @app.route('/profile/id<int:id_user>/')
-# def profile(id_user=None):
-#     if not 'id' in session and not id_user:
-#         return redirect('/')
-#     if 'id' in session:
-#         user = user_model.get_user_by_id(session.get('id'))[0]
-#         friends = sympathys.get_sympathys_list(session.get('id'))
-#
-#     if id_user:
-#         user = user_model.get_user_by_id(id_user)[0]
-#         friends = sympathys.get_sympathys_list(id_user)
-#         msg = str(session.get('firstname')) + ' ' + str(session.get('lastname')) + ' viewed your profile.'
-#         image = user_model.get_avatar(session.get('id'))
-#         notification_view.add_notification(id_user, msg,'view', image)
-#     data = {
-#         'user': user,
-#         'sympathys': sympathys,
-#         'friends': friends
-#     }
-#     return render_template('profile.html', data=data)
-
-
-
-
-# ABOUT
 @app.route('/profile')
 @app.route('/profile/id<int:id_user>/')
 def profile(id_user=None):
     if not 'id' in session and not id_user:
         return redirect('/')
     if 'id' in session:
-        user = user_model.get_user_by_id(session.get('id'))[0]
-        friends = sympathys.get_sympathys_list(session.get('id'))
-        information = user_model.get_information(session.get('id'))
-        sex_pref = user_model.get_sex_pref(session.get('id'))
-        interests = user_model.get_interests_by_user_id(session.get('id'))
-        education = user_model.get_education_by_user_id(session.get('id'))
-        work = user_model.get_work_by_user_id(session.get('id'))
-        geolocation = geolocation_model.get_geolocation_by_user_id(session.get('id'))
+        my_id = session.get('id')
+        user = user_model.get_user_by_id(my_id)[0]
+        friends = sympathys.get_sympathys_list(my_id)
+        information = user_model.get_information(my_id)
+        interests = user_model.get_interests_by_user_id(my_id)
+        education = user_model.get_education_by_user_id(my_id)
+        work = user_model.get_work_by_user_id(my_id)
+        geolocation = geolocation_model.get_geolocation_by_user_id(my_id)
+
+        suggestions = get_suggestions_for_user(user)
+        # print(suggestions)
+
 
     if id_user:
         user = user_model.get_user_by_id(id_user)[0]
         friends = sympathys.get_sympathys_list(id_user)
         information = user_model.get_information(id_user)
-        sex_pref = user_model.get_sex_pref(id_user)
         interests = user_model.get_interests_by_user_id(id_user)
         education = user_model.get_education_by_user_id(id_user)
         work = user_model.get_work_by_user_id(id_user)
@@ -79,14 +82,20 @@ def profile(id_user=None):
         msg = str(session.get('firstname')) + ' ' + str(session.get('lastname')) + ' viewed your profile.'
         image = user_model.get_avatar(session.get('id'))
         notification_view.add_notification(id_user, msg, 'view', image)
+        suggestions = None
 
-    suggestions = search_model.suggestion(session.get('id'))
-    print(suggestions)
-    for suggestion in suggestions:
-        print(suggestion['latitude'])
-        print(suggestion['longitude'])
-        suggestion['distance'] = calculate_distance(float(suggestion['latitude']), float(suggestion['longitude']))
-    suggestions = sorted(suggestions, key=lambda k: k['distance'])
+
+    # print(information)
+    # suggestions = []
+    #
+    # for i in range(len(array)):
+    #     if array[i] not in array[i + 1:]:
+    #         suggestions.append(array[i])
+    # for suggestion in suggestions:
+    #     suggestion['distance'] = calculate_distance(float(suggestion['latitude']), float(suggestion['longitude']))
+    #
+    # suggestions = sorted(suggestions, key=lambda k: k['distance'])
+    # print(suggestions)
 
 
     data = {
@@ -94,12 +103,11 @@ def profile(id_user=None):
         'friends': friends,
         'sympathys': sympathys,
         'information': information,
-        'sex_pref': sex_pref,
         'interests': interests,
         'education': education,
         'work': work,
         'geolocation': geolocation,
-        'suugestions': suggestions[:5]
+        'suggestions': suggestions
     }
     return render_template('profile.html', data=data)
 
@@ -124,7 +132,7 @@ def friends(id_user=None):
         notification_view.add_notification(id_user, msg, 'view', image)
     data = {
         'user': user,
-        'sympathys': sympathys.get_sympathys_list(session.get('id')),
+        'sympathys': sympathys,
         'friends': friends,
         'get_user_by_id': user_model.get_user_by_id
     }
@@ -320,7 +328,7 @@ def edit_interests():
 @app.route('/ajax_edit_interests', methods=['POST'])
 def ajax_edit_interests():
     interest = html.escape(request.form['interest'])
-    icon = None
+    icon = "fas fa-hashtag"
 
     if not interest:
         return json.dumps({
@@ -470,12 +478,17 @@ def ajax_edit_avatar():
     photos.save(avatar, login, avatar_name)
 
     # CHANGE AVATAR IN DB
-    user_model.change_avatar(path, id)
-    return json.dumps({
-        'ok': True,
-        'error': "Avatar successfully uploaded",
-    })
-
+    if not user_model.change_avatar(path, id):
+        photos_model.add_photo(id, path)
+        return json.dumps({
+            'ok': True,
+            'error': 'Avatar successfully uploaded',
+        })
+    else:
+        return json.dumps({
+            'ok': False,
+            'error': "Something wrong"
+        })
 
 @app.route('/ajax_add_education', methods=['POST'])
 def ajax_edit_education():

@@ -36,7 +36,7 @@ def register():
     if len(firstname) < 2 or len(firstname) > 25:
         return json.dumps({
             'ok': False,
-            'error': "Firstname length must be from 2 characters to 25",
+            'error': "Firs tname length must be from 2 characters to 25",
             'fields': ["firstname"]
         })
 
@@ -44,7 +44,7 @@ def register():
     if len(lastname) < 2 or len(lastname) > 25:
         return json.dumps({
             'ok': False,
-            'error': "Lastname length must be from 2 characters to 25",
+            'error': "Last name length must be from 2 characters to 25",
             'fields': ["lastname"]
         })
 
@@ -187,7 +187,29 @@ def register():
         message.html = "<p>Thank you for registration in Matcha. To activate your account please follow the <a href= " + request.url_root + "activate?email=" + email + '&token=' + token + ">link</a></p> "
         mail.send(message)
         id_user = user_model.email_exists(email)[0]['id']
-        if user_model.create_about_for_user(id_user):
+        user_gender = 'none'
+        user_sex_pref = 'none'
+        if gender == 'Female' and sex_pref == 'Heterosexual':
+            user_gender = 'Male'
+            user_sex_pref = 'noHomosexual'
+        if gender == 'Female' and sex_pref == 'Homosexual':
+            user_gender = 'Female'
+            user_sex_pref = 'noHeterosexual'
+        if gender == 'Female' and sex_pref == 'Bisexual':
+            user_gender = 'all'
+            user_sex_pref = 'none'
+
+        if gender == 'Male' and sex_pref == 'Heterosexual':
+            user_gender = 'Female'
+            user_sex_pref = 'noHomosexual'
+        if gender == 'Male' and sex_pref == 'Homosexual':
+            user_gender = 'Male'
+            user_sex_pref = 'noHeterosexual'
+        if gender == 'Male' and sex_pref == 'Bisexual':
+            user_gender = 'all'
+            user_sex_pref = 'none'
+
+        if user_model.create_about_for_user(id_user) and user_model.create_profile_settings(id_user, user_gender, user_sex_pref, 'none'):
             return json.dumps({
                 'ok': True,
             })
@@ -216,14 +238,14 @@ def login():
     if 'login' in session:
         return redirect('/profile')
 
-    email = html.escape(request.form['email'])
+    login = html.escape(request.form['login'])
     password = html.escape(request.form['password'])
 
-    if not email:
+    if not login:
         return json.dumps({
             'ok': False,
-            'error': "Please enter your email",
-            'fields': ["my-email"]
+            'error': "Please enter your login",
+            'fields': ["my-login"]
         })
 
     if not password:
@@ -233,7 +255,7 @@ def login():
             'fields': ["my-password"]
         })
 
-    user = user_model.email_exists(email)
+    user = user_model.login_exists(login)
 
     if user:
         if user[0]['activation'] != 1:
@@ -259,8 +281,8 @@ def login():
     else:
         return json.dumps({
             'ok': False,
-            'error': "There is no user with such email.",
-            'fields': ['my-email']
+            'error': "There is no user with such login.",
+            'fields': ['my-login']
         })
 
 

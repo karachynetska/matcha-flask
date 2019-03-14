@@ -4,6 +4,7 @@ $('#photo').on('change', function (e) {
     var file = this.files[0];
 
     if (file) {
+        $('#add_photo').removeClass('none');
         var data = new FormData();
         if (data) {
             data.append('photo', file);
@@ -25,6 +26,7 @@ $('#photo').on('change', function (e) {
                 return;
             }
             $('#add_photo').on('click', function (e) {
+                console.log('pressed');
                 e.preventDefault();
                 $.ajax({
                     type: "POST",

@@ -23,6 +23,14 @@
           <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-7">
+            <div class="row">
+                <ul class="list-inline">
+                    <li id="my_friends">My friends</li>
+                    <li id="incoming_requests">Incoming requests</li>
+                    <li id="outgoing_requests">Outgoing requests</li>
+                </ul>
+            </div>
+            <div class="line-divider"></div>
             {% if data.friends %}
               <!-- Friend List
               ================================================= -->
@@ -64,8 +72,12 @@
                 </div>
               </div>
                 {% else %}
-                <p>You have no friends yet</p>
+                {% if data.user.id == session.get('id') %}
+                    <p style="text-align: center">You have no friends yet</p>
+                {% else %}
+                    <p style="text-align: center">The user has no friends yet</p>
                 {% endif %}
+            {% endif %}
             </div>
 {#            <div class="col-md-2 static">#}
 {#              <div id="sticky-sidebar">#}

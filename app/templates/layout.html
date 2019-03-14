@@ -44,7 +44,7 @@
                             <li><a href="/profile/edit/basic">Basic information</a></li>
                             <li><a href="/profile/edit/edu-work">Education and work</a></li>
                             <li><a href="/profile/edit/interests">My interests</a></li>
-                            <li><a href="/profile/edit/settings">Account settings</a></li>
+                            <li><a href="/profile/edit/settings">Profile settings</a></li>
                             <li><a href="/profile/edit/avatar">Avatar</a></li>
                             <li><a href="/profile/edit/password">Password</a></li>
                             <li><a href="/profile/edit/geolocation">Geolocation</a></li>
@@ -76,7 +76,7 @@
                 <div class="row">
               <div class="col-md-3">
                 <div class="profile-info">
-                  <a href="/profile"><img src="{{ data.user.avatar }}" alt="" class="img-responsive profile-photo" /></a>
+                  <a href="/profile"><img id="profile_photo" src="{{ data.user.avatar }}" alt="" class="img-responsive profile-photo" /></a>
                   <h3>{{ data.user.firstname + ' ' + data.user.lastname }}</h3>
                   <p class="text-muted">{{ data.user.login }}</p>
                 </div>
@@ -147,7 +147,7 @@
             <!--Timeline Menu for Small Screens-->
             <div class="navbar-mobile hidden-lg hidden-md">
                 <div class="profile-info">
-                    <a href="/profile"><img src="{{ data.user.avatar }}" alt="" class="img-responsive profile-photo" /></a>
+                    <a href="/profile"><img id="m_profile_photo" src="{{ data.user.avatar }}" alt="" class="img-responsive profile-photo" /></a>
                     <h4>{{ data.user.firstname + ' ' + data.user.lastname }}</h4>
                     <p class="text-muted">{{ data.user.login }}</p>
                 </div>
@@ -201,6 +201,7 @@
         {% block scripts %}
             <script src="{{ url_for('static', filename = 'js/sympathys.js') }}"></script>
             <script src="{{ url_for('static', filename = 'js/messages.js') }}"></script>
+            <script src="{{ url_for('static', filename = 'js/create_dialogue.js') }}"></script>
         {% endblock %}
 </body>
 </html>
