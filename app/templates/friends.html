@@ -18,99 +18,167 @@
 
 {% block main %}
     <div class="container">
-
         <div id="page-contents">
-          <div class="row">
-            <div class="col-md-3"></div>
-            <div class="col-md-7">
             <div class="row">
-                <ul class="list-inline">
-                    <li id="my_friends">My friends</li>
-                    <li id="incoming_requests">Incoming requests</li>
-                    <li id="outgoing_requests">Outgoing requests</li>
-                </ul>
-            </div>
-            <div class="line-divider"></div>
-            {% if data.friends %}
-              <!-- Friend List
-              ================================================= -->
-              <div class="friend-list">
-                <div class="row">
-                 {% for friend in data.friends %}
-                    {% if friend.id_user1 == data.user.id %}
-                    {% set guy = data.get_user_by_id(friend.id_user2)[0] %}
-                  <div class="col-md-6 col-sm-6">
-                    <div class="friend-card">
-                      <img src="{{ guy.background }}" alt="profile-cover" class="img-responsive cover" />
-                      <div class="card-info">
-                        <img src="{{ guy.avatar }}" alt="user" class="profile-photo-lg" />
-                        <div class="friend-info">
-                          <a href="#" class="pull-right text-green">My Friend</a>
-                          <h5><a href="/profile/id{{ guy.id }}" class="profile-link">{{ guy.firstname + ' ' + guy.lastname }}</a></h5>
-                          <p>{{ guy.login }}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                    {% elif friend.id_user2 == data.user.id %}
-                    {% set guy = data.get_user_by_id(friend.id_user1)[0] %}
-                  <div class="col-md-6 col-sm-6">
-                    <div class="friend-card">
-                      <img src="{{ guy.background }}" alt="profile-cover" class="img-responsive cover" />
-                      <div class="card-info">
-                        <img src="{{ guy.avatar }}" alt="user" class="profile-photo-lg" />
-                        <div class="friend-info">
-                          <a href="#" class="pull-right text-green">My Friend</a>
-                          <h5><a href="/profile/id{{ guy.id }}" class="profile-link">{{ guy.firstname + ' ' + guy.lastname }}</a></h5>
-                          <p>{{ guy.login }}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                    {% endif %}
-                {% endfor %}
-                </div>
-              </div>
-                {% else %}
+                <div class="col-md-3"></div>
+                <div class="col-md-7">
                 {% if data.user.id == session.get('id') %}
-                    <p style="text-align: center">You have no friends yet</p>
+                    <div class="row">
+                        <ul class="nav nav-tabs">
+                            <li class="active"><a data-toggle="tab" href="#my_friends">My friends</a></li>
+                            <li><a data-toggle="tab" href="#incoming_requests">Incoming requests</a></li>
+                            <li><a data-toggle="tab" href="#outgoing_requests">Outgoing requests</a></li>
+                        </ul>
+                    </div>
+                    <div class="line-divider"></div>
+                    <div class="tab-content">
+                        <div id="my_friends" class="tab-pane fade in active">
+{#                            <p>Friends</p>#}
+                            {% if data.friends %}
+                                <!-- Friend List
+                                ================================================= -->
+                                <div class="friend-list">
+                                    <div class="row">
+                                        {% for friend in data.friends %}
+                                            {% if friend.id_user1 == data.user.id %}
+                                                {% set guy = data.get_user_by_id(friend.id_user2)[0] %}
+                                                <div class="col-md-6 col-sm-6">
+                                                    <div class="friend-card">
+                                                        <img src="{{ guy.background }}" alt="profile-cover" class="img-responsive cover" />
+                                                        <div class="card-info">
+                                                            <img src="{{ guy.avatar }}" alt="user" class="profile-photo-lg" />
+                                                            <div class="friend-info">
+                                                                <h5><a href="/profile/id{{ guy.id }}" class="profile-link">{{ guy.firstname + ' ' + guy.lastname }}</a></h5>
+                                                                <p>{{ guy.login }}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% elif friend.id_user2 == data.user.id %}
+                                                {% set guy = data.get_user_by_id(friend.id_user1)[0] %}
+                                                <div class="col-md-6 col-sm-6">
+                                                    <div class="friend-card">
+                                                        <img src="{{ guy.background }}" alt="profile-cover" class="img-responsive cover" />
+                                                        <div class="card-info">
+                                                            <img src="{{ guy.avatar }}" alt="user" class="profile-photo-lg" />
+                                                            <div class="friend-info">
+                                                                <h5><a href="/profile/id{{ guy.id }}" class="profile-link">{{ guy.firstname + ' ' + guy.lastname }}</a></h5>
+                                                                <p>{{ guy.login }}</p>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                </div>
+                            {% else %}
+                                {% if data.user.id == session.get('id') %}
+                                    <p style="text-align: center">You have no friends yet</p>
+                                {% else %}
+                                    <p style="text-align: center">The user has no friends yet</p>
+                                {% endif %}
+                            {% endif %}
+                        </div>
+                        <div id="incoming_requests" class="tab-pane fade">
+{#                            <p>Incoming requests</p>#}
+                            {% if data.incoming_requests %}
+                            <div class="friend-list">
+                                <div class="row">
+                                    {% for request in data.incoming_requests %}
+                                        {% set guy = data.get_user_by_id(request.id_sender)[0] %}
+                                        <div class="col-md-6 col-sm-6">
+                                            <div class="friend-card">
+                                                <img src="{{ guy.background }}" alt="profile-cover" class="img-responsive cover" />
+                                                <div class="card-info">
+                                                    <img src="{{ guy.avatar }}" alt="user" class="profile-photo-lg" />
+                                                    <div class="friend-info">
+                                                        <h5><a href="/profile/id{{ guy.id }}" class="profile-link">{{ guy.firstname + ' ' + guy.lastname }}</a></h5>
+                                                        <p>{{ guy.login }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                        <div id="outgoing_requests" class="tab-pane fade">
+{#                            <p>Outgoing requests</p>#}
+                            {% if data.outgoing_requests %}
+                            <div class="friend-list">
+                                <div class="row">
+                                    {% for request in data.outgoing_requests %}
+                                        {% set guy = data.get_user_by_id(request.id_taker)[0] %}
+                                        <div class="col-md-6 col-sm-6">
+                                            <div class="friend-card">
+                                                <img src="{{ guy.background }}" alt="profile-cover" class="img-responsive cover" />
+                                                <div class="card-info">
+                                                    <img src="{{ guy.avatar }}" alt="user" class="profile-photo-lg" />
+                                                    <div class="friend-info">
+                                                        <h5><a href="/profile/id{{ guy.id }}" class="profile-link">{{ guy.firstname + ' ' + guy.lastname }}</a></h5>
+                                                        <p>{{ guy.login }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
                 {% else %}
-                    <p style="text-align: center">The user has no friends yet</p>
+                    {% if data.friends %}
+                        <!-- Friend List
+                        ================================================= -->
+                        <div class="friend-list">
+                            <div class="row">
+                                {% for friend in data.friends %}
+                                    {% if friend.id_user1 == data.user.id %}
+                                        {% set guy = data.get_user_by_id(friend.id_user2)[0] %}
+                                        <div class="col-md-6 col-sm-6">
+                                            <div class="friend-card">
+                                                <img src="{{ guy.background }}" alt="profile-cover" class="img-responsive cover" />
+                                                <div class="card-info">
+                                                    <img src="{{ guy.avatar }}" alt="user" class="profile-photo-lg" />
+                                                    <div class="friend-info">
+                                                        <h5><a href="/profile/id{{ guy.id }}" class="profile-link">{{ guy.firstname + ' ' + guy.lastname }}</a></h5>
+                                                        <p>{{ guy.login }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% elif friend.id_user2 == data.user.id %}
+                                        {% set guy = data.get_user_by_id(friend.id_user1)[0] %}
+                                        <div class="col-md-6 col-sm-6">
+                                            <div class="friend-card">
+                                                <img src="{{ guy.background }}" alt="profile-cover" class="img-responsive cover" />
+                                                <div class="card-info">
+                                                    <img src="{{ guy.avatar }}" alt="user" class="profile-photo-lg" />
+                                                    <div class="friend-info">
+                                                        <h5><a href="/profile/id{{ guy.id }}" class="profile-link">{{ guy.firstname + ' ' + guy.lastname }}</a></h5>
+                                                        <p>{{ guy.login }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    {% else %}
+                        {% if data.user.id == session.get('id') %}
+                            <p style="text-align: center">You have no friends yet</p>
+                        {% else %}
+                            <p style="text-align: center">The user has no friends yet</p>
+                        {% endif %}
+                    {% endif %}
                 {% endif %}
-            {% endif %}
+                </div>
             </div>
-{#            <div class="col-md-2 static">#}
-{#              <div id="sticky-sidebar">#}
-{#                <h4 class="grey">Sarah's activity</h4>#}
-{#                <div class="feed-item">#}
-{#                  <div class="live-activity">#}
-{#                    <p><a href="#" class="profile-link">Sarah</a> Commended on a Photo</p>#}
-{#                    <p class="text-muted">5 mins ago</p>#}
-{#                  </div>#}
-{#                </div>#}
-{#                <div class="feed-item">#}
-{#                  <div class="live-activity">#}
-{#                    <p><a href="#" class="profile-link">Sarah</a> Has posted a photo</p>#}
-{#                    <p class="text-muted">an hour ago</p>#}
-{#                  </div>#}
-{#                </div>#}
-{#                <div class="feed-item">#}
-{#                  <div class="live-activity">#}
-{#                    <p><a href="#" class="profile-link">Sarah</a> Liked her friend's post</p>#}
-{#                    <p class="text-muted">4 hours ago</p>#}
-{#                  </div>#}
-{#                </div>#}
-{#                <div class="feed-item">#}
-{#                  <div class="live-activity">#}
-{#                    <p><a href="#" class="profile-link">Sarah</a> has shared an album</p>#}
-{#                    <p class="text-muted">a day ago</p>#}
-{#                  </div>#}
-{#                </div>#}
-{#              </div>#}
-{#            </div>#}
-          </div>
         </div>
-      </div>
     </div>
 {% endblock %}
 

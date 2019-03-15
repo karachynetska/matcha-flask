@@ -1,0 +1,64 @@
+{% extends 'layout.html' %}
+{% block title %}My Friends | Friend Finder Friend List{% endblock %}
+{% block link %}
+    <!-- Stylesheets
+    ================================================= -->
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/bootstrap.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/jquery-ui.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/style.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/ionicons.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/font-awesome.min.css') }}" />
+
+    <!--Google Font-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
+
+    <!--Favicon-->
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename = 'images/fav.png') }}"/>
+{% endblock %}
+
+{% block main %}
+    <div class="container">
+        <div id="page-contents">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-7">
+                <h4 class="grey">Suggestions</h4>
+                <div class="line-divider"></div>
+                {% if data.suggestions %}
+                    <div class="friend-list">
+                        <div class="row">
+                            {% for suggestion in data.suggestions %}
+                                <div class="col-md-6 col-sm-6">
+                                    <div class="friend-card">
+                                        <img src="{{ suggestion.background }}" alt="profile-cover" class="img-responsive cover" />
+                                        <div class="card-info">
+                                            <img src="{{ suggestion.avatar }}" alt="user" class="profile-photo-lg" />
+                                            <div class="friend-info">
+                                                <h5><a href="/profile/id{{ suggestion.id }}" class="profile-link">{{ suggestion.firstname + ' ' + suggestion.lastname }}</a></h5>
+                                                <p>{{ suggestion.login }}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <!-- Scripts
+    ================================================= -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+    <script src="{{ url_for('static', filename = 'js/jquery-3.1.1.min.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'js/jquery-ui.min.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'js/jquery.sticky-kit.min.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'js/jquery.scrollbar.min.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'js/script.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'js/notifications.js') }}"></script>
+{% endblock %}

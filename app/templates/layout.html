@@ -91,6 +91,7 @@
                         <li><a href="/profile">Profile</a></li>
                         <li><a href="/profile/friends">Friends</a></li>
                         <li><a href="/profile/photos">Album</a></li>
+                        <li><a href="/profile/suggestions">Suggestions</a></li>
                     {% endif %}
                 </ul>
                 <ul class="follow-me list-inline actions">
@@ -111,30 +112,28 @@
                 {% if session.get('id') != data.user.id %}
                     {% if data.sympathys.check_sympathy(session.get('id'), data.user.id) %}
                         <li><button id="unlike_user" class="btn-primary unlike_user" >Unlike</button></li>
-                        <li><a href="/profile/messages/dialogue_with_{{ data.user.id }}"><button id="start_dialog" class="btn-primary">Send message</button></a></li>
+                        <li><a href="/profile/messages/dialogue_with_{{ data.user.id }}"><button id="start_dialogue" class="btn-primary">Send message</button></a></li>
                         <li class="none"><button id="liked_user" class="btn-primary liked_user">Liked</button></li>
                         <li class="none"><button id="like_back" class="btn-primary">Like back</button></li>
                         <li class="none"><button id="like_user" class="btn-primary like_user">Like</button></li>
                     {% else %}
                         {% if data.sympathys.check_request(session.get('id'), data.user.id) == 'sender' %}
                             <li class="none"><button id="unlike_user" class="btn-primary unlike_user" >Unlike</button></li>
-                            <li class="none"><a href="/profile/messages/dialogue_with_{{ data.user.id }}"><button id="start_dialog" class="btn-primary">Send message</button></a></li>
+                            <li class="none"><a href="/profile/messages/dialogue_with_{{ data.user.id }}"><button id="start_dialogue" class="btn-primary">Send message</button></a></li>
                             <li><button id="liked_user" class="btn-primary liked_user">Liked</button></li>
                             <li class="none"><button id="like_back" class="btn-primary">Like back</button></li>
                             <li class="none"><button id="like_user" class="btn-primary like_user">Like</button></li>
                         {% elif data.sympathys.check_request(session.get('id'), data.user.id) == 'taker' %}
                             <li class="none"><button id="unlike_user" class="btn-primary unlike_user" >Unlike</button></li>
-                            <li class="none"><a href="/profile/messages/dialogue_with_{{ data.user.id }}"><button id="start_dialog" class="btn-primary">Send message</button></a></li>
+                            <li class="none"><a href="/profile/messages/dialogue_with_{{ data.user.id }}"><button id="start_dialogue" class="btn-primary">Send message</button></a></li>
                             <li class="none"><button id="liked_user" class="btn-primary liked_user">Liked</button></li>
                             <li><button id="like_back" class="btn-primary">Like back</button></li>
                             <li class="none"><button id="like_user" class="btn-primary like_user">Like</button></li>
                         {% else %}
                             <li class="none"><button id="unlike_user" class="btn-primary unlike_user" >Unlike</button></li>
-                            <li class="none"><a href="/profile/messages/dialogue_with_{{ data.user.id }}"><button id="start_dialog" class="btn-primary">Send message</button></a></li>
+                            <li class="none"><a href="/profile/messages/dialogue_with_{{ data.user.id }}"><button id="start_dialogue" class="btn-primary">Send message</button></a></li>
                             <li class="none"><button id="liked_user" class="btn-primary liked_user">Liked</button></li>
                             <li class="none"><button id="like_back" class="btn-primary">Like back</button></li>
-                            <li class="none"><button id="like_user" class="btn-primary like_user">Like</button></li>
-
                             <li><button id="like_user" class="btn-primary like_user">Like</button></li>
                         {% endif %}
                     {% endif %}
@@ -153,40 +152,45 @@
                 </div>
                 <div class="mobile-menu">
                     <ul class="list-inline actions">
-                        <li><a href="timeline.html" class="active">Timeline</a></li>
-                        <li><a href="timeline-about.html">About</a></li>
-                        <li><a href="timeline-album.html">Album</a></li>
-                        <li><a href="timeline-friends.html">Friends</a></li>
-                    </ul>
-                    {% if session.get('id') != data.user.id %}
-                        {% if data.sympathys.check_sympathy(session.get('id'), data.user.id) %}
-                            <li><button id="unlike_user-M" class="btn-primary unlike_user">Unlike</button></li>
-                            <li><a href="/profile/messages/dialogue_with_{{ data.user.id }}"><button id="start_dialogue-Mло" class="btn-primary">Send message</button></a></li>
-                            <li class="none"><button id="liked_user-M" class="btn-primary liked_user">Liked</button></li>
-                            <li class="none"><button id="like_back-M" class="btn-primary">Like back</button></li>
-                            <li class="none"><button id="like_user-M" class="btn-primary like_user">Like</button></li>
+                        {% if data.user.id != session.get('id') %}
+                        <li><a href="/profile/profile/id{{ data.user.id }}" class="active">Profile</a></li>
+                        <li><a href="/profile/friends/id{{ data.user.id }}">Friends</a></li>
+                        <li><a href="/profile/photos/id{{ data.user.id }}">Album</a></li>
+                    {% else %}
+                        <li><a href="/profile">Profile</a></li>
+                        <li><a href="/profile/friends">Friends</a></li>
+                        <li><a href="/profile/photos">Album</a></li>
+                        <li><a href="/profile/suggestions">Suggestions</a></li>
+                    {% endif %}
+                 {% if session.get('id') != data.user.id %}
+                    {% if data.sympathys.check_sympathy(session.get('id'), data.user.id) %}
+                        <li><button id="unlike_user_M" class="btn-primary unlike_user" >Unlike</button></li>
+                        <li><a href="/profile/messages/dialogue_with_{{ data.user.id }}"><button id="start_dialogue_M" class="btn-primary">Send message</button></a></li>
+                        <li class="none"><button id="liked_user_M" class="btn-primary liked_user">Liked</button></li>
+                        <li class="none"><button id="like_back_M" class="btn-primary">Like back</button></li>
+                        <li class="none"><button id="like_user_M" class="btn-primary like_user">Like</button></li>
+                    {% else %}
+                        {% if data.sympathys.check_request(session.get('id'), data.user.id) == 'sender' %}
+                            <li class="none"><button id="unlike_user_M" class="btn-primary unlike_user" >Unlike</button></li>
+                            <li class="none"><a href="/profile/messages/dialogue_with_{{ data.user.id }}"><button id="start_dialogue_M" class="btn-primary">Send message</button></a></li>
+                            <li><button id="liked_user_M" class="btn-primary liked_user">Liked</button></li>
+                            <li class="none"><button id="like_back_M" class="btn-primary">Like back</button></li>
+                            <li class="none"><button id="like_user_M" class="btn-primary like_user">Like</button></li>
+                        {% elif data.sympathys.check_request(session.get('id'), data.user.id) == 'taker' %}
+                            <li class="none"><button id="unlike_user_M" class="btn-primary unlike_user" >Unlike</button></li>
+                            <li class="none"><a href="/profile/messages/dialogue_with_{{ data.user.id }}"><button id="start_dialogue_M" class="btn-primary">Send message</button></a></li>
+                            <li class="none"><button id="liked_user_M" class="btn-primary liked_user">Liked</button></li>
+                            <li><button id="like_back_M" class="btn-primary">Like back</button></li>
+                            <li class="none"><button id="like_user_M" class="btn-primary like_user">Like</button></li>
                         {% else %}
-                            {% if data.sympathys.check_request(session.get('id'), data.user.id) == 'sender' %}
-                                <li class="none"><button id="unlike_user-M" class="btn-primary unlike_user">Unlike</button></li>
-                                <li class="none"><a href="/profile/messages/dialogue_with_{{ data.user.id }}"><button id="start_dialogue-M" class="btn-primary">Send message</button></a></li>
-                                <li><button id="liked_user-M" class="btn-primary liked_user">Liked</button></li>
-                                <li class="none"><button id="like_back-M" class="btn-primary">Like back</button></li>
-                                <li class="none"><button id="like_user-M" class="btn-primary like_user">Like</button></li>
-                            {% elif data.sympathys.check_request(session.get('id'), data.user.id) == 'taker' %}
-                                <li class="none"><button id="unlike_user-M" class="btn-primary unlike_user">Unlike</button></li>
-                                <li class="none"><a href="/profile/messages/dialogue_with_{{ data.user.id }}"><button id="start_dialogue-Mло" class="btn-primary">Send message</button></a></li>
-                                <li class="none"><button id="liked_user-M" class="btn-primary liked_user">Liked</button></li>
-                                <li><button id="like_back-M" class="btn-primary">Like back</button></li>
-                                <li class="none"><button id="like_user-M" class="btn-primary like_user">Like</button></li>
-                            {% else %}
-                                <li class="none"><button id="unlike_user-M" class="btn-primary unlike_user">Unlike</button></li>
-                                <li class="none"><a href="/profile/messages/dialogue_with_{{ data.user.id }}"><button id="start_dialogue-Mло" class="btn-primary">Send message</button></a></li>
-                                <li><button id="liked_user-M" class="btn-primary liked_user">Liked</button></li>
-                                <li class="none"><button id="like_back-M" class="btn-primary">Like back</button></li>
-                                <li class="none"><button id="like_user-M" class="btn-primary like_user">Like</button></li>
-                            {% endif %}
+                            <li class="none"><button id="unlike_user_M" class="btn-primary unlike_user" >Unlike</button></li>
+                            <li class="none"><a href="/profile/messages/dialogue_with_{{ data.user.id }}"><button id="start_dialogue_M" class="btn-primary">Send message</button></a></li>
+                            <li class="none"><button id="liked_user_M" class="btn-primary liked_user">Liked</button></li>
+                            <li class="none"><button id="like_back_M" class="btn-primary">Like back</button></li>
+                            <li><button id="like_user_M" class="btn-primary like_user">Like</button></li>
                         {% endif %}
                     {% endif %}
+                {% endif %}
                 </div>
             </div><!--Timeline Menu for Small Screens End-->
         </div>

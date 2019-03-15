@@ -29,6 +29,7 @@ def ajax_add_comment():
             'error': "Something went wrong"
         })
     res = comments.add_comment(id_photo, id_user, text)
+    print(res)
     to_whom_id = user_model.get_user_id_by_photo_id(id_photo)
     msg = 'You have a new comment from ' + str(session.get('firstname')) + ' ' + str(session.get('lastname')) + '.'
     image = user_model.get_avatar(session.get('id'))
@@ -40,6 +41,21 @@ def ajax_add_comment():
         })
     return json.dumps({
         'ok': True,
-        'error': "Commented"
+        'error': "Commented",
+        'id_comment': res
     })
 
+@app.route('/ajax_delete_comment', methods=['POST'])
+def ajax_delete_comment():
+    id_comment = request.form['id_comment']
+    if not id_comment:
+        return json.dumps({
+            'ok': False,
+            'error': "Something went wrong"
+        })
+    res = comments.delete_comment(id_comment)
+    if res:
+        return json.dumps({
+            'ok': True,
+            'error': "Comment deleted",
+        })

@@ -6,9 +6,9 @@ def add_comment(id_photo, id_user, text):
     res = database.db_insert(sql, array)
     return res
 
-def delete_comment(id_photo, id_user, text):
-    array = [id_photo, id_user, text]
-    sql = 'DELETE FROM comments WHERE id_photo=?, id_user=?, text=?'
+def delete_comment(id_comment):
+    array = [id_comment]
+    sql = 'DELETE FROM comments WHERE id_comment=?'
     res = database.db_insert(sql, array)
     return res
 

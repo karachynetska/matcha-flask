@@ -27,26 +27,29 @@ configure_uploads(app, photos)
 def get_suggestions_for_user(user):
     suggestions = []
 
-    # print(user['sex_pref'])
-    # print(user['gender'])
     if user['gender'] == 'Female' and user['sex_pref'] == 'Heterosexual':
-        print('blah')
-        suggestions = suggestions_model.get_getero_or_bi_user(user['id'], 'Male')
+        print(1)
+        suggestions = suggestions_model.get_getero_or_bi_man(user['id'])
 
     if user['gender'] == 'Female' and user['sex_pref'] == 'Homosexual':
-        suggestions = suggestions_model.get_getero_or_bi_user(user['id'], 'Female')
+        print(2)
+        suggestions = suggestions_model.get_homo_or_bi_women(user['id'])
 
     if user['gender'] == 'Female' and user['sex_pref'] == 'Bisexual':
-        suggestions = suggestions_model.get_getero_or_bi_user(user['id'], 'Male')
+        print(3)
+        suggestions = suggestions_model.get_users_for_bi_woman(user['id'])
 
     if user['gender'] == 'Male' and user['sex_pref'] == 'Heterosexual':
-        suggestions = suggestions_model.get_getero_or_bi_user(user['id'], 'Male')
+        print(4)
+        suggestions = suggestions_model.get_getero_or_bi_women(user['id'])
 
     if user['gender'] == 'Male' and user['sex_pref'] == 'Homosexual':
-        suggestions = suggestions_model.get_getero_or_bi_user(user['id'], 'Male')
+        print(5)
+        suggestions = suggestions_model.get_homo_or_bi_man(user['id'])
 
     if user['gender'] == 'Male' and user['sex_pref'] == 'Bisexual':
-        suggestions = suggestions_model.get_getero_or_bi_user(user['id'], 'Male')
+        print(6)
+        suggestions = suggestions_model.get_users_for_bi_man(user['id'])
 
     return suggestions
 
@@ -66,8 +69,13 @@ def profile(id_user=None):
         work = user_model.get_work_by_user_id(my_id)
         geolocation = geolocation_model.get_geolocation_by_user_id(my_id)
 
-        suggestions = get_suggestions_for_user(user)
-        # print(suggestions)
+        # if geolocation:
+        #     suggestions = get_suggestions_for_user(user)
+        #     print(suggestions)
+        #     if suggestions:
+        #         for suggestion in suggestions:
+        #             suggestion['distance'] = calculate_distance(float(suggestion['latitude']), float(suggestion['longitude']))
+        #             suggestions = sorted(suggestions, key=lambda k: k['distance'])
 
 
     if id_user:
@@ -82,20 +90,6 @@ def profile(id_user=None):
         msg = str(session.get('firstname')) + ' ' + str(session.get('lastname')) + ' viewed your profile.'
         image = user_model.get_avatar(session.get('id'))
         notification_view.add_notification(id_user, msg, 'view', image)
-        suggestions = None
-
-
-    # print(information)
-    # suggestions = []
-    #
-    # for i in range(len(array)):
-    #     if array[i] not in array[i + 1:]:
-    #         suggestions.append(array[i])
-    # for suggestion in suggestions:
-    #     suggestion['distance'] = calculate_distance(float(suggestion['latitude']), float(suggestion['longitude']))
-    #
-    # suggestions = sorted(suggestions, key=lambda k: k['distance'])
-    # print(suggestions)
 
 
     data = {
@@ -107,7 +101,7 @@ def profile(id_user=None):
         'education': education,
         'work': work,
         'geolocation': geolocation,
-        'suggestions': suggestions
+        # 'suggestions': suggestions
     }
     return render_template('profile.html', data=data)
 
@@ -122,32 +116,44 @@ def friends(id_user=None):
     if 'id' in session:
         user = user_model.get_user_by_id(session.get('id'))[0]
         friends = sympathys.get_sympathys_list(session.get('id'))
+        incoming_requests = sympathys.get_incoming_requests(session.get('id'))
+        outgoing_requests = sympathys.get_outgoing_requests(session.get('id'))
 
     if id_user:
         user = user_model.get_user_by_id(id_user)[0]
         friends = sympathys.get_sympathys_list(id_user)
+        incoming_requests = None
+        outgoing_requests = None
         image = user_model.get_avatar(session.get('id'))
         msg = str(session.get('firstname')) + ' ' + str(session.get(
             'lastname')) + ' viewed your profile.'
         notification_view.add_notification(id_user, msg, 'view', image)
+
+    print(incoming_requests)
+    print(outgoing_requests)
     data = {
         'user': user,
         'sympathys': sympathys,
         'friends': friends,
-        'get_user_by_id': user_model.get_user_by_id
+        'get_user_by_id': user_model.get_user_by_id,
+        'incoming_requests': incoming_requests,
+        'outgoing_requests': outgoing_requests
     }
     return render_template('friends.html', data=data)
 
-    # if 'id' in session:
-    #     data = {
-    #         'user': user_model.get_user_by_id(session.get('id'))[0],
-    #         'sympathys': sympathys.get_sympathys_list(session.get('id')),
-    #         'get_user_by_id': user_model.get_user_by_id
-    #     }
-    #     return render_template('friends.html', data=data)
-    # return redirect('/')
 
-
+# SUGGESTIONS
+@app.route('/profile/suggestions')
+def suggestions():
+    if not 'id' in session:
+        return redirect('/')
+    user = user_model.get_user_by_id(session.get('id'))[0]
+    suggestions = get_suggestions_for_user(user)
+    data = {
+        'user': user,
+        'suggestions': suggestions
+    }
+    return render_template('suggestions.html', data = data)
 
 # EDIT BASIC INFORMATION
 @app.route('/profile/edit/basic')

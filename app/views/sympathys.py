@@ -61,6 +61,15 @@ def ajax_pick_up_like():
                         'ok': False,
                         'error': "Something went wrong."
                     })
+            else:
+                return json.dumps({
+                    'ok': False,
+                    'error': "Something went wrong."
+                })
+        return json.dumps({
+            'ok': False,
+            'error': "Something went wrong."
+        })
     else:
         return json.dumps({
             'ok': False,
@@ -93,7 +102,7 @@ def ajax_delete_friend():
         else:
             print('blah2')
             sympathys.set_request_status_to_zero(session.get('id'), user_id)
-        if sympathys.unlike_user(session.get('id'), user_id):
+        if not sympathys.unlike_user(session.get('id'), user_id):
             print('blah3')
             msg = str(session.get('firstname')) + ' ' + str(session.get('lastname')) + ' does not like you anymore.'
             image = user_model.get_avatar(session.get('id'))
@@ -102,6 +111,17 @@ def ajax_delete_friend():
                 'ok': True,
                 'error': "Unlike"
             })
+        else:
+            return json.dumps({
+                'ok': False,
+                'error': "Something went wrong."
+            })
+    else:
+        return json.dumps({
+            'ok': False,
+            'error': "Something went wrong."
+        })
+
 # @app.route('/ajax_remove_request')
 # def ajax_remove_request():
 #     user_id = request.form('user_id')

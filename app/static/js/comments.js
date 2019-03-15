@@ -2,6 +2,7 @@ function add_comment(form) {
     event.preventDefault();
     var id_photo = form.id_photo.value,
         text = form.comment.value,
+        id_user = form.id_user.value
         data = {
         id_photo: id_photo,
         text: text
@@ -19,8 +20,29 @@ function add_comment(form) {
             var profile_photo = $('#profile_photo').val(),
                 user_firstname = $('#user_firstname').val();
 
-            $('.modal-'+id_photo).find('#photo_comments').append('<div class="post-comment"><img src="'+ profile_photo + '" alt="" class="profile-photo-sm" /><p><a href="timeline.html" class="profile-link">' + user_firstname + '</a> ' + text +'</p></div>');
+            $('.modal-'+id_photo).find('#photo_comments').append('<div class="post-comment" id="comment-'+res.id_comment+'"><img src="'+ profile_photo + '" alt="" class="profile-photo-sm" /><p><a href="/profile/id'+id_user+'" class="profile-link">'+user_firstname+' </a> '+text+' <br><a id="delete_comment" class="text-muted" style="text-decoration: none;" onclick="delete_comment(res.id_comment)">Delete</a></p></div>');
             form.reset();
+        }
+    });
+}
+
+
+function delete_comment(id_comment) {
+    event.preventDefault();
+    var data = {
+        'id_comment': id_comment
+    };
+
+    $.ajax({
+        type: 'POST',
+        data: data,
+        url: '/ajax_delete_comment'
+    }).done(function (data) {
+        var res = JSON.parse(data);
+        if (res.ok == false) {
+
+        } else {
+
         }
     });
 }

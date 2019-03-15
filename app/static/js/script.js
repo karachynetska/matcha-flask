@@ -150,4 +150,3 @@ $(window).on("resize", function() {
 
 
 
-

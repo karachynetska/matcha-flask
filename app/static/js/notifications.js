@@ -1,3 +1,22 @@
+function delete_notification(id_notification) {
+    var data = {
+        'id_notification': id_notification
+    };
+
+    $.ajax({
+        type: 'POST',
+        data: data,
+        url: '/ajax_delete_notification'
+    }).done(function (data) {
+        var res = JSON.parse(data);
+        if (res.ok == false) {
+
+        } else {
+
+        }
+    });
+}
+
 $(document).ready(function () {
     var socket = io.connect('http://' + document.domain + ':' + location.port);
     var socket_notifications = io('http://' + document.domain + ':' + location.port + '/notifications');
@@ -6,17 +25,18 @@ $(document).ready(function () {
         if (data) {
             console.log(data);
             jQuery.each(data, function (i, val) {
-                $('.notifications').append('<li class="notification-li"><div class="notification"><img src="'+val['image']+'" alt="user" class="profile-photo-md pull-left notification-img"/><p>'+val['notification']+'</p></div></li>');
+                $('.notifications').append('<li id="notification-'+val['id_notification']+'" class="notification-li"><div class="notification"><img src="'+val['image']+'" alt="user" class="profile-photo-md pull-left notification-img"/><p>'+val['notification']+'</p></div></li>');
+            swipe(val['id_notification']);
             });
         }
-        swipe();
+
     });
 
-    function swipe() {
-        $('.notification-li').draggable({
+    function swipe(id_notification) {
+        $('#notification-'+id_notification).draggable({
             axis: "x"
         });
-        $('.notification-li').bind("mouseup mouseleave", function() {
+        $('#notification-'+id_notification).bind("mouseup mouseleave", function() {
             if ($(this).position().left >= 80) {
                 $(this).animate({
                         left: 400,
@@ -33,6 +53,7 @@ $(document).ready(function () {
                         $(this).remove();
                     });
                 });
+                delete_notification(id_notification);
             } else {
                 $(this).animate({
                     left: 0

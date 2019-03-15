@@ -30,8 +30,8 @@
                             {% else %}
                                 {% if data.user.id == session.get('id') %}
                                     <a href="/profile/edit/basic"><p>Add information about yourself</p></a>
-                                {% else %}
-                                    <p>The user has not yet filled out any personal information.</p>
+{#                                {% else %}#}
+{#                                    <p>The user has not yet filled out any personal information.</p>#}
                                 {% endif %}
                             {% endif %}
                         </div>
@@ -51,7 +51,11 @@
                                         <li><a class="tag" style="text-decoration: none;"><i class="{{ interest.icon }}"></i> {{ interest.title }}</a></li>
                                     {% endfor %}
                                 {% else %}
-                                    <a href="/profile/edit/interests"><p>Add your interests</p></a>
+                                    {% if data.user.id == session.get('id') %}
+                                        <a href="/profile/edit/interests"><p>Add your interests</p></a>
+{#                                    {% else %}#}
+{#                                        <p>The user has not yet filled out any interests.</p>#}
+                                    {% endif %}
                                 {% endif %}
                             </ul>
                         </div>
@@ -105,22 +109,22 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-md-2 static">
-                    <div class="suggestions" id="sticky-sidebar">
-                        <h4 class="grey">Who to Follow</h4>
-                        {% if data.suggestions %}
-                        {% for suggestion in data.suggestions %}
-                        <div class="follow-user">
-                            <img src="{{ suggestion.avatar }}" alt="" class="profile-photo-sm pull-left" />
-                            <div>
-                                <h5><a href="/profile/id{{ suggestion.id }}">{{ suggestion.firstname + ' ' + suggestion.lastname }}</a></h5>
+{#                <div class="col-md-2 static">#}
+{#                    <div class="suggestions" id="sticky-sidebar">#}
+{#                        <h4 class="grey">Who to Follow</h4>#}
+{#                        {% if data.suggestions %}#}
+{#                        {% for suggestion in data.suggestions %}#}
+{#                        <div class="follow-user">#}
+{#                            <img src="{{ suggestion.avatar }}" alt="" class="profile-photo-sm pull-left" />#}
+{#                            <div>#}
+{#                                <h5><a href="/profile/id{{ suggestion.id }}">{{ suggestion.firstname + ' ' + suggestion.lastname }}</a></h5>#}
 {#                                <a href="#" class="text-green">{{  }}</a>#}
-                            </div>
-                        </div>
-                        {% endfor %}
-                    {% endif %}
-                    </div>
-                </div>
+{#                            </div>#}
+{#                        </div>#}
+{#                        {% endfor %}#}
+{#                    {% endif %}#}
+{#                    </div>#}
+{#                </div>#}
             </div>
         </div>
     </div>

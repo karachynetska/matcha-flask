@@ -25,7 +25,6 @@ def unlike_user(id1, id2):
     array = [id1, id2, id2, id1]
     sql = 'DELETE FROM sympathys WHERE id_user1=? AND id_user2=? OR id_user1=? AND id_user2=?'
     res = database.db_query(sql, array)
-    print(res)
     return res
 
 def check_sympathy(id1, id2):
@@ -72,5 +71,17 @@ def set_request_status_to_zero(id1, id2):
 def get_sympathys_list(id):
     array = [id, id]
     sql = 'SELECT * FROM sympathys WHERE id_user1=? OR id_user2=?'
+    res = database.db_query(sql, array)
+    return res
+
+def get_incoming_requests(id):
+    array = [id]
+    sql = 'SELECT * FROM requests WHERE id_taker=? AND status = 0'
+    res = database.db_query(sql, array)
+    return res
+
+def get_outgoing_requests(id):
+    array = [id]
+    sql = 'SELECT * FROM requests WHERE id_sender=? AND status = 0'
     res = database.db_query(sql, array)
     return res

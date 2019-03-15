@@ -7,6 +7,12 @@ def add_notification(to_whom_id, notification, type, image):
         res = database.db_insert(sql, array)
         return res
 
+def delete_notification(id_notification):
+    array = [id_notification]
+    sql = 'DELETE FROM notifications WHERE id_notification=?'
+    res = database.db_query(sql, array)
+    return res
+
 def get_notification_by_user_id(user_id):
     array = [user_id]
     sql = 'SELECT * FROM notifications WHERE to_whom_id=?'

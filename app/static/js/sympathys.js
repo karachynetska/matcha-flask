@@ -27,15 +27,11 @@ function like_user() {
         if (res.ok == true) {
             $('#like_user').parent().addClass('none');
             $('#liked_user').parent().removeClass('none');
-            $('#like_user-M').parent().addClass('none');
-            $('#liked_user-M').parent().removeClass('none');
+            $('#like_user_M').parent().addClass('none');
+            $('#liked_user_M').parent().removeClass('none');
         }
     });
 }
-
-// window.onload = function() {
-//     like_user();
-// };
 
 $('#like_user').on('click', function (e) {
     e.preventDefault();
@@ -44,9 +40,9 @@ $('#like_user').on('click', function (e) {
 });
 
 
-$('#like_user-M').on('click', function (e) {
-    // e.preventDefault();
-
+$('#like_user_M').on('click', function (e) {
+    e.preventDefault();
+    console.log('pressedM');
     like_user();
 });
 
@@ -65,8 +61,8 @@ function pick_up_like() {
         if (res.ok == true) {
             $('#liked_user').parent().addClass('none');
             $('#like_user').parent().removeClass('none');
-            $('#liked_user-M').parent().addClass('none');
-            $('#like_user-M').parent().removeClass('none');
+            $('#liked_user_M').parent().addClass('none');
+            $('#like_user_M').parent().removeClass('none');
         }
     });
 }
@@ -77,7 +73,7 @@ $('#liked_user').on('click', function (e) {
     pick_up_like();
 });
 
-$('#liked_user-M').on('click', function (e) {
+$('#liked_user_M').on('click', function (e) {
     e.preventDefault();
 
     pick_up_like();
@@ -97,8 +93,10 @@ function unlike_user() {
         if (res.ok == true) {
             $('#unlike_user').parent().addClass('none');
             $('#like_user').parent().removeClass('none');
-            $('#unlike_user-M').parent().addClass('none');
-            $('#like_user-M').parent().removeClass('none');
+            $('#start_dialogue').parent().parent().addClass('none');
+            $('#unlike_user_M').parent().addClass('none');
+            $('#like_user_M').parent().removeClass('none');
+            $('#start_dialogue_M').parent().parent().addClass('none');
         }
     });
 }
@@ -109,7 +107,7 @@ $('#unlike_user').on('click', function (e) {
     unlike_user();
 });
 
-$('#unlike_user-M').on('click', function (e) {
+$('#unlike_user_M').on('click', function (e) {
     e.preventDefault();
 
     unlike_user();
@@ -129,15 +127,10 @@ function like_back() {
         if (res.ok == true) {
             $('#like_back').parent().addClass('none');
             $('#unlike_user').parent().removeClass('none');
-            $('#start_dialog').parent().removeClass('none');
-            // $('#like_back').html('Unlike');
-            // $('#like_back').addClass('unlike_user');
-            // $('.actions').append('<li><a href="/profile/messages/dialogue_with_{{ data.user.id }}"><button id="start_dialog" class="btn-primary">Send message</button></a></li>');
-            // $('#like_back').attr('id', 'unlike_user');
-            // $('#like_back-M').html('Unlike');
-            // $('#like_back-M').addClass('unlike_user');
-            // $('.actions').append('<li><a href="/profile/messages/dialogue_with_{{ data.user.id }}"><button id="start_dialog-M" class="btn-primary">Send message</button></a></li>');
-            // $('#like_back-M').attr('id', 'unlike_user-M');
+            $('#start_dialogue').parent().parent().removeClass('none');
+            $('#like_back_M').parent().addClass('none');
+            $('#unlike_user_M').parent().removeClass('none');
+            $('#start_dialogue_M').parent().parent().removeClass('none');
         }
     });
 }
@@ -148,7 +141,7 @@ $('#like_back').on('click', function (e) {
     like_back();
 });
 
-$('#like_back-M').on('click', function (e) {
+$('#like_back_M').on('click', function (e) {
     e.preventDefault();
 
     like_back();

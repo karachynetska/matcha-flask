@@ -2518,38 +2518,6 @@ ul.contact li i{
     justify-content: flex-end;
 }
 
-#my_friends:hover {
-   background: #ff374f;
-    border-radius: 10px;
-    color: #ffffff;
-}
-
-#incoming_requests:hover {
-    background: #27aae1;
-    border-radius: 10px;
-    color: #ffffff;
-}
-
-#outgoing_requests:hover {
-    background: #fcf809;
-    border-radius: 10px;
-    color: #ffffff;
-}
-
-.my_friends:hover {
-   background: #ff374f;
-    border-radius: 10px;
-    color: #ffffff;
-}
-
-.incoming_requests:hover {
-    background: #27aae1;
-    border-radius: 10px;
-    color: #ffffff;
-}
-
-.outgoing_requests:hover {
-    background: #fcf809;
-    border-radius: 10px;
-    color: #ffffff;
+#delete_comment:hover{
+    color: #ff374f;
 }

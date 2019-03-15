@@ -139,7 +139,6 @@
                                                                         {% endif %}
                                                                     </div>
                                                                     <div class="line-divider"></div>
-                                                                    <div class="line-divider"></div>
                                                                     <div id="photo_comments">
                                                                         {% set comments = data.get_comments_by_photo_id(photo.id_photo) %}
                                                                         {% if comments %}
@@ -147,7 +146,11 @@
                                                                                 {% set user = data.get_user_by_id(comment.id_user)[0] %}
                                                                                 <div class="post-comment" id="comment-{{ comment.id_comment }}">
                                                                                     <img src="{{ user.avatar }}" alt="" class="profile-photo-sm" />
-                                                                                    <p><a href="timeline.html" class="profile-link">{{ user.firstname }} </a> {{ comment.text }} </p>
+                                                                                    {% if session.get('id') == user.id %}
+                                                                                        <p><a href="/profile/id{{ user.id }}" class="profile-link">{{ user.firstname }} </a> {{ comment.text }} <br><a id="delete_comment" class="text-muted" style="text-decoration: none;" onclick="delete_comment({{ comment.id_comment }})">Delete</a></p>
+                                                                                    {% else %}
+                                                                                        <p><a href="/profile/id{{ user.id }}" class="profile-link">{{ user.firstname }} </a> {{ comment.text }} </p>
+                                                                                    {% endif %}
                                                                                 </div>
                                                                             {% endfor %}
                                                                         {% endif %}
@@ -158,6 +161,7 @@
                                                                             <form method="post" onsubmit="add_comment(this)">
                                                                                 <div class="col-md-9 col-sm-9">
                                                                                     <input type="hidden" name="id_photo" id="id_photo" value="{{ photo.id_photo }}">
+                                                                                    <input type="hidden" name="id_user" id="id_user" value="{{ session.get('id') }}">
                                                                                     <input type="hidden" name="profile_photo" id="profile_photo" value="{{ data.get_avatar(session.get('id')) }}">
                                                                                     <input type="hidden" name="user_firstname" id="user_firstname" value="{{ session.get('firstname') }}">
                                                                                     <input id="comment" type="text" class="form-control" placeholder="Post a comment" style="margin-top: 2px">
