@@ -16,6 +16,7 @@
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
 		<link rel="stylesheet" href="{{ url_for('static', filename='css/ionicons.min.css') }}" />
         <link rel="stylesheet" href="{{ url_for('static', filename='css/font-awesome.min.css') }}" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
         <link href="{{ url_for('static', filename='css/emoji.css') }}" rel="stylesheet">
         <!--Google Font-->
         <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
@@ -146,7 +147,7 @@
                                                                                 {% set user = data.get_user_by_id(comment.id_user)[0] %}
                                                                                 <div class="post-comment" id="comment-{{ comment.id_comment }}">
                                                                                     <img src="{{ user.avatar }}" alt="" class="profile-photo-sm" />
-                                                                                    {% if session.get('id') == user.id %}
+                                                                                    {% if session.get('id') == user.id or data.user.id == session.get('id') %}
                                                                                         <p><a href="/profile/id{{ user.id }}" class="profile-link">{{ user.firstname }} </a> {{ comment.text }} <br><a id="delete_comment" class="text-muted" style="text-decoration: none;" onclick="delete_comment({{ comment.id_comment }})">Delete</a></p>
                                                                                     {% else %}
                                                                                         <p><a href="/profile/id{{ user.id }}" class="profile-link">{{ user.firstname }} </a> {{ comment.text }} </p>

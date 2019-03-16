@@ -1,3 +1,6 @@
+window.onload = function () {
+    $('.scrollbar-wrapper').scrollHeight = 999999999999;
+};
 var socket = io.connect('http://' + document.domain + ':' + location.port);
 var socket_messages = io('http://' + document.domain + ':' + location.port + '/messages');
 
@@ -9,7 +12,7 @@ function init(dialogue, id_user1, id_user2) {
     id_dialogue = dialogue;
     from_whom_id = id_user1;
     to_whom_id = id_user2;
-    $('#'+id_dialogue).find('.chat-alert').addClass('invisible');
+    $('#'+id_dialogue).find('.chat-alert').addClass('none');
     socket_messages.emit('join_dialogue', {'id_dialogue': id_dialogue, 'from_whom_id': from_whom_id, 'to_whom_id': to_whom_id});
     $('.send_message').removeClass('none');
 };
@@ -31,6 +34,7 @@ socket_messages.on('add_message_to_template', function (data) {
    var user = data['user'],
        last_message = data['last_message'];
 
+   console.log(data['last_message']);
    console.log(data['dialogue']);
    console.log(data['from_whom_id']);
    console.log($('li.active').find('.from_whom_id').text());
@@ -59,12 +63,14 @@ socket_messages.on('add_message_to_template', function (data) {
        '                      \t\t</li>');
    }
    $("#"+data['dialogue']).find('#last_message').text('');
-   $("#"+data['dialogue']).find('#last_message').text(last_message['message']);
+   $("#"+data['dialogue']).find('#last_message').text(data['message']);
+
+   topPos = $('.chat-message').offsetTop;
+   $('#message_scroll').scrollTop = topPos;
 });
 
 var dialogue_id = $('#dialogue_id').text();
 if (dialogue_id) {
-    console.log('if');
     $('#'+dialogue_id).addClass('active');
     $('#'+dialogue_id).find('a').attr('area-expanded', 'true');
     $('#contact-'+dialogue_id).addClass('active');

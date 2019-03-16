@@ -40,9 +40,9 @@ function delete_comment(id_comment) {
     }).done(function (data) {
         var res = JSON.parse(data);
         if (res.ok == false) {
-
+            console.log(res.error)
         } else {
-
+            $('#comment-'+id_comment).remove();
         }
     });
 }

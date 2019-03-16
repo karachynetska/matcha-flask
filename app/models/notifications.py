@@ -11,6 +11,7 @@ def delete_notification(id_notification):
     array = [id_notification]
     sql = 'DELETE FROM notifications WHERE id_notification=?'
     res = database.db_query(sql, array)
+    print(res)
     return res
 
 def get_notification_by_user_id(user_id):

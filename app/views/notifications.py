@@ -22,7 +22,7 @@ def add_notification(to_whom_id, notification, type, image):
         if value == to_whom_id:
             emit('notification', notifications, namespace='/notifications', room=key)
 
-@app.route('/ajax_delete_notification')
+@app.route('/ajax_delete_notification', methods=['POST'])
 def ajax_delete_notification():
     id_notification = request.form['id_notification']
     if not id_notification:
@@ -30,7 +30,17 @@ def ajax_delete_notification():
             'ok': False,
             'error': "Something went wrong"
         })
-    res = notification_model.delete_notifications_by_user_id()
+    res = notification_model.delete_notification(id_notification)
+    if not res:
+        return json.dumps({
+            'ok': True,
+            'error': "Notification deleted"
+        })
+    else:
+        return json.dumps({
+            'ok': False,
+            'error': "Something went wrong"
+        })
 
 @sio.on('connect', namespace='/notifications')
 def connect():

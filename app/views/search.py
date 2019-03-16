@@ -12,7 +12,8 @@ def search():
     if not 'id' in session:
         return redirect('/')
     data = {
-        'user': user_model.get_user_by_id(session.get('id'))[0]
+        'user': user_model.get_user_by_id(session.get('id'))[0],
+        'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id'))
     }
     return render_template('search.html', data=data)
 
@@ -164,7 +165,6 @@ def ajax_search():
             if filter == 'interests' and sort == 'desc' and found_users[0]['interests_nbr']:
                 found_users = sorted(found_users, key=lambda k: k['interests_nbr'], reverse=True)
 
-    print(found_users)
     if not found_users:
         return json.dumps({
             'ok': False,

@@ -19,20 +19,6 @@ def check_online_status(user_id):
         else:
             return False
 
-# @app.route('/ajax_start_dialogue', methods=['POST'])
-# def ajax_start_dialogue():
-#     id_user1 = request.form['id_user1']
-#     id_user2 = request.form['id_user2']
-#
-#     if not messages_model.check_dialogue(id_user1, id_user2):
-#         dialogue_name = id_user1 + id_user2
-#         if messages_model.create_dialogue(dialogue_name, id_user1, id_user2):
-#             dialogue_id = messages_model.get_dialogue_id(id_user1, id_user2)
-#     else:
-#         dialogue_id = messages_model.get_dialogue_id(id_user1, id_user2)
-#     return redirect('/profile/messages/dialogue'+str(dialogue_id))
-
-
 @app.route('/profile/messages')
 @app.route('/profile/messages/dialogue_with_<int:with_id>')
 def messages(with_id=None):
@@ -56,6 +42,7 @@ def messages(with_id=None):
             'messages': messages_model.get_messages_by_dialogue_id,
             'get_last_message_by_dialogue_id': messages_model.get_last_message_by_dialogue_id,
             'get_unread_messages_nbr': messages_model.get_unread_messages_nbr,
+            'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
             'dialogue_id': dialogue_id
         }
         return render_template('messages.html', data=data)

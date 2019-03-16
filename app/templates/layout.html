@@ -76,7 +76,11 @@
                 <div class="row">
               <div class="col-md-3">
                 <div class="profile-info">
-                  <a href="/profile"><img id="profile_photo" src="{{ data.user.avatar }}" alt="" class="img-responsive profile-photo" /></a>
+                    {% if data.user.id == session.get('id') %}
+                    <a href="/profile"><img id="profile_photo" src="{{ data.user.avatar }}" alt="" class="img-responsive profile-photo" /></a>
+                    {% else %}
+                    <a href="/profile/id{{ data.user.id }}"><img id="profile_photo" src="{{ data.user.avatar }}" alt="" class="img-responsive profile-photo" /></a>
+                    {% endif %}
                   <h3>{{ data.user.firstname + ' ' + data.user.lastname }}</h3>
                   <p class="text-muted">{{ data.user.login }}</p>
                 </div>
@@ -95,6 +99,7 @@
                     {% endif %}
                 </ul>
                 <ul class="follow-me list-inline actions">
+                <li style="margin-top: 7px;">{{ data.user.fame_rating }}<i class="fas fa-star"></i></li>
                 {% set nbr_of_friends = data.friends|count %}
                 {% if session.get('id') == data.user.id %}
                     {% if nbr_of_friends == 1 %}
@@ -146,7 +151,11 @@
             <!--Timeline Menu for Small Screens-->
             <div class="navbar-mobile hidden-lg hidden-md">
                 <div class="profile-info">
+                    {% if data.user.id == session.get('id') %}
                     <a href="/profile"><img id="m_profile_photo" src="{{ data.user.avatar }}" alt="" class="img-responsive profile-photo" /></a>
+                    {% else %}
+                    <a href="/profile/id{{ data.user.id }}"><img id="m_profile_photo" src="{{ data.user.avatar }}" alt="" class="img-responsive profile-photo" /></a>
+                    {% endif %}
                     <h4>{{ data.user.firstname + ' ' + data.user.lastname }}</h4>
                     <p class="text-muted">{{ data.user.login }}</p>
                 </div>

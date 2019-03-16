@@ -34,6 +34,8 @@ def ajax_add_comment():
     msg = 'You have a new comment from ' + str(session.get('firstname')) + ' ' + str(session.get('lastname')) + '.'
     image = user_model.get_avatar(session.get('id'))
     notifications_view.add_notification(to_whom_id, msg, 'comment', image)
+    rating = user_model.get_user_fame_rating(to_whom_id) + 5
+    user_model.update_user_rating(rating, to_whom_id)
     if not res:
         return json.dumps({
             'ok': False,
@@ -58,4 +60,9 @@ def ajax_delete_comment():
         return json.dumps({
             'ok': True,
             'error': "Comment deleted",
+        })
+    else:
+        return json.dumps({
+            'ok': False,
+            'error': "Something went wrong"
         })

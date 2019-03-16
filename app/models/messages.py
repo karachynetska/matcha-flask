@@ -72,3 +72,9 @@ def get_unread_messages_nbr(from_whom_id, to_whom_id):
     res = database.db_query(sql, array)
     n = len(res)
     return n
+
+def get_unread_messages_nbr_by_user_id(user_id):
+    array = [user_id]
+    sql = 'SELECT * FROM messages WHERE status="unread" AND to_whom_id=?'
+    res = database.db_query(sql, array)
+    return len(res)

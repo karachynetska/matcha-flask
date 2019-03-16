@@ -14,6 +14,7 @@ from app.views import notifications as notification_view
 from app.models import sympathys
 from app.models import suggestions as suggestions_model
 from app.models import photos as photos_model
+from app.models import messages as messages_model
 from app.views.search import calculate_distance
 # from app.models.friendships import check_friendship, add_friend
 from flask_mail import Message
@@ -28,27 +29,21 @@ def get_suggestions_for_user(user):
     suggestions = []
 
     if user['gender'] == 'Female' and user['sex_pref'] == 'Heterosexual':
-        print(1)
         suggestions = suggestions_model.get_getero_or_bi_man(user['id'])
 
     if user['gender'] == 'Female' and user['sex_pref'] == 'Homosexual':
-        print(2)
         suggestions = suggestions_model.get_homo_or_bi_women(user['id'])
 
     if user['gender'] == 'Female' and user['sex_pref'] == 'Bisexual':
-        print(3)
         suggestions = suggestions_model.get_users_for_bi_woman(user['id'])
 
     if user['gender'] == 'Male' and user['sex_pref'] == 'Heterosexual':
-        print(4)
         suggestions = suggestions_model.get_getero_or_bi_women(user['id'])
 
     if user['gender'] == 'Male' and user['sex_pref'] == 'Homosexual':
-        print(5)
         suggestions = suggestions_model.get_homo_or_bi_man(user['id'])
 
     if user['gender'] == 'Male' and user['sex_pref'] == 'Bisexual':
-        print(6)
         suggestions = suggestions_model.get_users_for_bi_man(user['id'])
 
     return suggestions
@@ -69,14 +64,6 @@ def profile(id_user=None):
         work = user_model.get_work_by_user_id(my_id)
         geolocation = geolocation_model.get_geolocation_by_user_id(my_id)
 
-        # if geolocation:
-        #     suggestions = get_suggestions_for_user(user)
-        #     print(suggestions)
-        #     if suggestions:
-        #         for suggestion in suggestions:
-        #             suggestion['distance'] = calculate_distance(float(suggestion['latitude']), float(suggestion['longitude']))
-        #             suggestions = sorted(suggestions, key=lambda k: k['distance'])
-
 
     if id_user:
         user = user_model.get_user_by_id(id_user)[0]
@@ -87,9 +74,10 @@ def profile(id_user=None):
         work = user_model.get_work_by_user_id(id_user)
         geolocation = geolocation_model.get_geolocation_by_user_id(id_user)
 
-        msg = str(session.get('firstname')) + ' ' + str(session.get('lastname')) + ' viewed your profile.'
-        image = user_model.get_avatar(session.get('id'))
-        notification_view.add_notification(id_user, msg, 'view', image)
+        if id_user != session.get('id'):
+            msg = str(session.get('firstname')) + ' ' + str(session.get('lastname')) + ' viewed your profile.'
+            image = user_model.get_avatar(session.get('id'))
+            notification_view.add_notification(id_user, msg, 'view', image)
 
 
     data = {
@@ -101,7 +89,7 @@ def profile(id_user=None):
         'education': education,
         'work': work,
         'geolocation': geolocation,
-        # 'suggestions': suggestions
+        'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id'))
     }
     return render_template('profile.html', data=data)
 
@@ -125,19 +113,17 @@ def friends(id_user=None):
         incoming_requests = None
         outgoing_requests = None
         image = user_model.get_avatar(session.get('id'))
-        msg = str(session.get('firstname')) + ' ' + str(session.get(
-            'lastname')) + ' viewed your profile.'
+        msg = str(session.get('firstname')) + ' ' + str(session.get('lastname')) + ' viewed your profile.'
         notification_view.add_notification(id_user, msg, 'view', image)
 
-    print(incoming_requests)
-    print(outgoing_requests)
     data = {
         'user': user,
         'sympathys': sympathys,
         'friends': friends,
         'get_user_by_id': user_model.get_user_by_id,
         'incoming_requests': incoming_requests,
-        'outgoing_requests': outgoing_requests
+        'outgoing_requests': outgoing_requests,
+        'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id'))
     }
     return render_template('friends.html', data=data)
 
@@ -151,7 +137,8 @@ def suggestions():
     suggestions = get_suggestions_for_user(user)
     data = {
         'user': user,
-        'suggestions': suggestions
+        'suggestions': suggestions,
+        'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id'))
     }
     return render_template('suggestions.html', data = data)
 
@@ -160,7 +147,8 @@ def suggestions():
 def edit_basic():
     if 'id' in session:
         data = {
-            'user': user_model.get_user_by_id(session.get('id'))[0]
+            'user': user_model.get_user_by_id(session.get('id'))[0],
+            'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id'))
         }
         return render_template('edit-profile-basic.html', data=data)
     else:
@@ -171,7 +159,8 @@ def edit_geolocation():
     if 'id' in session:
         data = {
             'user': user_model.get_user_by_id(session.get('id'))[0],
-            'geolocation': geolocation_model.get_geolocation_by_user_id(session.get('id'))
+            'geolocation': geolocation_model.get_geolocation_by_user_id(session.get('id')),
+            'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id'))
         }
         return render_template('edit-profile-geolocation.html', data=data)
     else:
@@ -244,7 +233,8 @@ def ajax_edit_basic():
 def edit_password():
     if 'id' in session:
         data = {
-            'user': user_model.get_user_by_id(session.get('id'))[0]
+            'user': user_model.get_user_by_id(session.get('id'))[0],
+            'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id'))
         }
         return render_template('edit-profile-password.html', data=data)
     else:
@@ -324,7 +314,8 @@ def edit_interests():
     if 'id' in session:
         data = {
             'user': user_model.get_user_by_id(session.get('id'))[0],
-            'interests': user_model.get_interests_by_user_id(session.get('id'))
+            'interests': user_model.get_interests_by_user_id(session.get('id')),
+            'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id'))
         }
         return render_template('edit-profile-interests.html', data=data)
     else:
@@ -417,7 +408,8 @@ def ajax_delete_interest():
 def edit_edu_work():
     if 'id' in session:
         data = {
-            'user': user_model.get_user_by_id(session.get('id'))[0]
+            'user': user_model.get_user_by_id(session.get('id'))[0],
+            'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id'))
         }
         return render_template('edit-profile-edu-work.html', data=data)
     else:
@@ -434,7 +426,8 @@ def edit_edu_work():
 def edit_settings():
     if 'id' in session:
         data = {
-            'user': user_model.get_user_by_id(session.get('id'))[0]
+            'user': user_model.get_user_by_id(session.get('id'))[0],
+            'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id'))
         }
         return render_template('edit-profile-settings.html', data=data)
     else:
@@ -447,7 +440,8 @@ def edit_settings():
 def edit_avatar():
     if 'id' in session:
         data = {
-            'user': user_model.get_user_by_id(session.get('id'))[0]
+            'user': user_model.get_user_by_id(session.get('id'))[0],
+            'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id'))
         }
         return render_template('edit-profile-avatar.html', data=data)
     else:
@@ -479,6 +473,9 @@ def ajax_edit_avatar():
     # DELETE IF EXISTS
     if os.path.isfile(name):
         os.remove(name)
+    else:
+        rating = user['fame_rating'] + 42
+        user_model.update_user_rating(rating, id)
 
     # SAVE AVATAR TO FOLDER
     photos.save(avatar, login, avatar_name)
@@ -525,6 +522,8 @@ def ajax_edit_education():
         })
 
     if user_model.add_education(session.get('id'), university, date_from, date_to, description):
+        rating = user_model.get_user_fame_rating(session.get('id')) + 15
+        user_model.update_user_rating(rating, session.get('id'))
         return json.dumps({
             'ok': True,
             'error': "Education successfully added"
@@ -581,6 +580,8 @@ def ajax_edit_work():
         })
 
     if user_model.add_work(session.get('id'), company, designation, from_date, to_date, city, description):
+        rating = user_model.get_user_fame_rating(session.get('id')) + 15
+        user_model.update_user_rating(rating, session.get('id'))
         return json.dumps({
             'ok': False,
             'error': "Work successfully added"

@@ -11,6 +11,7 @@ import os
 from app.models import user as user_model
 from app.models import photos as photos_model
 from app.models import likes, comments
+from app.models import messages as messages_model
 from app.views import notifications as notification_view
 from app.models import sympathys
 # from app.models.friendships import check_friendship, add_friend
@@ -51,7 +52,8 @@ def photos(id_user=None):
         'dislikes': likes.photo_dislikes,
         'check_like': likes.check_like,
         'check_dislike': likes.check_dislike,
-        'get_comments_by_photo_id': comments.get_comments_by_photo_id
+        'get_comments_by_photo_id': comments.get_comments_by_photo_id,
+        'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id'))
     }
 
     return render_template('photos.html', data=data)
@@ -75,6 +77,10 @@ def ajax_add_photo():
     path = '/static/media/' + login + '/' + photo_name
     images.save(photo, login, photo_name)
     photos_model.add_photo(session.get('id'), path)
+
+    rating = user_model.get_user_fame_rating(session.get('id')) + 10
+    user_model.update_user_rating(rating, session.get('id'))
+
     return json.dumps({
         'ok': True,
         'error': "Photo successfully uploaded"
@@ -91,6 +97,8 @@ def ajax_delete_photo():
             'error': 'Something wrong'
         })
     photos_model.delete_photo_by_id(id_photo)
+    rating = user_model.get_user_fame_rating(session.get('id')) - 10
+    user_model.update_user_rating(rating, session.get('id'))
     return json.dumps({
         'ok': True,
         'error': 'Photo deleted'

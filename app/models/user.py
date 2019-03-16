@@ -271,3 +271,18 @@ def delete_work(id_work):
     sql = 'DELETE FROM job WHERE id_job=?'
     res = database.db_query(sql, array)
     return res
+
+
+# RATING
+
+def update_user_rating(rating, id_user):
+    array = [rating, id_user]
+    sql = 'UPDATE users SET fame_rating=? WHERE id=?'
+    res = database.db_query(sql, array)
+    return res
+
+def get_user_fame_rating(id_user):
+    array = [id_user]
+    sql = 'SELECT fame_rating FROM users WHERE id=?'
+    res = database.db_query(sql, array)
+    return res[0]['fame_rating']

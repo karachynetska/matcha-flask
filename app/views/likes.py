@@ -31,6 +31,8 @@ def ajax_like():
         msg = str(session.get('firstname')) + ' ' + str(session.get('lastname')) + ' liked your photo.'
         image = user_model.get_avatar(session.get('id'))
         notification_view.add_notification(to_whom_id, msg, 'like', image)
+        rating = user_model.get_user_fame_rating(to_whom_id) + 5
+        user_model.update_user_rating(rating, to_whom_id)
         if res == 'was':
             return json.dumps({
                 'ok': True,
@@ -63,6 +65,8 @@ def ajax_dislike():
         msg = str(session.get('firstname')) + ' ' + str(session.get('lastname')) + ' disliked your photo.'
         image = user_model.get_avatar(session.get('id'))
         notification_view.add_notification(to_whom_id, msg, 'dislike', image)
+        rating = user_model.get_user_fame_rating(to_whom_id) - 5
+        user_model.update_user_rating(rating, to_whom_id)
         if res == 'was':
             return json.dumps({
                 'ok': True,

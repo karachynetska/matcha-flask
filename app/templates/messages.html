@@ -16,6 +16,7 @@
 		<link rel="stylesheet" href="{{ url_for('static', filename = 'css/style.css') }}" />
 		<link rel="stylesheet" href="{{ url_for('static', filename = 'css/ionicons.min.css') }}" />
         <link rel="stylesheet" href="{{ url_for('static', filename = 'css/font-awesome.min.css') }}" />
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
         <link href="{{ url_for('static', filename = 'css/emoji.css') }}" rel="stylesheet">
 
     <!--Google Font-->
@@ -115,7 +116,7 @@
 
 
                   <!--Chat Messages in Right-->
-                <div class="tab-content scrollbar-wrapper wrapper scrollbar-outer">
+                <div class="tab-content scrollbar-wrapper wrapper scrollbar-outer" id="message_scroll">
                   {% if data.dialogues %}
                     {% for dialogue in data.dialogues %}
                         {% if session.get('id') == dialogue.id_user1 %}

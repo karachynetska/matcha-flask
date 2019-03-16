@@ -26,6 +26,8 @@ def ajax_like_user():
             msg = str(session.get('firstname')) + ' ' + str(session.get('lastname')) + ' likes you!'
             image = user_model.get_avatar(session.get('id'))
             notification_view.add_notification(user_id, msg, 'like_user', image)
+            rating = user_model.get_user_fame_rating(user_id) + 20
+            user_model.update_user_rating(rating, user_id)
             return json.dumps({
                 'ok': True,
                 'error': "Liked"
@@ -51,6 +53,8 @@ def ajax_pick_up_like():
             if sympathys.check_request_status(session.get('id'), user_id)[0]['status'] == 0:
                 print('blah2')
                 if sympathys.remove_request(session.get('id'), user_id) == []:
+                    rating = user_model.get_user_fame_rating(user_id) - 20
+                    user_model.update_user_rating(rating, user_id)
                     print('blah3')
                     return json.dumps({
                         'ok': True,
@@ -86,6 +90,8 @@ def ajax_like_back_user():
         msg = 'You like each other! Now you can chat with ' + str(session.get('firstname')) + ' ' + str(session.get('lastname')) + '.'
         image = user_model.get_avatar(session.get('id'))
         notification_view.add_notification(user_id, msg, 'like_back_user', image)
+        rating = user_model.get_user_fame_rating(user_id) + 20
+        user_model.update_user_rating(rating, user_id)
         return json.dumps({
             'ok': True,
             'error': "Liked_back"
@@ -107,6 +113,8 @@ def ajax_delete_friend():
             msg = str(session.get('firstname')) + ' ' + str(session.get('lastname')) + ' does not like you anymore.'
             image = user_model.get_avatar(session.get('id'))
             notification_view.add_notification(user_id, msg, 'unlike_user', image)
+            rating = user_model.get_user_fame_rating(user_id) - 20
+            user_model.update_user_rating(rating, user_id)
             return json.dumps({
                 'ok': True,
                 'error': "Unlike"
