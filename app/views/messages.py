@@ -70,6 +70,7 @@ def send_message(data):
     data['user'] = user
     data['dialogue'] = dialogue
     data['last_message'] = messages_model.get_last_message_by_dialogue_id(dialogue)
+    data['my_id'] = session.get('id')
     messages_model.send_message(dialogue, from_whom_id, to_whom_id, message)
     emit('add_message_to_template', data, room=dialogue)
     if not check_online_status(to_whom_id):
@@ -78,7 +79,6 @@ def send_message(data):
 @sio.on('disconnect', namespace='/messages')
 def disconnect():
     id_user_to_sid.pop(request.sid)
-    # dialogue = id_dialogue_to_sid[request.sid]
     dialogue = id_dialogue_to_sid.get(request.sid)
     leave_room(dialogue)
     id_dialogue_to_sid.pop(request.sid)

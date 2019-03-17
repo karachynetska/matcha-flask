@@ -4,6 +4,7 @@ import json
 from app.models import user as user_model
 from app.models import search as search_model
 from app.models import geolocation as geolocation_model
+from app.models import messages as messages_model
 from datetime import datetime, date
 from math import sin, cos, sqrt, atan2, radians
 
