@@ -101,15 +101,12 @@ def ajax_like_back_user():
 def ajax_delete_friend():
     user_id = request.args.get('user_id')
     if sympathys.check_sympathy(session.get('id'), user_id):
-        print('blah')
         if sympathys.check_request(session.get('id'), user_id) == 'sender':
-            print('blah1')
             sympathys.remove_request(session.get('id'), user_id)
         else:
             print('blah2')
             sympathys.set_request_status_to_zero(session.get('id'), user_id)
         if not sympathys.unlike_user(session.get('id'), user_id):
-            print('blah3')
             msg = str(session.get('firstname')) + ' ' + str(session.get('lastname')) + ' does not like you anymore.'
             image = user_model.get_avatar(session.get('id'))
             notification_view.add_notification(user_id, msg, 'unlike_user', image)

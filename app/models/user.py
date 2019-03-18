@@ -118,6 +118,14 @@ def change_avatar(avatar, id):
     res = database.db_query(sql, array)
     return res
 
+def delete_avatar_from_db(avatar, id):
+    array = [avatar, id]
+    sql = 'DELETE FROM photos WHERE photo=? AND id_user=?'
+    res = database.db_query(sql, array)
+    print('delete')
+    print(res)
+    return res
+
 def change_password(id, password):
     array = [password, id]
     sql = 'UPDATE users SET password=? WHERE id=?'

@@ -27,7 +27,11 @@
                     <div class="row">
                         <ul class="nav nav-tabs">
                             <li class="active"><a data-toggle="tab" href="#my_friends">My friends</a></li>
-                            <li><a data-toggle="tab" href="#incoming_requests">Incoming requests</a></li>
+                            {% if data.incoming_requests_nbr > 0 %}
+                                <li><a data-toggle="tab" href="#incoming_requests">Incoming requests <span id="f_incoming_requests_nbr" style="color: #ff374f">{{ data.incoming_requests_nbr }}</span></a></li>
+                            {% else %}
+                                <li><a data-toggle="tab" href="#incoming_requests">Incoming requests <span id="f_incoming_requests_nbr" style="color: #ff374f" class="none">{{ data.incoming_requests_nbr }}</span></a></li>
+                            {% endif %}
                             <li><a data-toggle="tab" href="#outgoing_requests">Outgoing requests</a></li>
                         </ul>
                     </div>

@@ -53,7 +53,8 @@ def photos(id_user=None):
         'check_like': likes.check_like,
         'check_dislike': likes.check_dislike,
         'get_comments_by_photo_id': comments.get_comments_by_photo_id,
-        'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id'))
+        'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
+        'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id'))
     }
 
     return render_template('photos.html', data=data)

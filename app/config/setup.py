@@ -136,7 +136,7 @@ def create_photos():
     id_user INTEGER NOT NULL,
     photo TEXT NOT NULL,
     date_added DATETIME DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (id_user) REFERENCES user(id) ON DELETE CASCADE)''')
+    FOREIGN KEY (id_user) REFERENCES users(id) ON DELETE CASCADE)''')
     if res:
         print(res)
     else:

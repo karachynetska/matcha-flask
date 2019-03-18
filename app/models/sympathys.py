@@ -80,6 +80,12 @@ def get_incoming_requests(id):
     res = database.db_query(sql, array)
     return res
 
+def get_incoming_requests_nbr(id):
+    array = [id]
+    sql = 'SELECT * FROM requests WHERE id_taker=? AND status = 0'
+    res = database.db_query(sql, array)
+    return len(res)
+
 def get_outgoing_requests(id):
     array = [id]
     sql = 'SELECT * FROM requests WHERE id_sender=? AND status = 0'

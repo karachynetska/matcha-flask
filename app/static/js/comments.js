@@ -21,6 +21,9 @@ function add_comment(form) {
                 user_firstname = $('#user_firstname').val();
 
             $('.modal-'+id_photo).find('#photo_comments').append('<div class="post-comment" id="comment-'+res.id_comment+'"><img src="'+ profile_photo + '" alt="" class="profile-photo-sm" /><p><a href="/profile/id'+id_user+'" class="profile-link">'+user_firstname+' </a> '+text+' <br><a id="delete_comment" class="text-muted" style="text-decoration: none;" onclick="delete_comment(res.id_comment)">Delete</a></p></div>');
+            if(!$('.modal-'+id_photo)) {
+                $('#photo_comments-'+id_photo).append('<div class="post-comment" id="comment-'+res.id_comment+'"><img src="'+ profile_photo + '" alt="" class="profile-photo-sm" /><p><a href="/profile/id'+id_user+'" class="profile-link">'+user_firstname+' </a> '+text+' <br><a id="delete_comment" class="text-muted" style="text-decoration: none;" onclick="delete_comment(res.id_comment)">Delete</a></p></div>');
+            }
             form.reset();
         }
     });

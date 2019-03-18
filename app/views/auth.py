@@ -286,16 +286,6 @@ def login():
         })
 
 
-@app.route('/newsfeed')
-def newsfeed():
-    if 'id' in session:
-        data = {
-            'user': user_model.get_user_by_id(session.get('id'))[0]
-        }
-        return render_template('newsfeed.html', data=data)
-    return redirect('/')
-
-
 @app.route('/forgot')
 def forgot():
     if 'id' in session:

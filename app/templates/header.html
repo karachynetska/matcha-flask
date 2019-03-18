@@ -16,9 +16,15 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right main-menu">
-                    <li class="dropdown">
-                        <a href="/profile/friends">My friends</a>
-                    </li>
+                    {% if data.incoming_requests_nbr > 0 %}
+                        <li class="dropdown">
+                            <a href="/profile/friends">My friends <span id="incoming_requests_nbr" style="color: #ff374f">{{ data.incoming_requests_nbr }}</span></a>
+                        </li>
+                    {% else %}
+                        <li class="dropdown">
+                            <a href="/profile/friends">My friends <span id="incoming_requests_nbr" style="color: #ff374f" class="none">{{ data.incoming_requests_nbr }}</span></a>
+                        </li>
+                    {% endif %}
                     {% if data.unread_messages_nbr > 0 %}
                     <li class="dropdown">
                         <a href="/profile/messages">My messages <span id="unread_messages_nbr" style="color: #ff374f">{{ data.unread_messages_nbr }}</span></a>

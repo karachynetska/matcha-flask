@@ -15,12 +15,13 @@ from flask_mail import Message
 id_user_to_notification_sid = {}
 
 def add_notification(to_whom_id, notification, type, image):
-    notification_model.add_notification(to_whom_id, notification, type, image)
-    notifications = notification_model.get_notification_by_user_id(to_whom_id)
+    print('add notification')
+    id_notification = notification_model.add_notification(to_whom_id, notification, type, image)
+    notification = notification_model.get_notification_by_id(id_notification)
 
     for key, value in id_user_to_notification_sid.items():
         if value == to_whom_id:
-            emit('notification', notifications, namespace='/notifications', room=key)
+            emit('notification', notification, namespace='/notifications', room=key)
 
 @app.route('/ajax_delete_notification', methods=['POST'])
 def ajax_delete_notification():

@@ -4,14 +4,13 @@ from flask_uploads import configure_uploads, IMAGES, UploadSet
 import html
 import hashlib
 import random
-from datetime import datetime
-import json
-import re
-import os
+from datetime import datetime, date
+import json, re, os
 from app.models import user as user_model
 from app.models import geolocation as geolocation_model
 from app.views import notifications as notification_view
 from app.models import sympathys
+from app.models import likes, comments
 from app.models import suggestions as suggestions_model
 from app.models import photos as photos_model
 from app.models import messages as messages_model
@@ -89,7 +88,8 @@ def profile(id_user=None):
         'education': education,
         'work': work,
         'geolocation': geolocation,
-        'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id'))
+        'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
+        'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id'))
     }
     return render_template('profile.html', data=data)
 
@@ -123,7 +123,8 @@ def friends(id_user=None):
         'get_user_by_id': user_model.get_user_by_id,
         'incoming_requests': incoming_requests,
         'outgoing_requests': outgoing_requests,
-        'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id'))
+        'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
+        'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id'))
     }
     return render_template('friends.html', data=data)
 
@@ -138,9 +139,47 @@ def suggestions():
     data = {
         'user': user,
         'suggestions': suggestions,
-        'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id'))
+        'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
+        'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id'))
     }
     return render_template('suggestions.html', data = data)
+
+
+# NEWSFEED
+@app.route('/newsfeed')
+def newsfeed():
+    if 'id' in session:
+        my_id = session.get('id')
+        friends = sympathys.get_sympathys_list(my_id)
+        photos = []
+        if friends:
+            for friend in friends:
+                if friend['id_user1'] == my_id:
+                    res = photos_model.get_photos_by_id(friend['id_user2'])
+                else:
+                    res = photos_model.get_photos_by_id(friend['id_user1'])
+                if res:
+                    for el in res:
+                        el['age'] = int(date.today().year - datetime.strptime(el['date_added'], '%Y-%m-%d %H:%M:%S').year)
+                        photos.append(el)
+            if photos:
+                photos = sorted(photos, key=lambda k: k['age'], reverse=True)
+        data = {
+            'user': user_model.get_user_by_id(my_id)[0],
+            'get_user_by_id': user_model.get_user_by_id,
+            'get_avatar': user_model.get_avatar,
+            'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(my_id),
+            'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(my_id),
+            'check_like': likes.check_like,
+            'check_dislike': likes.check_dislike,
+            'photos': photos,
+            'likes': likes.photo_likes,
+            'dislikes': likes.photo_dislikes,
+            'get_comments_by_photo_id': comments.get_comments_by_photo_id
+        }
+        return render_template('newsfeed.html', data=data)
+    return redirect('/')
+
 
 # EDIT BASIC INFORMATION
 @app.route('/profile/edit/basic')
@@ -148,7 +187,8 @@ def edit_basic():
     if 'id' in session:
         data = {
             'user': user_model.get_user_by_id(session.get('id'))[0],
-            'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id'))
+            'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
+            'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id'))
         }
         return render_template('edit-profile-basic.html', data=data)
     else:
@@ -160,7 +200,8 @@ def edit_geolocation():
         data = {
             'user': user_model.get_user_by_id(session.get('id'))[0],
             'geolocation': geolocation_model.get_geolocation_by_user_id(session.get('id')),
-            'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id'))
+            'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
+            'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id'))
         }
         return render_template('edit-profile-geolocation.html', data=data)
     else:
@@ -234,7 +275,8 @@ def edit_password():
     if 'id' in session:
         data = {
             'user': user_model.get_user_by_id(session.get('id'))[0],
-            'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id'))
+            'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
+            'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id'))
         }
         return render_template('edit-profile-password.html', data=data)
     else:
@@ -315,7 +357,8 @@ def edit_interests():
         data = {
             'user': user_model.get_user_by_id(session.get('id'))[0],
             'interests': user_model.get_interests_by_user_id(session.get('id')),
-            'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id'))
+            'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
+            'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id'))
         }
         return render_template('edit-profile-interests.html', data=data)
     else:
@@ -409,7 +452,9 @@ def edit_edu_work():
     if 'id' in session:
         data = {
             'user': user_model.get_user_by_id(session.get('id'))[0],
-            'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id'))
+            'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
+            'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id'))
+
         }
         return render_template('edit-profile-edu-work.html', data=data)
     else:
@@ -427,7 +472,8 @@ def edit_settings():
     if 'id' in session:
         data = {
             'user': user_model.get_user_by_id(session.get('id'))[0],
-            'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id'))
+            'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
+            'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id'))
         }
         return render_template('edit-profile-settings.html', data=data)
     else:
@@ -441,7 +487,8 @@ def edit_avatar():
     if 'id' in session:
         data = {
             'user': user_model.get_user_by_id(session.get('id'))[0],
-            'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id'))
+            'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
+            'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id'))
         }
         return render_template('edit-profile-avatar.html', data=data)
     else:
@@ -451,6 +498,7 @@ def edit_avatar():
 @app.route('/ajax_edit_avatar', methods=['POST'])
 def ajax_edit_avatar():
     avatar = request.files.get('avatar')
+    print(avatar)
 
     if not avatar:
         return json.dumps({
@@ -461,6 +509,7 @@ def ajax_edit_avatar():
     id = session.get('id')
     login = session.get('login')
     user = user_model.get_user_by_id(id)[0]
+    print(user)
 
     extension = avatar.filename.rsplit('.', 1)[1]
     avatar_name = str('avatar' + '_' + login + '.' + extension)
@@ -473,6 +522,7 @@ def ajax_edit_avatar():
     # DELETE IF EXISTS
     if os.path.isfile(name):
         os.remove(name)
+        user_model.delete_avatar_from_db(avatar_name, id)
     else:
         rating = user['fame_rating'] + 42
         user_model.update_user_rating(rating, id)

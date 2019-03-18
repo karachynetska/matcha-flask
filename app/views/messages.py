@@ -43,7 +43,8 @@ def messages(with_id=None):
             'get_last_message_by_dialogue_id': messages_model.get_last_message_by_dialogue_id,
             'get_unread_messages_nbr': messages_model.get_unread_messages_nbr,
             'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
-            'dialogue_id': dialogue_id
+            'dialogue_id': dialogue_id,
+            'incoming_requests_nbr': sympathys_model.get_incoming_requests_nbr(session.get('id'))
         }
         return render_template('messages.html', data=data)
     return redirect('/')

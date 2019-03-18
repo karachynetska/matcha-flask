@@ -5,6 +5,7 @@ from app.models import user as user_model
 from app.models import search as search_model
 from app.models import geolocation as geolocation_model
 from app.models import messages as messages_model
+from app.models import sympathys
 from datetime import datetime, date
 from math import sin, cos, sqrt, atan2, radians
 
@@ -14,7 +15,8 @@ def search():
         return redirect('/')
     data = {
         'user': user_model.get_user_by_id(session.get('id'))[0],
-        'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id'))
+        'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
+        'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id'))
     }
     return render_template('search.html', data=data)
 

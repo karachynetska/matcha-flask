@@ -131,6 +131,15 @@ function like_back() {
             $('#like_back_M').parent().addClass('none');
             $('#unlike_user_M').parent().removeClass('none');
             $('#start_dialogue_M').parent().parent().removeClass('none');
+
+            var nbr = $('#incoming_requests_nbr').text();
+            nbr = parseInt(nbr, 10);
+            var nbr1 = nbr - 1;
+            if (nbr1 <= 0) {
+                $('#incoming_requests_nbr').addClass('none');
+            } else {
+                $('#incoming_requests_nbr').text(nbr1);
+            }
         }
     });
 }

@@ -19,9 +19,10 @@ function init(dialogue, id_user1, id_user2) {
     nbr1 = nbr1 - nbr;
     if (nbr1 === 0) {
         $('#unread_messages_nbr').addClass('none');
+    } else {
+        $('#unread_messages_nbr').removeClass('none');
+        $('#unread_messages_nbr').text(nbr1);
     }
-    $('#unread_messages_nbr').removeClass('none');
-    $('#unread_messages_nbr').text(nbr1);
     $('#'+id_dialogue).find('.chat-alert').addClass('none');
     socket_messages.emit('join_dialogue', {'id_dialogue': id_dialogue, 'from_whom_id': from_whom_id, 'to_whom_id': to_whom_id});
     $('.send_message').removeClass('none');

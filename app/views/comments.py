@@ -31,9 +31,10 @@ def ajax_add_comment():
     res = comments.add_comment(id_photo, id_user, text)
     print(res)
     to_whom_id = user_model.get_user_id_by_photo_id(id_photo)
-    msg = 'You have a new comment from ' + str(session.get('firstname')) + ' ' + str(session.get('lastname')) + '.'
-    image = user_model.get_avatar(session.get('id'))
-    notifications_view.add_notification(to_whom_id, msg, 'comment', image)
+    if to_whom_id != session.get('id'):
+        msg = 'You have a new comment from ' + str(session.get('firstname')) + ' ' + str(session.get('lastname')) + '.'
+        image = user_model.get_avatar(session.get('id'))
+        notifications_view.add_notification(to_whom_id, msg, 'comment', image)
     rating = user_model.get_user_fame_rating(to_whom_id) + 5
     user_model.update_user_rating(rating, to_whom_id)
     if not res:
