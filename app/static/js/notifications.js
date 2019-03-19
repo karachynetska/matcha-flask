@@ -36,10 +36,10 @@ $(document).ready(function () {
                     $('#unread_messages_nbr').text(nbr);
                 }
                 swipe(val['id_notification']);
-            setTimeout(function () {
-                $('#notification-'+val['id_notification']+'').remove();
-                delete_notification(val['id_notification']);
-            }, 60000); //will be deleted in a minute
+            // setTimeout(function () {
+            //     $('#notification-'+val['id_notification']+'').remove();
+            //     delete_notification(val['id_notification']);
+            // }, 60000); //will be deleted in a minute
             });
         }
 
@@ -66,7 +66,7 @@ $(document).ready(function () {
                         $(this).remove();
                     });
                 });
-                delete_notification(id_notification);
+                // delete_notification(id_notification);
             } else {
                 $(this).animate({
                     left: 0

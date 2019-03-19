@@ -29,7 +29,6 @@ def ajax_add_comment():
             'error': "Something went wrong"
         })
     res = comments.add_comment(id_photo, id_user, text)
-    print(res)
     to_whom_id = user_model.get_user_id_by_photo_id(id_photo)
     if to_whom_id != session.get('id'):
         msg = 'You have a new comment from ' + str(session.get('firstname')) + ' ' + str(session.get('lastname')) + '.'
@@ -57,7 +56,7 @@ def ajax_delete_comment():
             'error': "Something went wrong"
         })
     res = comments.delete_comment(id_comment)
-    if res:
+    if not res:
         return json.dumps({
             'ok': True,
             'error': "Comment deleted",

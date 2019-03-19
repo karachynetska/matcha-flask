@@ -335,10 +335,10 @@ textarea{
   font-weight: 600;
 }
 
-/*.menu ul.main-menu li.dropdown a:hover, .menu ul.main-menu li.dropdown a:active, .menu ul.main-menu li.dropdown a:focus{*/
-  /*color: #27aae1;*/
-  /*background: none;*/
-/*}*/
+.menu ul.main-menu li.dropdown a:hover, .menu ul.main-menu li.dropdown a:active, .menu ul.main-menu li.dropdown a:focus{
+  color: #27aae1;
+  background: none;
+}
 
 .menu ul.main-menu li.dropdown a:hover, .menu ul.main-menu li.dropdown a:active, .menu ul.main-menu li.dropdown a:focus{
   color: #27aae1;
@@ -358,7 +358,20 @@ textarea{
   padding: 0;
 }
 
+.timeline li ul.dropdown-menu{
+  background: #231F20;
+  box-shadow: none;
+  border: 0;
+  padding: 0;
+}
+
 .menu ul.main-menu li ul.dropdown-menu li{
+  list-style: none;
+  padding: 5px 0;
+  border-bottom: 1px solid rgba(255,255,255, 0.1)
+}
+
+.timeline li ul.dropdown-menu li{
   list-style: none;
   padding: 5px 0;
   border-bottom: 1px solid rgba(255,255,255, 0.1)
@@ -370,8 +383,19 @@ textarea{
   line-height: 16px;
 }
 
+.timeline li ul.dropdown-menu li a, .timeline li.open ul.dropdown-menu li a{
+  color: #fff;
+  font-size: 13px;
+  line-height: 16px;
+}
+
 .menu ul.main-menu li ul.dropdown-menu li a:hover, .menu ul.main-menu li.open ul.dropdown-menu li a:hover{
   color: #e6e6e6;
+}
+
+.timeline li ul.dropdown-menu li a:hover, .timeline li.open ul.dropdown-menu li a:hover{
+    color: #e6e6e6;
+    background: transparent;
 }
 
 .navbar-default .navbar-collapse, .navbar-default .navbar-form{
@@ -1418,12 +1442,12 @@ ul.online-users li span.online-dot{
 }
 .scrollbar-wrapper.tab-content{
     overflow-y: auto;
-    height: 720px;
+    height: 80vh;
 }
 
 .scrollbar-wrapper.contact-list{
     overflow-y: auto;
-    height: 720px;
+    height: 80vh;
     border: none;
     margin-bottom: 20px;
 }
@@ -2011,6 +2035,7 @@ input:checked + .slider:before{
     bottom: 0;
     left: 0;
     width: 100%;
+    z-index: 42;
 }
 
 #footer::before{
@@ -2520,4 +2545,18 @@ ul.contact li i{
 
 #delete_comment:hover{
     color: #ff374f;
+}
+
+.notification-item {
+    padding: 10px;
+}
+
+.notification-text {
+    margin-top: 10px;
+    margin-left: 65px;
+}
+
+#photo_comments {
+    height: 500px;
+    overflow-y: scroll;
 }

@@ -155,3 +155,66 @@ $('#like_back_M').on('click', function (e) {
 
     like_back();
 });
+
+// REPORT
+
+function report() {
+    var url = getLocation(location.href),
+        user_id = url.pathname.match(/(\d+)/)[1],
+        data = {
+        user_id: user_id
+    };
+
+    $.get('/ajax_report', data).done(function (data) {
+        var res = JSON.parse(data);
+        if (res.ok == true) {
+
+        } else {
+
+        }
+    });
+}
+
+$('#report_user').on('click', function (e) {
+    e.preventDefault();
+
+
+});
+
+$('#report_user_M').on('click', function (e) {
+    e.preventDefault();
+
+
+});
+
+// BLOCK
+
+function block() {
+    var url = getLocation(location.href),
+        user_id = url.pathname.match(/(\d+)/)[1],
+        data = {
+        user_id: user_id
+    };
+
+    $.get('/ajax_block', data).done(function (data) {
+        var res = JSON.parse(data);
+        if (res.ok == true) {
+
+        } else {
+
+        }
+    });
+
+}
+
+$('#block_user').on('click', function (e) {
+    e.preventDefault();
+
+
+});
+
+$('#block_user_M').on('click', function (e) {
+    e.preventDefault();
+
+
+});

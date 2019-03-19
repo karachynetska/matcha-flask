@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="This is social network html5 template available in themeforest......" />
+    <meta name="keywords" content="Social Network, Social Media, Make Friends, Newsfeed, Profile Page" />
+    <meta name="robots" content="index, follow" />
+    <title>Chatroom | Send and Receive Messages</title>
+    <!-- Stylesheets
+    ================================================= -->
+    <link rel="stylesheet" href='{{ url_for('static', filename = 'css/bootstrap.min.css') }}' />
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/jquery-ui.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/jquery.scrollbar.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/style.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/ionicons.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/font-awesome.min.css') }}" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link href="{{ url_for('static', filename = 'css/emoji.css') }}" rel="stylesheet">
+    <!--Google Font-->
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
+    <!--Favicon-->
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename = 'images/fav.png') }}"/>
+</head>
+<body>
+{% include 'header.html' %}
+<div id="page-contents">
+    <div class="container">
+        <div class="row">
+            <!-- Newsfeed Common Side Bar Left
+            ================================================= -->
+            <div class="col-md-3 static">
+                <div class="profile-card" style="background: url({{ data.user.background }}) no-repeat; background-size: cover">
+                    <img src="{{ data.user.avatar }}" alt="user" class="profile-photo" />
+                    <h5><a href="timeline.html" class="text-white">{{ data.user.firstname + ' ' + data.user.lastname }}</a></h5>
+                    <a href="#" class="text-white"><i class="ion ion-android-person-add"></i> 1,299 followers</a>
+                </div><!--profile card ends-->
+                <div id="chat-block">
+                    <div class="title">Chat online</div>
+                    <ul class="online-users list-inline">
+                        <li><a href="newsfeed-messages.html" title="Linda Lohan"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
+                        <li><a href="newsfeed-messages.html" title="Sophia Lee"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
+                        <li><a href="newsfeed-messages.html" title="John Doe"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
+                        <li><a href="newsfeed-messages.html" title="Alexis Clark"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
+                        <li><a href="newsfeed-messages.html" title="James Carter"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
+                        <li><a href="newsfeed-messages.html" title="Robert Cook"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
+                        <li><a href="newsfeed-messages.html" title="Richard Bell"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
+                        <li><a href="newsfeed-messages.html" title="Anna Young"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
+                        <li><a href="newsfeed-messages.html" title="Julia Cox"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
+                    </ul>
+                </div><!--chat block ends-->
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-7">
+                <div id="notifications">
+                    {% if data.notifications %}
+                        {% for notification in data.notifications %}
+                            <div class="row notification-item">
+                                <img class="profile-photo-md pull-left" src="{{ notification.image }}"/>
+                                <p class="notification-text">{{ notification.notification }}<span class="pull-right">{{ notification.date_of_creation }}</span></p>
+                            </div>
+                            <div class="line-divider"></div>
+                        {% endfor %}
+                    {% else %}
+                        <p>You have no notifications yet</p>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Footer
+================================================= -->
+<footer id="footer">
+    <div class="copyright">
+        <p>ikarachy © 2019. All rights reserved</p>
+    </div>
+</footer>
+<!--preloader-->
+<div id="spinner-wrapper">
+    <div class="spinner"></div>
+</div>
+<!-- Scripts
+================================================= -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+<script src="{{ url_for('static', filename = 'js/jquery-3.1.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/jquery-ui.min.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/jquery.sticky-kit.min.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/jquery.scrollbar.min.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/script.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/notifications.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/create_dialogue.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/likes.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/comments.js') }}"></script>
+</body>
+</html>

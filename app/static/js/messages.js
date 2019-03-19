@@ -14,22 +14,40 @@ function init(dialogue, id_user1, id_user2) {
     to_whom_id = id_user2;
     var nbr =  $('#'+id_dialogue).find('.chat-alert').text();
     var nbr1 = $('#unread_messages_nbr').text();
-    nbr = parseInt(nbr, 10);
-    nbr1 = parseInt(nbr1, 10);
-    nbr1 = nbr1 - nbr;
-    if (nbr1 === 0) {
-        $('#unread_messages_nbr').addClass('none');
-    } else {
-        $('#unread_messages_nbr').removeClass('none');
-        $('#unread_messages_nbr').text(nbr1);
+    if (nbr && nbr1) {
+        nbr = parseInt(nbr, 10);
+        nbr1 = parseInt(nbr1, 10);
+        nbr1 = nbr1 - nbr;
+        if (nbr1 <= 0) {
+            $('#unread_messages_nbr').addClass('none');
+        } else {
+            $('#unread_messages_nbr').removeClass('none');
+            $('#unread_messages_nbr').text(nbr1);
+        }
     }
+
     $('#'+id_dialogue).find('.chat-alert').addClass('none');
     socket_messages.emit('join_dialogue', {'id_dialogue': id_dialogue, 'from_whom_id': from_whom_id, 'to_whom_id': to_whom_id});
     $('.send_message').removeClass('none');
 }
 
+var dialogue_id = $('#dialogue_id').text();
+if (dialogue_id !== "None") {
+    console.log(dialogue_id);
+    $('#'+dialogue_id).addClass('active');
+
+    id_dialogue = $('#'+dialogue_id).find('.id_dialogue').text();
+    from_whom_id = $('#'+dialogue_id).find('.from_whom_id').text();
+    to_whom_id = $('#'+dialogue_id).find('.to_whom_id').text();
+
+    $('#'+dialogue_id).find('a').attr('area-expanded', 'true');
+    $('#contact-'+dialogue_id).addClass('active');
+    init(id_dialogue, from_whom_id, to_whom_id);
+}
+
 $('#send_message').on('click', function (e) {
     e.preventDefault();
+    console.log('click');
 
     var message = $('#message').val();
     if (!message) {
@@ -41,13 +59,7 @@ $('#send_message').on('click', function (e) {
 });
 
 socket_messages.on('add_message_to_template', function (data) {
-   var user = data['user'],
-       last_message = data['last_message'];
-
-   console.log(data['last_message']);
-   console.log(data['dialogue']);
-   console.log(data['from_whom_id']);
-   console.log($('li.active').find('.from_whom_id').text());
+   var user = data['user'];
 
    if(data['from_whom_id'] == $('li.active').find('.from_whom_id').text()) {
        $('#contact-'+data['dialogue']).find('.chat-message').append('<li class="right">\n' +
@@ -74,10 +86,7 @@ socket_messages.on('add_message_to_template', function (data) {
    }
    $("#"+data['dialogue']).find('#last_message').text('');
    $("#"+data['dialogue']).find('#last_message').text(data['message']);
-   console.log(data['to_whom_id']);
-   console.log(data['my_id']);
    if (data['to_whom_id'] == data['my_id']) {
-       console.log('blah');
        var nbr = $('#'+data['dialogue'].find('.chat-alert').text());
         nbr = parseInt(nbr, 10);
         nbr += 1;
@@ -96,7 +105,6 @@ socket_messages.on('add_message_to_template', function (data) {
 });
 
 socket_messages.on('add_unread_message', function (data) {
-    console.log('blah');
     var nbr = $('#'+data['dialogue'].find('.chat-alert').text());
     nbr = parseInt(nbr, 10);
     nbr += 1;
@@ -110,14 +118,7 @@ socket_messages.on('add_unread_message', function (data) {
     $('#unread_messages_nbr').text(nbr1);
 });
 
-var dialogue_id = $('#dialogue_id').text();
-if (dialogue_id !== "None") {
-    console.log(dialogue_id);
-    $('#'+dialogue_id).addClass('active');
-    $('#'+dialogue_id).find('a').attr('area-expanded', 'true');
-    $('#contact-'+dialogue_id).addClass('active');
-    $('.send_message').removeClass('none');
-}
+
 
 
 

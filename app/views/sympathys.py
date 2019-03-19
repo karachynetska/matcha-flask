@@ -127,10 +127,34 @@ def ajax_delete_friend():
             'error': "Something went wrong."
         })
 
-# @app.route('/ajax_remove_request')
-# def ajax_remove_request():
-#     user_id = request.form('user_id')
+@app.route('/ajax_report')
+def ajax_report():
+    user_id = request.args.get('user_id')
+    if sympathys.report_user(user_id):
+        return json.dumps({
+            'ok': True,
+            'error': "Report"
+        })
+    else:
+        return json.dumps({
+            'ok': False,
+            'error': "Something went wrong."
+        })
 
+@app.route('/ajax_block')
+def ajax_block():
+    user_id = request.args.get('user_id')
+    my_id = session.get('id')
+    if sympathys.block_user(user_id, my_id):
+        return json.dumps({
+            'ok': True,
+            'error': "Block"
+        })
+    else:
+        return json.dumps({
+            'ok': False,
+            'error': "Something went wrong."
+        })
 
 # @app.route('/ajax_decline_request')
 # def ajax_decline_request():

@@ -53,6 +53,7 @@ def messages(with_id=None):
 @sio.on('connect', namespace='/messages')
 def connect():
     id_user_to_sid[request.sid] = session.get('id')
+    print(id_user_to_sid)
 
 @sio.on('join_dialogue', namespace='/messages')
 def join_dialogue(data):
@@ -70,7 +71,6 @@ def send_message(data):
     user = user_model.get_user_by_id(from_whom_id)[0]
     data['user'] = user
     data['dialogue'] = dialogue
-    data['last_message'] = messages_model.get_last_message_by_dialogue_id(dialogue)
     data['my_id'] = session.get('id')
     messages_model.send_message(dialogue, from_whom_id, to_whom_id, message)
     emit('add_message_to_template', data, room=dialogue)

@@ -33,6 +33,7 @@
                                 <li><a data-toggle="tab" href="#incoming_requests">Incoming requests <span id="f_incoming_requests_nbr" style="color: #ff374f" class="none">{{ data.incoming_requests_nbr }}</span></a></li>
                             {% endif %}
                             <li><a data-toggle="tab" href="#outgoing_requests">Outgoing requests</a></li>
+                            <li><a data-toggle="tab" href="#block">Block</a></li>
                         </ul>
                     </div>
                     <div class="line-divider"></div>
@@ -133,6 +134,28 @@
                             </div>
                             {% endif %}
                         </div>
+                    <div id="block" class="tab-pane fade">
+                        {% if data.blocked_users %}
+                            <div class="friend-list">
+                                <div class="row">
+                                    {% for user in data.blocked_users %}
+                                        <div class="col-md-6 col-sm-6">
+                                            <div class="friend-card">
+                                                <img src="{{ user.background }}" alt="profile-cover" class="img-responsive cover" />
+                                                <div class="card-info">
+                                                    <img src="{{ user.avatar }}" alt="user" class="profile-photo-lg" />
+                                                    <div class="friend-info">
+                                                        <h5><a href="/profile/id{{ user.id }}" class="profile-link">{{ user.firstname + ' ' + user.lastname }}</a></h5>
+                                                        <p>{{ user.login }}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        {% endif %}
+                    </div>
                     </div>
                 {% else %}
                     {% if data.friends %}

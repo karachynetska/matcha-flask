@@ -41,14 +41,6 @@
             	<h5><a href="timeline.html" class="text-white">{{ data.user.firstname + ' ' + data.user.lastname }}</a></h5>
             	<a href="#" class="text-white"><i class="ion ion-android-person-add"></i> 1,299 followers</a>
             </div><!--profile card ends-->
-            <ul class="nav-news-feed">
-              <li><i class="icon ion-ios-paper"></i><div><a href="newsfeed.html">My Newsfeed</a></div></li>
-              <li><i class="icon ion-ios-people"></i><div><a href="newsfeed-people-nearby.html">People Nearby</a></div></li>
-              <li><i class="icon ion-ios-people-outline"></i><div><a href="newsfeed-friends.html">Friends</a></div></li>
-              <li><i class="icon ion-chatboxes"></i><div><a href="newsfeed-messages.html">Messages</a></div></li>
-              <li><i class="icon ion-images"></i><div><a href="newsfeed-images.html">Images</a></div></li>
-              <li><i class="icon ion-ios-videocam"></i><div><a href="newsfeed-videos.html">Videos</a></div></li>
-            </ul><!--news-feed links ends-->
             <div id="chat-block">
               <div class="title">Chat online</div>
               <ul class="online-users list-inline">
@@ -113,12 +105,17 @@
                                 <img src="{{ data.get_avatar(session.get('id')) }}" alt="" class="profile-photo-sm" />
                                 <div class="col-md-12 col-sm-12">
                                     <form method="post" onsubmit="add_comment(this)">
-                                        <div class="col-md-9 col-sm-9">
-                                            <input type="hidden" name="id_photo" id="id_photo" value="{{ photo.id_photo }}">
-                                            <input type="hidden" name="id_user" id="id_user" value="{{ session.get('id') }}">
-                                            <input type="hidden" name="profile_photo" id="profile_photo" value="{{ data.get_avatar(session.get('id')) }}">
-                                            <input type="hidden" name="user_firstname" id="user_firstname" value="{{ session.get('firstname') }}">
-                                            <input id="comment" type="text" class="form-control" placeholder="Post a comment" style="margin-top: 2px">
+                                        <div class="row">
+                                            <div class="form-group col-sm-9">
+                                                <input type="hidden" name="id_photo" id="id_photo" value="{{ photo.id_photo }}">
+                                                <input type="hidden" name="id_user" id="id_user" value="{{ session.get('id') }}">
+                                                <input type="hidden" name="profile_photo" id="profile_photo" value="{{ data.get_avatar(session.get('id')) }}">
+                                                <input type="hidden" name="user_firstname" id="user_firstname" value="{{ session.get('firstname') }}">
+                                                <input id="comment" type="text" class="form-control" placeholder="Post a comment">
+                                            </div>
+                                            <div class="form-group col-sm-3">
+                                                <button type="submit" class="btn btn-primary" style="margin-top: 5px;">Comment</button>
+                                            </div>
                                         </div>
                                     </form>
                                 </div>
@@ -129,22 +126,6 @@
                     </div>
                         {% endfor %}
                     {% endif %}
-{#                    {% if data.photos %}#}
-{#                        {% for photo in data.photos %}#}
-{#                        {% set user = data.get_user_by_id(photo.id_user)[0] %}#}
-{#                        <div class="row">#}
-{#                            <div class="newsfeed">#}
-{#                                <div class="info_card">#}
-{#                                    <img src="{{ user.avatar }}" class="profile-photo-lg">#}
-{#                                    <p>{{ user.firstname + ' ' + user.lastname }}</p>#}
-{#                                </div>#}
-{#                                <div class="photo">#}
-{#                                    <img src="{{ photo.photo }}" style="height: 500px;">#}
-{#                                </div>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        {% endfor %}#}
-{#                    {% endif %}#}
                 </div>
 
 

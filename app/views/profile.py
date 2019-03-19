@@ -9,6 +9,7 @@ import json, re, os
 from app.models import user as user_model
 from app.models import geolocation as geolocation_model
 from app.views import notifications as notification_view
+from app.models import notifications as notification_model
 from app.models import sympathys
 from app.models import likes, comments
 from app.models import suggestions as suggestions_model
@@ -106,16 +107,19 @@ def friends(id_user=None):
         friends = sympathys.get_sympathys_list(session.get('id'))
         incoming_requests = sympathys.get_incoming_requests(session.get('id'))
         outgoing_requests = sympathys.get_outgoing_requests(session.get('id'))
+        blocked_users = sympathys.get_blocked_users(session.get('id'))
 
     if id_user:
         user = user_model.get_user_by_id(id_user)[0]
         friends = sympathys.get_sympathys_list(id_user)
         incoming_requests = None
         outgoing_requests = None
+        blocked_users = None
         image = user_model.get_avatar(session.get('id'))
         msg = str(session.get('firstname')) + ' ' + str(session.get('lastname')) + ' viewed your profile.'
         notification_view.add_notification(id_user, msg, 'view', image)
 
+    print(blocked_users)
     data = {
         'user': user,
         'sympathys': sympathys,
@@ -124,7 +128,8 @@ def friends(id_user=None):
         'incoming_requests': incoming_requests,
         'outgoing_requests': outgoing_requests,
         'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
-        'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id'))
+        'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id')),
+        'blocked_users': blocked_users
     }
     return render_template('friends.html', data=data)
 
@@ -145,6 +150,26 @@ def suggestions():
     return render_template('suggestions.html', data = data)
 
 
+# NOTIFICATIONS
+@app.route('/profile/notifications')
+def notifications():
+    if not 'id' in session:
+        return redirect('/')
+    user = user_model.get_user_by_id(session.get('id'))[0]
+    notifications = notification_model.get_notification_by_user_id(session.get('id'))
+    if notifications:
+        notifications = sorted(notifications, key=lambda k: k['date_of_creation'], reverse=True)
+
+    data = {
+        'user': user,
+        'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
+        'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id')),
+        'notifications': notifications
+    }
+    return render_template('notifications.html', data=data)
+
+
+
 # NEWSFEED
 @app.route('/newsfeed')
 def newsfeed():
@@ -155,15 +180,11 @@ def newsfeed():
         if friends:
             for friend in friends:
                 if friend['id_user1'] == my_id:
-                    res = photos_model.get_photos_by_id(friend['id_user2'])
+                    photos = photos_model.get_photos_by_id(friend['id_user2'])
                 else:
-                    res = photos_model.get_photos_by_id(friend['id_user1'])
-                if res:
-                    for el in res:
-                        el['age'] = int(date.today().year - datetime.strptime(el['date_added'], '%Y-%m-%d %H:%M:%S').year)
-                        photos.append(el)
+                    photos = photos_model.get_photos_by_id(friend['id_user1'])
             if photos:
-                photos = sorted(photos, key=lambda k: k['age'], reverse=True)
+                photos = sorted(photos, key=lambda k: k['date_added'], reverse=True)
         data = {
             'user': user_model.get_user_by_id(my_id)[0],
             'get_user_by_id': user_model.get_user_by_id,

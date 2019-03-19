@@ -91,3 +91,36 @@ def get_outgoing_requests(id):
     sql = 'SELECT * FROM requests WHERE id_sender=? AND status = 0'
     res = database.db_query(sql, array)
     return res
+
+
+# REPORT AND BLOCK
+
+def report_user(id):
+    array = [id]
+    sql = 'UPDATE users SET report = report + 1 WHERE id=?'
+    res = database.db_query(sql, array)
+    return res
+
+def block_user(id_user, my_id):
+    array = [id_user, my_id]
+    sql = 'INSERT INTO blocked_users (blocked_user_id, who_block_id) VALUES (?, ?)'
+    res = database.db_query(sql, array)
+    return res
+
+def unblock_user(id_user, my_id):
+    array = [id_user, my_id]
+    sql = 'DELETE FROM blocked_users WHERE blocked_user_id=? AND who_block_id=?'
+    res = database.db_query(sql, array)
+    return res
+
+def check_block(id_user, my_id):
+    array = [id_user, my_id]
+    sql = 'SELECT * FROM blocked_users WHERE blocked_user_id=? AND who_block_id=?'
+    res = database.db_query(sql, array)
+    return res
+
+def get_blocked_users(my_id):
+    array = [my_id]
+    sql = 'SELECT * FROM users INNER JOIN blocked_users ON users.id = blocked_users.blocked_user_id WHERE blocked_users.who_block_id = ?'
+    res = database.db_query(sql, array)
+    return res
