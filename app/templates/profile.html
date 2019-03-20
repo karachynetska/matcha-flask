@@ -24,16 +24,8 @@
                     ================================================= -->
                     <div class="about-profile">
                         <div class="about-content-block">
-                            <h4 class="grey"><i class="ion-information-circled icon-in-title"></i>About me</h4>
-                            {% if data.information %}
-                                <p>{{ data.information }}</p>
-                            {% else %}
-                                {% if data.user.id == session.get('id') %}
-                                    <a href="/profile/edit/basic"><p>Add information about yourself</p></a>
-{#                                {% else %}#}
-{#                                    <p>The user has not yet filled out any personal information.</p>#}
-                                {% endif %}
-                            {% endif %}
+                            <h4 class="grey"><i class="ion-information-circled icon-in-title"></i>Age</h4>
+                            <p>{{ data.user.age }}</p>
                         </div>
                         <div class="about-content-block">
                             <h4 class="grey"><i class="ion-information-circled icon-in-title"></i>Gender</h4>
@@ -53,11 +45,19 @@
                                 {% else %}
                                     {% if data.user.id == session.get('id') %}
                                         <a href="/profile/edit/interests"><p>Add your interests</p></a>
-{#                                    {% else %}#}
-{#                                        <p>The user has not yet filled out any interests.</p>#}
                                     {% endif %}
                                 {% endif %}
                             </ul>
+                        </div>
+                        <div class="about-content-block">
+                            <h4 class="grey"><i class="ion-information-circled icon-in-title"></i>About me</h4>
+                            {% if data.information %}
+                                <p>{{ data.information }}</p>
+                            {% else %}
+                                {% if data.user.id == session.get('id') %}
+                                    <a href="/profile/edit/basic"><p>Add information about yourself</p></a>
+                                {% endif %}
+                            {% endif %}
                         </div>
                         <div class="about-content-block">
                             <h4 class="grey"><i class="ion-location icon-in-title"></i>Location</h4>

@@ -10,18 +10,20 @@ from flask_socketio import SocketIO, join_room, leave_room, emit, send
 from app.models import user as user_model
 from app.models import messages as messages_model
 from app.models import notifications as notification_model
+from app.models import sympathys
 from flask_mail import Message
 
 id_user_to_notification_sid = {}
 
-def add_notification(to_whom_id, notification, type, image):
+def add_notification(from_whom_id, to_whom_id, notification, type, image):
     print('add notification')
-    id_notification = notification_model.add_notification(to_whom_id, notification, type, image)
-    notification = notification_model.get_notification_by_id(id_notification)
+    if not sympathys.check_block(from_whom_id, to_whom_id):
+        id_notification = notification_model.add_notification(to_whom_id, notification, type, image)
+        notification = notification_model.get_notification_by_id(id_notification)
 
-    for key, value in id_user_to_notification_sid.items():
-        if value == to_whom_id:
-            emit('notification', notification, namespace='/notifications', room=key)
+        for key, value in id_user_to_notification_sid.items():
+            if value == to_whom_id:
+                emit('notification', notification, namespace='/notifications', room=key)
 
 @app.route('/ajax_delete_notification', methods=['POST'])
 def ajax_delete_notification():

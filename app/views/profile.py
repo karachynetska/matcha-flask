@@ -52,7 +52,7 @@ def get_suggestions_for_user(user):
 @app.route('/profile')
 @app.route('/profile/id<int:id_user>/')
 def profile(id_user=None):
-    if not 'id' in session and not id_user:
+    if not 'id' in session:
         return redirect('/')
     if 'id' in session:
         my_id = session.get('id')
@@ -77,8 +77,9 @@ def profile(id_user=None):
         if id_user != session.get('id'):
             msg = str(session.get('firstname')) + ' ' + str(session.get('lastname')) + ' viewed your profile.'
             image = user_model.get_avatar(session.get('id'))
-            notification_view.add_notification(id_user, msg, 'view', image)
+            notification_view.add_notification(session.get('id'), id_user, msg, 'view', image)
 
+    user['age'] = date.today().year - datetime.strptime(user['birth_date'], '%Y-%m-%d %H:%M:%S').year
 
     data = {
         'user': user,
@@ -90,7 +91,8 @@ def profile(id_user=None):
         'work': work,
         'geolocation': geolocation,
         'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
-        'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id'))
+        'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id')),
+        'check_block': sympathys.check_block
     }
     return render_template('profile.html', data=data)
 
@@ -117,9 +119,8 @@ def friends(id_user=None):
         blocked_users = None
         image = user_model.get_avatar(session.get('id'))
         msg = str(session.get('firstname')) + ' ' + str(session.get('lastname')) + ' viewed your profile.'
-        notification_view.add_notification(id_user, msg, 'view', image)
+        notification_view.add_notification(session.get('id') ,id_user, msg, 'view', image)
 
-    print(blocked_users)
     data = {
         'user': user,
         'sympathys': sympathys,
@@ -129,7 +130,8 @@ def friends(id_user=None):
         'outgoing_requests': outgoing_requests,
         'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
         'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id')),
-        'blocked_users': blocked_users
+        'blocked_users': blocked_users,
+        'check_block': sympathys.check_block
     }
     return render_template('friends.html', data=data)
 
@@ -140,7 +142,40 @@ def suggestions():
     if not 'id' in session:
         return redirect('/')
     user = user_model.get_user_by_id(session.get('id'))[0]
-    suggestions = get_suggestions_for_user(user)
+    selected = get_suggestions_for_user(user)
+    suggestions = []
+    for suggestion in selected:
+        correct = True
+        if sympathys.check_block(suggestion['id'], session.get('id')):
+            correct = False
+        geolocation = geolocation_model.get_geolocation_by_user_id(suggestion['id'])
+        if geolocation:
+            suggestion['latitude'] = float(geolocation['latitude'])
+            suggestion['longitude'] = float(geolocation['longitude'])
+        else:
+            suggestion['latitude'] = None
+            suggestion['longitude'] = None
+        suggestion['distance'] = calculate_distance(suggestion['latitude'], suggestion['longitude'])
+        if not suggestion['distance']:
+            correct = False
+        my_interests = user_model.get_interests_by_user_id(session.get('id'))
+        if my_interests:
+            suggestion['interests_nbr'] = 0
+            interests = user_model.get_interests_by_user_id(suggestion['id'])
+            if interests:
+                my_tags = []
+                for my_interest in my_interests:
+                    my_tags.append(my_interest['title'])
+                for interest in interests:
+                    if interest['title'] in my_tags:
+                        suggestion['interests_nbr'] += 1
+        # suggestion['interests'] = []
+        # suggestion['interests_nbr'] = 0
+        # for interest in interests:
+        #     user['interests'].append(interest['title'])
+        if correct:
+            suggestions.append(suggestion)
+        print(suggestions)
     data = {
         'user': user,
         'suggestions': suggestions,
@@ -519,7 +554,6 @@ def edit_avatar():
 @app.route('/ajax_edit_avatar', methods=['POST'])
 def ajax_edit_avatar():
     avatar = request.files.get('avatar')
-    print(avatar)
 
     if not avatar:
         return json.dumps({
@@ -530,7 +564,6 @@ def ajax_edit_avatar():
     id = session.get('id')
     login = session.get('login')
     user = user_model.get_user_by_id(id)[0]
-    print(user)
 
     extension = avatar.filename.rsplit('.', 1)[1]
     avatar_name = str('avatar' + '_' + login + '.' + extension)

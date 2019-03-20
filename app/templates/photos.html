@@ -31,8 +31,11 @@
             <div class="col-md-3 static">
                 <div class="profile-card" style="background: url({{ data.user.background }}) no-repeat; background-size: cover">
                     <img src="{{ data.user.avatar }}" alt="user" class="profile-photo" />
-                    <h5><a href="/profile" class="text-white">{{ data.user.firstname + ' ' + data.user.lastname }}</a></h5>
-                    <a href="#" class="text-white"><i class="ion ion-android-person-add"></i> 1,299 followers</a>
+                    {% if data.user.id == session.get('id') %}
+                        <h5><a href="/profile" class="text-white">{{ data.user.firstname + ' ' + data.user.lastname }}</a></h5>
+                    {% else %}
+                        <h5><a href="/profile/id{{ data.user.id }}" class="text-white">{{ data.user.firstname + ' ' + data.user.lastname }}</a></h5>
+                    {% endif %}
                 </div><!--profile card ends-->
                 <div id="chat-block">
                     <div class="title">Chat online</div>
@@ -176,7 +179,11 @@
                             </div>
                         {% endfor %}
                     {% else %}
-                        <p>You have no photos yet</p>
+                        {% if data.user.id == session.get('id') %}
+                            <p style="text-align: center">You have no photos yet</p>
+                        {% else %}
+                            <p style="text-align: center">User have no photos yet</p>
+                        {% endif %}
                     {% endif %}
                     </div>
                 </div>

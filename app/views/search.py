@@ -83,6 +83,8 @@ def ajax_search():
 
     for user in users:
         correct = True
+        if sympathys.check_block(user['id'], my_id):
+            correct = False
         user['age'] = date.today().year - datetime.strptime(user['birth_date'], '%Y-%m-%d %H:%M:%S').year
         geolocation = geolocation_model.get_geolocation_by_user_id(user['id'])
         if geolocation:

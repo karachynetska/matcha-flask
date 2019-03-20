@@ -45,10 +45,7 @@ if (dialogue_id !== "None") {
     init(id_dialogue, from_whom_id, to_whom_id);
 }
 
-$('#send_message').on('click', function (e) {
-    e.preventDefault();
-    console.log('click');
-
+function send_message() {
     var message = $('#message').val();
     if (!message) {
         return;
@@ -56,6 +53,19 @@ $('#send_message').on('click', function (e) {
     var data = {'message': message, 'from_whom_id': from_whom_id, 'to_whom_id': to_whom_id};
     socket_messages.emit('send_message', data);
     $('#message').val('');
+}
+
+$(document).on('keypress',function(e) {
+    if(e.which == 13) {
+
+        send_message();
+    }
+});
+
+$('#send_message').on('click', function (e) {
+    e.preventDefault();
+
+    send_message();
 });
 
 socket_messages.on('add_message_to_template', function (data) {

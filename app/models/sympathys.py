@@ -31,6 +31,7 @@ def check_sympathy(id1, id2):
     array = [id1, id2, id2, id1]
     sql = 'SELECT * FROM sympathys WHERE id_user1=? AND id_user2=? OR id_user1=? AND id_user2=?'
     res = database.db_query(sql, array)
+    print('sympathy')
     print(res)
     return res
 
@@ -104,7 +105,7 @@ def report_user(id):
 def block_user(id_user, my_id):
     array = [id_user, my_id]
     sql = 'INSERT INTO blocked_users (blocked_user_id, who_block_id) VALUES (?, ?)'
-    res = database.db_query(sql, array)
+    res = database.db_insert(sql, array)
     return res
 
 def unblock_user(id_user, my_id):
@@ -117,7 +118,16 @@ def check_block(id_user, my_id):
     array = [id_user, my_id]
     sql = 'SELECT * FROM blocked_users WHERE blocked_user_id=? AND who_block_id=?'
     res = database.db_query(sql, array)
-    return res
+    if not res:
+        array = [my_id, id_user]
+        sql = 'SELECT * FROM blocked_users WHERE blocked_user_id=? AND who_block_id=?'
+        res = database.db_query(sql, array)
+        if res:
+            return 'in_block'
+        else:
+            return None
+    else:
+        return 'block'
 
 def get_blocked_users(my_id):
     array = [my_id]

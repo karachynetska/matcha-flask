@@ -14,7 +14,6 @@ function getLocation(href) {
 
 // LIKE USER
 function like_user() {
-    console.log('pressed');
     var url = getLocation(location.href);
     var user_id = url.pathname.match(/(\d+)/)[1];
     var data = {
@@ -23,12 +22,13 @@ function like_user() {
 
     $.get('/ajax_like_user', data).done(function (data) {
         var res = JSON.parse(data);
-        console.log(res);
         if (res.ok == true) {
             $('#like_user').parent().addClass('none');
             $('#liked_user').parent().removeClass('none');
             $('#like_user_M').parent().addClass('none');
             $('#liked_user_M').parent().removeClass('none');
+        } else {
+            alert(res.error);
         }
     });
 }
@@ -199,9 +199,9 @@ function block() {
     $.get('/ajax_block', data).done(function (data) {
         var res = JSON.parse(data);
         if (res.ok == true) {
-
+            console.log(res.error);
         } else {
-
+            console.log(res.error);
         }
     });
 
@@ -210,11 +210,11 @@ function block() {
 $('#block_user').on('click', function (e) {
     e.preventDefault();
 
-
+    block();
 });
 
 $('#block_user_M').on('click', function (e) {
     e.preventDefault();
 
-
+    block();
 });

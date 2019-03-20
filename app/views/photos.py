@@ -40,7 +40,7 @@ def photos(id_user=None):
         image = user_model.get_avatar(session.get('id'))
         msg = str(session.get('firstname')) + ' ' + str(session.get(
             'lastname')) + ' viewed your profile.'
-        notification_view.add_notification(id_user, msg, 'view', image)
+        notification_view.add_notification(session.get('id'), id_user, msg, 'view', image)
 
 
     data = {
@@ -70,27 +70,31 @@ def ajax_add_photo():
             'error': "Something wrong"
         })
 
-    login = session.get('login')
+    if photos_model.get_photos_nbr_by_id(session.get('id')) < 4:
+        login = session.get('login')
+        extension = photo.filename.rsplit('.', 1)[1]
+        date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
+        photo_name = str(login + date + '.' + extension)
+        path = '/static/media/' + login + '/' + photo_name
+        images.save(photo, login, photo_name)
+        photos_model.add_photo(session.get('id'), path)
 
-    extension = photo.filename.rsplit('.', 1)[1]
-    date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
-    photo_name = str(login + date + '.' + extension)
-    path = '/static/media/' + login + '/' + photo_name
-    images.save(photo, login, photo_name)
-    photos_model.add_photo(session.get('id'), path)
+        rating = user_model.get_user_fame_rating(session.get('id')) + 10
+        user_model.update_user_rating(rating, session.get('id'))
 
-    rating = user_model.get_user_fame_rating(session.get('id')) + 10
-    user_model.update_user_rating(rating, session.get('id'))
-
-    return json.dumps({
-        'ok': True,
-        'error': "Photo successfully uploaded"
-    })
+        return json.dumps({
+            'ok': True,
+            'error': "Photo successfully uploaded"
+        })
+    else:
+        return json.dumps({
+            'ok': False,
+            'error': "You have the maximum number of photos"
+        })
 
 @app.route('/ajax_delete_photo', methods=['POST'])
 def ajax_delete_photo():
     id_photo = request.form['id_photo']
-    print(id_photo)
 
     if not id_photo:
         return json.dumps({
