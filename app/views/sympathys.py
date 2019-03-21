@@ -70,16 +70,16 @@ def ajax_pick_up_like():
                 else:
                     return json.dumps({
                         'ok': False,
-                        'error': "Something went wrong."
+                        'error': "Something went wrong"
                     })
             else:
                 return json.dumps({
                     'ok': False,
-                    'error': "Something went wrong."
+                    'error': "Something went wrong"
                 })
         return json.dumps({
             'ok': False,
-            'error': "Something went wrong."
+            'error': "Something went wrong"
         })
     else:
         return json.dumps({
@@ -125,12 +125,12 @@ def ajax_delete_friend():
         else:
             return json.dumps({
                 'ok': False,
-                'error': "Something went wrong."
+                'error': "Something went wrong"
             })
     else:
         return json.dumps({
             'ok': False,
-            'error': "Something went wrong."
+            'error': "Something went wrong"
         })
 
 @app.route('/ajax_report')
@@ -144,7 +144,7 @@ def ajax_report():
     else:
         return json.dumps({
             'ok': False,
-            'error': "Something went wrong."
+            'error': "Something went wrong"
         })
 
 @app.route('/ajax_block')
@@ -152,11 +152,10 @@ def ajax_block():
     user_id = request.args.get('user_id')
     my_id = session.get('id')
     if sympathys.block_user(user_id, my_id):
-        if sympathys.check_sympathy(session.get('id'), user_id):
-            if sympathys.check_request(session.get('id'), user_id) == 'sender':
-                sympathys.remove_request(session.get('id'), user_id)
-            else:
-                sympathys.remove_request(user_id, session.get('id'))
+        if sympathys.check_request(session.get('id'), user_id) == 'sender':
+            sympathys.remove_request(session.get('id'), user_id)
+        else:
+            sympathys.remove_request(user_id, session.get('id'))
         if not sympathys.unlike_user(user_id, my_id):
             return json.dumps({
                 'ok': True,
@@ -165,12 +164,33 @@ def ajax_block():
         else:
             return json.dumps({
                 'ok': False,
-                'error': "Something went wrong."
+                'error': "Something went wrong"
             })
     else:
         return json.dumps({
             'ok': False,
-            'error': "Something went wrong."
+            'error': "Something went wrong"
+        })
+
+@app.route('/ajax_unblock')
+def ajax_unblock():
+    user_id = request.args.get('user_id')
+    my_id = session.get('id')
+    if sympathys.check_block(user_id, my_id):
+        if not sympathys.unblock_user(user_id, my_id):
+            return json.dumps({
+                'ok': True,
+                'error': "Unblock"
+            })
+        else:
+            return json.dumps({
+                'ok': False,
+                'error': "Something went wrong"
+            })
+    else:
+        return json.dumps({
+            'ok': False,
+            'error': "This user is not blocked"
         })
 
 # @app.route('/ajax_decline_request')

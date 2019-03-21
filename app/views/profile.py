@@ -112,6 +112,8 @@ def friends(id_user=None):
         blocked_users = sympathys.get_blocked_users(session.get('id'))
 
     if id_user:
+        if sympathys.check_block(id_user, session.get('id')):
+            return redirect('/profile/id'+ str(id_user))
         user = user_model.get_user_by_id(id_user)[0]
         friends = sympathys.get_sympathys_list(id_user)
         incoming_requests = None
@@ -156,7 +158,7 @@ def suggestions():
             suggestion['latitude'] = None
             suggestion['longitude'] = None
         suggestion['distance'] = calculate_distance(suggestion['latitude'], suggestion['longitude'])
-        if not suggestion['distance']:
+        if suggestion['distance'] is None:
             correct = False
         my_interests = user_model.get_interests_by_user_id(session.get('id'))
         if my_interests:
@@ -169,13 +171,11 @@ def suggestions():
                 for interest in interests:
                     if interest['title'] in my_tags:
                         suggestion['interests_nbr'] += 1
-        # suggestion['interests'] = []
-        # suggestion['interests_nbr'] = 0
-        # for interest in interests:
-        #     user['interests'].append(interest['title'])
         if correct:
             suggestions.append(suggestion)
-        print(suggestions)
+        suggestions = sorted(suggestions, key=lambda k: k['distance'])
+        suggestions = sorted(suggestions, key=lambda k: k['interests_nbr'], reverse=True)
+        suggestions = sorted(suggestions, key=lambda k: k['fame_rating'], reverse=True)
     data = {
         'user': user,
         'suggestions': suggestions,

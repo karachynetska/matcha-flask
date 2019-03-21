@@ -7,6 +7,7 @@ from app.models import user as user_model
 from app.models import messages as messages_model
 from app.views import notifications as notifications_view
 from app.models import sympathys as sympathys_model
+from app.views.notifications import get_online_users
 
 id_user_to_sid = {}
 id_dialogue_to_sid = {}
@@ -44,7 +45,8 @@ def messages(with_id=None):
             'get_unread_messages_nbr': messages_model.get_unread_messages_nbr,
             'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
             'dialogue_id': dialogue_id,
-            'incoming_requests_nbr': sympathys_model.get_incoming_requests_nbr(session.get('id'))
+            'incoming_requests_nbr': sympathys_model.get_incoming_requests_nbr(session.get('id')),
+            'online_users': get_online_users()
         }
         return render_template('messages.html', data=data)
     return redirect('/')
@@ -82,7 +84,8 @@ def disconnect():
     id_user_to_sid.pop(request.sid)
     dialogue = id_dialogue_to_sid.get(request.sid)
     leave_room(dialogue)
-    id_dialogue_to_sid.pop(request.sid)
+    if request.sid in id_dialogue_to_sid:
+        id_dialogue_to_sid.pop(request.sid)
 
 
 

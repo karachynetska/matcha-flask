@@ -35,6 +35,8 @@ def photos(id_user=None):
         photos = photos_model.get_photos_by_id(id)
 
     if id_user:
+        if sympathys.check_block(id_user, session.get('id')):
+            return redirect('/profile/id'+ str(id_user))
         user = user_model.get_user_by_id(id_user)[0]
         photos = photos_model.get_photos_by_id(id_user)
         image = user_model.get_avatar(session.get('id'))

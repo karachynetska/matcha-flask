@@ -178,13 +178,13 @@ function report() {
 $('#report_user').on('click', function (e) {
     e.preventDefault();
 
-
+    report();
 });
 
 $('#report_user_M').on('click', function (e) {
     e.preventDefault();
 
-
+    report();
 });
 
 // BLOCK
@@ -200,6 +200,20 @@ function block() {
         var res = JSON.parse(data);
         if (res.ok == true) {
             console.log(res.error);
+            $('#actions').addClass('none');
+            $('#actions_M').addClass('none');
+            $('#like_user').parent().addClass('none');
+            $('#like_user_M').parent().addClass('none');
+            $('#liked_user').parent().addClass('none');
+            $('#liked_user_M').parent().addClass('none');
+            $('#unlike_user').parent().addClass('none');
+            $('#unlike_user_M').parent().addClass('none');
+            $('#like_back').parent().addClass('none');
+            $('#like_back_M').parent().addClass('none');
+            $('#start_dialogue').parent().parent().addClass('none');
+            $('#start_dialogue_M').parent().parent().addClass('none');
+            $('.actions').append('<li id="block"><a style="color: #ff374f; text-decoration: none;">Blocked by you</a></li>');
+            $('.actions_M').append('<li id="block_M"><a style="color: #ff374f; text-decoration: none;">Blocked by you</a></li>');
         } else {
             console.log(res.error);
         }
@@ -217,4 +231,43 @@ $('#block_user_M').on('click', function (e) {
     e.preventDefault();
 
     block();
+});
+
+// UNBLOCK
+
+function unblock() {
+    var url = getLocation(location.href),
+        user_id = url.pathname.match(/(\d+)/)[1],
+        data = {
+        user_id: user_id
+    };
+
+    $.get('/ajax_unblock', data).done(function (data) {
+        var res = JSON.parse(data);
+        if (res.ok == true) {
+            $('#block').addClass('none');
+            $('#block_M').addClass('none');
+            $('#unblock_user').addClass('none');
+            $('#unblock_user_M').addClass('none');
+            $('#like_user').parent().removeClass('none');
+            $('#like_user_M').parent().removeClass('none');
+            $('#actions').removeClass('none');
+            $('#actions_M').removeClass('none');
+        } else {
+            console.log(res.error);
+        }
+    });
+}
+
+$('#unblock_user').on('click', function (e) {
+    e.preventDefault();
+
+    unblock();
+});
+
+
+$('#unblock_user_M').on('click', function (e) {
+    e.preventDefault();
+
+    unblock();
 });

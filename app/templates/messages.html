@@ -37,17 +37,16 @@
                 </div><!--profile card ends-->
                 <div id="chat-block">
                     <div class="title">Chat online</div>
+                {% if data.online_users %}
                     <ul class="online-users list-inline">
-                        <li><a href="newsfeed-messages.html" title="Linda Lohan"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
-                        <li><a href="newsfeed-messages.html" title="Sophia Lee"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
-                        <li><a href="newsfeed-messages.html" title="John Doe"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
-                        <li><a href="newsfeed-messages.html" title="Alexis Clark"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
-                        <li><a href="newsfeed-messages.html" title="James Carter"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
-                        <li><a href="newsfeed-messages.html" title="Robert Cook"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
-                        <li><a href="newsfeed-messages.html" title="Richard Bell"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
-                        <li><a href="newsfeed-messages.html" title="Anna Young"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
-                        <li><a href="newsfeed-messages.html" title="Julia Cox"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
+                        {% for id in data.online_users %}
+                        {% set user = data.get_user_by_id(id)[0] %}
+                        <li><a href="/profile/messages/dialogue_with_{{ user.id }}" title="{{ user.firstname + ' ' + user.lastname }}"><img src="{{ user.avatar }}" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
+                        {% endfor %}
                     </ul>
+                {% else %}
+                <p>No users online</p>
+                {% endif %}
                 </div><!--chat block ends-->
             </div>
             <div class="col-md-9">

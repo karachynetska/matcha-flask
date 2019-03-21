@@ -15,6 +15,13 @@ from flask_mail import Message
 
 id_user_to_notification_sid = {}
 
+def get_online_users():
+    online_users = []
+    for key, value in id_user_to_notification_sid.items():
+        if not value in online_users and value != session.get('id'):
+            online_users.append(value)
+    return online_users
+
 def add_notification(from_whom_id, to_whom_id, notification, type, image):
     print('add notification')
     if not sympathys.check_block(from_whom_id, to_whom_id):

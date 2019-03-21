@@ -118,10 +118,19 @@
                             {% endif %}
                             {% if session.get('id') != data.user.id %}
                                 {% if data.check_block(data.user.id, session.get('id')) == 'in_block' %}
-                                    <li><a style="color: #ff374f; text-decoration: none;">You are in a block</a></li>
+                                    <li id="in_block"><a style="color: #ff374f; text-decoration: none;">You are in a block</a></li>
                                 {% elif data.check_block(data.user.id, session.get('id')) == 'block'%}
-                                    <li><a style="color: #ff374f; text-decoration: none;">Blocked by you</a></li>
+                                    <li id="block"><a style="color: #ff374f; text-decoration: none;">Blocked by you</a></li>
                                     <li><button id="unblock_user" class="btn-primary">Unblock</button></li>
+                                    <li class="none"><button id="like_user" class="btn-primary like_user">Like</button></li>
+                                    <li class="none"><button id="liked_user" class="btn-primary liked_user">Liked</button></li>
+                                    <li class="dropdown none" id="actions">
+                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
+                                        <ul class="dropdown-menu">
+                                            <li id="report_user"><a>Report</a></li>
+                                            <li id="block_user"><a>Block</a></li>
+                                        </ul>
+                                    </li>
                                 {% else %}
                                     {% if data.sympathys.check_sympathy(session.get('id'), data.user.id) %}
                                         <li><button id="unlike_user" class="btn-primary unlike_user" >Unlike</button></li>
@@ -151,7 +160,7 @@
                                             <li><button id="like_user" class="btn-primary like_user">Like</button></li>
                                         {% endif %}
                                     {% endif %}
-                                    <li class="dropdown">
+                                    <li class="dropdown" id="actions">
                                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
                                         <ul class="dropdown-menu">
                                             <li id="report_user"><a>Report</a></li>
@@ -187,10 +196,19 @@
                         {% endif %}
                         {% if session.get('id') != data.user.id %}
                             {% if data.check_block(data.user.id, session.get('id')) == 'in_block' %}
-                                <li><a style="color: #ff374f; text-decoration: none;">You are in a block</a></li>
+                                <li id="in_block_M"><a style="color: #ff374f; text-decoration: none;">You are in a block</a></li>
                             {% elif data.check_block(data.user.id, session.get('id')) == 'block'%}
-                                <li><a style="color: #ff374f; text-decoration: none;">Blocked by you</a></li>
+                                <li id="block_M"><a style="color: #ff374f; text-decoration: none;">Blocked by you</a></li>
                                 <li><button id="unblock_user_M" class="btn-primary">Unblock</button></li>
+                                <li class="none"><button id="like_user_M" class="btn-primary like_user">Like</button></li>
+                                <li class="none"><button id="liked_user_M" class="btn-primary liked_user">Liked</button></li>
+                                <li class="dropdown none" id="actions_M">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
+                                    <ul class="dropdown-menu">
+                                        <li id="report_user_M"><a>Report</a></li>
+                                        <li id="block_user_M"><a>Block</a></li>
+                                    </ul>
+                                </li>
                             {% else %}
                                 {% if data.sympathys.check_sympathy(session.get('id'), data.user.id) %}
                                     <li><button id="unlike_user_M" class="btn-primary unlike_user" >Unlike</button></li>
@@ -219,7 +237,7 @@
                                         <li><button id="like_user_M" class="btn-primary like_user">Like</button></li>
                                     {% endif %}
                             {% endif %}
-                            <li class="dropdown">
+                            <li class="dropdown" id="actions_M">
                                 <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-ellipsis-h"></i></a>
                                 <ul class="dropdown-menu">
                                     <li id="report_user_M"><a>Report</a></li>
