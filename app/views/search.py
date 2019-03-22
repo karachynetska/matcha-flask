@@ -5,6 +5,7 @@ from app.models import user as user_model
 from app.models import search as search_model
 from app.models import geolocation as geolocation_model
 from app.models import messages as messages_model
+from app.views.notifications import get_online_users
 from app.models import sympathys
 from datetime import datetime, date
 from math import sin, cos, sqrt, atan2, radians
@@ -16,7 +17,9 @@ def search():
     data = {
         'user': user_model.get_user_by_id(session.get('id'))[0],
         'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
-        'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id'))
+        'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id')),
+        'get_user_by_id': user_model.get_user_by_id,
+        'online_users': get_online_users()
     }
     return render_template('search.html', data=data)
 
@@ -104,10 +107,10 @@ def ajax_search():
                 if user['age'] > int(to_age):
                     correct = False
         if from_rate:
-            if user['fame_rating'] < from_rate:
+            if user['fame_rating'] < int(from_rate):
                 correct = False
         if to_rate:
-            if user['fame_rating'] > to_rate:
+            if user['fame_rating'] > int(to_rate):
                 correct = False
         if gender and gender != 'all':
             if user['gender'].find(gender) == -1:

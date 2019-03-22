@@ -16,6 +16,7 @@ from app.models import suggestions as suggestions_model
 from app.models import photos as photos_model
 from app.models import messages as messages_model
 from app.views.search import calculate_distance
+from app.views.notifications import get_online_users
 # from app.models.friendships import check_friendship, add_friend
 from flask_mail import Message
 from app.settings import APP_ROOT
@@ -161,8 +162,8 @@ def suggestions():
         if suggestion['distance'] is None:
             correct = False
         my_interests = user_model.get_interests_by_user_id(session.get('id'))
+        suggestion['interests_nbr'] = 0
         if my_interests:
-            suggestion['interests_nbr'] = 0
             interests = user_model.get_interests_by_user_id(suggestion['id'])
             if interests:
                 my_tags = []
@@ -180,7 +181,8 @@ def suggestions():
         'user': user,
         'suggestions': suggestions,
         'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
-        'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id'))
+        'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id')),
+        'friends': sympathys.get_sympathys_list(session.get('id'))
     }
     return render_template('suggestions.html', data = data)
 
@@ -199,7 +201,9 @@ def notifications():
         'user': user,
         'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
         'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id')),
-        'notifications': notifications
+        'notifications': notifications,
+        'online_users': get_online_users(),
+        'get_user_by_id': user_model.get_user_by_id,
     }
     return render_template('notifications.html', data=data)
 
@@ -231,7 +235,9 @@ def newsfeed():
             'photos': photos,
             'likes': likes.photo_likes,
             'dislikes': likes.photo_dislikes,
-            'get_comments_by_photo_id': comments.get_comments_by_photo_id
+            'get_comments_by_photo_id': comments.get_comments_by_photo_id,
+            'online_users': get_online_users(),
+            'friends': sympathys.get_sympathys_list(session.get('id'))
         }
         return render_template('newsfeed.html', data=data)
     return redirect('/')
@@ -244,7 +250,8 @@ def edit_basic():
         data = {
             'user': user_model.get_user_by_id(session.get('id'))[0],
             'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
-            'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id'))
+            'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id')),
+            'friends': sympathys.get_sympathys_list(session.get('id'))
         }
         return render_template('edit-profile-basic.html', data=data)
     else:
@@ -257,7 +264,8 @@ def edit_geolocation():
             'user': user_model.get_user_by_id(session.get('id'))[0],
             'geolocation': geolocation_model.get_geolocation_by_user_id(session.get('id')),
             'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
-            'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id'))
+            'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id')),
+            'friends': sympathys.get_sympathys_list(session.get('id'))
         }
         return render_template('edit-profile-geolocation.html', data=data)
     else:
@@ -332,7 +340,8 @@ def edit_password():
         data = {
             'user': user_model.get_user_by_id(session.get('id'))[0],
             'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
-            'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id'))
+            'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id')),
+            'friends': sympathys.get_sympathys_list(session.get('id'))
         }
         return render_template('edit-profile-password.html', data=data)
     else:
@@ -414,7 +423,8 @@ def edit_interests():
             'user': user_model.get_user_by_id(session.get('id'))[0],
             'interests': user_model.get_interests_by_user_id(session.get('id')),
             'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
-            'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id'))
+            'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id')),
+            'friends': sympathys.get_sympathys_list(session.get('id'))
         }
         return render_template('edit-profile-interests.html', data=data)
     else:
@@ -509,8 +519,8 @@ def edit_edu_work():
         data = {
             'user': user_model.get_user_by_id(session.get('id'))[0],
             'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
-            'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id'))
-
+            'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id')),
+            'friends': sympathys.get_sympathys_list(session.get('id'))
         }
         return render_template('edit-profile-edu-work.html', data=data)
     else:
@@ -529,7 +539,8 @@ def edit_settings():
         data = {
             'user': user_model.get_user_by_id(session.get('id'))[0],
             'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
-            'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id'))
+            'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id')),
+            'friends': sympathys.get_sympathys_list(session.get('id'))
         }
         return render_template('edit-profile-settings.html', data=data)
     else:
@@ -544,7 +555,8 @@ def edit_avatar():
         data = {
             'user': user_model.get_user_by_id(session.get('id'))[0],
             'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
-            'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id'))
+            'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id')),
+            'friends': sympathys.get_sympathys_list(session.get('id'))
         }
         return render_template('edit-profile-avatar.html', data=data)
     else:

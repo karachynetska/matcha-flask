@@ -1,6 +1,6 @@
 from app import app, mail
 from flask import render_template, url_for, redirect, request, session
-from flask_uploads import configure_uploads, IMAGES, UploadSet
+from flask_uploads import configure_uploads, IMAGES, UploadSet, UploadNotAllowed
 import html
 import hashlib
 import random
@@ -14,6 +14,7 @@ from app.models import likes, comments
 from app.models import messages as messages_model
 from app.views import notifications as notification_view
 from app.models import sympathys
+from app.views.notifications import get_online_users
 # from app.models.friendships import check_friendship, add_friend
 from flask_mail import Message
 from app.settings import APP_ROOT
@@ -56,7 +57,8 @@ def photos(id_user=None):
         'check_dislike': likes.check_dislike,
         'get_comments_by_photo_id': comments.get_comments_by_photo_id,
         'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
-        'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id'))
+        'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id')),
+        'online_users': get_online_users()
     }
 
     return render_template('photos.html', data=data)
@@ -78,7 +80,15 @@ def ajax_add_photo():
         date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
         photo_name = str(login + date + '.' + extension)
         path = '/static/media/' + login + '/' + photo_name
+        try:
+            images.save(photo, login, photo_name)
+        except UploadNotAllowed:
+            return json.dumps({
+                'ok': False,
+                'error': "Extension not allowed"
+            })
         images.save(photo, login, photo_name)
+        # print(res)
         photos_model.add_photo(session.get('id'), path)
 
         rating = user_model.get_user_fame_rating(session.get('id')) + 10

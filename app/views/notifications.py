@@ -28,8 +28,10 @@ def add_notification(from_whom_id, to_whom_id, notification, type, image):
         id_notification = notification_model.add_notification(to_whom_id, notification, type, image)
         notification = notification_model.get_notification_by_id(id_notification)
 
-        for key, value in id_user_to_notification_sid.items():
-            if value == to_whom_id:
+        tmp_dict = id_user_to_notification_sid.copy()
+
+        for key, value in tmp_dict.items():
+            if int(value) == int(to_whom_id):
                 emit('notification', notification, namespace='/notifications', room=key)
 
 @app.route('/ajax_delete_notification', methods=['POST'])

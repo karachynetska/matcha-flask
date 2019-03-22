@@ -44,7 +44,8 @@ def ajax_add_comment():
     return json.dumps({
         'ok': True,
         'error': "Commented",
-        'id_comment': res
+        'id_comment': res,
+        'text': text
     })
 
 @app.route('/ajax_delete_comment', methods=['POST'])

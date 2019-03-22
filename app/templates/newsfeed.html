@@ -38,23 +38,21 @@
     			<div class="col-md-3 static">
             <div class="profile-card" style="background: url({{ data.user.background }}) no-repeat; background-size: cover">
             	<img src="{{ data.user.avatar }}" alt="user" class="profile-photo" />
-            	<h5><a href="timeline.html" class="text-white">{{ data.user.firstname + ' ' + data.user.lastname }}</a></h5>
-            	<a href="#" class="text-white"><i class="ion ion-android-person-add"></i> 1,299 followers</a>
+            	<h5><a href="/profile" class="text-white">{{ data.user.firstname + ' ' + data.user.lastname }}</a></h5>
             </div><!--profile card ends-->
             <div id="chat-block">
-              <div class="title">Chat online</div>
-              <ul class="online-users list-inline">
-                <li><a href="newsfeed-messages.html" title="Linda Lohan"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
-                <li><a href="newsfeed-messages.html" title="Sophia Lee"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
-                <li><a href="newsfeed-messages.html" title="John Doe"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
-                <li><a href="newsfeed-messages.html" title="Alexis Clark"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
-                <li><a href="newsfeed-messages.html" title="James Carter"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
-                <li><a href="newsfeed-messages.html" title="Robert Cook"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
-                <li><a href="newsfeed-messages.html" title="Richard Bell"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
-                <li><a href="newsfeed-messages.html" title="Anna Young"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
-                <li><a href="newsfeed-messages.html" title="Julia Cox"><img src="http://placehold.it/300x300" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
-              </ul>
-            </div><!--chat block ends-->
+                    <div class="title">Chat online</div>
+                {% if data.online_users %}
+                    <ul class="online-users list-inline">
+                        {% for id in data.online_users %}
+                        {% set user = data.get_user_by_id(id)[0] %}
+                        <li><a href="/profile/messages/dialogue_with_{{ user.id }}" title="{{ user.firstname + ' ' + user.lastname }}"><img src="{{ user.avatar }}" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                <p>No users online</p>
+                {% endif %}
+                </div><!--chat block ends-->
           </div>
                 <div class="col-md-1"></div>
     			<div class="col-md-7">
@@ -67,21 +65,21 @@
                             <img src="{{ user.avatar }}" alt="user" class="profile-photo-md pull-left" />
                             <div class="post-detail">
                                 <div class="user-info">
-                                    <h5><a href="timeline.html" class="profile-link">{{ user.firstname + ' ' + user.lastname }}</a></h5>
+                                    <h5><a href="/profile/id{{ user.id }}" class="profile-link">{{ user.firstname + ' ' + user.lastname }}</a></h5>
                                     <p class="text-muted">{{ photo.date_added }}</p>
                                 </div>
                                 <div class="reaction">
                                     {% set likes =  data.likes(photo.id_photo) %}
                                     {% set dislikes =  data.dislikes(photo.id_photo) %}
                                     {% if data.check_like(photo.id_photo, session.get('id')) %}
-                                        <a class="btn text-green like photo-{{ photo.id_photo }}" onclick="like({{ photo.id_photo }}, {{ session.get('id') }})"><i class="fa fa-thumbs-up"></i> <span>{{ likes }}</span></a>
+                                        <a class="btn text-green like photo-{{ photo.id_photo }}" onclick="newsfeed_like({{ photo.id_photo }}, {{ session.get('id') }})"><i class="fa fa-thumbs-up"></i> <span>{{ likes }}</span></a>
                                     {% else %}
-                                        <a class="btn text-muted like photo-{{ photo.id_photo }}" onclick="like({{ photo.id_photo }}, {{ session.get('id') }})"><i class="fa fa-thumbs-up"></i> <span>{{ likes }}</span></a>
+                                        <a class="btn text-muted like photo-{{ photo.id_photo }}" onclick="newsfeed_like({{ photo.id_photo }}, {{ session.get('id') }})"><i class="fa fa-thumbs-up"></i> <span>{{ likes }}</span></a>
                                     {% endif %}
                                     {% if data.check_dislike(photo.id_photo, session.get('id')) %}
-                                        <a class="btn text-red dislike photo-{{ photo.id_photo }}" onclick="dislike({{ photo.id_photo }}, {{ session.get('id') }})"><i class="fa fa-thumbs-down"></i> <span>{{ dislikes }}</span></a>
+                                        <a class="btn text-red dislike photo-{{ photo.id_photo }}" onclick="newsfeed_dislike({{ photo.id_photo }}, {{ session.get('id') }})"><i class="fa fa-thumbs-down"></i> <span>{{ dislikes }}</span></a>
                                     {% else %}
-                                        <a class="btn text-muted dislike photo-{{ photo.id_photo }}" onclick="dislike({{ photo.id_photo }}, {{ session.get('id')}})"><i class="fa fa-thumbs-down"></i> <span>{{ dislikes }}</span></a>
+                                        <a class="btn text-muted dislike photo-{{ photo.id_photo }}" onclick="newsfeed_dislike({{ photo.id_photo }}, {{ session.get('id')}})"><i class="fa fa-thumbs-down"></i> <span>{{ dislikes }}</span></a>
                                     {% endif %}
                                 </div>
                                 <div class="line-divider"></div>

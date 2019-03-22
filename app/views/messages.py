@@ -26,6 +26,7 @@ def messages(with_id=None):
     if 'id' in session:
         dialogue_id = None
         if with_id:
+            print(with_id)
             my_id = session.get('id')
             if sympathys_model.check_sympathy(my_id, with_id):
                 if not messages_model.check_dialogue(my_id, with_id):
@@ -35,7 +36,7 @@ def messages(with_id=None):
                 else:
                     dialogue_id = messages_model.get_dialogue_id(my_id, with_id)
             else:
-                redirect('/profile/id'+with_id)
+                return redirect('/profile/id'+str(with_id))
         data = {
             'user': user_model.get_user_by_id(session.get('id'))[0],
             'get_user_by_id': user_model.get_user_by_id,
@@ -66,6 +67,8 @@ def join_dialogue(data):
 @sio.on('send_message', namespace='/messages')
 def send_message(data):
     dialogue = id_dialogue_to_sid[request.sid]
+    # dialogue = id_dialogue_to_sid.get(request.sid)
+    # if dialogue:
     from_whom_id = data['from_whom_id']
     to_whom_id = data['to_whom_id']
     message = html.escape(data['message'])

@@ -306,9 +306,9 @@ def ajax_forgot():
             'error': "Please enter your email",
             'fields': ["my-email"]
         })
-    user = user_model.email_exists(email)[0]
+    user = user_model.email_exists(email)
     if user:
-        token = user_model.create_token(user['id'], user['login'])
+        token = user_model.create_token(user[0]['id'], user[0]['login'])
         message = Message('Matcha: recovery password', sender='matcha@project.unit.ua', recipients=[email])
         message.body = "To change your password, please follow the link " + request.url_root + "recovery?email=" + email + '&token=' + token
         message.html = "<p>To change your password, please follow the <a href= " + request.url_root + "recovery?email=" + email + '&token=' + token + ">link</a></p> "
