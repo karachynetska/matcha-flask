@@ -37,13 +37,13 @@ def create_profile_settings(id_user, user_gender, user_sex_pref, user_filter):
     array = [id_user, user_gender, user_sex_pref, user_filter]
     sql = 'INSERT INTO profile_settings (id_user, user_gender, user_sex_pref, user_filter) VALUES (?, ?, ?, ?)'
     res = database.db_insert(sql, array)
-    print(res)
     return res
 
 def get_user_by_id(id):
     array = [id]
     sql = 'SELECT * FROM users WHERE id=?'
     res = database.db_query(sql, array)
+    # print(res)
     return res
 
 def get_user_id_by_photo_id(id_photo):
@@ -67,7 +67,6 @@ def check_token(email, token):
     if not res:
         return False
     if res[0]['token'] == token:
-        print(res)
         return res
     else:
         return False
@@ -122,8 +121,6 @@ def delete_avatar_from_db(avatar, id):
     array = [avatar, id]
     sql = 'DELETE FROM photos WHERE photo=? AND id_user=?'
     res = database.db_query(sql, array)
-    print('delete')
-    print(res)
     return res
 
 def change_password(id, password):
@@ -190,14 +187,12 @@ def change_basic(id, firstname, lastname, email, city, country, gender, sex_pref
     array = [firstname, lastname, email, city, country, gender, sex_pref, id]
     sql = 'UPDATE users SET firstname=?, lastname=?, email=?, city=?, country=?, gender=?, sex_pref=? WHERE id=?'
     res = database.db_query(sql, array)
-    print(res)
     return res
 
 def change_information(information, user_id):
     array = [information, user_id]
     sql = 'UPDATE about SET information=? WHERE id_user=?'
     res = database.db_query(sql, array)
-    print(res)
     return res
 
 def get_interest_by_title(title):

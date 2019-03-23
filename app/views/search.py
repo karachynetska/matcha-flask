@@ -45,6 +45,8 @@ def calculate_distance(latitude, longitude):
         c = 2 * atan2(sqrt(a), sqrt(1 - a))
 
         distance = R * c
+        if distance == 0.0:
+            distance = 0.0001
         return distance
 
     else:
@@ -160,13 +162,15 @@ def ajax_search():
         if filter == 'age' and sort == 'desc':
             found_users = sorted(found_users, key=lambda k: k['age'], reverse=True)
         if filter == 'distance' and sort == 'asc':
+            print('1')
             found_users = sorted(found_users, key=lambda k: k['distance'])
         if filter == 'distance' and sort == 'desc':
+            print('2')
             found_users = sorted(found_users, key=lambda k: k['distance'], reverse=True)
         if filter == 'rating' and sort == 'asc':
-            found_users = sorted(found_users, key=lambda k: k['rating'])
+            found_users = sorted(found_users, key=lambda k: k['fame_rating'])
         if filter == 'rating' and sort == 'desc':
-            found_users = sorted(found_users, key=lambda k: k['rating'], reverse=True)
+            found_users = sorted(found_users, key=lambda k: k['fame_rating'], reverse=True)
         if interest1 or interest2 or interest3 or interest4:
             if filter == 'interests' and sort == 'asc' and found_users[0]['interests_nbr']:
                 found_users = sorted(found_users, key=lambda k: k['interests_nbr'])

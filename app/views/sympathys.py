@@ -1,21 +1,10 @@
-from app import app, mail
-from flask import render_template, url_for, redirect, request, session
-from flask_uploads import configure_uploads, IMAGES, UploadSet
-import html
-import hashlib
-import random
-from datetime import datetime
+from app import app
+from flask import request, session
 import json
-import re
-import os
 from app.models import user as user_model
 from app.models import photos as photos_model
 from app.views import notifications as notification_view
 from app.models import sympathys
-# from app.models.friendships import check_friendship, add_friend
-from flask_mail import Message
-from app.settings import APP_ROOT
-
 @app.route('/ajax_like_user')
 def ajax_like_user():
     user_id = request.args.get('user_id')
@@ -110,7 +99,9 @@ def ajax_delete_friend():
     if sympathys.check_sympathy(session.get('id'), user_id):
         if sympathys.check_request(session.get('id'), user_id) == 'sender':
             sympathys.remove_request(session.get('id'), user_id)
+            status = 'sender'
         else:
+            status = 'taker'
             sympathys.set_request_status_to_zero(session.get('id'), user_id)
         if not sympathys.unlike_user(session.get('id'), user_id):
             msg = str(session.get('firstname')) + ' ' + str(session.get('lastname')) + ' does not like you anymore.'
@@ -120,7 +111,8 @@ def ajax_delete_friend():
             user_model.update_user_rating(rating, user_id)
             return json.dumps({
                 'ok': True,
-                'error': "Unlike"
+                'error': "Unlike",
+                'status': status
             })
         else:
             return json.dumps({
@@ -193,6 +185,20 @@ def ajax_unblock():
             'error': "This user is not blocked"
         })
 
-# @app.route('/ajax_decline_request')
-# def ajax_decline_request():
+@app.route('/ajax_decline')
+def ajax_decline():
+    user_id = request.args.get('user_id')
+    print(user_id)
 
+    if not sympathys.check_sympathy(session.get('id'), user_id):
+        print('not sympathy')
+        sympathys.remove_request(user_id, session.get('id'))
+        return json.dumps({
+            'ok': True,
+            'error': "Decline"
+        })
+    else:
+        return json.dumps({
+            'ok': False,
+            'error': "Something went wrong"
+        })

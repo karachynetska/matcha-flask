@@ -1,13 +1,8 @@
-from app import app, mail
-from flask import render_template, url_for, redirect, request, session
+from app import app
+from flask import render_template, redirect, request, session
 from flask_uploads import configure_uploads, IMAGES, UploadSet, UploadNotAllowed
-import html
-import hashlib
-import random
 from datetime import datetime
 import json
-import re
-import os
 from app.models import user as user_model
 from app.models import photos as photos_model
 from app.models import likes, comments
@@ -15,9 +10,6 @@ from app.models import messages as messages_model
 from app.views import notifications as notification_view
 from app.models import sympathys
 from app.views.notifications import get_online_users
-# from app.models.friendships import check_friendship, add_friend
-from flask_mail import Message
-from app.settings import APP_ROOT
 
 
 images = UploadSet('photos', IMAGES)
@@ -36,14 +28,12 @@ def photos(id_user=None):
         photos = photos_model.get_photos_by_id(id)
 
     if id_user:
+        if not user_model.get_user_by_id(id_user):
+            return render_template('404.html')
         if sympathys.check_block(id_user, session.get('id')):
             return redirect('/profile/id'+ str(id_user))
         user = user_model.get_user_by_id(id_user)[0]
         photos = photos_model.get_photos_by_id(id_user)
-        image = user_model.get_avatar(session.get('id'))
-        msg = str(session.get('firstname')) + ' ' + str(session.get(
-            'lastname')) + ' viewed your profile.'
-        notification_view.add_notification(session.get('id'), id_user, msg, 'view', image)
 
 
     data = {

@@ -17,9 +17,9 @@
 </head>
 <body>
 {% if status.activation == True %}
-    <h1>{{ status.message }} </h1>
+    <h1 style="text-align: center">{{ status.message }} </h1>
 {% else %}
-    <h1>{{ status.message }}</h1>
+    <h1 style="text-align: center">{{ status.message }}</h1>
 {% endif %}
 <a href="{{ url_for('index') }}">Main page</a>
 </body>

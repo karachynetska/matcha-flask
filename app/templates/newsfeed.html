@@ -1,163 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta http-equiv="content-type" content="text/html; charset=utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<meta name="description" content="This is social network html5 template available in themeforest......" />
-		<meta name="keywords" content="Social Network, Social Media, Make Friends, Newsfeed, Profile Page" />
-		<meta name="robots" content="index, follow" />
-		<title>Chatroom | Send and Receive Messages</title>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Newsfeed</title>
 
     <!-- Stylesheets
     ================================================= -->
-        <link rel="stylesheet" href='{{ url_for('static', filename = 'css/bootstrap.min.css') }}' />
-        <link rel="stylesheet" href="{{ url_for('static', filename = 'css/jquery-ui.min.css') }}" />
-        <link rel="stylesheet" href="{{ url_for('static', filename = 'css/jquery.scrollbar.css') }}" />
-		<link rel="stylesheet" href="{{ url_for('static', filename = 'css/style.css') }}" />
-		<link rel="stylesheet" href="{{ url_for('static', filename = 'css/ionicons.min.css') }}" />
-        <link rel="stylesheet" href="{{ url_for('static', filename = 'css/font-awesome.min.css') }}" />
-        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-        <link href="{{ url_for('static', filename = 'css/emoji.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href='{{ url_for('static', filename = 'css/bootstrap.min.css') }}' />
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/jquery-ui.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/jquery.scrollbar.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/style.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/ionicons.min.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'css/font-awesome.min.css') }}" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
+    <link href="{{ url_for('static', filename = 'css/emoji.css') }}" rel="stylesheet">
 
     <!--Google Font-->
-        <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400i,700,700i" rel="stylesheet">
 
     <!--Favicon-->
-        <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename = 'images/fav.png') }}"/>
-	</head>
-  <body>
-
-   {% include 'header.html' %}
-
-    <div id="page-contents">
-    	<div class="container">
-    		<div class="row">
-
-    			<!-- Newsfeed Common Side Bar Left
-          ================================================= -->
-    			<div class="col-md-3 static">
-            <div class="profile-card" style="background: url({{ data.user.background }}) no-repeat; background-size: cover">
-            	<img src="{{ data.user.avatar }}" alt="user" class="profile-photo" />
-            	<h5><a href="/profile" class="text-white">{{ data.user.firstname + ' ' + data.user.lastname }}</a></h5>
-            </div><!--profile card ends-->
-            <div id="chat-block">
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename = 'images/fav.png') }}"/>
+</head>
+<body>
+{% include 'header.html' %}
+<div id="page-contents">
+    <div class="container">
+        <div class="row">
+            <!-- Newsfeed Common Side Bar Left
+            ================================================= -->
+            <div class="col-md-3 static">
+                <div class="profile-card" style="background: url({{ data.user.background }}) no-repeat; background-size: cover">
+                    <img src="{{ data.user.avatar }}" alt="user" class="profile-photo" />
+                    <h5><a href="/profile" class="text-white">{{ data.user.firstname + ' ' + data.user.lastname }}</a></h5>
+                </div><!--profile card ends-->
+                <div id="chat-block">
                     <div class="title">Chat online</div>
-                {% if data.online_users %}
-                    <ul class="online-users list-inline">
-                        {% for id in data.online_users %}
-                        {% set user = data.get_user_by_id(id)[0] %}
-                        <li><a href="/profile/messages/dialogue_with_{{ user.id }}" title="{{ user.firstname + ' ' + user.lastname }}"><img src="{{ user.avatar }}" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
-                        {% endfor %}
-                    </ul>
-                {% else %}
-                <p>No users online</p>
-                {% endif %}
+                    {% if data.online_users %}
+                        <ul class="online-users list-inline">
+                            {% for id in data.online_users %}
+                                {% set user = data.get_user_by_id(id)[0] %}
+                                <li><a href="/profile/messages/dialogue_with_{{ user.id }}" title="{{ user.firstname + ' ' + user.lastname }}"><img src="{{ user.avatar }}" alt="user" class="img-responsive profile-photo" /><span class="online-dot"></span></a></li>
+                            {% endfor %}
+                        </ul>
+                    {% else %}
+                        <p>No users online</p>
+                    {% endif %}
                 </div><!--chat block ends-->
-          </div>
-                <div class="col-md-1"></div>
-    			<div class="col-md-7">
-                    {% if data.photos %}
+            </div>
+            <div class="col-md-1"></div>
+            <div class="col-md-7">
+                {% if data.photos %}
                     {% for photo in data.photos %}
-                    {% set user = data.get_user_by_id(photo.id_user)[0] %}
-                    <div class="post-content">
-                        <img src="{{ photo.photo }}" alt="post-image" class="img-responsive post-image" />
-                        <div class="post-container">
-                            <img src="{{ user.avatar }}" alt="user" class="profile-photo-md pull-left" />
-                            <div class="post-detail">
-                                <div class="user-info">
-                                    <h5><a href="/profile/id{{ user.id }}" class="profile-link">{{ user.firstname + ' ' + user.lastname }}</a></h5>
-                                    <p class="text-muted">{{ photo.date_added }}</p>
-                                </div>
-                                <div class="reaction">
-                                    {% set likes =  data.likes(photo.id_photo) %}
-                                    {% set dislikes =  data.dislikes(photo.id_photo) %}
-                                    {% if data.check_like(photo.id_photo, session.get('id')) %}
-                                        <a class="btn text-green like photo-{{ photo.id_photo }}" onclick="newsfeed_like({{ photo.id_photo }}, {{ session.get('id') }})"><i class="fa fa-thumbs-up"></i> <span>{{ likes }}</span></a>
-                                    {% else %}
-                                        <a class="btn text-muted like photo-{{ photo.id_photo }}" onclick="newsfeed_like({{ photo.id_photo }}, {{ session.get('id') }})"><i class="fa fa-thumbs-up"></i> <span>{{ likes }}</span></a>
-                                    {% endif %}
-                                    {% if data.check_dislike(photo.id_photo, session.get('id')) %}
-                                        <a class="btn text-red dislike photo-{{ photo.id_photo }}" onclick="newsfeed_dislike({{ photo.id_photo }}, {{ session.get('id') }})"><i class="fa fa-thumbs-down"></i> <span>{{ dislikes }}</span></a>
-                                    {% else %}
-                                        <a class="btn text-muted dislike photo-{{ photo.id_photo }}" onclick="newsfeed_dislike({{ photo.id_photo }}, {{ session.get('id')}})"><i class="fa fa-thumbs-down"></i> <span>{{ dislikes }}</span></a>
-                                    {% endif %}
-                                </div>
-                                <div class="line-divider"></div>
-                            <div id="photo_comments-{{ photo.id_photo }}">
-                                {% set comments = data.get_comments_by_photo_id(photo.id_photo) %}
-                                {% if comments %}
-                                    {% for comment in comments %}
-                                        {% set user = data.get_user_by_id(comment.id_user)[0] %}
-                                        <div class="post-comment" id="comment-{{ comment.id_comment }}">
-                                            <img src="{{ user.avatar }}" alt="" class="profile-photo-sm" />
-                                            {% if session.get('id') == user.id %}
-                                                <p><a href="/profile/id{{ user.id }}" class="profile-link">{{ user.firstname }} </a> {{ comment.text }} <br><a id="delete_comment" class="text-muted" style="text-decoration: none;" onclick="delete_comment({{ comment.id_comment }})">Delete</a></p>
-                                            {% else %}
-                                                <p><a href="/profile/id{{ user.id }}" class="profile-link">{{ user.firstname }} </a> {{ comment.text }} </p>
-                                            {% endif %}
+                        {% set user = data.get_user_by_id(photo.id_user)[0] %}
+                        <div class="post-content">
+                            <img src="{{ photo.photo }}" alt="post-image" class="img-responsive post-image" />
+                            <div class="post-container">
+                                <img src="{{ user.avatar }}" alt="user" class="profile-photo-md pull-left" />
+                                <div class="post-detail">
+                                    <div class="user-info">
+                                        <h5><a href="/profile/id{{ user.id }}" class="profile-link">{{ user.firstname + ' ' + user.lastname }}</a></h5>
+                                        <p class="text-muted">{{ photo.date_added }}</p>
+                                    </div>
+                                    <div class="reaction">
+                                        {% set likes =  data.likes(photo.id_photo) %}
+                                        {% set dislikes =  data.dislikes(photo.id_photo) %}
+                                        {% if data.check_like(photo.id_photo, session.get('id')) %}
+                                            <a class="btn text-green like photo-{{ photo.id_photo }}" onclick="newsfeed_like({{ photo.id_photo }}, {{ session.get('id') }})"><i class="fa fa-thumbs-up"></i> <span>{{ likes }}</span></a>
+                                        {% else %}
+                                            <a class="btn text-muted like photo-{{ photo.id_photo }}" onclick="newsfeed_like({{ photo.id_photo }}, {{ session.get('id') }})"><i class="fa fa-thumbs-up"></i> <span>{{ likes }}</span></a>
+                                        {% endif %}
+                                        {% if data.check_dislike(photo.id_photo, session.get('id')) %}
+                                            <a class="btn text-red dislike photo-{{ photo.id_photo }}" onclick="newsfeed_dislike({{ photo.id_photo }}, {{ session.get('id') }})"><i class="fa fa-thumbs-down"></i> <span>{{ dislikes }}</span></a>
+                                        {% else %}
+                                            <a class="btn text-muted dislike photo-{{ photo.id_photo }}" onclick="newsfeed_dislike({{ photo.id_photo }}, {{ session.get('id')}})"><i class="fa fa-thumbs-down"></i> <span>{{ dislikes }}</span></a>
+                                        {% endif %}
+                                    </div>
+                                    <div class="line-divider"></div>
+                                    <div id="photo_comments-{{ photo.id_photo }}">
+                                        {% set comments = data.get_comments_by_photo_id(photo.id_photo) %}
+                                        {% if comments %}
+                                            {% for comment in comments %}
+                                                {% set user = data.get_user_by_id(comment.id_user)[0] %}
+                                                <div class="post-comment" id="comment-{{ comment.id_comment }}">
+                                                    <img src="{{ user.avatar }}" alt="" class="profile-photo-sm" />
+                                                    {% if session.get('id') == user.id %}
+                                                        <p><a href="/profile/id{{ user.id }}" class="profile-link">{{ user.firstname }} </a> {{ comment.text }} <br><a id="delete_comment" class="text-muted" style="text-decoration: none;" onclick="delete_comment({{ comment.id_comment }})">Delete</a></p>
+                                                    {% else %}
+                                                        <p><a href="/profile/id{{ user.id }}" class="profile-link">{{ user.firstname }} </a> {{ comment.text }} </p>
+                                                    {% endif %}
+                                                </div>
+                                            {% endfor %}
+                                        {% endif %}
+                                    </div>
+                                    <div class="post-comment">
+                                        <img src="{{ data.get_avatar(session.get('id')) }}" alt="" class="profile-photo-sm" />
+                                        <div class="col-md-12 col-sm-12">
+                                            <form method="post" onsubmit="add_comment(this)">
+                                                <div class="row">
+                                                    <div class="form-group col-sm-9">
+                                                        <input type="hidden" name="id_photo" id="id_photo" value="{{ photo.id_photo }}">
+                                                        <input type="hidden" name="id_user" id="id_user" value="{{ session.get('id') }}">
+                                                        <input type="hidden" name="profile_photo" id="profile_photo" value="{{ data.get_avatar(session.get('id')) }}">
+                                                        <input type="hidden" name="user_firstname" id="user_firstname" value="{{ session.get('firstname') }}">
+                                                        <input id="comment" type="text" class="form-control" placeholder="Post a comment">
+                                                    </div>
+                                                    <div class="form-group col-sm-3">
+                                                        <button type="submit" class="btn btn-primary" style="margin-top: 5px;">Comment</button>
+                                                    </div>
+                                                </div>
+                                            </form>
                                         </div>
-                                    {% endfor %}
-                                {% endif %}
-                            </div>
-                            <div class="post-comment">
-                                <img src="{{ data.get_avatar(session.get('id')) }}" alt="" class="profile-photo-sm" />
-                                <div class="col-md-12 col-sm-12">
-                                    <form method="post" onsubmit="add_comment(this)">
-                                        <div class="row">
-                                            <div class="form-group col-sm-9">
-                                                <input type="hidden" name="id_photo" id="id_photo" value="{{ photo.id_photo }}">
-                                                <input type="hidden" name="id_user" id="id_user" value="{{ session.get('id') }}">
-                                                <input type="hidden" name="profile_photo" id="profile_photo" value="{{ data.get_avatar(session.get('id')) }}">
-                                                <input type="hidden" name="user_firstname" id="user_firstname" value="{{ session.get('firstname') }}">
-                                                <input id="comment" type="text" class="form-control" placeholder="Post a comment">
-                                            </div>
-                                            <div class="form-group col-sm-3">
-                                                <button type="submit" class="btn btn-primary" style="margin-top: 5px;">Comment</button>
-                                            </div>
-                                        </div>
-                                    </form>
+                                    </div>
                                 </div>
-                            </div>
                             </div>
                         </div>
-
-                    </div>
-                        {% endfor %}
-                    {% endif %}
-                </div>
-
-
-    		</div>
-    	</div>
+                    {% endfor %}
+                {% endif %}
+            </div>
+        </div>
     </div>
-
-    <!-- Footer
-    ================================================= -->
-    <footer id="footer">
-      <div class="copyright">
+</div>
+<!-- Footer
+================================================= -->
+<footer id="footer">
+    <div class="copyright">
         <p>ikarachy © 2019. All rights reserved</p>
-      </div>
-		</footer>
-
-    <!--preloader-->
-    <div id="spinner-wrapper">
-      <div class="spinner"></div>
     </div>
-
-    <!-- Scripts
-    ================================================= -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
-    <script src="{{ url_for('static', filename = 'js/jquery-3.1.1.min.js') }}"></script>
-    <script src="{{ url_for('static', filename = 'js/jquery-ui.min.js') }}"></script>
-    <script src="{{ url_for('static', filename = 'js/bootstrap.min.js') }}"></script>
-    <script src="{{ url_for('static', filename = 'js/jquery.sticky-kit.min.js') }}"></script>
-    <script src="{{ url_for('static', filename = 'js/jquery.scrollbar.min.js') }}"></script>
-    <script src="{{ url_for('static', filename = 'js/script.js') }}"></script>
-    <script src="{{ url_for('static', filename = 'js/notifications.js') }}"></script>
-    <script src="{{ url_for('static', filename = 'js/create_dialogue.js') }}"></script>
-  <script src="{{ url_for('static', filename = 'js/likes.js') }}"></script>
-  <script src="{{ url_for('static', filename = 'js/comments.js') }}"></script>
-
-
-  </body>
+</footer>
+<!--preloader-->
+<div id="spinner-wrapper">
+    <div class="spinner"></div>
+</div>
+<!-- Scripts
+================================================= -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.1/socket.io.js"></script>
+<script src="{{ url_for('static', filename = 'js/jquery-3.1.1.min.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/jquery-ui.min.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/bootstrap.min.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/jquery.sticky-kit.min.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/jquery.scrollbar.min.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/script.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/notifications.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/likes.js') }}"></script>
+<script src="{{ url_for('static', filename = 'js/comments.js') }}"></script>
+</body>
 </html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>404</title>
+
+	<!-- Google font -->
+	<link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,900" rel="stylesheet">
+
+	<!-- Custom stlylesheet -->
+	<link rel="stylesheet" href="{{ url_for('static', filename='css/404.css') }}" />
+    <link rel="shortcut icon" type="image/png" href="{{ url_for('static', filename='images/fav.png') }}"/>
+
+</head>
+
+<body>
+
+	<div id="notfound">
+		<div class="notfound">
+			<div class="notfound-404">
+				<h1>Oops!</h1>
+			</div>
+			<h2>404 - Page not found</h2>
+			<a href="/profile">Go To Homepage</a>
+		</div>
+	</div>
+
+</body>
+
+</html>
+
+<script>
+    document.body.removeAttribute('line-height');
+</script>

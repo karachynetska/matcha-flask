@@ -10,14 +10,20 @@ def ajax_set_geolocation():
     latitude = request.form['latitude']
     longitude = request.form['longitude']
 
-    if not latitude or not longitude:
-        latitude = 50.4688257
-        longitude = 30.4621588
+    if not geolocation_model.get_geolocation_by_user_id(id_user):
+        if not latitude or not longitude:
+            latitude = 50.4688257
+            longitude = 30.4621588
 
-    if geolocation_model.add_geolocation(id_user, latitude, longitude):
+        if geolocation_model.add_geolocation(id_user, latitude, longitude):
+            return json.dumps({
+                'ok': True,
+                'error': "Geolocation saved.",
+            })
+    else:
         return json.dumps({
-            'ok': True,
-            'error': "Geolocation saved.",
+            'ok': False,
+            'error': "Something went wrong.",
         })
 
 @app.route('/ajax_change_geolocation', methods=['POST'])

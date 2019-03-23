@@ -1,6 +1,3 @@
-window.onload = function () {
-    $('.scrollbar-wrapper').scrollHeight = 999999999999;
-};
 var socket = io.connect('http://' + document.domain + ':' + location.port);
 var socket_messages = io('http://' + document.domain + ':' + location.port + '/messages');
 
@@ -29,14 +26,18 @@ function init(dialogue, id_user1, id_user2) {
     $('#'+id_dialogue).find('.chat-alert').addClass('none');
     socket_messages.emit('join_dialogue', {'id_dialogue': id_dialogue, 'from_whom_id': from_whom_id, 'to_whom_id': to_whom_id});
     $('.send_message').removeClass('none');
+    setTimeout(function () {
+        $('#message_scroll').scrollTop(9999);
+    }, 100);
 }
 
+// IF URL CONTAIN USER ID
 var dialogue_id = $('#dialogue_id').text();
 if (dialogue_id !== "None") {
-    console.log(dialogue_id);
+    console.log('here');
     $('#'+dialogue_id).addClass('active');
 
-    id_dialogue = $('#'+dialogue_id).find('.id_dialogue').text();
+    id_dialogue = dialogue_id;
     from_whom_id = $('#'+dialogue_id).find('.from_whom_id').text();
     to_whom_id = $('#'+dialogue_id).find('.to_whom_id').text();
 
@@ -44,6 +45,8 @@ if (dialogue_id !== "None") {
     $('#contact-'+dialogue_id).addClass('active');
     init(id_dialogue, from_whom_id, to_whom_id);
 }
+
+// SEND MESSAGE
 
 function send_message() {
     var message = $('#message').val();
@@ -53,6 +56,7 @@ function send_message() {
     var data = {'message': message, 'from_whom_id': from_whom_id, 'to_whom_id': to_whom_id};
     socket_messages.emit('send_message', data);
     $('#message').val('');
+    $('#contact-'+id_dialogue).find('.no_messages').addClass('none');
 }
 
 $(document).on('keypress',function(e) {
@@ -110,8 +114,7 @@ socket_messages.on('add_message_to_template', function (data) {
         $('#unread_messages_nbr').text(nbr1);
    }
 
-   topPos = $('.chat-message').offsetTop;
-   $('#message_scroll').scrollTop = topPos;
+   $('#message_scroll').scrollTop(9999);
 });
 
 socket_messages.on('add_unread_message', function (data) {

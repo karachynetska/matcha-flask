@@ -32,3 +32,4 @@ def index():
         return redirect('/profile')
     return render_template('index-register.html')
 
+

@@ -1,5 +1,5 @@
 from app import app, mail
-from flask import render_template, url_for, redirect, request, session
+from flask import render_template, redirect, request, session
 import html
 import hashlib
 import random
@@ -22,8 +22,6 @@ def register():
     country = request.form['country']
     gender = request.form['gender']
     sex_pref = request.form['sex_pref']
-    date_of_creation = datetime.now()
-
 
 # firstname and lastname
     if not (firstname or lastname):
@@ -396,8 +394,5 @@ def ajax_recovery():
 
 @app.route('/logout')
 def logout():
-    print(session)
-
     session.clear()
     return redirect('/')
-    # return redirect(request.referrer)

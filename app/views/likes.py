@@ -1,20 +1,9 @@
-from app import app, mail
-from flask import render_template, url_for, redirect, request, session
-from flask_uploads import configure_uploads, IMAGES, UploadSet
-import html
-import hashlib
-import random
-from datetime import datetime
+from app import app
+from flask import request, session
 import json
-import re
-import os
 from app.models import user as user_model
 from app.views import notifications as notification_view
-from app.models import sympathys
 from app.models import likes
-# from app.models.friendships import check_friendship, add_friend
-from flask_mail import Message
-from app.settings import APP_ROOT
 
 @app.route('/ajax_like', methods=['POST'])
 def ajax_like():

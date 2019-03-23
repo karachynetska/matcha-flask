@@ -4,7 +4,6 @@ def add_notification(to_whom_id, notification, type, image):
     array = [to_whom_id, notification, type, image]
     sql = 'INSERT INTO notifications (to_whom_id, notification, notif_type, image) VALUES (?,?,?,?)'
     res = database.db_insert(sql, array)
-    print(res)
     return res
 
 def get_notification_by_id(id_notification):

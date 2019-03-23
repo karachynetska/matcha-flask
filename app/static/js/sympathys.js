@@ -92,11 +92,18 @@ function unlike_user() {
         var res = JSON.parse(data);
         if (res.ok == true) {
             $('#unlike_user').parent().addClass('none');
-            $('#like_user').parent().removeClass('none');
             $('#start_dialogue').parent().parent().addClass('none');
             $('#unlike_user_M').parent().addClass('none');
-            $('#like_user_M').parent().removeClass('none');
             $('#start_dialogue_M').parent().parent().addClass('none');
+            if (res.status == 'taker') {
+                $('#decline').removeClass('none');
+                $('#like_back').removeClass('none');
+                $('#decline_M').removeClass('none');
+                $('#like_back_M').removeClass('none');
+            } else {
+                $('#like_user').parent().removeClass('none');
+                $('#like_user_M').parent().removeClass('none');
+            }
         }
     });
 }
@@ -131,6 +138,8 @@ function like_back() {
             $('#like_back_M').parent().addClass('none');
             $('#unlike_user_M').parent().removeClass('none');
             $('#start_dialogue_M').parent().parent().removeClass('none');
+            $('#decline').parent().addClass('none');
+            $('#decline_M').parent().addClass('none');
 
             var nbr = $('#incoming_requests_nbr').text();
             nbr = parseInt(nbr, 10);
@@ -154,6 +163,50 @@ $('#like_back_M').on('click', function (e) {
     e.preventDefault();
 
     like_back();
+});
+
+// DECLINE
+function decline() {
+    var url = getLocation(location.href);
+    var user_id = url.pathname.match(/(\d+)/)[1];
+    var data = {
+        user_id: user_id
+    };
+    
+    $.get('/ajax_decline', data).done(function (data) {
+        var res = JSON.parse(data);
+        if (res.ok == true) {
+            $('#decline').parent().addClass('none');
+            $('#like_back').parent().addClass('none');
+            $('#decline_M').parent().addClass('none');
+            $('#like_back_M').parent().addClass('none');
+
+            $('#like_user').parent().removeClass('none');
+            $('#like_user_M').parent().removeClass('none');
+
+            var nbr = $('#incoming_requests_nbr').text();
+            nbr = parseInt(nbr, 10);
+            var nbr1 = nbr - 1;
+            if (nbr1 <= 0) {
+                $('#incoming_requests_nbr').addClass('none');
+            } else {
+                $('#incoming_requests_nbr').text(nbr1);
+            }
+        }
+
+    });
+}
+
+$('#decline').on('click', function (e) {
+    e.preventDefault();
+
+    decline();
+});
+
+$('#decline_M').on('click', function (e) {
+    e.preventDefault();
+
+    decline();
 });
 
 // REPORT

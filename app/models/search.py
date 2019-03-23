@@ -16,18 +16,17 @@ def search_by_full_name(id_user, first_name, last_name):
     array = [first_name, last_name, id_user]
     sql = 'SELECT * FROM users WHERE firstname LIKE "%"||?||"%" AND lastname LIKE "%"||?||"%" AND id != ? AND activation = 1'
     res = database.db_query(sql, array)
-    print(res)
     return res
 
 def search_by_first_name(id_user, first_name):
     array = [first_name, id_user]
-    sql = 'SELECT * FROM users WHERE firstname=? AND id != ? AND activation = 1'
+    sql = 'SELECT * FROM users WHERE firstname LIKE "%"||?||"%" AND id != ? AND activation = 1'
     res = database.db_query(sql, array)
     return res
 
 def search_by_last_name(id_user, last_name):
     array = [last_name, id_user]
-    sql = 'SELECT * FROM users WHERE lastname=? AND id != ? AND activation = 1'
+    sql = 'SELECT * FROM users WHERE lastname LIKE "%"||?||"%" AND id != ? AND activation = 1'
     res = database.db_query(sql, array)
     return res
 

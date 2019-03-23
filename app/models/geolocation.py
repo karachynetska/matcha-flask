@@ -10,7 +10,6 @@ def change_geolocation(id_user, latitude, longitude):
     array = [latitude, longitude, id_user]
     sql = 'UPDATE geolocation SET latitude=?, longitude=? WHERE id_user=?'
     res = database.db_query(sql, array)
-    print(res)
     return res
 
 def get_geolocation_by_user_id(id_user):

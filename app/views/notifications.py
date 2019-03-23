@@ -1,19 +1,13 @@
 from app import app, sio
-from flask import render_template, url_for, redirect, request, session
-import html
-import hashlib
-import random
-from datetime import datetime
+from flask import request, session
 import json
-import re
-from flask_socketio import SocketIO, join_room, leave_room, emit, send
-from app.models import user as user_model
-from app.models import messages as messages_model
+from flask_socketio import SocketIO, emit
 from app.models import notifications as notification_model
 from app.models import sympathys
-from flask_mail import Message
+from datetime import datetime
 
 id_user_to_notification_sid = {}
+offline_users = {}
 
 def get_online_users():
     online_users = []
@@ -22,8 +16,13 @@ def get_online_users():
             online_users.append(value)
     return online_users
 
+def get_offline_users():
+    offline_users_list = offline_users
+    print(offline_users_list)
+    return offline_users_list
+
+
 def add_notification(from_whom_id, to_whom_id, notification, type, image):
-    print('add notification')
     if not sympathys.check_block(from_whom_id, to_whom_id):
         id_notification = notification_model.add_notification(to_whom_id, notification, type, image)
         notification = notification_model.get_notification_by_id(id_notification)
@@ -57,11 +56,19 @@ def ajax_delete_notification():
 @sio.on('connect', namespace='/notifications')
 def connect():
     id_user_to_notification_sid[request.sid] = session.get('id')
+    if session.get('id') in offline_users:
+        offline_users.pop(session.get('id'))
 
 @sio.on('disconnect', namespace='/notifications')
 def disconnect():
-    print(request.sid)
-    print(id_user_to_notification_sid)
-    id_user_to_notification_sid.pop(request.sid)
-    print(id_user_to_notification_sid)
+    if request.sid in id_user_to_notification_sid:
+        print('array', id_user_to_notification_sid)
+        id_user = id_user_to_notification_sid.get(request.sid)
+        id_user_to_notification_sid.pop(request.sid)
+        print('array after pop', id_user_to_notification_sid)
+        online_users = get_online_users()
+        print('online users', online_users)
+        if not id_user in online_users:
+            offline_users[id_user] = datetime.now()
+        print('offline users', offline_users)
 

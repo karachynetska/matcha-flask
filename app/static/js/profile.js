@@ -14,13 +14,13 @@ $("#edit-password").on('click', function (e) {
     }).done(function (data) {
         var res = JSON.parse(data);
         if (res.ok == false) {
-          $("#message-edit").text("");
-          $("#message-edit").text(res.error);
-          if (res.fields) {
-            res.fields.forEach(function (item) {
-                $("input[id=" + item + "]").addClass("error");
-            });
-          }
+            $("#message-edit").text("");
+            $("#message-edit").text(res.error);
+            if (res.fields) {
+                res.fields.forEach(function (item) {
+                    $("input[id=" + item + "]").addClass("error");
+                });
+            }
         } else {
             $("#message-edit").text("");
             $("#message-edit").text(res.error);
@@ -50,7 +50,6 @@ $("#edit-basic").on('click', function (e) {
         country: $('#country').val(),
         information: $('#my-info').val()
     };
-      console.log(data);
 
     $.ajax({
         type: "POST",
@@ -118,7 +117,6 @@ $("#avatar").on('change', function () {
                     contentType: false
                 }).done(function (data) {
                     var res = JSON.parse(data);
-                    console.log(res);
                     if (res.ok == false) {
                         $("#message-avatar").text("");
                         $("#message-avatar").text(res.error);
@@ -145,8 +143,6 @@ $("#add_interest").on('click', function (e) {
     var data = {
         interest: $("#interest").val()
     };
-
-    console.log(data);
 
     $.ajax({
         type: "POST",
@@ -202,7 +198,6 @@ function add_education(form) {
         'description': form.edu_description.value
     };
 
-    console.log(data);
     $.ajax({
         type: 'POST',
         data: data,
@@ -225,6 +220,25 @@ function add_education(form) {
     });
 }
 
+function delete_education(id_education) {
+    event.preventDefault();
+
+    var data = {
+        'id_education': id_education
+    };
+
+    $.ajax({
+        type: 'POST',
+        data: data,
+        url: '/ajax_delete_education'
+    }).done(function (data) {
+        var res = JSON.parse(data);
+        if (res.ok == true) {
+            $('#edu_'+id_education).remove();
+        }
+    });
+}
+
 function add_work(form) {
     event.preventDefault();
     var data = {
@@ -235,7 +249,6 @@ function add_work(form) {
         'city': form.work_city.value,
         'description': form.work_description.value
     };
-    console.log(data);
 
     $.ajax({
         type: 'POST',
@@ -255,6 +268,25 @@ function add_work(form) {
             $('#message_work').text('');
             $('#message_work').text(res.error);
             $("#message_work").addClass("success");
+        }
+    });
+}
+
+function delete_work(id_work) {
+    event.preventDefault();
+
+    var data = {
+        'id_work': id_work
+    };
+
+    $.ajax({
+        type: 'POST',
+        data: data,
+        url: '/ajax_delete_work'
+    }).done(function (data) {
+        var res = JSON.parse(data);
+        if (res.ok == true) {
+            $('#work_'+id_work).remove();
         }
     });
 }

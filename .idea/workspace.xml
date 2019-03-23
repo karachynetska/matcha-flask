@@ -2,35 +2,57 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="567250cd-dcc5-4389-bbf0-9b452b7959b0" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/app/templates/404.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/config/mail_config.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/config/mail_config.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/geolocation.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/geolocation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/messages.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/messages.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/notifications.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/notifications.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/models/search.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/search.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/js/comments.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/js/comments.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/static/js/likes.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/js/likes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/sympathys.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/sympathys.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/models/user.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/models/user.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/backgrounds/12.jpeg" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/backgrounds/12.jpg" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/css/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/css/style.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/js/auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/js/auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/js/create_dialogue.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/js/geolocation.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/js/geolocation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/js/messages.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/js/messages.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/js/notifications.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/js/notifications.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/js/profile.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/js/profile.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/static/js/sympathys.js" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/js/sympathys.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/about.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/activation.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/activation.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/edit-profile-avatar.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/edit-profile-avatar.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/edit-profile-basic.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/edit-profile-basic.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/edit-profile-edu-work.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/edit-profile-edu-work.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/edit-profile-geolocation.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/edit-profile-geolocation.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/edit-profile-interests.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/edit-profile-interests.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/edit-profile-password.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/edit-profile-password.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/edit-profile-settings.html" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/forgot.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/forgot.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/header.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/friends.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/friends.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/index-register.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/index-register.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/layout.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/layout.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/messages.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/messages.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/newsfeed.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/newsfeed.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/notifications.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/notifications.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/photos.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/photos.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/profile.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/profile.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/recovery_password.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/recovery_password.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/templates/search.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/search.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/templates/suggestions.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/suggestions.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/activation.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/static/css/404.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/auth.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/auth.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/comments.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/comments.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/geolocation.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/geolocation.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/likes.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/likes.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/messages.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/messages.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/notifications.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/notifications.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/photos.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/photos.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/profile.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/profile.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/views/search.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/search.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/views/sympathys.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/views/sympathys.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/matcha.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/matcha.sqlite3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/run.py" beforeDir="false" afterPath="$PROJECT_DIR$/run.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -39,7 +61,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageDataManager">
-    <SUITE FILE_PATH="coverage/matcha$matcha.coverage" NAME="matcha Coverage Results" MODIFIED="1553275650920" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/matcha$matcha.coverage" NAME="matcha Coverage Results" MODIFIED="1553364512330" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/matcha$test.coverage" NAME="test Coverage Results" MODIFIED="1548155346995" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
   <component name="DatabaseView">
@@ -60,57 +82,108 @@
     <favorites_list name="matcha" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.527732">
-      <split-first>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/views/profile.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="30">
-                  <caret line="2" column="62" selection-start-line="2" selection-start-column="62" selection-end-line="2" selection-end-column="62" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/static/js/photos.js">
-              <provider selected="true" editor-type-id="text-editor" />
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/app/views/photos.py">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="30">
-                  <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-first>
-      <split-second>
-        <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/app/templates/photos.html">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1785">
-                  <caret line="119" column="103" selection-start-line="119" selection-start-column="103" selection-end-line="119" selection-end-column="103" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/app/static/js/notifications.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="1035">
-                  <caret line="69" column="20" selection-start-line="69" selection-start-column="20" selection-end-line="69" selection-end-column="20" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-        </leaf>
-      </split-second>
-    </splitter>
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/profile.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="316">
+              <caret line="117" column="46" selection-start-line="117" selection-start-column="46" selection-end-line="117" selection-end-column="46" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/templates/profile.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="661">
+              <caret line="125" column="30" selection-start-line="125" selection-start-column="30" selection-end-line="125" selection-end-column="30" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/sympathys.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="775">
+              <caret line="121" column="9" lean-forward="true" selection-start-line="121" selection-start-column="9" selection-end-line="121" selection-end-column="9" />
+              <folding>
+                <element signature="e#0#19#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/models/sympathys.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="860">
+              <caret line="59" column="39" selection-start-line="59" selection-start-column="39" selection-end-line="59" selection-end-column="39" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/auth.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-2279">
+              <caret line="5" selection-start-line="5" selection-end-line="5" selection-end-column="29" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/comments.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="420">
+              <caret line="36" column="19" lean-forward="true" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/views/messages.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="20">
+              <caret line="26" column="52" selection-start-line="26" selection-start-column="52" selection-end-line="26" selection-end-column="52" />
+              <folding>
+                <element signature="e#0#24#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/templates/layout.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="3990">
+              <caret line="266" column="133" selection-start-line="266" selection-start-column="133" selection-end-line="266" selection-end-column="133" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/app/static/js/sympathys.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="290">
+              <caret line="174" column="4" selection-start-line="174" selection-start-column="4" selection-end-line="174" selection-end-column="4" />
+              <folding>
+                <element signature="n#style#0;n#a#0;n#li#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#a#0;n#li#0;n#!!top" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/app/static/css/style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="500">
+              <caret line="2471" selection-start-line="2471" selection-end-line="2471" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -122,13 +195,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>error</find>
-      <find>friend-card</find>
-      <find>none</find>
-      <find>.none</find>
-      <find>get_inf</find>
-      <find>footer</find>
-      <find>al</find>
       <find>bod</find>
       <find>send-</find>
       <find>chat-ale</find>
@@ -152,6 +218,13 @@
       <find>try</find>
       <find>UploadNotAllowed</find>
       <find>try:</find>
+      <find>search</find>
+      <find>activa</find>
+      <find>date</find>
+      <find>url</find>
+      <find>messages</find>
+      <find>notfound</find>
+      <find>offli</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -160,57 +233,57 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/app/models/geolocation.py" />
-        <option value="$PROJECT_DIR$/app/__init__.py" />
-        <option value="$PROJECT_DIR$/app/templates/index-register.html" />
-        <option value="$PROJECT_DIR$/app/static/js/auth.js" />
-        <option value="$PROJECT_DIR$/app/static/js/profile.js" />
-        <option value="$PROJECT_DIR$/app/static/js/script.js" />
-        <option value="$PROJECT_DIR$/app/models/suggestions.py" />
-        <option value="$PROJECT_DIR$/app/models/comments.py" />
-        <option value="$PROJECT_DIR$/app/models/messages.py" />
-        <option value="$PROJECT_DIR$/app/templates/suggestions.html" />
-        <option value="$PROJECT_DIR$/run.py" />
-        <option value="$PROJECT_DIR$/app/models/notifications.py" />
-        <option value="$PROJECT_DIR$/app/static/js/notifications.js" />
-        <option value="$PROJECT_DIR$/app/config/setup.py" />
-        <option value="$PROJECT_DIR$/app/static/js/photos.js" />
-        <option value="$PROJECT_DIR$/app/templates/friends.html" />
-        <option value="$PROJECT_DIR$/app/models/user.py" />
-        <option value="$PROJECT_DIR$/app/static/css/style.css" />
-        <option value="$PROJECT_DIR$/app/models/photos.py" />
-        <option value="$PROJECT_DIR$/app/templates/profile.html" />
         <option value="$PROJECT_DIR$/app/templates/edit-profile-settings.html" />
-        <option value="$PROJECT_DIR$/app/static/js/messages.js" />
-        <option value="$PROJECT_DIR$/app/views/sympathys.py" />
-        <option value="$PROJECT_DIR$/app/models/sympathys.py" />
-        <option value="$PROJECT_DIR$/app/static/js/sympathys.js" />
-        <option value="$PROJECT_DIR$/app/templates/forgot.html" />
-        <option value="$PROJECT_DIR$/app/views/auth.py" />
-        <option value="$PROJECT_DIR$/app/templates/recovery_password.html" />
-        <option value="$PROJECT_DIR$/app/views/messages.py" />
-        <option value="$PROJECT_DIR$/app/views/notifications.py" />
-        <option value="$PROJECT_DIR$/app/templates/notifications.html" />
-        <option value="$PROJECT_DIR$/app/views/likes.py" />
-        <option value="$PROJECT_DIR$/app/views/comments.py" />
         <option value="$PROJECT_DIR$/app/static/js/comments.js" />
         <option value="$PROJECT_DIR$/app/static/js/likes.js" />
-        <option value="$PROJECT_DIR$/app/templates/newsfeed.html" />
-        <option value="$PROJECT_DIR$/app/templates/photos.html" />
-        <option value="$PROJECT_DIR$/app/templates/messages.html" />
-        <option value="$PROJECT_DIR$/app/models/search.py" />
-        <option value="$PROJECT_DIR$/app/views/search.py" />
-        <option value="$PROJECT_DIR$/app/templates/search.html" />
-        <option value="$PROJECT_DIR$/app/templates/layout.html" />
         <option value="$PROJECT_DIR$/app/templates/header.html" />
-        <option value="$PROJECT_DIR$/app/templates/edit-profile-avatar.html" />
-        <option value="$PROJECT_DIR$/app/templates/edit-profile-basic.html" />
         <option value="$PROJECT_DIR$/app/templates/edit-profile-edu-work.html" />
+        <option value="$PROJECT_DIR$/app/views/search.py" />
+        <option value="$PROJECT_DIR$/app/models/search.py" />
+        <option value="$PROJECT_DIR$/app/static/js/profile.js" />
+        <option value="$PROJECT_DIR$/app/static/js/auth.js" />
+        <option value="$PROJECT_DIR$/app/views/geolocation.py" />
+        <option value="$PROJECT_DIR$/app/static/js/geolocation.js" />
+        <option value="$PROJECT_DIR$/app/static/js/notifications.js" />
+        <option value="$PROJECT_DIR$/app/models/geolocation.py" />
         <option value="$PROJECT_DIR$/app/templates/edit-profile-geolocation.html" />
+        <option value="$PROJECT_DIR$/app/templates/notifications.html" />
+        <option value="$PROJECT_DIR$/app/templates/photos.html" />
+        <option value="$PROJECT_DIR$/app/templates/suggestions.html" />
+        <option value="$PROJECT_DIR$/app/templates/edit-profile-avatar.html" />
+        <option value="$PROJECT_DIR$/app/templates/activation.html" />
+        <option value="$PROJECT_DIR$/app/templates/search.html" />
+        <option value="$PROJECT_DIR$/app/templates/recovery_password.html" />
+        <option value="$PROJECT_DIR$/app/templates/edit-profile-basic.html" />
         <option value="$PROJECT_DIR$/app/templates/edit-profile-interests.html" />
+        <option value="$PROJECT_DIR$/app/templates/forgot.html" />
+        <option value="$PROJECT_DIR$/app/templates/index-register.html" />
+        <option value="$PROJECT_DIR$/app/config/mail_config.py" />
+        <option value="$PROJECT_DIR$/app/models/messages.py" />
+        <option value="$PROJECT_DIR$/app/models/notifications.py" />
+        <option value="$PROJECT_DIR$/app/models/sympathys.py" />
+        <option value="$PROJECT_DIR$/app/views/auth.py" />
+        <option value="$PROJECT_DIR$/app/views/comments.py" />
+        <option value="$PROJECT_DIR$/app/views/likes.py" />
+        <option value="$PROJECT_DIR$/app/templates/newsfeed.html" />
+        <option value="$PROJECT_DIR$/app/views/notifications.py" />
+        <option value="$PROJECT_DIR$/app/templates/friends.html" />
+        <option value="$PROJECT_DIR$/app/templates/messages.html" />
+        <option value="$PROJECT_DIR$/app/static/js/messages.js" />
+        <option value="$PROJECT_DIR$/app/templates/profile.html" />
         <option value="$PROJECT_DIR$/app/templates/edit-profile-password.html" />
-        <option value="$PROJECT_DIR$/app/views/profile.py" />
+        <option value="$PROJECT_DIR$/app/static/css/404.css" />
+        <option value="$PROJECT_DIR$/app/templates/404.html" />
+        <option value="$PROJECT_DIR$/app/__init__.py" />
+        <option value="$PROJECT_DIR$/run.py" />
+        <option value="$PROJECT_DIR$/app/models/user.py" />
         <option value="$PROJECT_DIR$/app/views/photos.py" />
+        <option value="$PROJECT_DIR$/app/views/profile.py" />
+        <option value="$PROJECT_DIR$/app/views/messages.py" />
+        <option value="$PROJECT_DIR$/app/static/css/style.css" />
+        <option value="$PROJECT_DIR$/app/views/sympathys.py" />
+        <option value="$PROJECT_DIR$/app/templates/layout.html" />
+        <option value="$PROJECT_DIR$/app/static/js/sympathys.js" />
       </list>
     </option>
   </component>
@@ -241,12 +314,6 @@
               <item name="matcha" type="b2602c69:ProjectViewProjectNode" />
               <item name="matcha" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="matcha" type="b2602c69:ProjectViewProjectNode" />
-              <item name="matcha" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="models" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -267,30 +334,14 @@
               <item name="matcha" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="static" type="462c0819:PsiDirectoryNode" />
+              <item name="images" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="matcha" type="b2602c69:ProjectViewProjectNode" />
+              <item name="matcha" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="static" type="462c0819:PsiDirectoryNode" />
               <item name="js" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="matcha" type="b2602c69:ProjectViewProjectNode" />
-              <item name="matcha" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="media" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="matcha" type="b2602c69:ProjectViewProjectNode" />
-              <item name="matcha" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="media" type="462c0819:PsiDirectoryNode" />
-              <item name="lpohribn" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="matcha" type="b2602c69:ProjectViewProjectNode" />
-              <item name="matcha" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="media" type="462c0819:PsiDirectoryNode" />
-              <item name="vibondar" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="matcha" type="b2602c69:ProjectViewProjectNode" />
@@ -504,17 +555,18 @@
       <workItem from="1553187763351" duration="23000" />
       <workItem from="1553256738582" duration="3095000" />
       <workItem from="1553267699776" duration="6357000" />
+      <workItem from="1553337346277" duration="23603000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="539474000" />
+    <option name="totallyTimeSpent" value="563077000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="0" width="2560" height="1440" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49927008" visible="true" weight="0.27680698" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.49927008" visible="true" weight="0.27879268" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.5007299" side_tool="true" weight="0.18506752" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -564,198 +616,145 @@
     <option name="version" value="1" />
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/app/config/database.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/mail_config.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="105">
+          <caret line="7" selection-start-line="7" selection-end-line="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/config/setup.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/comments.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/geolocation.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="165">
+          <caret line="11" column="39" selection-start-line="11" selection-start-column="39" selection-end-line="11" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/models/likes.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/notifications.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="75">
+          <caret line="5" column="40" selection-start-line="5" selection-start-column="40" selection-end-line="5" selection-end-column="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/photos.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/search.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="17" column="39" selection-start-line="17" selection-start-column="39" selection-end-line="17" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/suggestions.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/activation.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/newsfeed.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="887">
+          <caret line="143" column="81" selection-start-line="143" selection-start-column="81" selection-end-line="143" selection-end-column="81" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/views/geolocation.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="390">
+          <caret line="26" column="10" selection-start-line="26" selection-start-column="10" selection-end-line="26" selection-end-column="10" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/activation.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/suggestions.html">
+    <entry file="file://$PROJECT_DIR$/app/views/likes.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="198" selection-start-line="10" selection-start-column="198" selection-end-line="10" selection-end-column="198" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/messages.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/config/setup.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3690">
-          <caret line="246" column="38" selection-start-line="246" selection-start-column="38" selection-end-line="246" selection-end-column="38" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/friends.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1019">
-          <caret line="158" column="20" selection-start-line="158" selection-start-column="20" selection-end-line="158" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/user.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-2204">
-          <caret line="83" column="39" selection-start-line="83" selection-start-column="39" selection-end-line="83" selection-end-column="39" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/photos.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="165">
-          <caret line="11" column="11" selection-start-line="11" selection-start-column="11" selection-end-line="11" selection-end-column="47" />
-          <folding>
-            <element signature="e#0#31#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/suggestions.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="37" lean-forward="true" selection-start-line="37" selection-end-line="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/edit-profile-settings.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="843">
-          <caret line="151" column="4" selection-start-line="151" selection-start-column="4" selection-end-line="151" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/static/js/messages.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="960">
-          <caret line="64" column="45" lean-forward="true" selection-start-line="64" selection-start-column="45" selection-end-line="64" selection-end-column="45" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/static/js/sympathys.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3015">
-          <caret line="201" column="35" selection-start-line="201" selection-start-column="35" selection-end-line="201" selection-end-column="35" />
-          <folding>
-            <element signature="n#style#0;n#a#0;n#li#0;n#!!top" expanded="true" />
-            <element signature="n#style#0;n#a#0;n#li#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/sympathys.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1938">
-          <caret line="154" column="75" selection-start-line="154" selection-start-column="75" selection-end-line="154" selection-end-column="75" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/notifications.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="555">
-          <caret line="37" column="14" selection-start-line="37" selection-start-column="14" selection-end-line="37" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/sympathys.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1110">
-          <caret line="74" column="66" selection-start-line="74" selection-start-column="66" selection-end-line="74" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/index-register.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="345">
-          <caret line="23" selection-start-line="23" selection-end-line="42" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/forgot.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="630">
-          <caret line="42" column="21" selection-start-line="23" selection-start-column="6" selection-end-line="42" selection-end-column="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/auth.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4395">
-          <caret line="302" column="4" selection-start-line="302" selection-start-column="4" selection-end-line="302" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#25#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/recovery_password.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="645">
-          <caret line="43" column="21" selection-start-line="43" selection-start-column="21" selection-end-line="43" selection-end-column="21" />
+        <state relative-caret-position="-119">
+          <caret column="19" selection-start-column="19" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/notifications.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="657">
-          <caret line="48" column="44" lean-forward="true" selection-start-line="36" selection-start-column="16" selection-end-line="48" selection-end-column="44" />
+        <state relative-caret-position="15">
+          <caret line="4" column="72" selection-start-line="4" selection-start-column="72" selection-end-line="4" selection-end-column="72" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/likes.py">
+    <entry file="file://$PROJECT_DIR$/app/views/notifications.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="736">
-          <caret line="68" column="12" selection-start-line="68" selection-start-column="12" selection-end-line="68" selection-end-column="12" />
+        <state relative-caret-position="923">
+          <caret line="69" column="42" selection-start-line="69" selection-start-column="42" selection-end-line="69" selection-end-column="42" />
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
+            <element signature="e#0#24#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/static/js/auth.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/about.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/comments.py">
+    <entry file="file://$PROJECT_DIR$/app/models/messages.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="698">
-          <caret line="47" column="20" selection-start-line="47" selection-start-column="20" selection-end-line="47" selection-end-column="20" />
+        <state relative-caret-position="-179">
+          <caret column="31" selection-start-column="31" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/static/js/auth.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1334" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/static/js/photos.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/static/js/profile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-3403">
           <folding>
-            <element signature="e#0#25#0" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#li#0;n#!!top" expanded="true" />
+            <element signature="e#75#81#0" expanded="true" />
+            <element signature="e#81#87#0" expanded="true" />
+            <element signature="e#87#93#0" expanded="true" />
+            <element signature="n#style#0;n#a#1;n#li#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/static/js/comments.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="33" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
+        <state>
           <folding>
             <element signature="n#style#0;n#a#1;n#p#0;n#div#0;n#!!top" expanded="true" />
             <element signature="n#style#0;n#a#1;n#p#0;n#div#0;n#!!top" expanded="true" />
@@ -763,182 +762,198 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/static/js/notifications.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1035">
-          <caret line="69" column="20" selection-start-line="69" selection-start-column="20" selection-end-line="69" selection-end-column="20" />
-        </state>
-      </provider>
+    <entry file="file://$PROJECT_DIR$/app/static/js/geolocation.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/static/js/geomarker.js">
+      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/static/js/likes.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/static/js/search.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="154">
-          <caret line="103" column="22" selection-start-line="103" selection-start-column="9" selection-end-line="103" selection-end-column="22" />
+        <state relative-caret-position="-209" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/static/js/notifications.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/newsfeed.html">
+    <entry file="file://$PROJECT_DIR$/app/templates/friends.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="680">
-          <caret line="78" column="40" selection-start-line="78" selection-start-column="40" selection-end-line="78" selection-end-column="40" />
+        <state relative-caret-position="3120">
+          <caret line="208" column="56" selection-start-line="208" selection-start-column="56" selection-end-line="208" selection-end-column="56" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/models/search.py">
+    <entry file="file://$PROJECT_DIR$/app/static/js/messages.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="240">
-          <caret line="16" column="93" selection-start-line="16" selection-start-column="93" selection-end-line="16" selection-end-column="93" />
+        <state relative-caret-position="960">
+          <caret line="64" column="23" selection-start-line="64" selection-start-column="23" selection-end-line="64" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/static/images/bg.jpg">
+      <provider selected="true" editor-type-id="images" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/edit-profile-password.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="106" lean-forward="true" selection-start-line="14" selection-start-column="4" selection-end-line="14" selection-end-column="106" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/messages.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="376">
-          <caret line="49" column="44" lean-forward="true" selection-start-line="37" selection-start-column="16" selection-end-line="49" selection-end-column="44" />
+        <state relative-caret-position="784">
+          <caret line="172" selection-start-line="172" selection-end-line="173" selection-end-column="81" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/messages.py">
+    <entry file="file://$PROJECT_DIR$/app/static/css/404.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="735">
-          <caret line="49" column="12" selection-start-line="49" selection-start-column="12" selection-end-line="49" selection-end-column="46" />
+        <state relative-caret-position="150">
+          <caret line="10" selection-start-line="10" selection-end-line="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/run.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="18" selection-start-line="1" selection-start-column="18" selection-end-line="1" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/models/user.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="690">
+          <caret line="46" column="14" lean-forward="true" selection-start-line="46" selection-start-column="14" selection-end-line="46" selection-end-column="14" />
           <folding>
-            <element signature="e#0#24#0" expanded="true" />
+            <element signature="e#0#31#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/search.py">
+    <entry file="file://$PROJECT_DIR$/app/templates/404.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="300">
-          <caret line="20" column="52" selection-start-line="20" selection-start-column="52" selection-end-line="20" selection-end-column="52" />
+        <state relative-caret-position="180">
+          <caret line="12" column="71" selection-start-line="12" selection-start-column="71" selection-end-line="12" selection-end-column="71" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="480">
+          <caret line="32" column="4" selection-start-line="32" selection-start-column="4" selection-end-line="32" selection-end-column="49" />
+          <folding>
+            <element signature="e#0#77#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/photos.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="465">
+          <caret line="31" column="12" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="46" />
           <folding>
             <element signature="e#0#19#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/search.html">
+    <entry file="file://$PROJECT_DIR$/app/views/search.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="525">
-          <caret line="35" column="20" selection-start-line="35" selection-start-column="20" selection-end-line="35" selection-end-column="20" />
+        <state relative-caret-position="15">
+          <caret line="4" column="29" selection-start-line="4" selection-start-column="23" selection-end-line="4" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/profile.html">
+    <entry file="file://$PROJECT_DIR$/app/views/auth.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2100">
-          <caret line="140" column="87" selection-start-line="140" selection-start-column="87" selection-end-line="140" selection-end-column="87" />
+        <state relative-caret-position="-2279">
+          <caret line="5" selection-start-line="5" selection-end-line="5" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/notifications.py">
+    <entry file="file://$PROJECT_DIR$/app/views/comments.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="488">
-          <caret line="33" column="45" selection-start-line="33" selection-start-column="45" selection-end-line="33" selection-end-column="45" />
+        <state relative-caret-position="420">
+          <caret line="36" column="19" lean-forward="true" selection-start-line="36" selection-start-column="19" selection-end-line="36" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/messages.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="20">
+          <caret line="26" column="52" selection-start-line="26" selection-start-column="52" selection-end-line="26" selection-end-column="52" />
           <folding>
             <element signature="e#0#24#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/app/templates/header.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/app/static/css/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="628">
-          <caret line="2460" column="16" selection-start-line="2460" selection-start-column="16" selection-end-line="2460" selection-end-column="23" />
+        <state relative-caret-position="500">
+          <caret line="2471" selection-start-line="2471" selection-end-line="2471" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/photos.html">
+    <entry file="file://$PROJECT_DIR$/app/models/sympathys.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1785">
-          <caret line="119" column="103" selection-start-line="119" selection-start-column="103" selection-end-line="119" selection-end-column="103" />
+        <state relative-caret-position="860">
+          <caret line="59" column="39" selection-start-line="59" selection-start-column="39" selection-end-line="59" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app/views/sympathys.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="775">
+          <caret line="121" column="9" lean-forward="true" selection-start-line="121" selection-start-column="9" selection-end-line="121" selection-end-column="9" />
+          <folding>
+            <element signature="e#0#19#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/app/templates/layout.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="214">
-          <caret line="60" column="87" selection-start-line="60" selection-start-column="87" selection-end-line="60" selection-end-column="87" />
-          <folding>
-            <element signature="n#style#0;n#i#0;n#a#0;n#li#0;n#ul#0;n#div#1;n#div#0;n#nav#0;n#header#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
+        <state relative-caret-position="3990">
+          <caret line="266" column="133" selection-start-line="266" selection-start-column="133" selection-end-line="266" selection-end-column="133" />
         </state>
       </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/edit-profile-basic.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="435">
-          <caret line="29" column="117" selection-start-line="29" selection-start-column="117" selection-end-line="29" selection-end-column="117" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/edit-profile-edu-work.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="26" column="121" selection-start-line="26" selection-start-column="121" selection-end-line="26" selection-end-column="121" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/edit-profile-geolocation.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="405">
-          <caret line="27" column="117" selection-start-line="27" selection-start-column="117" selection-end-line="27" selection-end-column="117" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/edit-profile-interests.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="420">
-          <caret line="28" column="132" selection-start-line="28" selection-start-column="132" selection-end-line="28" selection-end-column="132" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/edit-profile-avatar.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="355">
-          <caret line="28" column="117" selection-start-line="28" selection-start-column="117" selection-end-line="28" selection-end-column="117" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/header.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="720">
-          <caret line="48" column="87" selection-start-line="48" selection-start-column="87" selection-end-line="48" selection-end-column="87" />
-          <folding>
-            <element signature="n#style#0;n#i#0;n#a#0;n#li#0;n#ul#0;n#div#1;n#div#0;n#nav#0;n#header#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/templates/edit-profile-password.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="250">
-          <caret line="25" column="117" selection-start-line="25" selection-start-column="117" selection-end-line="25" selection-end-column="117" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/app/static/js/photos.js">
-      <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/app/views/profile.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="62" selection-start-line="2" selection-start-column="62" selection-end-line="2" selection-end-column="62" />
+        <state relative-caret-position="316">
+          <caret line="117" column="46" selection-start-line="117" selection-start-column="46" selection-end-line="117" selection-end-column="46" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/venv/lib/python3.6/site-packages/flask_uploads.py">
+    <entry file="file://$PROJECT_DIR$/app/templates/profile.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="86">
-          <caret line="71" column="14" lean-forward="true" selection-start-line="71" selection-start-column="14" selection-end-line="71" selection-end-column="14" />
+        <state relative-caret-position="661">
+          <caret line="125" column="30" selection-start-line="125" selection-start-column="30" selection-end-line="125" selection-end-column="30" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/app/views/photos.py">
+    <entry file="file://$PROJECT_DIR$/app/static/js/sympathys.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="30">
-          <caret line="2" column="12" selection-start-line="2" selection-start-column="12" selection-end-line="2" selection-end-column="12" />
+        <state relative-caret-position="290">
+          <caret line="174" column="4" selection-start-line="174" selection-start-column="4" selection-end-line="174" selection-end-column="4" />
+          <folding>
+            <element signature="n#style#0;n#a#0;n#li#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#a#0;n#li#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

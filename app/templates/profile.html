@@ -1,4 +1,5 @@
 {% extends 'layout.html' %}
+{% block title %}Profile{% endblock %}
 {% block link %}
     <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.min.css') }}" />
     <link rel="stylesheet" href="{{ url_for('static', filename = 'css/jquery-ui.min.css') }}" />
@@ -67,64 +68,64 @@
                                 <div id="map" class="map"></div>
                             </div>
                         </div>
-                        <div class="about-content-block">
+                        <div class="about-content-block" id="edu">
                             <h4 class="grey"><i class="ion-university icon-in-title"></i>Education</h4>
                             {% if data.education %}
-                            {% for edu in data.education %}
-                            <div class="organization">
-                                <img src="{{ url_for('static', filename = 'images/envato.png') }}" alt="" class="pull-left img-org" />
-                                <div class="work-info">
-                                    <h5>{{ edu.university }}</h5>
-                                    <p><span class="text-grey">from {{ edu.from_year }} to {{ edu.to_year }}</span></p>
-                                    <p>{{ edu.description }}</p>
-                                </div>
-                            </div>
-                            {% endfor %}
-                        {% endif %}
+                                {% for edu in data.education %}
+                                    <div class="row" id="edu_{{ edu.id_education }}">
+                                        {% if data.user.id == session.get('id') %}
+                                            <div class="col-md-1">
+                                                <a onclick="delete_education({{ edu.id_education }})"><i class="ion-android-close"></i></a>
+                                            </div>
+                                        {% endif %}
+                                        <div class="col-md-11">
+                                            <div class="organization">
+                                                <img src="{{ url_for('static', filename = 'images/envato.png') }}" alt="" class="pull-left img-org" />
+                                                <div class="work-info">
+                                                    <h5>{{ edu.university }}</h5>
+                                                    <p><span class="text-grey">from {{ edu.from_year }} to {{ edu.to_year }}</span></p>
+                                                    <p>{{ edu.description }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% if data.user.id == session.get('id') %}
+                                    <a href="/profile/edit/edu-work"><p>Add education</p></a>
+                                {% endif %}
+                            {% endif %}
                         </div>
-                        <div class="about-content-block">
+                        <div class="about-content-block" id="work">
                             <h4 class="grey"><i class="ion-ios-briefcase icon-in-title"></i>Work Experiences</h4>
                             {% if data.work %}
-                            {% for work in data.work %}
-                            <div class="organization">
-                                <img src="{{ url_for('static', filename = 'images/envato.png') }}" alt="" class="pull-left img-org" />
-                                <div class="work-info">
-                                    <h5>{{ work.company }}</h5>
-                                    <p>{{ work.designation }} - <span class="text-grey">from  {{ work.from_year }}  to  {{ work.to_year }}</span></p>
-                                    <p>{{ work.description }}</p>
-                                </div>
-                            </div>
-                            {% endfor %}
-                        {% endif %}
-                        </div>
-                        <div class="about-content-block">
-                            <h4 class="grey"><i class="ion-link icon-in-title"></i>Links</h4>
-                            <ul class="list-inline social-icons">
-                                <li><a href="#"><i class="icon ion-social-facebook"></i></a></li>
-                                <li><a href="#"><i class="icon ion-social-twitter"></i></a></li>
-                                <li><a href="#"><i class="icon ion-social-googleplus"></i></a></li>
-                                <li><a href="#"><i class="icon ion-social-pinterest"></i></a></li>
-                                <li><a href="#"><i class="icon ion-social-linkedin"></i></a></li>
-                            </ul>
+                                {% for work in data.work %}
+                                    <div class="row" id="work_{{ work.id_job }}">
+                                        {% if data.user.id == session.get('id') %}
+                                            <div class="col-md-1">
+                                                <a onclick="delete_work({{ work.id_job }})"><i class="ion-android-close"></i></a>
+                                            </div>
+                                        {% endif %}
+                                        <div class="col-md-11">
+                                            <div class="organization">
+                                                <img src="{{ url_for('static', filename = 'images/envato.png') }}" alt="" class="pull-left img-org" />
+                                                <div class="work-info">
+                                                    <h5>{{ work.company }}</h5>
+                                                    <p>{{ work.designation }} - <span class="text-grey">from  {{ work.from_year }}  to  {{ work.to_year }}</span></p>
+                                                    <p>{{ work.description }}</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                {% if data.user.id == session.get('id') %}
+                                    <a href="/profile/edit/edu-work"><p>Add work experience</p></a>
+                                {% endif %}
+                            {% endif %}
                         </div>
                     </div>
                 </div>
-{#                <div class="col-md-2 static">#}
-{#                    <div class="suggestions" id="sticky-sidebar">#}
-{#                        <h4 class="grey">Who to Follow</h4>#}
-{#                        {% if data.suggestions %}#}
-{#                        {% for suggestion in data.suggestions %}#}
-{#                        <div class="follow-user">#}
-{#                            <img src="{{ suggestion.avatar }}" alt="" class="profile-photo-sm pull-left" />#}
-{#                            <div>#}
-{#                                <h5><a href="/profile/id{{ suggestion.id }}">{{ suggestion.firstname + ' ' + suggestion.lastname }}</a></h5>#}
-{#                                <a href="#" class="text-green">{{  }}</a>#}
-{#                            </div>#}
-{#                        </div>#}
-{#                        {% endfor %}#}
-{#                    {% endif %}#}
-{#                    </div>#}
-{#                </div>#}
             </div>
         </div>
     </div>
@@ -138,9 +139,9 @@
     <script src="{{ url_for('static', filename='js/jquery.scrollbar.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/script.js') }}"></script>
     <script src="{{ url_for('static', filename = 'js/notifications.js') }}"></script>
-    <script src="{{ url_for('static', filename = 'js/create_dialogue.js') }}"></script>
     <script src="{{ url_for('static', filename = 'js/geolocation.js') }}"></script>
     <script src="{{ url_for('static', filename = 'js/geomarker.js') }}"></script>
     <script src="{{ url_for('static', filename = 'js/sympathys.js') }}"></script>
+    <script src="{{ url_for('static', filename = 'js/profile.js') }}"></script>
     <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqLNucodvPuxX_30MWoh6g1YT6hWnvzS4&callback=initMap"></script>
 {% endblock %}

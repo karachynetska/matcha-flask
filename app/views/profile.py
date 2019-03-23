@@ -1,9 +1,8 @@
-from app import app, mail
-from flask import render_template, url_for, redirect, request, session
+from app import app
+from flask import render_template, redirect, request, session
 from flask_uploads import configure_uploads, IMAGES, UploadSet
 import html
 import hashlib
-import random
 from datetime import datetime, date
 import json, re, os
 from app.models import user as user_model
@@ -16,9 +15,7 @@ from app.models import suggestions as suggestions_model
 from app.models import photos as photos_model
 from app.models import messages as messages_model
 from app.views.search import calculate_distance
-from app.views.notifications import get_online_users
-# from app.models.friendships import check_friendship, add_friend
-from flask_mail import Message
+from app.views.notifications import get_online_users, get_offline_users
 from app.settings import APP_ROOT
 
 photos = UploadSet('photos', IMAGES)
@@ -67,6 +64,8 @@ def profile(id_user=None):
 
 
     if id_user:
+        if not user_model.get_user_by_id(id_user):
+            return render_template('404.html')
         user = user_model.get_user_by_id(id_user)[0]
         friends = sympathys.get_sympathys_list(id_user)
         information = user_model.get_information(id_user)
@@ -93,7 +92,9 @@ def profile(id_user=None):
         'geolocation': geolocation,
         'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
         'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id')),
-        'check_block': sympathys.check_block
+        'check_block': sympathys.check_block,
+        'offline_users': get_offline_users(),
+        'online_users': get_online_users()
     }
     return render_template('profile.html', data=data)
 
@@ -113,6 +114,8 @@ def friends(id_user=None):
         blocked_users = sympathys.get_blocked_users(session.get('id'))
 
     if id_user:
+        if not user_model.get_user_by_id(id_user):
+            return render_template('404.html')
         if sympathys.check_block(id_user, session.get('id')):
             return redirect('/profile/id'+ str(id_user))
         user = user_model.get_user_by_id(id_user)[0]
@@ -120,9 +123,6 @@ def friends(id_user=None):
         incoming_requests = None
         outgoing_requests = None
         blocked_users = None
-        image = user_model.get_avatar(session.get('id'))
-        msg = str(session.get('firstname')) + ' ' + str(session.get('lastname')) + ' viewed your profile.'
-        notification_view.add_notification(session.get('id') ,id_user, msg, 'view', image)
 
     data = {
         'user': user,
@@ -134,7 +134,9 @@ def friends(id_user=None):
         'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
         'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id')),
         'blocked_users': blocked_users,
-        'check_block': sympathys.check_block
+        'check_block': sympathys.check_block,
+        'offline_users': get_offline_users(),
+        'online_users': get_online_users()
     }
     return render_template('friends.html', data=data)
 
@@ -182,7 +184,8 @@ def suggestions():
         'suggestions': suggestions,
         'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
         'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id')),
-        'friends': sympathys.get_sympathys_list(session.get('id'))
+        'friends': sympathys.get_sympathys_list(session.get('id')),
+        'online_users': get_online_users()
     }
     return render_template('suggestions.html', data = data)
 
@@ -237,7 +240,7 @@ def newsfeed():
             'dislikes': likes.photo_dislikes,
             'get_comments_by_photo_id': comments.get_comments_by_photo_id,
             'online_users': get_online_users(),
-            'friends': sympathys.get_sympathys_list(session.get('id'))
+            'friends': sympathys.get_sympathys_list(session.get('id')),
         }
         return render_template('newsfeed.html', data=data)
     return redirect('/')
@@ -527,27 +530,6 @@ def edit_edu_work():
         return redirect('/')
 
 
-# @app.route('/ajax_edit_edu_work')
-# def ajax_edit_edu_work():
-
-
-
-# EDIT ACCOUNT SETTINGS
-@app.route('/profile/edit/settings')
-def edit_settings():
-    if 'id' in session:
-        data = {
-            'user': user_model.get_user_by_id(session.get('id'))[0],
-            'unread_messages_nbr': messages_model.get_unread_messages_nbr_by_user_id(session.get('id')),
-            'incoming_requests_nbr': sympathys.get_incoming_requests_nbr(session.get('id')),
-            'friends': sympathys.get_sympathys_list(session.get('id'))
-        }
-        return render_template('edit-profile-settings.html', data=data)
-    else:
-        return redirect('/')
-
-
-
 #CHANGE AVATAR
 @app.route('/profile/edit/avatar')
 def edit_avatar():
@@ -651,6 +633,25 @@ def ajax_edit_education():
         })
 
 
+@app.route('/ajax_delete_education', methods=['POST'])
+def ajax_delete_education():
+    id_education = request.form['id_education']
+    if not id_education:
+        return json.dumps({
+            'ok': False,
+            'error': "Something went wrong"
+        })
+    if not user_model.delete_education(id_education):
+        return json.dumps({
+            'ok': True,
+            'error': "Education deleted"
+        })
+    else:
+        return json.dumps({
+            'ok': False,
+            'error': "Something went wrong"
+        })
+
 @app.route('/ajax_add_work', methods=['POST'])
 def ajax_edit_work():
     company = request.form['company']
@@ -708,3 +709,21 @@ def ajax_edit_work():
             'error': "Something went wrong"
         })
 
+@app.route('/ajax_delete_work', methods=['POST'])
+def ajax_delete_work():
+    id_work = request.form['id_work']
+    if not id_work:
+        return json.dumps({
+            'ok': False,
+            'error': "Something went wrong"
+        })
+    if not user_model.delete_work(id_work):
+        return json.dumps({
+            'ok': True,
+            'error': "Work deleted"
+        })
+    else:
+        return json.dumps({
+            'ok': False,
+            'error': "Something went wrong"
+        })

@@ -1,5 +1,5 @@
 {% extends 'layout.html' %}
-{% block title %}My Friends | Friend Finder Friend List{% endblock %}
+{% block title %}Friends{% endblock %}
 {% block link %}
     <!-- Stylesheets
     ================================================= -->
@@ -54,6 +54,9 @@
                                                         <div class="card-info">
                                                             <img src="{{ guy.avatar }}" alt="user" class="profile-photo-lg" />
                                                             <div class="friend-info">
+                                                                {% if data.online_users and guy.id in data.online_users%}
+                                                                    <a href="#" class="pull-right text-green">Online</a>
+                                                                {% endif %}
                                                                 <h5><a href="/profile/id{{ guy.id }}" class="profile-link">{{ guy.firstname + ' ' + guy.lastname }}</a></h5>
                                                                 <p>{{ guy.login }}</p>
                                                             </div>
@@ -68,6 +71,9 @@
                                                         <div class="card-info">
                                                             <img src="{{ guy.avatar }}" alt="user" class="profile-photo-lg" />
                                                             <div class="friend-info">
+                                                                {% if data.online_users and guy.id in data.online_users%}
+                                                                    <a href="#" class="pull-right text-green">Online</a>
+                                                                {% endif %}
                                                                 <h5><a href="/profile/id{{ guy.id }}" class="profile-link">{{ guy.firstname + ' ' + guy.lastname }}</a></h5>
                                                                 <p>{{ guy.login }}</p>
                                                             </div>
@@ -99,6 +105,9 @@
                                                 <div class="card-info">
                                                     <img src="{{ guy.avatar }}" alt="user" class="profile-photo-lg" />
                                                     <div class="friend-info">
+                                                        {% if data.online_users and guy.id in data.online_users%}
+                                                                    <a href="#" class="pull-right text-green">Online</a>
+                                                                {% endif %}
                                                         <h5><a href="/profile/id{{ guy.id }}" class="profile-link">{{ guy.firstname + ' ' + guy.lastname }}</a></h5>
                                                         <p>{{ guy.login }}</p>
                                                     </div>
@@ -123,6 +132,9 @@
                                                 <div class="card-info">
                                                     <img src="{{ guy.avatar }}" alt="user" class="profile-photo-lg" />
                                                     <div class="friend-info">
+                                                        {% if data.online_users and guy.id in data.online_users%}
+                                                            <a href="#" class="pull-right text-green">Online</a>
+                                                        {% endif %}
                                                         <h5><a href="/profile/id{{ guy.id }}" class="profile-link">{{ guy.firstname + ' ' + guy.lastname }}</a></h5>
                                                         <p>{{ guy.login }}</p>
                                                     </div>
@@ -145,6 +157,9 @@
                                                 <div class="card-info">
                                                     <img src="{{ user.avatar }}" alt="user" class="profile-photo-lg" />
                                                     <div class="friend-info">
+                                                        {% if data.online_users and guy.id in data.online_users%}
+                                                            <a href="#" class="pull-right text-green">Online</a>
+                                                        {% endif %}
                                                         <h5><a href="/profile/id{{ user.id }}" class="profile-link">{{ user.firstname + ' ' + user.lastname }}</a></h5>
                                                         <p>{{ user.login }}</p>
                                                     </div>
@@ -172,6 +187,9 @@
                                                 <div class="card-info">
                                                     <img src="{{ guy.avatar }}" alt="user" class="profile-photo-lg" />
                                                     <div class="friend-info">
+                                                        {% if data.online_users and guy.id in data.online_users%}
+                                                            <a href="#" class="pull-right text-green">Online</a>
+                                                        {% endif %}
                                                         <h5><a href="/profile/id{{ guy.id }}" class="profile-link">{{ guy.firstname + ' ' + guy.lastname }}</a></h5>
                                                         <p>{{ guy.login }}</p>
                                                     </div>
@@ -186,6 +204,9 @@
                                                 <div class="card-info">
                                                     <img src="{{ guy.avatar }}" alt="user" class="profile-photo-lg" />
                                                     <div class="friend-info">
+                                                        {% if data.online_users and guy.id in data.online_users%}
+                                                            <a href="#" class="pull-right text-green">Online</a>
+                                                        {% endif %}
                                                         <h5><a href="/profile/id{{ guy.id }}" class="profile-link">{{ guy.firstname + ' ' + guy.lastname }}</a></h5>
                                                         <p>{{ guy.login }}</p>
                                                     </div>

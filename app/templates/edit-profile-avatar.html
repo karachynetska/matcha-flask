@@ -1,5 +1,5 @@
 {% extends 'layout.html' %}
-{% block title %}Edit Profile | Edit Profile Page{% endblock %}
+{% block title %}Edit Profile | Avatar{% endblock %}
 {% block link %}
     <!-- Stylesheets
     ================================================= -->
@@ -18,59 +18,53 @@
 {% endblock %}
 
 {% block main %}
-        <div id="page-contents">
-          <div class="row">
+    <div id="page-contents">
+        <div class="row">
             <div class="col-md-3">
-
-              <!--Edit Profile Menu-->
-              <ul class="edit-menu">
-              	<li><i class="icon ion-ios-information-outline"></i><a href="/profile/edit/basic">Basic Information</a></li>
-              	<li><i class="icon ion-ios-briefcase-outline"></i><a href="/profile/edit/edu-work">Education and Work</a></li>
-              	<li><i class="icon ion-ios-heart-outline"></i><a href="/profile/edit/interests">My Interests</a></li>
-                <li class="active"><i class="icon ion-ios-camera-outline"></i><a href="/profile/edit/avatar">Change Avatar</a></li>
-              	<li><i class="icon ion-ios-locked-outline"></i><a href="/profile/edit/password">Change Password</a></li>
-                <li><i class="icon ion-ios-locked-outline"></i><a href="/profile/edit/geolocation">Change Geolocation</a></li>
-              </ul>
+                <!--Edit Profile Menu-->
+                <ul class="edit-menu">
+                    <li><i class="icon ion-ios-information-outline"></i><a href="/profile/edit/basic">Basic Information</a></li>
+              	    <li><i class="icon ion-ios-briefcase-outline"></i><a href="/profile/edit/edu-work">Education and Work</a></li>
+              	    <li><i class="icon ion-ios-heart-outline"></i><a href="/profile/edit/interests">My Interests</a></li>
+                    <li class="active"><i class="icon ion-ios-camera-outline"></i><a href="/profile/edit/avatar">Change Avatar</a></li>
+              	    <li><i class="icon ion-ios-locked-outline"></i><a href="/profile/edit/password">Change Password</a></li>
+                    <li><i class="icon ion-ios-locked-outline"></i><a href="/profile/edit/geolocation">Change Geolocation</a></li>
+                </ul>
             </div>
             <div class="col-md-9">
-
-              <!-- Basic Information
-              ================================================= -->
-              <div class="edit-profile-container">
-                <div class="block-title">
-                  <h4 class="grey"><i class="icon ion-android-checkmark-circle"></i>Change avatar</h4>
-                  <div class="line"></div>
-                  <p id="message-avatar"></p>
-                  <div class="line"></div>
+                <!-- Basic Information
+                ================================================= -->
+                <div class="edit-profile-container">
+                    <div class="block-title">
+                        <h4 class="grey"><i class="icon ion-android-checkmark-circle"></i>Change avatar</h4>
+                        <div class="line"></div>
+                        <p id="message-avatar"></p>
+                        <div class="line"></div>
+                    </div>
+                    <div class="edit-block">
+                        <form name="basic-info" id="basic-info" class="form-inline" enctype="multipart/form-data" method="post">
+                            <div class="row">
+                                <div>
+                                    <img id="avatar_preview" src="{{ url_for('static', filename = 'images/no_photo.png') }}" class="img-responsive" style="width: 350px;">
+                                </div>
+                            </div>
+                            <div class="row">
+                                <input type="file" name="avatar" id="avatar">
+                            </div>
+                            <div class="row">
+                                <button id="change-avatar" class="btn btn-primary">Save Changes</button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
-                <div class="edit-block">
-                  <form name="basic-info" id="basic-info" class="form-inline" enctype="multipart/form-data" method="post">
-                    <div class="row">
-                        <div>
-                            <img id="avatar_preview" src="{{ url_for('static', filename = 'images/no_photo.png') }}" class="img-responsive" style="width: 350px;">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <input type="file" name="avatar" id="avatar">
-                    </div>
-                    <div class="row">
-                        <button id="change-avatar" class="btn btn-primary">Save Changes</button>
-                    </div>
-                  </form>
-                </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
 {% endblock %}
-
-    <!--preloader-->
-    <div id="spinner-wrapper">
-      <div class="spinner"></div>
-    </div>
-
+<!--preloader-->
+<div id="spinner-wrapper">
+    <div class="spinner"></div>
+</div>
 {% block scripts %}
     <!-- Scripts
     ================================================= -->

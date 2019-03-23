@@ -12,7 +12,6 @@ function geolocationSuccess(position) {
 		'latitude': position.coords.latitude,
 		'longitude': position.coords.longitude
 	};
-	console.log(data);
 
 	$.ajax({
 		type: 'POST',
@@ -32,23 +31,7 @@ function geolocationFailure(positionError) {
 		$.ajax({
 			type: 'POST',
 			data: data,
-			url: '/ajax_set_location'
+			url: '/ajax_set_geolocation'
 		});
 	});
-    // if(positionError == 1) {
-	// 	alert("Вы решили не предоставлять данные о своем местоположении, " +
-	// 	        "но это не проблема. Мы больше не будем запрашивать их у вас.");
-	// }
-	// else if(positionError == 2) {
-	// 	alert("Проблемы с сетью или нельзя связаться со службой определения " +
-	// 	        "местоположения по каким-либо другим причинам.");
-	// }
-	// else if(positionError == 3) {
-	// 	alert("He удалось определить местоположение "
-	// 	        + "в течение установленного времени. ");
-	//
-	// }
-	// else {
-	// 	alert("Загадочная ошибка.");
-	// }
 }

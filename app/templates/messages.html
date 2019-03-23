@@ -3,10 +3,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="This is social network html5 template available in themeforest......" />
-    <meta name="keywords" content="Social Network, Social Media, Make Friends, Newsfeed, Profile Page" />
-    <meta name="robots" content="index, follow" />
-    <title>Chatroom | Send and Receive Messages</title>
+    <title>Messages</title>
 
     <!-- Stylesheets
     ================================================= -->
@@ -108,7 +105,7 @@
                                                 <ul class="chat-message">
                                                     {% set messages = data.messages(dialogue.id_dialogue) %}
                                                     {% if not messages %}
-                                                        <p>There are no messages here yet</p>
+                                                        <p class="no_messages">There are no messages here yet</p>
                                                     {% else %}
                                                         {% for message in messages %}
                                                             {% if message.from_whom_id == session.get('id') %}
@@ -181,6 +178,5 @@
 <script src="{{ url_for('static', filename = 'js/script.js') }}"></script>
 <script src="{{ url_for('static', filename = 'js/messages.js') }}"></script>
 <script src="{{ url_for('static', filename = 'js/notifications.js') }}"></script>
-<script src="{{ url_for('static', filename = 'js/create_dialogue.js') }}"></script>
 </body>
 </html>

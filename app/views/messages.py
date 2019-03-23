@@ -1,7 +1,6 @@
 from app import app, sio
-from flask import render_template, url_for, redirect, request, session
+from flask import render_template, redirect, request, session
 import html
-import json
 from flask_socketio import SocketIO, join_room, leave_room, emit, send
 from app.models import user as user_model
 from app.models import messages as messages_model
@@ -13,9 +12,8 @@ id_user_to_sid = {}
 id_dialogue_to_sid = {}
 
 def check_online_status(user_id):
-    print(id_user_to_sid)
     for key, value in id_user_to_sid.items():
-        if value == user_id:
+        if int(value) == int(user_id):
             return True
         else:
             return False
@@ -26,7 +24,8 @@ def messages(with_id=None):
     if 'id' in session:
         dialogue_id = None
         if with_id:
-            print(with_id)
+            if not user_model.get_user_by_id(with_id):
+                return render_template('404.html')
             my_id = session.get('id')
             if sympathys_model.check_sympathy(my_id, with_id):
                 if not messages_model.check_dialogue(my_id, with_id):
@@ -56,7 +55,6 @@ def messages(with_id=None):
 @sio.on('connect', namespace='/messages')
 def connect():
     id_user_to_sid[request.sid] = session.get('id')
-    print(id_user_to_sid)
 
 @sio.on('join_dialogue', namespace='/messages')
 def join_dialogue(data):
@@ -66,19 +64,20 @@ def join_dialogue(data):
 
 @sio.on('send_message', namespace='/messages')
 def send_message(data):
-    dialogue = id_dialogue_to_sid[request.sid]
-    # dialogue = id_dialogue_to_sid.get(request.sid)
-    # if dialogue:
+
     from_whom_id = data['from_whom_id']
     to_whom_id = data['to_whom_id']
+    dialogue = id_dialogue_to_sid.get(request.sid)
+    if not dialogue:
+        dialogue = messages_model.get_dialogue_id(from_whom_id, to_whom_id)
     message = html.escape(data['message'])
     data['message'] = message
     user = user_model.get_user_by_id(from_whom_id)[0]
     data['user'] = user
     data['dialogue'] = dialogue
     data['my_id'] = session.get('id')
-    messages_model.send_message(dialogue, from_whom_id, to_whom_id, message)
-    emit('add_message_to_template', data, room=dialogue)
+    if messages_model.send_message(dialogue, from_whom_id, to_whom_id, message):
+        emit('add_message_to_template', data, room=dialogue)
     if not check_online_status(to_whom_id):
         notifications_view.add_notification(from_whom_id, to_whom_id, 'You have a new message from '+ user['firstname'] + ' ' + user['lastname'], 'message', user['avatar'])
 

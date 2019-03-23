@@ -1,5 +1,4 @@
 from app.config import database
-from datetime import datetime
 
 
 def create_dialogue(dialogue_name, id_user1, id_user2):
@@ -60,7 +59,6 @@ def get_last_message_by_dialogue_id(id_dialogue):
     array = [id_dialogue]
     sql = 'SELECT * FROM messages WHERE id_dialogue=? GROUP BY id_message ORDER BY id_message DESC LIMIT 1;'
     res = database.db_query(sql, array)
-    print(res)
     if res:
         return res[0]['message']
     else:
