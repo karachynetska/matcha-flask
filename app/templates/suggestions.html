@@ -22,11 +22,11 @@
         <div id="page-contents">
             <div class="row">
                 <div class="col-md-3"></div>
-                <div class="col-md-7">
+                <div class="col-md-9">
                 <h4 class="grey">Suggestions</h4>
                 <div class="line-divider"></div>
                 {% if data.suggestions %}
-                    <div class="friend-list">
+                    <div class="friend-list" style="overflow-y: auto; overflow-x: hidden; height: 55vh;">
                         <div class="row">
                             {% for suggestion in data.suggestions %}
                                 <div class="col-md-6 col-sm-6">

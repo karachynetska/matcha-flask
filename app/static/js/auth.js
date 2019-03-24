@@ -33,9 +33,15 @@ $("#register-button").on("click", function(e) {
             $("#message-register").text(res.error);
             if (res.fields) {
                 res.fields.forEach(function(item) {
-                    $("input[id=" + item + "]").addClass("error");
-                });
+                        $("input[id=" + item + "]").addClass("error");
+                        setTimeout(function () {
+                            $("input[id=" + item + "]").removeClass("error");
+                        }, 3000);
+                    });
             }
+            setTimeout(function () {
+                $("#message-register").text("");
+            }, 3000);
         } else {
             $("#message-register").text(
                 "Registration completed successfully. Please check your email."
@@ -66,8 +72,14 @@ $("#login-button").on('click', function (e) {
             if (res.fields) {
                 res.fields.forEach(function(item) {
                     $("input[id=" + item + "]").addClass("error");
+                    setTimeout(function () {
+                        $("input[id=" + item + "]").removeClass("error");
+                     }, 3000);
                 });
             }
+            setTimeout(function () {
+                $("#message-login").text("");
+            }, 3000);
         } else {
             location.replace('/profile');
         }
@@ -76,9 +88,8 @@ $("#login-button").on('click', function (e) {
 
 $("#send-button").on('click', function (e) {
     e.preventDefault();
-
     var data = {
-      email: $("#my-email").val()
+        email: $("#my-email").val()
     };
 
     $.ajax({
@@ -88,17 +99,23 @@ $("#send-button").on('click', function (e) {
     }).done(function (data) {
         var res = JSON.parse(data);
         if (res.ok == false) {
-          $("#message-forgot").text("");
-          $("#message-forgot").text(res.error);
-          if (res.fields) {
+            $("#message-forgot").text("");
+            $("#message-forgot").text(res.error);
+            if (res.fields) {
                 res.fields.forEach(function(item) {
                     $("input[id=" + item + "]").addClass("error");
+                    setTimeout(function () {
+                        $("input[id=" + item + "]").removeClass("error");
+                    }, 3000);
                 });
             }
+            setTimeout(function () {
+                $("#message-forgot").text("");
+            }, 3000);
         } else {
-          $("#message-forgot").text("");
-          $("#message-forgot").text(res.error);
-          $("#message-forgot").addClass("success");
+            $("#message-forgot").text("");
+            $("#message-forgot").text(res.error);
+            $("#message-forgot").addClass("success");
         }
     });
 });
@@ -144,8 +161,14 @@ $("#recovery-button").on('click', function (e) {
             if (res.fields) {
                 res.fields.forEach(function(item) {
                     $("input[id=" + item + "]").addClass("error");
+                    setTimeout(function () {
+                        $("input[id=" + item + "]").removeClass("error");
+                    }, 3000);
                 });
             }
+            setTimeout(function () {
+                $("#message-recovery").text("");
+            }, 3000);
         } else {
             $("#message-recovery").text("");
             $("#message-recovery").text(res.error);

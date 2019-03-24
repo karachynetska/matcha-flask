@@ -18,7 +18,6 @@ def get_online_users():
 
 def get_offline_users():
     offline_users_list = offline_users
-    print(offline_users_list)
     return offline_users_list
 
 
@@ -62,13 +61,9 @@ def connect():
 @sio.on('disconnect', namespace='/notifications')
 def disconnect():
     if request.sid in id_user_to_notification_sid:
-        print('array', id_user_to_notification_sid)
         id_user = id_user_to_notification_sid.get(request.sid)
         id_user_to_notification_sid.pop(request.sid)
-        print('array after pop', id_user_to_notification_sid)
         online_users = get_online_users()
-        print('online users', online_users)
         if not id_user in online_users:
-            offline_users[id_user] = datetime.now()
-        print('offline users', offline_users)
+            offline_users[id_user] = datetime.now().strftime("%d-%m-%Y %H:%M")
 

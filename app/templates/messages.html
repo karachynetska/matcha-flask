@@ -55,7 +55,7 @@
                             <div id="dialogue_id" style="display: none">{{ data.dialogue_id }}</div>
                             <ul class="nav nav-tabs contact-list scrollbar-wrapper scrollbar-outer">
                                 {% if not data.dialogues %}
-                                    <p>You have no dialogues yet</p>
+                                    <p style="text-align: center">You have no dialogues yet</p>
                                 {% else %}
                                     {% for dialogue in data.dialogues %}
                                         {% if session.get('id') == dialogue.id_user1 %}

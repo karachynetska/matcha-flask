@@ -27,7 +27,6 @@ $(document).ready(function () {
             jQuery.each(data, function (i, val) {
                 $('.notifications').append('<li id="notification-'+val['id_notification']+'" class="notification-li"><div class="notification"><img src="'+val['image']+'" alt="user" class="profile-photo-md pull-left notification-img"/><p>'+val['notification']+'</p></div></li>');
                 if (val['notif_type'] == 'message') {
-                    console.log('yes');
                     var nbr = $('#unread_messages_nbr').text();
                     nbr = parseInt(nbr, 10);
                     nbr += 1;

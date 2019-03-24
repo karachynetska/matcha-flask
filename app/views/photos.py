@@ -77,8 +77,7 @@ def ajax_add_photo():
                 'ok': False,
                 'error': "Extension not allowed"
             })
-        images.save(photo, login, photo_name)
-        # print(res)
+        # images.save(photo, login, photo_name)
         photos_model.add_photo(session.get('id'), path)
 
         rating = user_model.get_user_fame_rating(session.get('id')) + 10

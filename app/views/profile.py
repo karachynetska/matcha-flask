@@ -1,6 +1,6 @@
 from app import app
 from flask import render_template, redirect, request, session
-from flask_uploads import configure_uploads, IMAGES, UploadSet
+from flask_uploads import configure_uploads, IMAGES, UploadSet, UploadNotAllowed
 import html
 import hashlib
 from datetime import datetime, date
@@ -552,7 +552,7 @@ def ajax_edit_avatar():
     if not avatar:
         return json.dumps({
             'ok': False,
-            'error': "Something wrong",
+            'error': "Not avatar",
             'fields': ["avatar"]
         })
     id = session.get('id')
@@ -576,11 +576,18 @@ def ajax_edit_avatar():
         user_model.update_user_rating(rating, id)
 
     # SAVE AVATAR TO FOLDER
-    photos.save(avatar, login, avatar_name)
+    try:
+        photos.save(avatar, login, avatar_name)
+    except UploadNotAllowed:
+        return json.dumps({
+            'ok': False,
+            'error': "Extension not allowed",
+            'fields': ["avatar"]
+        })
+    # photos.save(avatar, login, avatar_name)
 
     # CHANGE AVATAR IN DB
     if not user_model.change_avatar(path, id):
-        photos_model.add_photo(id, path)
         return json.dumps({
             'ok': True,
             'error': 'Avatar successfully uploaded',
@@ -588,7 +595,8 @@ def ajax_edit_avatar():
     else:
         return json.dumps({
             'ok': False,
-            'error': "Something wrong"
+            'error': "Something wrong",
+            'fields': ["avatar"]
         })
 
 @app.route('/ajax_add_education', methods=['POST'])

@@ -26,7 +26,6 @@ $('#photo').on('change', function (e) {
                 return;
             }
             $('#add_photo').on('click', function (e) {
-                console.log('pressed');
                 e.preventDefault();
                 $.ajax({
                     type: "POST",
@@ -40,6 +39,10 @@ $('#photo').on('change', function (e) {
                         $('#message-photo').text('');
                         $('#message-photo').text(res.error);
                         $('#photo').addClass('error');
+                        setTimeout(function () {
+                            $('#message-photo').text('');
+                            $('#photo').removeClass('error');
+                            }, 3000);
                     } else {
                         location.reload();
                     }
@@ -60,14 +63,11 @@ function delete_photo(id_photo) {
         data: data,
         url: '/ajax_delete_photo'
     }).done(function (data) {
-        console.log(data);
         var res = JSON.parse(data);
         if (res.ok == true) {
             $('#'+id_photo).remove();
             $('.modal-backdrop.in').css({'display': 'none'});
             $('.modal-'+id_photo).css({'display': 'none'});
-        } else {
-            console.log('Photo not deleted');
         }
     });
 }

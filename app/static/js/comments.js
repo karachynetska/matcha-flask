@@ -14,9 +14,7 @@ function add_comment(form) {
         url: "/ajax_add_comment"
     }).done(function (data) {
         var res = JSON.parse(data);
-        if (res.ok == false) {
-            console.log(res.error);
-        } else {
+        if (res.ok == true) {
             var profile_photo = $('#profile_photo').val(),
                 user_firstname = $('#user_firstname').val();
 
@@ -41,9 +39,7 @@ function delete_comment(id_comment) {
         url: '/ajax_delete_comment'
     }).done(function (data) {
         var res = JSON.parse(data);
-        if (res.ok == false) {
-            console.log(res.error)
-        } else {
+        if (res.ok == true) {
             $('#comment-'+id_comment).remove();
         }
     });

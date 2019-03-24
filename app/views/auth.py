@@ -173,7 +173,6 @@ def register():
 # token
     date = datetime.now().strftime("%Y-%m-%d %H:%M:%S")
     token = hashlib.md5((login + date).encode('utf-8')).hexdigest()
-    # token = user_model.create_token(id, login)
 
 
 # saving user to db and sending email
@@ -185,29 +184,8 @@ def register():
         message.html = "<p>Thank you for registration in Matcha. To activate your account please follow the <a href= " + request.url_root + "activate?email=" + email + '&token=' + token + ">link</a></p> "
         mail.send(message)
         id_user = user_model.email_exists(email)[0]['id']
-        user_gender = 'none'
-        user_sex_pref = 'none'
-        if gender == 'Female' and sex_pref == 'Heterosexual':
-            user_gender = 'Male'
-            user_sex_pref = 'noHomosexual'
-        if gender == 'Female' and sex_pref == 'Homosexual':
-            user_gender = 'Female'
-            user_sex_pref = 'noHeterosexual'
-        if gender == 'Female' and sex_pref == 'Bisexual':
-            user_gender = 'all'
-            user_sex_pref = 'none'
 
-        if gender == 'Male' and sex_pref == 'Heterosexual':
-            user_gender = 'Female'
-            user_sex_pref = 'noHomosexual'
-        if gender == 'Male' and sex_pref == 'Homosexual':
-            user_gender = 'Male'
-            user_sex_pref = 'noHeterosexual'
-        if gender == 'Male' and sex_pref == 'Bisexual':
-            user_gender = 'all'
-            user_sex_pref = 'none'
-
-        if user_model.create_about_for_user(id_user) and user_model.create_profile_settings(id_user, user_gender, user_sex_pref, 'none'):
+        if user_model.create_about_for_user(id_user):
             return json.dumps({
                 'ok': True,
             })

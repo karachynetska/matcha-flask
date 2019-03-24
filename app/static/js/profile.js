@@ -19,12 +19,22 @@ $("#edit-password").on('click', function (e) {
             if (res.fields) {
                 res.fields.forEach(function (item) {
                     $("input[id=" + item + "]").addClass("error");
+                    setTimeout(function () {
+                        $("input[id=" + item + "]").removeClass("error");
+                    }, 3000);
                 });
             }
+            setTimeout(function () {
+                $("#message-edit").text("");
+            }, 3000);
         } else {
             $("#message-edit").text("");
             $("#message-edit").text(res.error);
             $("#message-edit").addClass("success");
+
+            $("#my_password").val('');
+            $("#new_password").val('');
+            $("#confirm_password").val('');
         }
     });
 });
@@ -63,8 +73,14 @@ $("#edit-basic").on('click', function (e) {
             if (res.fields) {
                 res.fields.forEach(function (item) {
                     $("input[id=" + item + "]").addClass("error");
+                    setTimeout(function () {
+                        $("input[id=" + item + "]").removeClass("error");
+                    }, 3000);
                 });
             }
+            setTimeout(function () {
+                $("#message-basic").text("");
+            }, 3000);
         } else {
             $("#message-basic").text("");
             $("#message-basic").text(res.error);
@@ -75,6 +91,7 @@ $("#edit-basic").on('click', function (e) {
 
 
 $("#avatar").on('change', function () {
+    event.preventDefault();
     var file = this.files[0];
 
     if (file) {
@@ -88,7 +105,7 @@ $("#avatar").on('change', function () {
 
             var allowed_extensions = ['image/jpg', 'image/jpeg', 'image/JPG', 'image/JPEG', 'image/png', 'image/PNG', 'image/gif', 'image/GIF'];
             var max_size = 1024 * 1024 + 1;
-            if ($.inArray(data.get('avatar').type, allowed_extensions)) {
+            if ($.inArray(data.get('avatar').type, allowed_extensions) != -1) {
                 if (data.get('avatar').size == max_size) {
                     $("#message-avatar").text("");
                     $("#message-avatar").text("Image size is too large");
@@ -120,11 +137,10 @@ $("#avatar").on('change', function () {
                     if (res.ok == false) {
                         $("#message-avatar").text("");
                         $("#message-avatar").text(res.error);
-                        if (res.fields) {
-                            res.fields.forEach(function (item) {
-                                $("input[id=" + item + "]").addClass("error");
-                            });
-                        }
+                        $("#message-avatar").addClass('error_text');
+                        setTimeout(function () {
+                            $("#message-avatar").text("");
+                        }, 3000);
                     } else {
                         $('#profile_photo').attr('src', src);
                         $('#m-profile_photo').attr('src', src);
@@ -134,6 +150,18 @@ $("#avatar").on('change', function () {
             });
         }
     }
+});
+
+$('#change-avatar').on('click', function (e) {
+    e.preventDefault();
+    data = null;
+    $.ajax({
+        type: "POST",
+        data: data,
+        url: "/ajax_edit_avatar",
+        processData: false,
+        contentType: false
+    });
 });
 
 
@@ -210,8 +238,14 @@ function add_education(form) {
             if (res.fields) {
                 res.fields.forEach(function (item) {
                     $("input[id=" + item + "]").addClass("error");
+                    setTimeout(function () {
+                        $("input[id=" + item + "]").removeClass("error");
+                    }, 3000);
                 });
             }
+            setTimeout(function () {
+                $('#message_education').text('');
+            }, 3000);
         } else {
             $('#message_education').text('');
             $('#message_education').text(res.error);
@@ -262,8 +296,14 @@ function add_work(form) {
             if (res.fields) {
                 res.fields.forEach(function (item) {
                     $("input[id=" + item + "]").addClass("error");
+                    setTimeout(function () {
+                        $("input[id=" + item + "]").removeClass("error");
+                    }, 3000);
                 });
             }
+            setTimeout(function () {
+                $('#message_work').text('');
+            }, 3000);
         } else {
             $('#message_work').text('');
             $('#message_work').text(res.error);
